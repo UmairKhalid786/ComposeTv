@@ -1,4 +1,4 @@
-package com.techlads.composetv.login
+package com.techlads.composetv.login.withToken
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

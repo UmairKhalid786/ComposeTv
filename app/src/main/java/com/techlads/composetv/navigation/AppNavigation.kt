@@ -1,19 +1,17 @@
 package com.techlads.composetv.navigation
 
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.techlads.composetv.login.DeviceTokenAuthenticationScreen
-import com.techlads.composetv.login.LoginScreen
+import com.techlads.composetv.login.withToken.DeviceTokenAuthenticationScreen
+import com.techlads.composetv.login.withEmailPassword.LoginScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -39,14 +37,11 @@ fun AppNavigation(navController: NavHostController) {
     }
 }
 
-
-@OptIn(ExperimentalAnimationApi::class)
-private fun AnimatedContentScope<NavBackStackEntry>.tabExitTransition(
+private fun tabExitTransition(
     duration: Int = 500
 ) = fadeOut(tween(duration / 2, easing = LinearEasing))
 
-@OptIn(ExperimentalAnimationApi::class)
-private fun AnimatedContentScope<NavBackStackEntry>.tabEnterTransition(
+private fun tabEnterTransition(
     duration: Int = 500, delay: Int = duration - 350
 ) = fadeIn(tween(duration, duration - delay))
 

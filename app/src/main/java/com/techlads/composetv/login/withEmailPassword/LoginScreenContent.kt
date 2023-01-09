@@ -1,6 +1,5 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
-
-package com.techlads.composetv.login
+package com.techlads.composetv.login.withEmailPassword
 
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource

@@ -1,4 +1,4 @@
-package com.techlads.composetv.login
+package com.techlads.composetv.login.withToken
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.focusable
