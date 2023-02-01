@@ -55,4 +55,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.qrcode)
+    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.3.3")
 }
