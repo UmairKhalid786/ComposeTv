@@ -8,19 +8,33 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.navigation.AppNavigation
 import com.techlads.composetv.theme.Material3Theme
 
-class LoginActivity :  ComponentActivity()  {
+class LoginActivity : ComponentActivity() {
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberAnimatedNavController()
-            App(navController = navController)
+            val displayDialog = remember {
+                mutableStateOf(false)
+            }
+
+            App(navController = rememberAnimatedNavController())
+
+            registerOnBackPress {
+                displayDialog.value = true
+            }
+
+            if (displayDialog.value)
+                CustomDialog(openDialogCustom = displayDialog){
+                    finish()
+                }
         }
     }
 
