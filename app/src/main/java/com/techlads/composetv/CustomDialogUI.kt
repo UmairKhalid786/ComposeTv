@@ -31,7 +31,7 @@ fun CustomDialog(openDialogCustom: MutableState<Boolean>, onExitClick: () -> Uni
     }
 }
 
-//Layout
+// Layout
 @Composable
 fun CustomDialogUI(
     modifier: Modifier = Modifier,
