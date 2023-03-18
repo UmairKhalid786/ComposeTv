@@ -15,7 +15,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.navigation.AppNavigation
 import com.techlads.composetv.theme.Material3Theme
-
+ 
 class LoginActivity : ComponentActivity() {
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
