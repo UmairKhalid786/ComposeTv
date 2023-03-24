@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.accompanist.placeholder)
     implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.tv.foundation)
+//    implementation(libs.androidx.tv.material)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.androidx.lifecycle.runtime)
