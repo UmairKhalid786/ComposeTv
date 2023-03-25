@@ -1,15 +1,13 @@
 package com.techlads.composetv.home
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
+import com.techlads.composetv.leftmenu.LeftMenu
 
 @Composable
-fun HomeScreenContent(){
-    Box(contentAlignment = Alignment.Center) {
-        Text(text = "Home Screen")
+fun HomeScreenContent() {
+    LeftMenu(defaultFocus = 2,menuItems = MenuData.menuItems) {
+
     }
 }
 
