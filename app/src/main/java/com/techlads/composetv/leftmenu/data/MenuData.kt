@@ -1,4 +1,4 @@
-package com.techlads.composetv.home
+package com.techlads.composetv.leftmenu.data
 
 import com.techlads.composetv.leftmenu.model.MenuItem
 import compose.icons.LineAwesomeIcons
