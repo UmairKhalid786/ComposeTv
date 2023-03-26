@@ -7,5 +7,5 @@ Signin with Email UX
 ![Email Password](https://user-images.githubusercontent.com/21205138/211226691-c74f286f-52bc-4b56-a4bc-928be7660aa4.png)
 
 Carousel Experience 
-https://user-images.githubusercontent.com/21205138/227805240-fe0576b8-bdbe-40c9-a623-5a47ce8b420d.mp4
+![Home](https://user-images.githubusercontent.com/21205138/227805240-fe0576b8-bdbe-40c9-a623-5a47ce8b420d.mp4)
 
