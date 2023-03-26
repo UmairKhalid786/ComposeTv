@@ -50,11 +50,13 @@ dependencies {
     implementation(libs.accompanist.placeholder)
     implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.tv.foundation)
+//    implementation(libs.androidx.tv.material)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.qrcode)
+    implementation(libs.line.awesome.icons)
     implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
     debugImplementation("androidx.compose.ui:ui-tooling:1.3.3")
 }
