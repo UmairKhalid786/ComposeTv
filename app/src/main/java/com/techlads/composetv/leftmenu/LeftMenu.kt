@@ -1,5 +1,6 @@
 package com.techlads.composetv.leftmenu
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -9,6 +10,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,7 +58,7 @@ fun LeftMenu(
     Box(
         modifier = modifier
             .background(Color.DarkGray.copy(alpha = 0.2f))
-            .width(200.dp)
+            .wrapContentWidth()
     ) {
         Column(
             modifier = Modifier
@@ -105,7 +107,13 @@ fun MenuHeader(expanded: Boolean = true) {
             imageVector = LineAwesomeIcons.TvSolid,
             contentDescription = "App icon"
         )
-        Text(text = "Compose Tv", fontWeight = FontWeight.Thin, fontSize = 16.sp , modifier = Modifier.alpha(animatedAlpha.value), maxLines = 1)
+        Text(
+            text = "Compose Tv",
+            fontWeight = FontWeight.Thin,
+            fontSize = 16.sp,
+            modifier = Modifier.alpha(animatedAlpha.value),
+            maxLines = 1
+        )
     }
 }
 
@@ -165,24 +173,25 @@ fun LeftMenuItem(
         },
         targetValue = if (expanded) 8.dp else 4.dp,
     )
+
     var isFocused by remember { mutableStateOf(false) }
 
     Row(
         modifier
             .padding(vertical = 4.dp)
-            .clickable {
-                onMenuSelected?.invoke(menuItem)
-            }
             .focusRequester(requester)
             .onFocusChanged {
                 isFocused = it.isFocused
+                Log.e("isFocused", it.isFocused.toString())
                 onMenuFocused?.invoke(menuItem)
             }
             .focusable()
             .background(
-                if (isFocused) MaterialTheme.colorScheme.onSurface
-                else MaterialTheme.colorScheme.surface, shape = ShapeDefaults.Small
-            )
+                color = if (isFocused) colorScheme.onSurface else colorScheme.surface,
+                shape = ShapeDefaults.Small
+            ).clickable {
+                onMenuSelected?.invoke(menuItem)
+            }
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically) {
 
@@ -191,16 +200,19 @@ fun LeftMenuItem(
                 modifier = Modifier.size(20.dp),
                 imageVector = it,
                 contentDescription = menuItem.text,
-                tint = if (!isFocused) MaterialTheme.colorScheme.onSurface
-                else MaterialTheme.colorScheme.surface
+                tint = if (!isFocused)
+                    colorScheme.onSurface
+                else
+                    colorScheme.surface
             )
             Spacer(modifier = Modifier.padding(horizontal = padding.value))
         }
 
         AnimatedVisibility(visible = expanded, modifier = Modifier.height(20.dp)) {
             Text(
-                text = menuItem.text, color = if (!isFocused) MaterialTheme.colorScheme.onSurface
-                else MaterialTheme.colorScheme.surface, maxLines = 1
+                text = menuItem.text,
+                color = if (!isFocused) colorScheme.onSurface else colorScheme.surface,
+                maxLines = 1
             )
         }
     }
