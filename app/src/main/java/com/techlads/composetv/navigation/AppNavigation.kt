@@ -10,22 +10,24 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.techlads.composetv.home.HomeScreen
 import com.techlads.composetv.login.withToken.DeviceTokenAuthenticationScreen
 import com.techlads.composetv.login.withEmailPassword.LoginScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AppNavigation(navController: NavHostController) {
-    AnimatedNavHost(navController = navController, startDestination = Screens.LoginToken.title) {
+    AnimatedNavHost(navController = navController, startDestination = Screens.Home.title) {
         // e.g will add auth routes here if when we will extend project
         composable(
             Screens.Login.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
             LoginScreen {
-                // Take user to home
+                navController.navigateSingleTopTo(Screens.Home.title)
             }
         }
+
         composable(
             Screens.LoginToken.title,
             enterTransition = { tabEnterTransition() },
@@ -33,6 +35,13 @@ fun AppNavigation(navController: NavHostController) {
             DeviceTokenAuthenticationScreen {
                 navController.navigateSingleTopTo(it.title)
             }
+        }
+
+        composable(
+            Screens.Home.title,
+            enterTransition = { tabEnterTransition() },
+            exitTransition = { tabExitTransition() }) {
+            HomeScreen()
         }
     }
 }

@@ -62,6 +62,7 @@ ktlint = "0.40.0"
 # @keep
 targetSdk = "33"
 palette = "1.0.0"
+line_awesome = "1.0.0"
 
 [libraries]
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
@@ -156,5 +157,7 @@ paging = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
 paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging-compose" }
 room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
 androidx-tv-foundation = { module = "androidx.tv:tv-foundation", version.ref = "tv-foundation" }
+androidx-tv-material = { module = "androidx.tv:tv-material", version.ref = "tv-foundation" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 qrcode = { module = "com.github.alexzhirkevich:custom-qr-generator", version.ref = "qr_code" }
+line-awesome-icons = { module = "br.com.devsrsouza.compose.icons.android:line-awesome", version.ref = "line_awesome" }
