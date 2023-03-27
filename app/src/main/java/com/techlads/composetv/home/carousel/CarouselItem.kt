@@ -59,8 +59,54 @@ fun CarouselItem(parent: Int, child: Int) {
     }
 }
 
+
+@Composable
+fun VerticalCarouselItem(parent: Int, child: Int) {
+
+    var isFocused by remember { mutableStateOf(false) }
+    val scale = animateFloatAsState(if (isFocused) 1.05f else 1f)
+
+
+    Card(
+        modifier = Modifier
+            .zIndex(if (isFocused) 20f else 1f)
+            .graphicsLayer(
+                scaleX = scale.value,
+                scaleY = scale.value
+            )
+            .padding(8.dp)
+            .fillMaxWidth()
+            .aspectRatio(0.6f)
+            .onFocusChanged {
+                isFocused = it.isFocused
+            }
+            .border(
+                border = BorderStroke(
+                    1.dp,
+                    if (isFocused)
+                        Color.LightGray
+                    else
+                        Color.Transparent
+                ), shape = MaterialTheme.shapes.medium
+            )
+            .clickable { }
+            .focusable()
+    ) {
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+            Text(text = "Item $parent x $child", textAlign = TextAlign.Center)
+        }
+    }
+}
+
 @Preview
 @Composable
 fun CarouselItemPrev() {
     CarouselItem(1, 1)
+}
+
+
+@Preview
+@Composable
+fun VerticalCarouselItemPrev() {
+    VerticalCarouselItem(1, 1)
 }
