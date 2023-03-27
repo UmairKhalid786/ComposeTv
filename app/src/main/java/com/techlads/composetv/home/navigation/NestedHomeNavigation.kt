@@ -1,23 +1,19 @@
 package com.techlads.composetv.home.navigation
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.techlads.composetv.hero.HeroItem
-import com.techlads.composetv.home.carousel.HomeCarousel
+import androidx.navigation.NavHostController
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @Composable
-fun NestedHomeNavigation() {
-    Column(Modifier.fillMaxSize()) {
-        HeroItem()
-        HomeCarousel(Modifier.weight(1f))
-    }
+fun NestedHomeNavigation(navController: NavHostController) {
+    NestedHomeScreenNavigation(navController)
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
 fun NestedHomeNavigationPrev() {
-    NestedHomeNavigation()
+    NestedHomeNavigation(rememberAnimatedNavController())
 }
