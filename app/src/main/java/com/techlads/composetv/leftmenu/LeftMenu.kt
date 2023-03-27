@@ -11,6 +11,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.techlads.composetv.home.navigation.NestedScreens
 import com.techlads.composetv.leftmenu.model.MenuItem
 import compose.icons.LineAwesomeIcons
 import compose.icons.lineawesomeicons.CogSolid
@@ -63,7 +64,7 @@ fun LeftMenu(
             )
             Spacer(modifier = Modifier.weight(1f))
             LeftMenuItem(
-                menuItem = MenuItem("", "Settings", LineAwesomeIcons.CogSolid),
+                menuItem = MenuItem(NestedScreens.Settings.title, "Settings", LineAwesomeIcons.CogSolid),
                 modifier = Modifier.fillMaxWidth(),
                 expanded = isExpanded,
                 onMenuFocused = onMenuFocused,
