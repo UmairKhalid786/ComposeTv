@@ -46,11 +46,11 @@ fun AppNavigation(navController: NavHostController) {
     }
 }
 
-private fun tabExitTransition(
+fun tabExitTransition(
     duration: Int = 500
 ) = fadeOut(tween(duration / 2, easing = LinearEasing))
 
-private fun tabEnterTransition(
+fun tabEnterTransition(
     duration: Int = 500, delay: Int = duration - 350
 ) = fadeIn(tween(duration, duration - delay))
 
