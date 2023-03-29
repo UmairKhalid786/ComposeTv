@@ -1,16 +1,27 @@
 package com.techlads.composetv.home
 
 import androidx.lifecycle.ViewModel
+import com.techlads.composetv.leftmenu.data.MenuData
 import com.techlads.composetv.leftmenu.model.MenuItem
+import com.techlads.composetv.utils.toMutable
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ViewModel() {
     val menuItems : StateFlow<List<MenuItem>> = MutableStateFlow(emptyList())
+    val menuState : StateFlow<Boolean> = MutableStateFlow(false)
 
     init {
-        menuItems.toMutable().value = listOf()
+        menuItems.toMutable().value = MenuData.menuItems
+    }
+
+    fun menuClosed() {
+        menuState.toMutable().value = false
+    }
+    fun menuOpen() {
+        menuState.toMutable().value = true
     }
 }
-
-fun <T> StateFlow<T>.toMutable() = this as MutableStateFlow

@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -57,5 +58,10 @@ dependencies {
     implementation(libs.qrcode)
     implementation(libs.line.awesome.icons)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    // Hilt navigation
+    implementation(libs.androidx.hilt.navigation.compose)
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

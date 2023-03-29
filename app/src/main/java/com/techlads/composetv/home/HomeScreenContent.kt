@@ -3,20 +3,19 @@ package com.techlads.composetv.home
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.home.navigation.NestedHomeNavigation
 import com.techlads.composetv.leftmenu.LeftMenu
-import com.techlads.composetv.leftmenu.data.MenuData
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun HomeScreenContent() {
+fun HomeScreenContent(viewModel: HomeViewModel) {
 
+    val menuItems by viewModel.menuItems.collectAsState()
     val navController = rememberAnimatedNavController()
 
     val isExpanded = remember {
@@ -28,9 +27,10 @@ fun HomeScreenContent() {
             modifier = Modifier.wrapContentWidth(),
             defaultFocus = 0,
             isExpanded = isExpanded.value,
-            menuItems = MenuData.menuItems,
+            menuItems = menuItems,
             onMenuFocused = { _, isSelected ->
                 isExpanded.value = !isExpanded.value && isSelected
+                setViewModelState(isSelected, viewModel)
             }
         ) {
             navController.navigate(it.id)
@@ -40,8 +40,16 @@ fun HomeScreenContent() {
     }
 }
 
+fun setViewModelState(isSelected: Boolean, viewModel: HomeViewModel) {
+    if (isSelected) {
+        viewModel.menuOpen()
+    } else {
+        viewModel.menuClosed()
+    }
+}
+
 @Preview
 @Composable
 fun HomeScreenContentPrev() {
-    HomeScreenContent()
+    HomeScreenContent(hiltViewModel())
 }
