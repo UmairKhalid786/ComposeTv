@@ -22,11 +22,10 @@ import androidx.compose.ui.zIndex
 
 
 @Composable
-fun CarouselItem(parent: Int, child: Int) {
+fun CarouselItem(parent: Int, child: Int, onItemFocus: (item: Int) -> Unit) {
 
     var isFocused by remember { mutableStateOf(false) }
     val scale = animateFloatAsState(if (isFocused) 1.2f else 1f)
-
 
     Card(
         modifier = Modifier
@@ -40,6 +39,9 @@ fun CarouselItem(parent: Int, child: Int) {
             .aspectRatio(1.8f)
             .onFocusChanged {
                 isFocused = it.isFocused
+                if (isFocused) {
+                    onItemFocus(child)
+                }
             }
             .border(
                 border = BorderStroke(
@@ -101,7 +103,7 @@ fun VerticalCarouselItem(parent: Int, child: Int) {
 @Preview
 @Composable
 fun CarouselItemPrev() {
-    CarouselItem(1, 1)
+    CarouselItem(1, 1){}
 }
 
 
