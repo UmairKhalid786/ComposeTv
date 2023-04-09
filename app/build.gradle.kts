@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -30,7 +31,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.4.4"
     }
 
     kotlinOptions {
@@ -43,19 +44,38 @@ dependencies {
     implementation(libs.leanback)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.android.material)
-    implementation(libs.androidx.constraintlayout.compose)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.materialWindow)
     implementation(libs.accompanist.navigation.animation)
     implementation(libs.accompanist.placeholder)
-    implementation(libs.androidx.compose.material.iconsExtended)
-    implementation(libs.androidx.tv.foundation)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.androidx.lifecycle.runtime)
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.qrcode)
     implementation(libs.line.awesome.icons)
-    implementation(libs.androidx.compose.ui.tooling.preview)
+
+    /* Jetpack Compose */
+    /* Compose BOM */
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.materialWindow)
+    implementation(libs.androidx.compose.material.iconsExtended)
+
+    /* Debug */
+    debugImplementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    /* End Compose BOM */
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewModelCompose)
+
+    // Specific APIs
+    implementation(libs.androidx.tv.material)
+    implementation(libs.androidx.tv.foundation)
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    // Hilt navigation
+    implementation(libs.androidx.hilt.navigation.compose)
 }
