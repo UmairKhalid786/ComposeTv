@@ -71,7 +71,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewModelCompose)
 
     // Specific APIs
-//    implementation(libs.androidx.tv.material)
+    implementation(libs.androidx.tv.material)
     implementation(libs.androidx.tv.foundation)
     // Hilt
     implementation(libs.hilt.android)
