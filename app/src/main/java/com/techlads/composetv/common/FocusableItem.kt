@@ -25,7 +25,7 @@ fun FocusableItem(
         glow = ClickableSurfaceDefaults.glow(
             focusedGlow = Glow(
                 elevation = 5.dp,
-                elevationColor = Color.Black
+                elevationColor = Color.Gray
             )
         ),
         shape = ClickableSurfaceDefaults.shape(

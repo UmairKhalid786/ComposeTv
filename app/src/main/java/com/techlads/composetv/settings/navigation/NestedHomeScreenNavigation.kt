@@ -7,7 +7,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.techlads.composetv.navigation.tabEnterTransition
 import com.techlads.composetv.navigation.tabExitTransition
-import com.techlads.composetv.settings.screens.about.AboutMe
+import com.techlads.composetv.settings.screens.about.AboutMeScreen
 import com.techlads.composetv.settings.screens.profile.ProfileScreen
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -25,7 +25,7 @@ fun NestedSettingsScreenNavigation(navController: NavHostController) {
             SettingsScreens.AboutMe.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            AboutMe()
+            AboutMeScreen()
         }
     }
 }
