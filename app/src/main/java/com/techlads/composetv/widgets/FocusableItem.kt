@@ -1,11 +1,11 @@
-package com.techlads.composetv.common
+package com.techlads.composetv.widgets
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.*
 
@@ -18,14 +18,19 @@ fun FocusableItem(
 ) {
     Surface(
         onClick = { onClick() },
-        scale = ClickableSurfaceDefaults.scale(focusedScale = 1.05f),
+        scale = ClickableSurfaceDefaults.scale(focusedScale = 1.1f),
         color = ClickableSurfaceDefaults.color(
-            color = Color.Transparent
+            color = colorScheme.onSurface,
+            focusedColor = colorScheme.surface
+        ),
+        contentColor = ClickableSurfaceDefaults.contentColor(
+            color = colorScheme.surface,
+            focusedColor = colorScheme.onSurface
         ),
         glow = ClickableSurfaceDefaults.glow(
             focusedGlow = Glow(
                 elevation = 5.dp,
-                elevationColor = Color.Gray
+                elevationColor = colorScheme.surface.copy(alpha = 0.5f)
             )
         ),
         shape = ClickableSurfaceDefaults.shape(
@@ -33,11 +38,16 @@ fun FocusableItem(
             focusedShape = ShapeDefaults.Small
         ),
         modifier = modifier
-            .padding(
-                start = 16.dp, bottom = 8.dp
-            )
             .fillMaxWidth()
     ) {
         content()
+    }
+}
+
+@Preview
+@Composable
+fun FocusableItemPrev() {
+    FocusableItem(onClick = {}){
+        Text(text = "Preview Text")
     }
 }
