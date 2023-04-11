@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.tv.material3.Text
 import androidx.compose.runtime.*
@@ -19,8 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.contentColorFor
+import com.techlads.composetv.theme.AppTheme
 
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun CarouselItem(parent: Int, child: Int, onItemFocus: (item: Int) -> Unit) {
 
@@ -47,13 +52,17 @@ fun CarouselItem(parent: Int, child: Int, onItemFocus: (item: Int) -> Unit) {
                 border = BorderStroke(
                     1.dp,
                     if (isFocused)
-                        Color.LightGray
+                        contentColorFor(backgroundColor = AppTheme.surface)
                     else
                         Color.Transparent
                 ), shape = MaterialTheme.shapes.medium
             )
             .clickable { }
-            .focusable()
+            .focusable(),
+        colors = CardDefaults.cardColors(
+            containerColor = AppTheme.surface,
+            contentColor = contentColorFor(backgroundColor = AppTheme.surface)
+        )
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
             Text(text = "Item $parent x $child", textAlign = TextAlign.Center)
@@ -62,6 +71,7 @@ fun CarouselItem(parent: Int, child: Int, onItemFocus: (item: Int) -> Unit) {
 }
 
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun VerticalCarouselItem(parent: Int, child: Int) {
 
@@ -86,16 +96,23 @@ fun VerticalCarouselItem(parent: Int, child: Int) {
                 border = BorderStroke(
                     1.dp,
                     if (isFocused)
-                        Color.LightGray
+                        contentColorFor(backgroundColor = AppTheme.surface)
                     else
                         Color.Transparent
                 ), shape = MaterialTheme.shapes.medium
             )
             .clickable { }
-            .focusable()
+            .focusable(),
+        colors = CardDefaults.cardColors(
+            containerColor = AppTheme.surface,
+            contentColor = contentColorFor(backgroundColor = AppTheme.surface)
+        )
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-            Text(text = "Item $parent x $child", textAlign = TextAlign.Center)
+            Text(
+                text = "Item $parent x $child",
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }
@@ -103,7 +120,7 @@ fun VerticalCarouselItem(parent: Int, child: Int) {
 @Preview
 @Composable
 fun CarouselItemPrev() {
-    CarouselItem(1, 1){}
+    CarouselItem(1, 1) {}
 }
 
 
