@@ -1,25 +1,22 @@
 package com.techlads.composetv.theme
 
-import android.app.Activity
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
-import androidx.core.view.WindowCompat
-import androidx.tv.material3.LocalContentColor
+import androidx.tv.material3.*
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 private val DarkColorScheme = darkColorScheme(
+    primary = Purple80,
+    secondary = PurpleGrey80,
+    tertiary = Pink80,
+    background = Neutral10
+)
+
+@OptIn(ExperimentalTvMaterial3Api::class)
+private val LightColorScheme = lightColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80,
@@ -34,43 +31,38 @@ object AppTheme {
         @ReadOnlyComposable
         get() = MidShape.current
 
+    @OptIn(ExperimentalTvMaterial3Api::class)
     val MainColor: Color
         @Composable
         @ReadOnlyComposable
         get() = DarkColorScheme.primary
+
+    @OptIn(ExperimentalTvMaterial3Api::class)
+    val surface: Color
+        @Composable
+        @ReadOnlyComposable
+        get() = MaterialTheme.colorScheme.surface
+
+    @OptIn(ExperimentalTvMaterial3Api::class)
+    val onSurface: Color
+        @Composable
+        @ReadOnlyComposable
+        get() = MaterialTheme.colorScheme.onSurface
 }
 
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun Material3Theme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-        else -> DarkColorScheme
-    }
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            (view.context as? Activity)?.window?.run {
-                statusBarColor = colorScheme.primary.toArgb()
-                WindowCompat.getInsetsController(this, view).isAppearanceLightStatusBars = darkTheme
-            }
-        }
-    }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = DarkColorScheme,
         typography = Typography,
         content = {
             CompositionLocalProvider(
-                LocalContentColor provides White.copy(alpha = 0.7f)
+                LocalContentColor provides AppTheme.onSurface
             ){
                 content()
             }
