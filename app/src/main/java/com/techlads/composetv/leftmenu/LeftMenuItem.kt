@@ -1,6 +1,5 @@
 package com.techlads.composetv.leftmenu
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.keyframes
@@ -9,9 +8,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.ShapeDefaults
-import androidx.tv.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +17,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.Text
 import com.techlads.composetv.leftmenu.model.MenuItem
 
 @Composable
@@ -45,12 +44,11 @@ fun LeftMenuItem(
             .focusRequester(requester)
             .onFocusChanged {
                 isFocused = it.isFocused
-                Log.e("isFocused", it.isFocused.toString())
                 onMenuFocused?.invoke(menuItem, it.isFocused)
             }
             .focusable()
             .background(
-                color = if (isFocused) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surface,
+                color = if (isFocused) colorScheme.surface else colorScheme.onSurface,
                 shape = ShapeDefaults.Small
             )
             .clickable {
@@ -64,10 +62,10 @@ fun LeftMenuItem(
                 modifier = Modifier.size(20.dp),
                 imageVector = it,
                 contentDescription = menuItem.text,
-                tint = if (!isFocused)
-                    MaterialTheme.colorScheme.onSurface
+                tint = if (isFocused)
+                    colorScheme.onSurface
                 else
-                    MaterialTheme.colorScheme.surface
+                    colorScheme.surface
             )
             Spacer(modifier = Modifier.padding(horizontal = padding.value))
         }
@@ -75,7 +73,7 @@ fun LeftMenuItem(
         AnimatedVisibility(visible = expanded, modifier = Modifier.height(20.dp)) {
             Text(
                 text = menuItem.text,
-                color = if (!isFocused) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surface,
+                color = if (isFocused) colorScheme.onSurface else colorScheme.surface,
                 maxLines = 1
             )
         }
