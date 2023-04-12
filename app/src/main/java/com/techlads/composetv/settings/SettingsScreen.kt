@@ -1,6 +1,7 @@
 package com.techlads.composetv.settings
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -14,14 +15,22 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.settings.data.SettingsMenuModel
 import com.techlads.composetv.widgets.FocusableItem
 import com.techlads.composetv.settings.navigation.NestedSettingsScreenNavigation
+import com.techlads.composetv.theme.AppTheme
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun SettingsScreen() {
     val navController = rememberAnimatedNavController()
 
-    Row(Modifier.padding(16.dp).fillMaxSize()) {
-        SettingsMenu(Modifier.fillMaxHeight().padding(vertical = 16.dp)) {
+    Row(
+        Modifier
+            .fillMaxSize()) {
+        SettingsMenu(
+            Modifier
+                .fillMaxHeight()
+                .background(AppTheme.surface.copy(alpha = 0.2f))
+                .padding(vertical = 32.dp, horizontal = 16.dp)
+        ) {
             navController.navigate(it.navigation)
         }
         SettingsNavigation(navController)
@@ -41,8 +50,13 @@ fun SettingsMenu(modifier: Modifier, onMenuSelected: (SettingsMenuModel) -> Unit
     TvLazyColumn(modifier = modifier.width(200.dp)) {
         items(settingsMenu.size) {
             val item = settingsMenu[it]
-            FocusableItem(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),onClick = { onMenuSelected(item) }) {
-                Text(text = item.text, modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp))
+            FocusableItem(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                onClick = { onMenuSelected(item) }) {
+                Text(
+                    text = item.text,
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+                )
             }
         }
     }
