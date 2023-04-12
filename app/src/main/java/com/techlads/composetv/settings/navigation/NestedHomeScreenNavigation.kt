@@ -7,13 +7,13 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.techlads.composetv.navigation.tabEnterTransition
 import com.techlads.composetv.navigation.tabExitTransition
-import com.techlads.composetv.settings.screens.about.AboutMeScreen
+import com.techlads.composetv.settings.screens.about.AboutScreen
 import com.techlads.composetv.settings.screens.profile.ProfileScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NestedSettingsScreenNavigation(navController: NavHostController) {
-    AnimatedNavHost(navController = navController, startDestination = SettingsScreens.AboutMe.title) {
+    AnimatedNavHost(navController = navController, startDestination = SettingsScreens.Profile.title) {
         // e.g will add auth routes here if when we will extend project
         composable(
             SettingsScreens.Profile.title,
@@ -25,7 +25,7 @@ fun NestedSettingsScreenNavigation(navController: NavHostController) {
             SettingsScreens.AboutMe.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            AboutMeScreen()
+            AboutScreen()
         }
     }
 }
