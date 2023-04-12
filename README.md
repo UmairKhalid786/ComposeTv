@@ -15,6 +15,15 @@
 ## Favorites
 ![favoritesscreen](https://user-images.githubusercontent.com/21205138/228040345-387ba9be-0792-4e8e-810d-e5ad9b63dcde.png)
 
+## Settings
+![settings](https://user-images.githubusercontent.com/21205138/231318386-a34b7edc-d15e-4755-bc9a-9b893d462db8.png)
+
+## Profile
+![settings_expanded](https://user-images.githubusercontent.com/21205138/231318567-5bf956dd-b5d7-4daf-9329-86504cf89516.png)
+
+## About me
+![about_me_added](https://user-images.githubusercontent.com/21205138/231318869-2a76f19b-0179-44d4-9207-945b9037b95e.png)
+
 ## Movies
 ![MoviesGrid](https://user-images.githubusercontent.com/21205138/228040389-25c4f8c1-b600-411c-9d35-00fb18de8e3e.png)
 
