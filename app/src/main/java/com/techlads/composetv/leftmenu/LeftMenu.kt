@@ -8,11 +8,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.techlads.composetv.home.navigation.NestedScreens
 import com.techlads.composetv.leftmenu.model.MenuItem
+import com.techlads.composetv.theme.AppTheme
 import compose.icons.LineAwesomeIcons
 import compose.icons.lineawesomeicons.CogSolid
 import compose.icons.lineawesomeicons.Comment
@@ -43,7 +43,7 @@ fun LeftMenu(
 
     Box(
         modifier = modifier
-            .background(Color.DarkGray.copy(alpha = 0.2f))
+            .background(AppTheme.surface.copy(alpha = 0.5f))
             .wrapContentWidth()
     ) {
         Column(
