@@ -40,7 +40,7 @@ fun MenuHeader(expanded: Boolean = true) {
         )
         Text(
             text = "Compose Tv",
-            fontWeight = FontWeight.Thin,
+            fontWeight = FontWeight.Normal,
             fontSize = 16.sp,
             modifier = Modifier.alpha(animatedAlpha.value),
             maxLines = 1
