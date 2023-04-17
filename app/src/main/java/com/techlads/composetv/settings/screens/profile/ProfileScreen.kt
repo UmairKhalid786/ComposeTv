@@ -29,32 +29,32 @@ fun ProfileScreen() {
 @Composable
 fun ProfilesContent() {
     Column {
-
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(
-                modifier = Modifier
-                    .size(100.dp)
-                    .clip(CircleShape)
-                    .shadow(elevation = 12.dp, shape = CircleShape, clip = true)
-                    .border(2.dp, LocalContentColor.current, CircleShape),
-                painter = painterResource(id = R.drawable.profile),
-                contentDescription = "User profile"
-            )
+            ProfilePicture()
             Spacer(modifier = Modifier.size(20.dp))
             UserDetails()
         }
         Spacer(modifier = Modifier.size(5.dp))
         Row {
             Spacer(modifier = Modifier.size(120.dp))
-            Button(text = "Save") {
-
-            }
+            Button(text = "Save") {}
             Spacer(modifier = Modifier.size(8.dp))
-            Button(text = "Cancel") {
-
-            }
+            Button(text = "Cancel") {}
         }
     }
+}
+
+@Composable
+fun ProfilePicture() {
+    Image(
+        modifier = Modifier
+            .size(100.dp)
+            .clip(CircleShape)
+            .shadow(elevation = 12.dp, shape = CircleShape, clip = true)
+            .border(2.dp, LocalContentColor.current, CircleShape),
+        painter = painterResource(id = R.drawable.profile),
+        contentDescription = "User profile"
+    )
 }
 
 @Composable

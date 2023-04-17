@@ -18,7 +18,7 @@ import com.techlads.composetv.login.withEmailPassword.LoginScreen
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
-    AnimatedNavHost(navController = navController, startDestination = Screens.LoginToken.title) {
+    AnimatedNavHost(navController = navController, startDestination = Screens.Home.title) {
         // e.g will add auth routes here if when we will extend project
         composable(
             Screens.Login.title,
