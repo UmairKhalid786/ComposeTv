@@ -26,7 +26,7 @@
 
 ## Movies
 ![MoviesGrid](https://user-images.githubusercontent.com/21205138/228040389-25c4f8c1-b600-411c-9d35-00fb18de8e3e.png)
-
+ 
 ## Songs
 ![songs](https://user-images.githubusercontent.com/21205138/232351274-d5c47060-d876-4d11-b993-d66184be44fe.png)
 
