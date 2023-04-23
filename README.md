@@ -24,7 +24,7 @@
 ## About me
 ![about_me_added](https://user-images.githubusercontent.com/21205138/231318869-2a76f19b-0179-44d4-9207-945b9037b95e.png)
 
-## Movies
+## Movies 
 ![MoviesGrid](https://user-images.githubusercontent.com/21205138/228040389-25c4f8c1-b600-411c-9d35-00fb18de8e3e.png)
  
 ## Songs
