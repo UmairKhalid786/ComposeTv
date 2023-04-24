@@ -14,7 +14,7 @@
 
 ## Favorites
 ![favoritesscreen](https://user-images.githubusercontent.com/21205138/228040345-387ba9be-0792-4e8e-810d-e5ad9b63dcde.png)
-
+ 
 ## Settings
 ![settings](https://user-images.githubusercontent.com/21205138/231318386-a34b7edc-d15e-4755-bc9a-9b893d462db8.png)
 
