@@ -11,7 +11,7 @@
 
 ## Home - Expandded
 ![Screenshot_1679864765](https://user-images.githubusercontent.com/21205138/227805700-c5fc5909-3fb9-4fc2-a348-382a792d15c9.png)
-
+ 
 ## Favorites
 ![favoritesscreen](https://user-images.githubusercontent.com/21205138/228040345-387ba9be-0792-4e8e-810d-e5ad9b63dcde.png)
  
