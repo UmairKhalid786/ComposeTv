@@ -11,7 +11,7 @@ buildscript {
         classpath(libs.hilt.gradlePlugin)
     }
 }
-
+ 
 allprojects {
     repositories {
         google()
