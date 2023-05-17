@@ -1,4 +1,8 @@
 # ComposeTv
+
+## Upcoming features 
+- Player 
+- Detail page
  
 ## Signin with QR code UX 
 ![QR Code](https://user-images.githubusercontent.com/21205138/211226659-249d191c-d930-4dd7-8aa2-e9a0056539c8.png)
