@@ -16,14 +16,17 @@ import com.techlads.composetv.features.songs.SongsScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun NestedHomeScreenNavigation(navController: NavHostController) {
+fun NestedHomeScreenNavigation(
+    navController: NavHostController,
+    onItemClick: (parent: Int, child: Int) -> Unit
+) {
     AnimatedNavHost(navController = navController, startDestination = NestedScreens.Home.title) {
         // e.g will add auth routes here if when we will extend project
         composable(
             NestedScreens.Home.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            HomeNestedScreen()
+            HomeNestedScreen(onItemFocus = { _, _ -> }, onItemClick = onItemClick)
         }
 
         composable(
@@ -37,7 +40,7 @@ fun NestedHomeScreenNavigation(navController: NavHostController) {
             NestedScreens.Movies.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            MoviesScreen()
+            MoviesScreen(onItemClick)
         }
 
         composable(

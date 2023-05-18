@@ -8,9 +8,12 @@ import com.techlads.composetv.features.home.hero.HeroItem
 import com.techlads.composetv.features.home.carousel.HomeCarousel
 
 @Composable
-fun HomeNestedScreen() {
+fun HomeNestedScreen(
+    onItemFocus: (parent: Int, child: Int) -> Unit,
+    onItemClick: (parent: Int, child: Int) -> Unit
+) {
     Column(Modifier.fillMaxSize()) {
         HeroItem()
-        HomeCarousel(Modifier.weight(1f))
+        HomeCarousel(Modifier.weight(1f), onItemFocus = onItemFocus, onItemClick = onItemClick)
     }
 }

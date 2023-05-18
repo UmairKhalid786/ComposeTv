@@ -36,7 +36,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.google.android.material)
 
-    implementation(libs.media3.exoplayer)
-    implementation(libs.media3.session)
-    implementation(libs.media3.datasource.cronet)
+    api(libs.media3.exoplayer)
+    api(libs.media3.session)
+    api(libs.media3.datasource.cronet)
 }

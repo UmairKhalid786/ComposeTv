@@ -15,15 +15,20 @@ import androidx.tv.material3.Text
 import com.techlads.composetv.widgets.BorderedFocusableItem
 
 @Composable
-fun CarouselItem(parent: Int, child: Int, onItemFocus: (item: Int) -> Unit) {
+fun CarouselItem(
+    parent: Int,
+    child: Int,
+    onItemFocus: (parent: Int, child: Int) -> Unit,
+    onItemClick: (parent: Int, child: Int) -> Unit
+) {
     BorderedFocusableItem(
-        onClick = {  },
+        onClick = { onItemClick(parent, child) },
         modifier = Modifier
             .padding(horizontal = 8.dp)
             .aspectRatio(1.8f)
             .onFocusChanged {
                 if (it.isFocused) {
-                    onItemFocus(child)
+                    onItemFocus(parent, child)
                 }
             }) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
@@ -34,12 +39,15 @@ fun CarouselItem(parent: Int, child: Int, onItemFocus: (item: Int) -> Unit) {
 
 
 @Composable
-fun VerticalCarouselItem(parent: Int, child: Int) {
+fun VerticalCarouselItem(parent: Int, child: Int, onItemFocus: (parent: Int, child: Int) -> Unit) {
     BorderedFocusableItem(
-        onClick = {  },
+        onClick = {
+            onItemFocus(parent, child)
+        },
         modifier = Modifier
             .padding(8.dp)
-            .aspectRatio(0.6f)) {
+            .aspectRatio(0.6f)
+    ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
             Text(text = "Item $parent x $child", textAlign = TextAlign.Center)
         }
@@ -49,12 +57,14 @@ fun VerticalCarouselItem(parent: Int, child: Int) {
 @Preview
 @Composable
 fun CarouselItemPrev() {
-    CarouselItem(1, 1) {}
+    CarouselItem(1, 1, onItemClick = { _, _ -> }, onItemFocus = { _, _ -> })
 }
 
 
 @Preview
 @Composable
 fun VerticalCarouselItemPrev() {
-    VerticalCarouselItem(1, 1)
+    VerticalCarouselItem(1, 1) { _, _ ->
+
+    }
 }

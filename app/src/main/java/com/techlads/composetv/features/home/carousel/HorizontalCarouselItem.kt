@@ -12,7 +12,11 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.foundation.lazy.list.TvLazyRow
 
 @Composable
-fun HorizontalCarouselItem(parent: Int, onItemFocus: (child: Int, parent: Int) -> Unit) {
+fun HorizontalCarouselItem(
+    parent: Int,
+    onItemFocus: (child: Int, parent: Int) -> Unit,
+    onItemClick: (child: Int, parent: Int) -> Unit
+) {
 
     Column(Modifier.height(150.dp)) {
         Text(text = "Row $parent", modifier = Modifier.padding(horizontal = 24.dp))
@@ -25,9 +29,9 @@ fun HorizontalCarouselItem(parent: Int, onItemFocus: (child: Int, parent: Int) -
             )
         ) {
             items(15) { child ->
-                CarouselItem(parent, child) {
-                    onItemFocus(child, parent)
-                }
+                CarouselItem(parent, child,
+                    onItemClick = onItemClick,
+                    onItemFocus = onItemFocus)
             }
         }
     }
@@ -36,7 +40,7 @@ fun HorizontalCarouselItem(parent: Int, onItemFocus: (child: Int, parent: Int) -
 @Preview
 @Composable
 fun HorizontalCarouselItemPrev() {
-    HorizontalCarouselItem(1) { child, parent ->
-
-    }
+    HorizontalCarouselItem(1,
+        onItemFocus = { _, _ -> },
+        onItemClick = { _, _ -> })
 }
