@@ -10,7 +10,7 @@ import com.techlads.player.domain.TLPlayer
 import com.techlads.player.domain.state.PlayerStateListener
 import java.lang.ref.WeakReference
 
-class ExoPlayerImpl(private val context: WeakReference<Context>, private val player: ExoPlayer) :
+internal class ExoPlayerImpl(private val context: WeakReference<Context>, private val player: ExoPlayer) :
     TLPlayer {
 
     private var listener: Player.Listener? = null
