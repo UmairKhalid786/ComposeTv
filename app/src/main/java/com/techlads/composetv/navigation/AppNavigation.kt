@@ -10,10 +10,10 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.techlads.composetv.home.HomeScreen
-import com.techlads.composetv.home.HomeViewModel
-import com.techlads.composetv.login.withToken.DeviceTokenAuthenticationScreen
-import com.techlads.composetv.login.withEmailPassword.LoginScreen
+import com.techlads.composetv.features.home.HomeScreen
+import com.techlads.composetv.features.home.HomeViewModel
+import com.techlads.composetv.features.login.withToken.DeviceTokenAuthenticationScreen
+import com.techlads.composetv.features.login.withEmailPassword.LoginScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
