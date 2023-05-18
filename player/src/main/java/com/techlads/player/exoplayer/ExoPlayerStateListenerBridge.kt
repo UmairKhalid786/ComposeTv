@@ -9,7 +9,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.techlads.player.domain.state.PlayerState
 import com.techlads.player.domain.state.PlayerStateListener
 
-class ExoPlayerStateListenerBridge(
+internal class ExoPlayerStateListenerBridge(
     private val stateListener: PlayerStateListener,
     val player: ExoPlayer
 ) : Player.Listener {
