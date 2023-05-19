@@ -93,7 +93,6 @@ fun ButtonSection() {
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
-            //.background(color = Color(0xFF2D2D44)),
             .background(color = AppTheme.surface.copy(alpha = 0.5f)),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
