@@ -9,3 +9,4 @@ pluginManagement {
 }
 rootProject.name = "Compose TV"
 include(":app")
+include(":player")

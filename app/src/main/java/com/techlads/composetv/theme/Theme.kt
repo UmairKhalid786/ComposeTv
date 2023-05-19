@@ -50,13 +50,11 @@ object AppTheme {
         get() = MaterialTheme.colorScheme.onSurface
 }
 
-
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun Material3Theme(
     content: @Composable () -> Unit
 ) {
-
     MaterialTheme(
         colorScheme = DarkColorScheme,
         typography = Typography,

@@ -1,6 +1,10 @@
 # ComposeTv
 
-## Signin with QR code UX
+## Upcoming features 
+- Player 
+- Detail page
+ 
+## Signin with QR code UX 
 ![QR Code](https://user-images.githubusercontent.com/21205138/211226659-249d191c-d930-4dd7-8aa2-e9a0056539c8.png)
 
 ## Signin with Email UX
@@ -11,10 +15,10 @@
 
 ## Home - Expandded
 ![Screenshot_1679864765](https://user-images.githubusercontent.com/21205138/227805700-c5fc5909-3fb9-4fc2-a348-382a792d15c9.png)
-
+ 
 ## Favorites
 ![favoritesscreen](https://user-images.githubusercontent.com/21205138/228040345-387ba9be-0792-4e8e-810d-e5ad9b63dcde.png)
-
+ 
 ## Settings
 ![settings](https://user-images.githubusercontent.com/21205138/231318386-a34b7edc-d15e-4755-bc9a-9b893d462db8.png)
 
@@ -23,10 +27,12 @@
 
 ## About me
 ![about_me_added](https://user-images.githubusercontent.com/21205138/231318869-2a76f19b-0179-44d4-9207-945b9037b95e.png)
-
-## Movies
+ 
+## Movies 
 ![MoviesGrid](https://user-images.githubusercontent.com/21205138/228040389-25c4f8c1-b600-411c-9d35-00fb18de8e3e.png)
 
-## Whole Experience 
-<video src='https://user-images.githubusercontent.com/21205138/227805240-fe0576b8-bdbe-40c9-a623-5a47ce8b420d.mp4' width=180/>
+## Songs
+![songs](https://user-images.githubusercontent.com/21205138/232351274-d5c47060-d876-4d11-b993-d66184be44fe.png)
 
+## Whole Experience
+<video src='https://user-images.githubusercontent.com/21205138/227805240-fe0576b8-bdbe-40c9-a623-5a47ce8b420d.mp4' width=180/>
