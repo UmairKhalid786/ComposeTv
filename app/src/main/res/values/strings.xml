@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Compose TV</string>
+    <string name="watch_trailer">Watch Trailer</string>
+    <string name="movie_desciption">\"Batman ventures into Gotham City\'s underworld when a sadistic killer leaves behind a trail of cryptic clues. \"</string>
+    <string name="movie_name">Batman</string>
+    <string name="release_year">2022</string>
+    <string name="movie_duration_text">2h 56mm</string>
 </resources>

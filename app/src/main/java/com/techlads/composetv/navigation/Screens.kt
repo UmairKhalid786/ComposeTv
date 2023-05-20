@@ -5,4 +5,5 @@ sealed class Screens(val title: String) {
     object LoginToken : Screens("login_token")
     object Home : Screens("home_screen")
     object Player : Screens("player_screen")
+    object ProductDetail : Screens("product_detail")
 }
