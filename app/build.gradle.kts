@@ -54,8 +54,6 @@ dependencies {
     implementation(project(mapOf("path" to ":player")))
     implementation(libs.media3.ui)
 
-    implementation(libs.timber)
-
     /* Jetpack Compose */
     /* Compose BOM */
     val composeBom = platform(libs.androidx.compose.bom)

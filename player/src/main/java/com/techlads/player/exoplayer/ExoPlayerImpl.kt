@@ -48,7 +48,7 @@ internal class ExoPlayerImpl(
         player.apply {
             this.playWhenReady = playWhenReady
             videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
-            repeatMode = Player.REPEAT_MODE_ONE
+            repeatMode = Player.REPEAT_MODE_OFF
             setMediaSource(prepareMediaSource(context, uri))
             prepare()
         }
@@ -61,7 +61,7 @@ internal class ExoPlayerImpl(
     override fun exoPlayer() = player
 
     override fun setPlaybackEvent(callback: PlayerStateListener) {
-        listener = ExoPlayerStateListenerBridge(callback, player).apply {
+        listener = ExoPlayerStateListener(callback, player).apply {
             player.addListener(this)
         }
     }
