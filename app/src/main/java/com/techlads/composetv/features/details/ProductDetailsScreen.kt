@@ -1,10 +1,14 @@
 package com.techlads.composetv.features.details
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -21,8 +25,11 @@ import androidx.tv.material3.Text
 import com.techlads.composetv.R
 import com.techlads.composetv.theme.AppTheme
 import com.techlads.composetv.theme.Material3Theme
-import com.techlads.composetv.widgets.BorderedFocusableItem
 import com.techlads.composetv.widgets.Button
+import com.techlads.composetv.widgets.ThumbnailImageCard
+import kotlinx.coroutines.delay
+
+const val ANIMATION_DELAY = 600L
 
 @Composable
 fun ProductDetailsScreen(onBackPressed: () -> Unit) {
@@ -33,6 +40,17 @@ fun ProductDetailsScreen(onBackPressed: () -> Unit) {
 private fun ProductDetailsContent(onBackPressed: () -> Unit) {
 
     BackHandler(onBack = onBackPressed)
+
+    val isLoaded = remember {
+        mutableStateOf(false)
+    }
+
+    val animatedPortraitSize = animateDpAsState(targetValue = if (isLoaded.value) 150.dp else 1.dp)
+
+    LaunchedEffect(key1 = Unit) {
+        delay(ANIMATION_DELAY)
+        isLoaded.value = true
+    }
 
     Box {
         SearchIcon(
@@ -60,11 +78,13 @@ private fun ProductDetailsContent(onBackPressed: () -> Unit) {
         }
 
         ThumbnailImageCard(
-            modifier = Modifier
+            Modifier
                 .align(Alignment.CenterStart)
-                .padding(start = 30.dp),
-            parent = 1, child = 1
-        )
+                .padding(start = 30.dp)
+                .width(animatedPortraitSize.value)
+        ) {
+            Text(text = "1x1")
+        }
     }
 }
 
@@ -204,20 +224,6 @@ fun Rating(rating: String) {
             style = MaterialTheme.typography.bodyLarge,
             text = rating
         )
-    }
-}
-
-@Composable
-fun ThumbnailImageCard(modifier: Modifier, parent: Int, child: Int) {
-    BorderedFocusableItem(
-        onClick = { },
-        modifier = modifier
-            .padding(8.dp)
-            .size(width = 150.dp, height = 200.dp)
-    ) {
-        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-            Text(text = "Item $parent x $child", textAlign = TextAlign.Center)
-        }
     }
 }
 
