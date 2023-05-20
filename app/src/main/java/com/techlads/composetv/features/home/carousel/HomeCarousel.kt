@@ -8,12 +8,14 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.foundation.lazy.list.TvLazyColumn
 
 @Composable
-fun HomeCarousel(modifier: Modifier) {
+fun HomeCarousel(
+    modifier: Modifier,
+    onItemFocus: (parent: Int, child: Int) -> Unit,
+    onItemClick: (child: Int, parent: Int) -> Unit
+) {
     TvLazyColumn(modifier, contentPadding = PaddingValues(bottom = 100.dp)) {
         items(15) {
-            HorizontalCarouselItem(it){ child, parent ->
-                
-            }
+            HorizontalCarouselItem(it, onItemFocus = onItemFocus, onItemClick = onItemClick)
         }
     }
 }
@@ -21,5 +23,5 @@ fun HomeCarousel(modifier: Modifier) {
 @Preview
 @Composable
 fun HomeCarouselPrev() {
-    HomeCarousel(Modifier)
+    HomeCarousel(Modifier, onItemFocus = { _, _ ->  }, onItemClick = { _, _ ->  })
 }

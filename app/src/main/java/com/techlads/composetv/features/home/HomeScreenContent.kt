@@ -13,7 +13,10 @@ import com.techlads.composetv.features.home.leftmenu.LeftMenu
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun HomeScreenContent(viewModel: HomeViewModel) {
+fun HomeScreenContent(
+    viewModel: HomeViewModel,
+    onItemFocus: (parent: Int, child: Int) -> Unit
+) {
 
     val menuItems by viewModel.menuItems.collectAsState()
     val navController = rememberAnimatedNavController()
@@ -36,7 +39,7 @@ fun HomeScreenContent(viewModel: HomeViewModel) {
             navController.navigate(it.id)
         }
 
-        NestedHomeNavigation(navController)
+        NestedHomeNavigation(navController, onItemFocus)
     }
 }
 
@@ -51,5 +54,5 @@ fun setViewModelState(isSelected: Boolean, viewModel: HomeViewModel) {
 @Preview
 @Composable
 fun HomeScreenContentPrev() {
-    HomeScreenContent(hiltViewModel())
+    HomeScreenContent(hiltViewModel()) { _, _ -> }
 }

@@ -50,6 +50,10 @@ dependencies {
     implementation(libs.qrcode)
     implementation(libs.line.awesome.icons)
 
+    // Player
+    implementation(project(mapOf("path" to ":player")))
+    implementation(libs.media3.ui)
+
     /* Jetpack Compose */
     /* Compose BOM */
     val composeBom = platform(libs.androidx.compose.bom)

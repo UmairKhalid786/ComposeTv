@@ -7,13 +7,16 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 @Composable
-fun NestedHomeNavigation(navController: NavHostController) {
-    NestedHomeScreenNavigation(navController)
+fun NestedHomeNavigation(
+    navController: NavHostController,
+    onItemFocus: (parent: Int, child: Int) -> Unit
+) {
+    NestedHomeScreenNavigation(navController, onItemFocus)
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
 fun NestedHomeNavigationPrev() {
-    NestedHomeNavigation(rememberAnimatedNavController())
+    NestedHomeNavigation(rememberAnimatedNavController()) { _, _ -> }
 }

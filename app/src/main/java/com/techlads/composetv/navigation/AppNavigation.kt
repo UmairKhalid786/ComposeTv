@@ -15,6 +15,7 @@ import com.techlads.composetv.features.home.HomeScreen
 import com.techlads.composetv.features.home.HomeViewModel
 import com.techlads.composetv.features.login.withToken.DeviceTokenAuthenticationScreen
 import com.techlads.composetv.features.login.withEmailPassword.LoginScreen
+import com.techlads.composetv.features.player.PlayerScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -43,7 +44,20 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
             Screens.Home.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            HomeScreen(viewModel)
+            HomeScreen(viewModel) { _, _ ->
+                navController.navigate(Screens.Player.title)
+            }
+        }
+
+        composable(
+            Screens.Player.title,
+            enterTransition = { tabEnterTransition() },
+            exitTransition = { tabExitTransition() }) {
+            PlayerScreen(
+                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                onBackPressed = {
+                    navController.navigateUp()
+                })
         }
 
         composable(

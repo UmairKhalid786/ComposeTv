@@ -1,73 +1,67 @@
 package com.techlads.composetv.utils
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.runtime.*
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_DPAD_CENTER
+import android.view.KeyEvent.KEYCODE_DPAD_LEFT
+import android.view.KeyEvent.KEYCODE_DPAD_RIGHT
+import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.KeyEvent.KEYCODE_NUMPAD_ENTER
+import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_LEFT
+import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_RIGHT
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.input.key.onPreviewKeyEvent
-import androidx.compose.ui.platform.debugInspectorInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
 fun <T> StateFlow<T>.toMutable() = this as MutableStateFlow
 
-fun Modifier.handleDPadEnter(
-    enabled: Boolean,
-    interactionSource: MutableInteractionSource,
-    onClick: (() -> Unit)? = null,
-    checked: Boolean = false,
-    onCheckedChanged: ((Boolean) -> Unit)? = null
-) = composed(
-    inspectorInfo = debugInspectorInfo {
-        name = "handleDPadEnter"
-        properties["enabled"] = enabled
-        properties["interactionSource"] = interactionSource
-        properties["onClick"] = onClick
-        properties["checked"] = checked
-        properties["onCheckedChanged"] = onCheckedChanged
-    }
-) {
-    val coroutineScope = rememberCoroutineScope()
-    val pressInteraction = remember { PressInteraction.Press(Offset.Zero) }
-    var isPressed by remember { mutableStateOf(false) }
-    this.then(
-        onPreviewKeyEvent {
-            keyEvent ->
-            if (AcceptableKeys.any { keyEvent.nativeKeyEvent.keyCode == it } && enabled) {
-                when (keyEvent.nativeKeyEvent.action) {
-                    NativeKeyEvent.ACTION_DOWN -> {
-                        if (!isPressed) {
-                            isPressed = true
-                            coroutineScope.launch {
-                                interactionSource.emit(pressInteraction)
-                            }
-                        }
-                    }
-
-                    NativeKeyEvent.ACTION_UP -> {
-                        if (isPressed) {
-                            isPressed = false
-                            coroutineScope.launch {
-                                interactionSource.emit(PressInteraction.Release(pressInteraction))
-                            }
-                            onClick?.invoke()
-                            onCheckedChanged?.invoke(!checked)
-                        }
-                    }
-                }
-                return@onPreviewKeyEvent EventPropagation.StopPropagation
-            }
-            EventPropagation.ContinuePropagation
-        }
-    )
-}
-
-private val AcceptableKeys = listOf(
-    NativeKeyEvent.KEYCODE_DPAD_CENTER,
-    NativeKeyEvent.KEYCODE_ENTER,
-    NativeKeyEvent.KEYCODE_NUMPAD_ENTER
+private val DPadEventsKeyCodes = listOf(
+    KEYCODE_DPAD_LEFT,
+    KEYCODE_SYSTEM_NAVIGATION_LEFT,
+    KEYCODE_DPAD_RIGHT,
+    KEYCODE_SYSTEM_NAVIGATION_RIGHT,
+    KEYCODE_DPAD_CENTER,
+    KEYCODE_ENTER,
+    KEYCODE_NUMPAD_ENTER
 )
+
+fun Modifier.handleDPadKeyEvents(
+    onLeft: (() -> Unit)? = null,
+    onRight: (() -> Unit)? = null,
+    onEnter: (() -> Unit)? = null
+) = onPreviewKeyEvent {
+    fun onActionUp(block: () -> Unit) {
+        if (it.nativeKeyEvent.action == KeyEvent.ACTION_UP) block()
+    }
+
+    if (!DPadEventsKeyCodes.contains(it.nativeKeyEvent.keyCode)) return@onPreviewKeyEvent false
+
+    when (it.nativeKeyEvent.keyCode) {
+
+        KEYCODE_ENTER,
+        KEYCODE_DPAD_CENTER,
+        KEYCODE_NUMPAD_ENTER, -> {
+            onEnter?.apply {
+                onActionUp(::invoke)
+                return@onPreviewKeyEvent true
+            }
+        }
+
+        KEYCODE_DPAD_LEFT,
+        KEYCODE_SYSTEM_NAVIGATION_LEFT -> {
+            onLeft?.apply {
+                onActionUp(::invoke)
+                return@onPreviewKeyEvent true
+            }
+        }
+
+        KEYCODE_DPAD_RIGHT,
+        KEYCODE_SYSTEM_NAVIGATION_RIGHT -> {
+            onRight?.apply {
+                onActionUp(::invoke)
+                return@onPreviewKeyEvent true
+            }
+        }
+    }
+    false
+}

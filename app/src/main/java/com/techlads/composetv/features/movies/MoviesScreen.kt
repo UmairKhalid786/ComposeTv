@@ -13,12 +13,12 @@ import androidx.tv.foundation.lazy.grid.TvLazyVerticalGrid
 import com.techlads.composetv.features.home.carousel.VerticalCarouselItem
 
 @Composable
-fun MoviesScreen() {
-    MoviesGrid(Modifier)
+fun MoviesScreen(onItemFocus: (parent: Int, child: Int) -> Unit) {
+    MoviesGrid(Modifier, onItemFocus)
 }
 
 @Composable
-fun MoviesGrid(modifier: Modifier) {
+fun MoviesGrid(modifier: Modifier, onItemFocus: (parent: Int, child: Int) -> Unit) {
     TvLazyVerticalGrid(
         modifier = modifier,
         columns = TvGridCells.Fixed(5),
@@ -30,7 +30,7 @@ fun MoviesGrid(modifier: Modifier) {
             GridHeader()
         }
         items(30) {
-            VerticalCarouselItem(parent = 0, child = 0)
+            VerticalCarouselItem(parent = 0, child = 0, onItemFocus)
         }
     }
 }
@@ -48,5 +48,5 @@ fun GridHeader() {
 @Preview
 @Composable
 fun MoviesScreenPrev() {
-    MoviesScreen()
+    MoviesScreen { _, _ ->  }
 }
