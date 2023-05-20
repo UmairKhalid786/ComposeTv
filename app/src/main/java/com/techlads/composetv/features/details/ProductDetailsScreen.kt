@@ -1,5 +1,6 @@
 package com.techlads.composetv.features.details
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -24,12 +25,15 @@ import com.techlads.composetv.widgets.BorderedFocusableItem
 import com.techlads.composetv.widgets.Button
 
 @Composable
-fun ProductDetailsScreen() {
-    ProductDetailsContent()
+fun ProductDetailsScreen(onBackPressed: () -> Unit) {
+    ProductDetailsContent(onBackPressed)
 }
 
 @Composable
-private fun ProductDetailsContent() {
+private fun ProductDetailsContent(onBackPressed: () -> Unit) {
+
+    BackHandler(onBack = onBackPressed)
+
     Box {
         SearchIcon(
             modifier = Modifier
@@ -221,6 +225,6 @@ fun ThumbnailImageCard(modifier: Modifier, parent: Int, child: Int) {
 @Composable
 fun DetailsScreenPrev() {
     Material3Theme {
-        ProductDetailsScreen()
+        ProductDetailsScreen {}
     }
 }

@@ -45,7 +45,7 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
             HomeScreen(viewModel) { _, _ ->
-                navController.navigate(Screens.Player.title)
+                navController.navigate(Screens.ProductDetail.title)
             }
         }
 
@@ -64,7 +64,10 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
             Screens.ProductDetail.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            ProductDetailsScreen()
+            ProductDetailsScreen(
+                onBackPressed = {
+                    navController.navigateUp()
+                })
         }
     }
 }
