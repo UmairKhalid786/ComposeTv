@@ -10,6 +10,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.techlads.composetv.features.details.ProductDetailsScreen
 import com.techlads.composetv.features.home.HomeScreen
 import com.techlads.composetv.features.home.HomeViewModel
 import com.techlads.composetv.features.login.withToken.DeviceTokenAuthenticationScreen
@@ -43,6 +44,13 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
             HomeScreen(viewModel)
+        }
+
+        composable(
+            Screens.ProductDetail.title,
+            enterTransition = { tabEnterTransition() },
+            exitTransition = { tabExitTransition() }) {
+            ProductDetailsScreen()
         }
     }
 }
