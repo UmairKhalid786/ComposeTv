@@ -29,7 +29,7 @@ fun ProductDetailsScreen() {
 }
 
 @Composable
-fun ProductDetailsContent() {
+private fun ProductDetailsContent() {
     Box {
         SearchIcon(
             modifier = Modifier
