@@ -11,6 +11,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -32,12 +34,12 @@ import kotlinx.coroutines.delay
 const val ANIMATION_DELAY = 600L
 
 @Composable
-fun ProductDetailsScreen(onBackPressed: () -> Unit) {
-    ProductDetailsContent(onBackPressed)
+fun ProductDetailsScreen(onBackPressed: () -> Unit, onPlayClick: () -> Unit) {
+    ProductDetailsContent(onBackPressed, onPlayClick = onPlayClick)
 }
 
 @Composable
-private fun ProductDetailsContent(onBackPressed: () -> Unit) {
+private fun ProductDetailsContent(onBackPressed: () -> Unit, onPlayClick: () -> Unit) {
 
     BackHandler(onBack = onBackPressed)
 
@@ -72,7 +74,7 @@ private fun ProductDetailsContent(onBackPressed: () -> Unit) {
                     .weight(.4f)
             )
             Column(modifier = Modifier.weight(.6f)) {
-                ButtonSection()
+                ButtonSection(onPlayClick)
                 DetailsSection()
             }
         }
@@ -112,7 +114,15 @@ fun BannerImage(modifier: Modifier) {
 }
 
 @Composable
-fun ButtonSection() {
+fun ButtonSection(onPlayClick: () -> Unit) {
+
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(key1 = Unit) {
+        delay(ANIMATION_DELAY)
+        focusRequester.requestFocus()
+    }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -125,9 +135,10 @@ fun ButtonSection() {
 
         Button(
             text = "Play",
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-        ) {
-        }
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 4.dp)
+                .focusRequester(focusRequester), onClick = onPlayClick
+        )
         Spacer(modifier = Modifier.size(16.dp))
         Text(
             color = LocalContentColor.current,
@@ -231,6 +242,6 @@ fun Rating(rating: String) {
 @Composable
 fun DetailsScreenPrev() {
     Material3Theme {
-        ProductDetailsScreen {}
+        ProductDetailsScreen(onPlayClick = {}, onBackPressed = {})
     }
 }

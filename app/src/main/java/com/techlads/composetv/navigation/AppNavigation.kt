@@ -67,7 +67,11 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
             ProductDetailsScreen(
                 onBackPressed = {
                     navController.navigateUp()
-                })
+                },
+                onPlayClick = {
+                    navController.navigate(Screens.Player.title)
+                }
+            )
         }
     }
 }
