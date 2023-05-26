@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.player.controls
 
 import androidx.compose.animation.AnimatedVisibility
@@ -6,7 +8,12 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -21,6 +28,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme
 import com.techlads.composetv.R
 
 
@@ -119,6 +128,9 @@ fun PlayerControls(
                     vertical = 32.dp
                 )
         ) {
+
+            VideoHeaders()
+            Spacer(modifier = Modifier.height(32.dp))
             Row(
                 modifier = Modifier.padding(bottom = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -167,16 +179,38 @@ fun PlayerControls(
     }
 }
 
+@Composable
+fun VideoHeaders() {
+    Column(Modifier.fillMaxWidth()) {
+        Text(text = "This is Dummy video title",
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.headlineLarge)
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = "This is Dummy video description | acting as placeholder for details",
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.bodySmall
+        )
+    }
+}
+
 private fun Long.padStartWith0() = this.toString().padStart(2, '0')
 
 @Preview
 @Composable
 private fun PlayerControlsPrev() {
     PlayerControls(
+        modifier = Modifier.fillMaxSize(),
         isPlaying = false,
         onPlayPauseToggle = {},
         onSeek = {},
         contentProgressInMillis = 0,
         contentDurationInMillis = 0
     )
+}
+
+@Preview
+@Composable
+fun VideoHeadersPrev() {
+    VideoHeaders()
 }
