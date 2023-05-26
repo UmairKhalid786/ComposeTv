@@ -11,6 +11,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -113,6 +115,14 @@ fun BannerImage(modifier: Modifier) {
 
 @Composable
 fun ButtonSection() {
+
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(key1 = Unit){
+        delay(1000)
+        focusRequester.requestFocus()
+    }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -124,8 +134,11 @@ fun ButtonSection() {
         Spacer(modifier = Modifier.width(280.dp))
 
         Button(
+
             text = "Play",
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+            modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 4.dp)
+                .focusRequester(focusRequester)
         ) {
         }
         Spacer(modifier = Modifier.size(16.dp))
