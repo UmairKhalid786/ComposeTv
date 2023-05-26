@@ -19,6 +19,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.techlads.composetv.R
 
@@ -167,3 +168,15 @@ fun PlayerControls(
 }
 
 private fun Long.padStartWith0() = this.toString().padStart(2, '0')
+
+@Preview
+@Composable
+private fun PlayerControlsPrev() {
+    PlayerControls(
+        isPlaying = false,
+        onPlayPauseToggle = {},
+        onSeek = {},
+        contentProgressInMillis = 0,
+        contentDurationInMillis = 0
+    )
+}
