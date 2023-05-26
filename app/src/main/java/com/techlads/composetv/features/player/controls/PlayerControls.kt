@@ -3,8 +3,8 @@
 package com.techlads.composetv.features.player.controls
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -110,14 +110,15 @@ fun PlayerControls(
     AnimatedVisibility(
         modifier = modifier,
         visible = state.isDisplayed,
-        enter = slideInVertically { it },
-        exit = slideOutVertically { it }
+        enter = expandVertically { it },
+        exit = shrinkVertically { it }
     ) {
         Column(
             modifier = Modifier
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
+                            Color.Black,
                             Color.Transparent,
                             Color.Black
                         )
@@ -130,7 +131,7 @@ fun PlayerControls(
         ) {
 
             VideoHeaders()
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.weight(1.0f))
             Row(
                 modifier = Modifier.padding(bottom = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
