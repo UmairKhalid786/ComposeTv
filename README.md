@@ -1,9 +1,5 @@
 # ComposeTv
 
-## Upcoming features 
-- Player
- 
- 
 ## Signin with QR code UX 
 ![QR Code](https://user-images.githubusercontent.com/21205138/211226659-249d191c-d930-4dd7-8aa2-e9a0056539c8.png)
 
@@ -18,7 +14,10 @@
 
 ## Product Detail Page
 ![Screenshot_20230521_003306](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/338a7972-a9dd-4a6e-9807-a2ea474df44d)
- 
+
+## Player Screen added
+ ![Screenshot_20230527_013806](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/14438091-46c6-4d67-a338-b6acd05ad222)
+
 ## Favorites
 ![favoritesscreen](https://user-images.githubusercontent.com/21205138/228040345-387ba9be-0792-4e8e-810d-e5ad9b63dcde.png)
  
@@ -39,3 +38,6 @@
 
 ## Whole Experience
 <video src='https://user-images.githubusercontent.com/21205138/227805240-fe0576b8-bdbe-40c9-a623-5a47ce8b420d.mp4' width=180/>
+
+## APIs
+KMM
