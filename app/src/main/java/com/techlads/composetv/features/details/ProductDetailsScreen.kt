@@ -19,10 +19,12 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
+import com.techlads.composetv.features.movies.MoviesViewModel
 import com.techlads.composetv.theme.AppTheme
 import com.techlads.composetv.theme.Material3Theme
 import com.techlads.composetv.widgets.Button
@@ -32,7 +34,14 @@ import kotlinx.coroutines.delay
 const val ANIMATION_DELAY = 600L
 
 @Composable
-fun ProductDetailsScreen(onBackPressed: () -> Unit) {
+fun ProductDetailsScreen(
+    viewModel: MoviesViewModel = hiltViewModel(),
+    onBackPressed: () -> Unit
+) {
+    LaunchedEffect(key1 = true) {
+        viewModel.getMovieById()
+    }
+
     ProductDetailsContent(onBackPressed)
 }
 
