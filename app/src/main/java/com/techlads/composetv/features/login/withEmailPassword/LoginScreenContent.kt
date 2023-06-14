@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 @Composable
@@ -15,7 +16,7 @@ fun LoginPage(
     onLoginClick: (user: String, psw: String) -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(20.dp),
+        modifier = Modifier.padding(20.dp).width(320.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -37,13 +38,13 @@ fun LoginPage(
         ) { password.value = it }
         Spacer(modifier = Modifier.height(40.dp))
 
-        LoginButton {
+        LoginButton(modifier = Modifier.padding(start = 20.dp, end = 20.dp)) {
             onLoginClick(username.value, password.value)
         }
     }
 }
 
-@Preview
+@Preview(device = Devices.TV_1080p)
 @Composable
 fun LoginPagePrev() {
     LoginPage { u, p ->
