@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.techlads.composetv.theme.ComposeTvTheme
 import compose.icons.LineAwesomeIcons
 import compose.icons.lineawesomeicons.TvSolid
 
@@ -51,5 +52,7 @@ fun MenuHeader(expanded: Boolean = true) {
 @Preview
 @Composable
 fun MenuHeaderPrev() {
-    MenuHeader(true)
+    ComposeTvTheme {
+        MenuHeader()
+    }
 }

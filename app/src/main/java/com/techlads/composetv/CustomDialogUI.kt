@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -18,9 +17,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.techlads.composetv.theme.Gray20
-import com.techlads.composetv.theme.Gray700
-import com.techlads.composetv.theme.LightBlue
 
 @Composable
 fun CustomDialog(openDialogCustom: MutableState<Boolean>, onExitClick: () -> Unit) {
@@ -42,7 +38,7 @@ fun CustomDialogUI(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier.padding(10.dp, 5.dp, 10.dp, 10.dp),
     ) {
-        Column(modifier.background(Color.White)) {
+        Column(modifier.background(MaterialTheme.colorScheme.surface)) {
 
             //.......................................................................
             Image(
@@ -50,7 +46,7 @@ fun CustomDialogUI(
                 contentDescription = null, // decorative
                 contentScale = ContentScale.Fit,
                 colorFilter = ColorFilter.tint(
-                    color = LightBlue
+                    color = MaterialTheme.colorScheme.onSurface
                 ),
                 modifier = Modifier
                     .padding(top = 35.dp)
@@ -84,15 +80,14 @@ fun CustomDialogUI(
                 Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp)
-                    .background(Gray20.copy(0.2F)),
+                    .background(MaterialTheme.colorScheme.background.copy(0.2F)),
             ) {
                 TextButton(onClick = {
                     openDialogCustom.value = false
-                }, modifier = Modifier.weight(1F)) {
+                }, modifier = Modifier.weight(1F), shape = RoundedCornerShape(0.dp)) {
                     Text(
                         "No",
                         fontWeight = FontWeight.Bold,
-                        color = Gray700,
                         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
                     )
                 }
@@ -106,11 +101,10 @@ fun CustomDialogUI(
                 TextButton(onClick = {
                     openDialogCustom.value = false
                     onExitClick()
-                }, modifier = Modifier.weight(1F)) {
+                }, modifier = Modifier.weight(1F), shape = RoundedCornerShape(0.dp)) {
                     Text(
                         "Yes",
                         fontWeight = FontWeight.ExtraBold,
-                        color = Color.Black,
                         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
                     )
                 }

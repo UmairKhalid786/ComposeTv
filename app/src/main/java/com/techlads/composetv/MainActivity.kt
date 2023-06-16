@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.features.home.HomeViewModel
 import com.techlads.composetv.navigation.AppNavigation
-import com.techlads.composetv.theme.Material3Theme
+import com.techlads.composetv.theme.ComposeTvTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,6 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val viewModel: HomeViewModel by viewModels()
 
         setContent {
@@ -44,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun App(navController: NavHostController, viewModel: HomeViewModel) {
-        Material3Theme {
+        ComposeTvTheme {
             AppNavigation(navController, viewModel)
         }
     }

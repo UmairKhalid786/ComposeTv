@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.home.leftmenu
 
 import androidx.compose.animation.core.animateDpAsState
@@ -10,9 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme
 import com.techlads.composetv.features.home.navigation.NestedScreens
 import com.techlads.composetv.features.home.leftmenu.model.MenuItem
-import com.techlads.composetv.theme.AppTheme
 import compose.icons.LineAwesomeIcons
 import compose.icons.lineawesomeicons.CogSolid
 import compose.icons.lineawesomeicons.Comment
@@ -43,7 +46,7 @@ fun LeftMenu(
 
     Box(
         modifier = modifier
-            .background(AppTheme.surface.copy(alpha = 0.5f))
+            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.5f))
             .wrapContentWidth()
     ) {
         Column(

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.settings.screens.profile
 
 import androidx.compose.foundation.Image
@@ -10,14 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
 import com.techlads.composetv.features.settings.data.SettingsMenuModel
 import com.techlads.composetv.features.settings.screens.PreferencesContainer
-import com.techlads.composetv.widgets.Button
+import com.techlads.composetv.widgets.TvButton
 
 @Composable
 fun ProfileScreen() {
@@ -37,9 +41,21 @@ fun ProfilesContent() {
         Spacer(modifier = Modifier.size(5.dp))
         Row {
             Spacer(modifier = Modifier.size(120.dp))
-            Button(text = "Save") {}
-            Spacer(modifier = Modifier.size(8.dp))
-            Button(text = "Cancel") {}
+            TvButton(onClick = {}, modifier = Modifier.width(120.dp)) {
+                Text(
+                    text = "Save",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            }
+            Spacer(modifier = Modifier.size(16.dp))
+            TvButton(onClick = {}, modifier = Modifier.width(120.dp)) {
+                Text(
+                    text = "Cancel",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }

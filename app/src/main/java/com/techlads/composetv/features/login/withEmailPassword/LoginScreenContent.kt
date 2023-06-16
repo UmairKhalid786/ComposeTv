@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.login.withEmailPassword
 
 import androidx.compose.foundation.layout.*
@@ -6,17 +8,27 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.Text
+import com.techlads.composetv.theme.ComposeTvTheme
+import com.techlads.composetv.widgets.TvButton
+
 @Composable
 fun LoginPage(
     onLoginClick: (user: String, psw: String) -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(20.dp).width(320.dp),
+        modifier = Modifier
+            .width(320.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -38,8 +50,15 @@ fun LoginPage(
         ) { password.value = it }
         Spacer(modifier = Modifier.height(40.dp))
 
-        LoginButton(modifier = Modifier.padding(start = 20.dp, end = 20.dp)) {
-            onLoginClick(username.value, password.value)
+        TvButton(modifier = Modifier.padding(start = 20.dp, end = 20.dp), onClick = {onLoginClick(username.value, password.value)}) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "LOGIN", style = TextStyle(
+                    fontFamily = FontFamily.SansSerif,
+                    fontWeight = FontWeight.Light,
+                    textAlign = TextAlign.Center,
+                )
+            )
         }
     }
 }
@@ -47,7 +66,9 @@ fun LoginPage(
 @Preview(device = Devices.TV_1080p)
 @Composable
 fun LoginPagePrev() {
-    LoginPage { u, p ->
+    ComposeTvTheme {
+        LoginPage { u, p ->
 
+        }
     }
 }
