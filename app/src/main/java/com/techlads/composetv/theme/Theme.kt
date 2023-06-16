@@ -5,6 +5,7 @@ package com.techlads.composetv.theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.lightColorScheme
 import androidx.tv.material3.darkColorScheme
@@ -140,7 +141,7 @@ fun ComposeTvTheme(
         typography = Typography,
         shapes = Shapes,
         content = {
-            CompositionLocalProvider {
+            CompositionLocalProvider(LocalContentColor provides colors.onSurface) {
                 content()
             }
         }
