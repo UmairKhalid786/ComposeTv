@@ -3,6 +3,7 @@
 package com.techlads.composetv.theme
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.lightColorScheme
@@ -125,7 +126,7 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun ComposeTvTheme(
-    useDarkTheme: Boolean = false,
+    useDarkTheme: Boolean = true,
     content: @Composable() () -> Unit
 ) {
     val colors = if (useDarkTheme) {
@@ -136,6 +137,12 @@ fun ComposeTvTheme(
 
     MaterialTheme(
         colorScheme = colors,
-        content = content
+        typography = Typography,
+        shapes = Shapes,
+        content = {
+            CompositionLocalProvider {
+                content()
+            }
+        }
     )
 }

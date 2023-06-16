@@ -61,7 +61,7 @@ fun HeroItem(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun HeroItemPrev() {
-    ComposeTvTheme(true) {
+    ComposeTvTheme {
         HeroItem()
     }
 }
