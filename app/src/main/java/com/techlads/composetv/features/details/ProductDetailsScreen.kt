@@ -26,7 +26,7 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
 import com.techlads.composetv.theme.AppTheme
-import com.techlads.composetv.theme.Material3Theme
+import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.Button
 import com.techlads.composetv.widgets.ThumbnailImageCard
 import kotlinx.coroutines.delay
@@ -241,7 +241,7 @@ fun Rating(rating: String) {
 @Preview(device = Devices.TV_1080p)
 @Composable
 fun DetailsScreenPrev() {
-    Material3Theme {
+    ComposeTvTheme {
         ProductDetailsScreen(onPlayClick = {}, onBackPressed = {})
     }
 }

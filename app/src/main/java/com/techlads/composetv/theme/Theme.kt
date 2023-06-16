@@ -102,7 +102,7 @@ object AppTheme {
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun Material3Theme(
+fun ComposeTvTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
