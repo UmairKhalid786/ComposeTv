@@ -11,12 +11,15 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.techlads.composetv.theme.ComposeTvTheme
+
 @Composable
 fun LoginPage(
     onLoginClick: (user: String, psw: String) -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(20.dp).width(320.dp),
+        modifier = Modifier
+            .width(320.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -47,7 +50,9 @@ fun LoginPage(
 @Preview(device = Devices.TV_1080p)
 @Composable
 fun LoginPagePrev() {
-    LoginPage { u, p ->
+    ComposeTvTheme {
+        LoginPage { u, p ->
 
+        }
     }
 }

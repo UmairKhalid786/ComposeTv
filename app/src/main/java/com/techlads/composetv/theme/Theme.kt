@@ -128,7 +128,7 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun ComposeTvTheme(
     useDarkTheme: Boolean = true,
-    content: @Composable() () -> Unit
+    content: @Composable () -> Unit
 ) {
     val colors = if (useDarkTheme) {
         DarkColors

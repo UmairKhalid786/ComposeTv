@@ -21,6 +21,7 @@
             android:name=".MainActivity"
             android:banner="@drawable/ic_app"
             android:exported="true"
+            android:windowSoftInputMode="adjustResize"
             android:icon="@drawable/ic_app"
             android:logo="@drawable/ic_app"
             android:screenOrientation="landscape">
