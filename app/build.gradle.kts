@@ -14,7 +14,13 @@ android {
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+
+
+
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
     }
+
+
 
     buildTypes {
         release {
@@ -82,4 +88,18 @@ dependencies {
     kapt(libs.hilt.compiler)
     // Hilt navigation
     implementation(libs.androidx.hilt.navigation.compose)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+
+    //OkHttpClient
+    implementation(libs.okhttp3)
+    implementation(libs.okhttp.logging)
+
+    //Paging
+    //implementation(libs.paging)
+    implementation(libs.paging.compose)
+
+    implementation(libs.coil.kt.compose)
 }

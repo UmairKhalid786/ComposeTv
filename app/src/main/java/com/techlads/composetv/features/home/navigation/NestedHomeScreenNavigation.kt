@@ -40,7 +40,7 @@ fun NestedHomeScreenNavigation(
             NestedScreens.Movies.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            MoviesScreen(onItemClick)
+            MoviesScreen(onItemFocus = onItemClick)
         }
 
         composable(
