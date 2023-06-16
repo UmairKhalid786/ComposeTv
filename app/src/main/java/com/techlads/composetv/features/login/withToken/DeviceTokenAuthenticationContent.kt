@@ -27,6 +27,7 @@ import com.github.alexzhirkevich.customqrgenerator.QrData
 import com.github.alexzhirkevich.customqrgenerator.vector.QrCodeDrawable
 import com.github.alexzhirkevich.customqrgenerator.vector.QrVectorOptions
 import com.github.alexzhirkevich.customqrgenerator.vector.style.*
+import com.techlads.composetv.widgets.TvButton
 
 @Composable
 fun DeviceTokenAuthenticationContent(
@@ -142,32 +143,19 @@ fun DeviceTokenAuthenticationContent(
                 .width(300.dp)
                 .padding(40.dp, 0.dp, 40.dp, 0.dp)
         ) {
-            LoginButton(interactionSource = interactionSource) {
-                onLoginClick(token)
+            TvButton(
+                modifier = Modifier.padding(start = 20.dp, end = 20.dp),
+                interactionSource = interactionSource,
+                onClick = { onLoginClick(token) }) {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Login with Email", style = TextStyle(
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Light,
+                        textAlign = TextAlign.Center,
+                    )
+                )
             }
         }
-    }
-}
-
-@Composable
-fun LoginButton(
-    modifier: Modifier = Modifier,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    onClick: () -> Unit
-) {
-    Button(
-        onClick = onClick,
-        interactionSource = interactionSource,
-        contentPadding = PaddingValues(16.dp),
-        modifier = modifier
-    ) {
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = "WITH KEYBOARD", style = TextStyle(
-                fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.Light,
-                textAlign = TextAlign.Center,
-            )
-        )
     }
 }
