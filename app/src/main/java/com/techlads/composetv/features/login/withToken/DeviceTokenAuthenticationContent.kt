@@ -1,18 +1,16 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.login.withToken
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.tv.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
@@ -21,6 +19,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
@@ -49,8 +48,10 @@ fun DeviceTokenAuthenticationContent(
         val start = globalText.indexOf(url)
         val spanStyles = listOf(
             AnnotatedString.Range(
-                SpanStyle(fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Normal),
+                SpanStyle(
+                    fontFamily = FontFamily.SansSerif,
+                    fontWeight = FontWeight.Normal
+                ),
                 start = start,
                 end = start + url.length
             )
@@ -141,28 +142,32 @@ fun DeviceTokenAuthenticationContent(
                 .width(300.dp)
                 .padding(40.dp, 0.dp, 40.dp, 0.dp)
         ) {
-            Button(
-                onClick = { onLoginClick(token) },
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.buttonColors(Color.White),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-                    .onFocusChanged { state ->
-                        if (state.isFocused) {
-                            println("login")
-                        }
-                    }
-                    .focusable(true, interactionSource)
-            ) {
-                Text(
-                    text = "WITH KEYBOARD", style = TextStyle(
-                        color = Color.Black,
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight.Light
-                    )
-                )
+            LoginButton(interactionSource = interactionSource) {
+                onLoginClick(token)
             }
         }
+    }
+}
+
+@Composable
+fun LoginButton(
+    modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        interactionSource = interactionSource,
+        contentPadding = PaddingValues(16.dp),
+        modifier = modifier
+    ) {
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "WITH KEYBOARD", style = TextStyle(
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.Light,
+                textAlign = TextAlign.Center,
+            )
+        )
     }
 }

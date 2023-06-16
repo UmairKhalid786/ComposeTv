@@ -29,7 +29,7 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
 import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.composetv.widgets.Button
+import com.techlads.composetv.widgets.TvButton
 import com.techlads.composetv.widgets.ThumbnailImageCard
 import kotlinx.coroutines.delay
 
@@ -135,12 +135,13 @@ fun ButtonSection(onPlayClick: () -> Unit) {
     ) {
         Spacer(modifier = Modifier.width(280.dp))
 
-        Button(
-            text = "Play",
+        TvButton(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 4.dp)
                 .focusRequester(focusRequester), onClick = onPlayClick
-        )
+        ) {
+            Text("Play")
+        }
         Spacer(modifier = Modifier.size(16.dp))
         Text(
             color = LocalContentColor.current,
