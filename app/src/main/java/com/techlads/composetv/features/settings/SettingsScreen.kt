@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.settings
 
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -8,9 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.features.settings.navigation.NestedSettingsScreenNavigation
-import com.techlads.composetv.theme.AppTheme
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -23,7 +26,7 @@ fun SettingsScreen() {
         SettingsMenu(
             Modifier
                 .fillMaxHeight()
-                .background(AppTheme.surface.copy(alpha = 0.2f))
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.2f))
                 .padding(vertical = 32.dp, horizontal = 16.dp)
         ) {
             navController.navigate(it.navigation)

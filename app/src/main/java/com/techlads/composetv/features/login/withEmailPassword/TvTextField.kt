@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import com.techlads.composetv.theme.LightBlue
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,7 +32,7 @@ fun TvTextField(
         Color.White.copy(0.6F)
     }
     val selectedColor = remember {
-        LightBlue
+        Color.Blue
     }
     val selectionColor = remember { mutableStateOf(defaultColor) }
 

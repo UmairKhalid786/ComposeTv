@@ -28,7 +28,6 @@ import com.github.alexzhirkevich.customqrgenerator.QrData
 import com.github.alexzhirkevich.customqrgenerator.vector.QrCodeDrawable
 import com.github.alexzhirkevich.customqrgenerator.vector.QrVectorOptions
 import com.github.alexzhirkevich.customqrgenerator.vector.style.*
-import com.techlads.composetv.theme.AppTheme
 
 @Composable
 fun DeviceTokenAuthenticationContent(
@@ -144,7 +143,7 @@ fun DeviceTokenAuthenticationContent(
         ) {
             Button(
                 onClick = { onLoginClick(token) },
-                shape = AppTheme.midShape,
+                shape = MaterialTheme.shapes.medium,
                 colors = ButtonDefaults.buttonColors(Color.White),
                 modifier = Modifier
                     .fillMaxWidth()

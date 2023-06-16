@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.details
 
 import androidx.activity.compose.BackHandler
@@ -21,11 +23,11 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
-import com.techlads.composetv.theme.AppTheme
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.Button
 import com.techlads.composetv.widgets.ThumbnailImageCard
@@ -127,7 +129,7 @@ fun ButtonSection(onPlayClick: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)
-            .background(color = AppTheme.surface.copy(alpha = 0.5f)),
+            .background(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {

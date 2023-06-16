@@ -18,9 +18,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.techlads.composetv.theme.Gray20
-import com.techlads.composetv.theme.Gray700
-import com.techlads.composetv.theme.LightBlue
 
 @Composable
 fun CustomDialog(openDialogCustom: MutableState<Boolean>, onExitClick: () -> Unit) {
@@ -50,7 +47,7 @@ fun CustomDialogUI(
                 contentDescription = null, // decorative
                 contentScale = ContentScale.Fit,
                 colorFilter = ColorFilter.tint(
-                    color = LightBlue
+                    color = MaterialTheme.colorScheme.onSurface
                 ),
                 modifier = Modifier
                     .padding(top = 35.dp)
@@ -84,7 +81,8 @@ fun CustomDialogUI(
                 Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp)
-                    .background(Gray20.copy(0.2F)),
+//                    .background(Gray20.copy(0.2F))
+                ,
             ) {
                 TextButton(onClick = {
                     openDialogCustom.value = false
@@ -92,7 +90,7 @@ fun CustomDialogUI(
                     Text(
                         "No",
                         fontWeight = FontWeight.Bold,
-                        color = Gray700,
+//                        color = Gray700,
                         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
                     )
                 }
