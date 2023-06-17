@@ -35,6 +35,10 @@ fun LeftMenu(
         targetValue = if (isExpanded) 200.dp else 50.dp,
     )
 
+    val menuPadding = animateDpAsState(
+        targetValue = if (isExpanded) 24.dp else 16.dp,
+    )
+
     val requester = remember {
         FocusRequester()
     }
@@ -51,11 +55,9 @@ fun LeftMenu(
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(vertical = 16.dp, horizontal = menuPadding.value)
                 .width(width.value)
         ) {
-            MenuHeader(isExpanded)
-            Spacer(modifier = Modifier.weight(1f))
             CenteredMenu(
                 modifier = Modifier,
                 requester,
@@ -67,7 +69,11 @@ fun LeftMenu(
             )
             Spacer(modifier = Modifier.weight(1f))
             LeftMenuItem(
-                menuItem = MenuItem(NestedScreens.Settings.title, "Settings", LineAwesomeIcons.CogSolid),
+                menuItem = MenuItem(
+                    NestedScreens.Settings.title,
+                    "Settings",
+                    LineAwesomeIcons.CogSolid
+                ),
                 modifier = Modifier.fillMaxWidth(),
                 expanded = isExpanded,
                 onMenuFocused = onMenuFocused,

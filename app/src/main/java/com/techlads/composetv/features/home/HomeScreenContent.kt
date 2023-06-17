@@ -10,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.features.home.navigation.NestedHomeNavigation
 import com.techlads.composetv.features.home.leftmenu.LeftMenu
+import com.techlads.composetv.theme.ComposeTvTheme
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -54,5 +55,7 @@ fun setViewModelState(isSelected: Boolean, viewModel: HomeViewModel) {
 @Preview
 @Composable
 fun HomeScreenContentPrev() {
-    HomeScreenContent(hiltViewModel()) { _, _ -> }
+    ComposeTvTheme {
+        HomeScreenContent(hiltViewModel()) { _, _ -> }
+    }
 }
