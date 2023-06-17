@@ -1,22 +1,20 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.home.leftmenu
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.keyframes
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.material3.ShapeDefaults
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme
+import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
 import com.techlads.composetv.features.home.leftmenu.model.MenuItem
 
@@ -25,7 +23,7 @@ fun LeftMenuItem(
     modifier: Modifier = Modifier,
     menuItem: MenuItem,
     expanded: Boolean = false,
-    requester: FocusRequester = FocusRequester(),
+    requester: FocusRequester? = null,
     onMenuFocused: ((menuItem: MenuItem, isFocused: Boolean) -> Unit)? = null,
     onMenuSelected: ((menuItem: MenuItem) -> Unit)? = null,
 ) {
@@ -36,46 +34,35 @@ fun LeftMenuItem(
         targetValue = if (expanded) 8.dp else 4.dp,
     )
 
-    var isFocused by remember { mutableStateOf(false) }
-
-    Row(
-        modifier
-            .padding(vertical = 4.dp)
-            .focusRequester(requester)
-            .onFocusChanged {
-                isFocused = it.isFocused
-                onMenuFocused?.invoke(menuItem, it.isFocused)
+    Surface(
+        onClick = { onMenuSelected?.invoke(menuItem) },
+        modifier = modifier
+            .onFocusChanged { focusState ->
+                onMenuFocused?.invoke(menuItem, focusState.isFocused)
             }
-            .focusable()
-            .background(
-                color = if (isFocused) colorScheme.surface else colorScheme.onSurface,
-                shape = ShapeDefaults.Small
-            )
-            .clickable {
-                onMenuSelected?.invoke(menuItem)
+            .focusRequester(requester ?: FocusRequester())
+            .padding(bottom = 8.dp)
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            menuItem.icon?.let {
+                androidx.tv.material3.Icon(
+                    imageVector = it,
+                    contentDescription = menuItem.text,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.padding(horizontal = padding.value))
             }
-            .padding(horizontal = 16.dp, vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically) {
-
-        menuItem.icon?.let {
-            Icon(
-                modifier = Modifier.size(20.dp),
-                imageVector = it,
-                contentDescription = menuItem.text,
-                tint = if (isFocused)
-                    colorScheme.onSurface
-                else
-                    colorScheme.surface
-            )
-            Spacer(modifier = Modifier.padding(horizontal = padding.value))
-        }
-
-        AnimatedVisibility(visible = expanded, modifier = Modifier.height(20.dp)) {
-            Text(
-                text = menuItem.text,
-                color = if (isFocused) colorScheme.onSurface else colorScheme.surface,
-                maxLines = 1
-            )
+            AnimatedVisibility(visible = expanded, modifier = Modifier.height(20.dp)) {
+                Text(
+                    text = menuItem.text,
+                    maxLines = 1,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
         }
     }
 }
