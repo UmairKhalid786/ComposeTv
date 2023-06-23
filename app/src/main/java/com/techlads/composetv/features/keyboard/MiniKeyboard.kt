@@ -125,7 +125,7 @@ fun KeyItem(
     modifier: Modifier = Modifier, content: @Composable () -> Unit,
 ) {
     Surface(
-        modifier = modifier.padding(4.dp),
+        modifier = modifier.padding(3.dp),
         onClick = {},
         shape = ClickableSurfaceDefaults.shape(shape = MaterialTheme.shapes.small)
     ) {
