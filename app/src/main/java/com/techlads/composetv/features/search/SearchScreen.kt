@@ -14,7 +14,7 @@ import com.techlads.composetv.theme.ComposeTvTheme
 @Composable
 fun SearchScreen() {
     Row(modifier = Modifier.fillMaxSize()) {
-        MiniKeyboard(modifier = Modifier.width(400.dp))
+        MiniKeyboard(modifier = Modifier.width(330.dp))
     }
 }
 
