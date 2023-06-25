@@ -3,8 +3,8 @@ package com.techlads.composetv.features.home.leftmenu
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.keyframes
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.tv.material3.*
 import androidx.compose.runtime.Composable
@@ -30,8 +30,7 @@ fun MenuHeader(expanded: Boolean = true) {
     )
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.width(if (expanded) 180.dp else 20.dp)
     ) {
         Icon(
             modifier = Modifier.size(50.dp),

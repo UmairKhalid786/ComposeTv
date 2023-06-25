@@ -13,4 +13,10 @@ object MenuData {
         MenuItem(Songs.title, "Songs", LineAwesomeIcons.MusicSolid),
         MenuItem(Favorites.title, "Favorites", LineAwesomeIcons.HeartSolid),
     )
+
+    val settingsItem = MenuItem(
+        Settings.title,
+        "Settings",
+        LineAwesomeIcons.CogSolid
+    )
 }
