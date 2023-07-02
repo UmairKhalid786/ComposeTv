@@ -64,7 +64,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
     LaunchedEffect(Unit) {
         while (true) {
             delay(300)
-//            contentCurrentPosition = player.exoPlayer().currentPosition
+            contentCurrentPosition = player.currentPosition
         }
     }
 
