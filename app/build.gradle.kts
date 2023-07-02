@@ -52,6 +52,7 @@ dependencies {
 
     // Player
     implementation(project(mapOf("path" to ":player")))
+    implementation(project(mapOf("path" to ":exoplayer")))
     implementation(libs.media3.ui)
 
     /* Jetpack Compose */

@@ -1,4 +1,4 @@
-package com.techlads.player.exoplayer
+package com.techlads.exoplayer
 
 import androidx.media3.common.Player
 import androidx.media3.common.Player.STATE_BUFFERING

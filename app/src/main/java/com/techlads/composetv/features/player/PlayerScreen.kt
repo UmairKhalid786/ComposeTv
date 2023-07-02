@@ -20,13 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.techlads.composetv.features.player.controls.PlayerControls
 import com.techlads.composetv.features.player.controls.rememberVideoPlayerState
 import com.techlads.composetv.utils.handleDPadKeyEvents
-import com.techlads.player.PlayerFactory
 import com.techlads.player.domain.state.PlayerState
 import com.techlads.player.domain.state.PlayerStateListener
 import kotlinx.coroutines.delay
@@ -44,7 +42,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
     val context = LocalContext.current
 
     val player = remember {
-        PlayerFactory.create(context)
+        com.techlads.exoplayer.PlayerFactory.create(context)
     }
 
     val coroutineScope = rememberCoroutineScope()
@@ -69,7 +67,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
     LaunchedEffect(Unit) {
         while (true) {
             delay(300)
-            contentCurrentPosition = player.exoPlayer().currentPosition
+//            contentCurrentPosition = player.exoPlayer().currentPosition
         }
     }
 
@@ -88,14 +86,15 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
                     )
                     .focusable(),
                 factory = {
-                    PlayerView(context).apply {
-                        hideController()
-                        useController = false
-                        resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
-
-                        this.player = player.exoPlayer()
-                        layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-                    }
+                    player.getView()
+//                    PlayerView(context).apply {
+//                        hideController()
+//                        useController = false
+//                        resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+//
+//                        this.player = player.exoPlayer()
+//                        layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+//                    }
                 }
             )
         ) {
@@ -103,7 +102,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
         }
         PlayerControls(
             modifier = Modifier.align(Alignment.BottomCenter),
-            isPlaying = player.exoPlayer().isPlaying,
+            isPlaying = /*player.exoPlayer().isPlaying*/ false,
             onPlayPauseToggle = { shouldPlay ->
                 if (shouldPlay) {
                     player.play()
@@ -112,16 +111,15 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
                 }
             },
             contentProgressInMillis = contentCurrentPosition,
-            contentDurationInMillis = player.exoPlayer().duration,
+            contentDurationInMillis = /*player.exoPlayer().duration*/ 0,
             state = videoPlayerState,
             onSeek = { seekProgress ->
-                player.seekTo(player.exoPlayer().duration.times(seekProgress).toLong())
+//                player.seekTo(player.exoPlayer().duration.times(seekProgress).toLong())
             }
         )
     }
 }
 
-@UnstableApi
 @Preview
 @Composable
 private fun PlayerScreenPreview() {
