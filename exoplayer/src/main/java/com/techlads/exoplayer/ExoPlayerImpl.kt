@@ -60,6 +60,8 @@ internal class ExoPlayerImpl(
     }
 
     override fun getView(): View  = providePlayerView()
+    override val currentPosition: Long
+        get() = player.currentPosition
 
     override fun setPlaybackEvent(callback: PlayerStateListener) {
         listener = ExoPlayerStateListener(callback, player).apply {
