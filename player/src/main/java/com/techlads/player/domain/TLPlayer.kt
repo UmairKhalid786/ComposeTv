@@ -18,6 +18,7 @@ interface TLPlayer {
 
     val currentPosition: Long
     val duration: Long
+    val isPlaying: Boolean
 
     fun setPlaybackEvent(callback: PlayerStateListener)
     fun removePlaybackEvent(callback: PlayerStateListener)
