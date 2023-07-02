@@ -91,7 +91,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
         }
         PlayerControls(
             modifier = Modifier.align(Alignment.BottomCenter),
-            isPlaying = /*player.exoPlayer().isPlaying*/ false,
+            isPlaying = player.isPlaying,
             onPlayPauseToggle = { shouldPlay ->
                 if (shouldPlay) {
                     player.play()

@@ -67,6 +67,9 @@ internal class ExoPlayerImpl(
     override val duration: Long
         get() = player.duration
 
+    override val isPlaying: Boolean
+        get() = player.isPlaying
+
     override fun setPlaybackEvent(callback: PlayerStateListener) {
         listener = ExoPlayerStateListener(callback, player).apply {
             player.addListener(this)
