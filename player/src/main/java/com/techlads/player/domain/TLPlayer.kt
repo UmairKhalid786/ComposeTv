@@ -17,6 +17,7 @@ interface TLPlayer {
     fun getView(): View
 
     val currentPosition: Long
+    val duration: Long
 
     fun setPlaybackEvent(callback: PlayerStateListener)
     fun removePlaybackEvent(callback: PlayerStateListener)
