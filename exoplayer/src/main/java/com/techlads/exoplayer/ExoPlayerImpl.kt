@@ -1,6 +1,7 @@
-package com.techlads.player.exoplayer
+package com.techlads.exoplayer
 
 import android.content.Context
+import android.view.View
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -13,9 +14,9 @@ import java.lang.ref.WeakReference
 
 internal class ExoPlayerImpl(
     private val context: WeakReference<Context>,
-    private val player: ExoPlayer
-) :
-    TLPlayer {
+    private val player: ExoPlayer,
+    private val providePlayerView: () -> View
+) : TLPlayer {
 
     private var listener: Player.Listener? = null
 
@@ -58,7 +59,7 @@ internal class ExoPlayerImpl(
         player.release()
     }
 
-    override fun exoPlayer() = player
+    override fun getView(): View  = providePlayerView()
 
     override fun setPlaybackEvent(callback: PlayerStateListener) {
         listener = ExoPlayerStateListener(callback, player).apply {

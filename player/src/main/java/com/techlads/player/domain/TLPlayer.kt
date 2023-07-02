@@ -1,6 +1,6 @@
 package com.techlads.player.domain
 
-import androidx.media3.exoplayer.ExoPlayer
+import android.view.View
 import com.techlads.player.domain.state.PlayerStateListener
 
 interface TLPlayer {
@@ -14,8 +14,7 @@ interface TLPlayer {
 
     fun prepare(uri: String, playWhenReady: Boolean)
     fun release()
-
-    fun exoPlayer(): ExoPlayer
+    fun getView(): View
 
     fun setPlaybackEvent(callback: PlayerStateListener)
     fun removePlaybackEvent(callback: PlayerStateListener)
