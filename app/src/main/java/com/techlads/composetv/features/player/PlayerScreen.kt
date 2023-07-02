@@ -1,8 +1,6 @@
 package com.techlads.composetv.features.player
 
 import android.annotation.SuppressLint
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.widget.FrameLayout
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
@@ -20,11 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.media3.ui.AspectRatioFrameLayout
-import androidx.media3.ui.PlayerView
 import com.techlads.composetv.features.player.controls.PlayerControls
 import com.techlads.composetv.features.player.controls.rememberVideoPlayerState
 import com.techlads.composetv.utils.handleDPadKeyEvents
+import com.techlads.exoplayer.PlayerFactory
 import com.techlads.player.domain.state.PlayerState
 import com.techlads.player.domain.state.PlayerStateListener
 import kotlinx.coroutines.delay
@@ -42,7 +39,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
     val context = LocalContext.current
 
     val player = remember {
-        com.techlads.exoplayer.PlayerFactory.create(context)
+        PlayerFactory.create(context)
     }
 
     val coroutineScope = rememberCoroutineScope()
