@@ -100,7 +100,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
                 }
             },
             contentProgressInMillis = contentCurrentPosition,
-            contentDurationInMillis = /*player.exoPlayer().duration*/ 0,
+            contentDurationInMillis = player.duration,
             state = videoPlayerState,
             onSeek = { seekProgress ->
 //                player.seekTo(player.exoPlayer().duration.times(seekProgress).toLong())
