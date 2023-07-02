@@ -84,14 +84,6 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
                     .focusable(),
                 factory = {
                     player.getView()
-//                    PlayerView(context).apply {
-//                        hideController()
-//                        useController = false
-//                        resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
-//
-//                        this.player = player.exoPlayer()
-//                        layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-//                    }
                 }
             )
         ) {
