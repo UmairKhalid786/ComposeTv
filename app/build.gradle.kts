@@ -34,6 +34,10 @@ android {
         kotlinCompilerExtensionVersion = "1.4.4"
     }
 
+    kapt {
+        correctErrorTypes = true
+    }
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
@@ -65,7 +69,7 @@ dependencies {
     implementation(libs.androidx.compose.material.iconsExtended)
 
     /* Debug */
-    debugImplementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
     /* End Compose BOM */
 
