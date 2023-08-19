@@ -8,14 +8,15 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
 import com.techlads.composetv.features.details.ProductDetailsScreen
 import com.techlads.composetv.features.home.HomeScreen
 import com.techlads.composetv.features.home.HomeViewModel
-import com.techlads.composetv.features.login.withToken.DeviceTokenAuthenticationScreen
 import com.techlads.composetv.features.login.withEmailPassword.LoginScreen
+import com.techlads.composetv.features.login.withToken.DeviceTokenAuthenticationScreen
 import com.techlads.composetv.features.player.PlayerScreen
+import com.techlads.composetv.features.wiw.WhoIsWatchingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -27,7 +28,7 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
             LoginScreen {
-                navController.navigateSingleTopTo(Screens.Home.title)
+                navController.navigateSingleTopTo(Screens.WhoIsWatching.title)
             }
         }
 
@@ -37,6 +38,15 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
             exitTransition = { tabExitTransition() }) {
             DeviceTokenAuthenticationScreen {
                 navController.navigateSingleTopTo(it.title)
+            }
+        }
+
+        composable(
+            Screens.WhoIsWatching.title,
+            enterTransition = { tabEnterTransition() },
+            exitTransition = { tabExitTransition() }) {
+            WhoIsWatchingScreen {
+                navController.navigateSingleTopTo(Screens.Home.title)
             }
         }
 
