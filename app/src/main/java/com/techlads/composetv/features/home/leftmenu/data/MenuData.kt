@@ -1,9 +1,19 @@
 package com.techlads.composetv.features.home.leftmenu.data
 
-import com.techlads.composetv.features.home.navigation.NestedScreens.*
 import com.techlads.composetv.features.home.leftmenu.model.MenuItem
+import com.techlads.composetv.features.home.navigation.NestedScreens.Favorites
+import com.techlads.composetv.features.home.navigation.NestedScreens.Home
+import com.techlads.composetv.features.home.navigation.NestedScreens.Movies
+import com.techlads.composetv.features.home.navigation.NestedScreens.Search
+import com.techlads.composetv.features.home.navigation.NestedScreens.Settings
+import com.techlads.composetv.features.home.navigation.NestedScreens.Songs
 import compose.icons.LineAwesomeIcons
-import compose.icons.lineawesomeicons.*
+import compose.icons.lineawesomeicons.CogSolid
+import compose.icons.lineawesomeicons.HeartSolid
+import compose.icons.lineawesomeicons.HomeSolid
+import compose.icons.lineawesomeicons.MusicSolid
+import compose.icons.lineawesomeicons.SearchSolid
+import compose.icons.lineawesomeicons.VideoSolid
 
 object MenuData {
     val menuItems = listOf(
@@ -17,6 +27,6 @@ object MenuData {
     val settingsItem = MenuItem(
         Settings.title,
         "Settings",
-        LineAwesomeIcons.CogSolid
+        LineAwesomeIcons.CogSolid,
     )
 }

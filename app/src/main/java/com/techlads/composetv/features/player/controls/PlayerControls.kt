@@ -32,7 +32,6 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import com.techlads.composetv.R
 
-
 @Composable
 fun PlayerControls(
     modifier: Modifier = Modifier,
@@ -41,7 +40,7 @@ fun PlayerControls(
     onPlayPauseToggle: (Boolean) -> Unit,
     onSeek: (seekProgress: Float) -> Unit,
     contentProgressInMillis: Long,
-    contentDurationInMillis: Long
+    contentDurationInMillis: Long,
 ) {
     val focusRequester = remember { FocusRequester() }
 
@@ -111,7 +110,7 @@ fun PlayerControls(
         modifier = modifier,
         visible = state.isDisplayed,
         enter = expandVertically { it },
-        exit = shrinkVertically { it }
+        exit = shrinkVertically { it },
     ) {
         Column(
             modifier = Modifier
@@ -120,45 +119,44 @@ fun PlayerControls(
                         colors = listOf(
                             Color.Black,
                             Color.Transparent,
-                            Color.Black
-                        )
-                    )
+                            Color.Black,
+                        ),
+                    ),
                 )
                 .padding(
                     horizontal = 56.dp,
-                    vertical = 32.dp
-                )
+                    vertical = 32.dp,
+                ),
         ) {
-
             VideoHeaders()
             Spacer(modifier = Modifier.weight(1.0f))
             Row(
                 modifier = Modifier.padding(bottom = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 VideoPlayerControlsIcon(
                     icon = R.drawable.ic_auto_awesome_motion,
                     state = state,
                     isPlaying = isPlaying,
-                    contentDescription = "Playlist"
+                    contentDescription = "Playlist",
                 )
                 VideoPlayerControlsIcon(
                     modifier = Modifier.padding(start = 12.dp),
                     icon = R.drawable.ic_cc,
                     state = state,
                     isPlaying = isPlaying,
-                    contentDescription = "Closed Captions Icon"
+                    contentDescription = "Closed Captions Icon",
                 )
                 VideoPlayerControlsIcon(
                     modifier = Modifier.padding(start = 12.dp),
                     icon = R.drawable.ic_settings,
                     state = state,
                     isPlaying = isPlaying,
-                    contentDescription = "Settings Icon"
+                    contentDescription = "Settings Icon",
                 )
             }
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 VideoPlayerControlsIcon(
                     modifier = Modifier.focusRequester(focusRequester),
@@ -166,13 +164,13 @@ fun PlayerControls(
                     onClick = { onPlayPauseToggle(!isPlaying) },
                     state = state,
                     isPlaying = isPlaying,
-                    contentDescription = "Play arrow"
+                    contentDescription = "Play arrow",
                 )
                 ControllerText(text = contentProgressString)
                 VideoPlayerControllerIndicator(
                     progress = contentProgress,
                     onSeek = onSeek,
-                    state = state
+                    state = state,
                 )
                 ControllerText(text = contentDurationString)
             }
@@ -180,17 +178,20 @@ fun PlayerControls(
     }
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun VideoHeaders() {
     Column(Modifier.fillMaxWidth()) {
-        Text(text = "This is Dummy video title",
+        Text(
+            text = "This is Dummy video title",
             color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.headlineLarge)
+            style = MaterialTheme.typography.headlineLarge,
+        )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = "This is Dummy video description | acting as placeholder for details",
             color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.bodySmall
+            style = MaterialTheme.typography.bodySmall,
         )
     }
 }
@@ -206,7 +207,7 @@ private fun PlayerControlsPrev() {
         onPlayPauseToggle = {},
         onSeek = {},
         contentProgressInMillis = 0,
-        contentDurationInMillis = 0
+        contentDurationInMillis = 0,
     )
 }
 

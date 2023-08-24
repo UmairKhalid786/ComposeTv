@@ -48,6 +48,6 @@ class PlayerControlsState internal constructor(
 @Composable
 fun rememberVideoPlayerState(
     @IntRange(from = 0) hideSeconds: Int = 2,
-    coroutineScope: CoroutineScope
+    coroutineScope: CoroutineScope,
 ) =
     remember { PlayerControlsState(hideSeconds = hideSeconds, coroutineScope = coroutineScope) }

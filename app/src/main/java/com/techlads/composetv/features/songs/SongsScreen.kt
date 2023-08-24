@@ -2,7 +2,17 @@ package com.techlads.composetv.features.songs
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +43,7 @@ fun RecentHistory(modifier: Modifier = Modifier) {
         Text(
             text = "Recent Songs",
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(horizontal = 32.dp)
+            modifier = Modifier.padding(horizontal = 32.dp),
         )
         TvLazyRow(contentPadding = PaddingValues(horizontal = 32.dp, vertical = 8.dp)) {
             items(12) {
@@ -50,7 +60,8 @@ fun SongCategories(modifier: Modifier = Modifier) {
     Column(
         modifier
             .fillMaxWidth()
-            .clipToBounds()) {
+            .clipToBounds(),
+    ) {
         SongsHomeGreeting()
         Spacer(modifier = Modifier.height(8.dp))
         TagsList()
@@ -63,7 +74,7 @@ fun TagsList(modifier: Modifier = Modifier) {
         contentPadding = PaddingValues(horizontal = 32.dp, vertical = 8.dp),
         columns = TvGridCells.Fixed(3),
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         items(6) {
             TransparentBorderedFocusableItem(onClick = {}, Modifier.padding(4.dp)) {
@@ -79,18 +90,19 @@ fun TagItem(it: Int) {
         Modifier
             .fillMaxWidth()
             .background(generateRandomColor()),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Image(
             painter = painterResource(id = R.drawable.song),
             contentDescription = "Song image",
-            modifier = Modifier.size(50.dp)
+            modifier = Modifier.size(50.dp),
         )
-        Text(text = "Song item $it",
+        Text(
+            text = "Song item $it",
             Modifier
                 .weight(1f)
                 .padding(horizontal = 16.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         )
     }
 }
@@ -101,26 +113,29 @@ fun SongItem(it: Int) {
         Modifier
             .width(150.dp)
             .wrapContentHeight()
-            .background(generateRandomColor())
+            .background(generateRandomColor()),
     ) {
         Image(
             painter = painterResource(id = R.drawable.song),
             contentDescription = "Song image",
-            Modifier.fillMaxWidth()
+            Modifier.fillMaxWidth(),
         )
         Text(
             text = "Song item $it",
             Modifier
-                .padding(16.dp)
+                .padding(16.dp),
         )
     }
 }
 
 @Composable
 fun SongsHomeGreeting() {
-    Text(text = "Good Morning", style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(start = 32.dp, top = 32.dp))
+    Text(
+        text = "Good Morning",
+        style = MaterialTheme.typography.titleLarge,
+        modifier = Modifier.padding(start = 32.dp, top = 32.dp),
+    )
 }
-
 
 @Preview
 @Composable

@@ -9,7 +9,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 @Composable
 fun NestedHomeNavigation(
     navController: NavHostController,
-    onItemFocus: (parent: Int, child: Int) -> Unit
+    onItemFocus: (parent: Int, child: Int) -> Unit,
 ) {
     NestedHomeScreenNavigation(navController, onItemFocus)
 }

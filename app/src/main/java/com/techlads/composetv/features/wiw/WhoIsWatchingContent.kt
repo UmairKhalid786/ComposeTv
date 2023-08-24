@@ -61,24 +61,25 @@ import kotlinx.coroutines.delay
 private val avatarList = listOf(
     Avatar(
         title = "Jack",
-        image = R.drawable.boy
-    ), Avatar(
+        image = R.drawable.boy,
+    ),
+    Avatar(
         title = "Alice",
-        image = R.drawable.girl
-    ), Avatar(
+        image = R.drawable.girl,
+    ),
+    Avatar(
         title = "Archit",
-        image = R.drawable.old
-    )
+        image = R.drawable.old,
+    ),
 )
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
-
-    //initial height set at 0.dp
+    // initial height set at 0.dp
     var containerWidth by remember { mutableStateOf(0.dp) }
     // get local density from composable
     val density = LocalDensity.current
-
 
     Box(
         modifier = Modifier
@@ -87,11 +88,10 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
                 containerWidth = with(density) {
                     it.size.width.toDp()
                 }
-            }, contentAlignment = Alignment.Center
+            },
+        contentAlignment = Alignment.Center,
     ) {
-
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
             var selectedAvatar by remember {
                 mutableStateOf("")
             }
@@ -114,7 +114,7 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
             Text(
                 text = "Who's Watching?",
                 style = MaterialTheme.typography.titleLarge.copy(fontSize = 38.sp),
-                modifier = Modifier.padding(top = 32.dp)
+                modifier = Modifier.padding(top = 32.dp),
             )
 
             Spacer(modifier = Modifier.size(68.dp))
@@ -123,7 +123,7 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
                 contentPadding = PaddingValues(horizontal = containerWidth / 2),
                 horizontalArrangement = Arrangement.Center,
                 pivotOffsets = PivotOffsets(0.5f, 0.5f),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 items(avatarList.size) {
                     val item = avatarList[it]
@@ -139,7 +139,7 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
                                 }
                                 selectedAvatar = item.title
                             },
-                        onProfileSelection = onProfileSelection
+                        onProfileSelection = onProfileSelection,
                     )
                 }
             }
@@ -154,7 +154,7 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_settings),
-                    contentDescription = "Settings"
+                    contentDescription = "Settings",
                 )
             }
         }
@@ -172,32 +172,34 @@ fun ProfileName(name: String, scaleUp: Boolean) {
                 // If the target number is larger, it slides up and fades in
                 // while the initial (smaller) number slides up and fades out.
                 slideInVertically { height -> height } + fadeIn() with
-                        slideOutVertically { height -> -height } + fadeOut()
+                    slideOutVertically { height -> -height } + fadeOut()
             } else {
                 // If the target number is smaller, it slides down and fades in
                 // while the initial number slides down and fades out.
                 slideInVertically { height -> -height } + fadeIn() with
-                        slideOutVertically { height -> height } + fadeOut()
+                    slideOutVertically { height -> height } + fadeOut()
             }.using(
                 // Disable clipping since the faded slide-in/out should
                 // be displayed out of bounds.
-                SizeTransform(clip = false)
+                SizeTransform(clip = false),
             )
-        }, label = ""
+        },
+        label = "",
     ) { text ->
         Text(
             text = text,
             style = MaterialTheme.typography.titleSmall.copy(fontSize = 24.sp),
-            modifier = Modifier.padding(top = 32.dp)
+            modifier = Modifier.padding(top = 32.dp),
         )
     }
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun ScaleAbleAvatar(
     modifier: Modifier,
     avatarRes: Int,
-    onProfileSelection: (avatar: Avatar) -> Unit
+    onProfileSelection: (avatar: Avatar) -> Unit,
 ) {
     Surface(
         onClick = {
@@ -207,16 +209,21 @@ fun ScaleAbleAvatar(
         border = ClickableSurfaceDefaults.border(
             border = Border(
                 border = BorderStroke(
-                    4.dp, Color.Transparent
-                ), shape = CircleShape
-            ), focusedBorder = Border(
+                    4.dp,
+                    Color.Transparent,
+                ),
+                shape = CircleShape,
+            ),
+            focusedBorder = Border(
                 border = BorderStroke(
-                    4.dp, Color.White
-                ), shape = CircleShape
-            )
+                    4.dp,
+                    Color.White,
+                ),
+                shape = CircleShape,
+            ),
         ),
         shape = ClickableSurfaceDefaults.shape(shape = CircleShape),
-        scale = ClickableSurfaceDefaults.scale(focusedScale = 1.5f)
+        scale = ClickableSurfaceDefaults.scale(focusedScale = 1.5f),
     ) {
         AvatarIcon(avatarRes = avatarRes, modifier = Modifier.size(120.dp))
     }
@@ -228,7 +235,7 @@ fun AvatarIcon(modifier: Modifier, @DrawableRes avatarRes: Int, description: Str
         painter = painterResource(id = avatarRes),
         contentDescription = description,
         contentScale = ContentScale.Crop,
-        modifier = modifier.aspectRatio(1f)
+        modifier = modifier.aspectRatio(1f),
     )
 }
 
@@ -236,6 +243,5 @@ fun AvatarIcon(modifier: Modifier, @DrawableRes avatarRes: Int, description: Str
 @Composable
 private fun WhoIsWatchingPreview() {
     WhoIsWatchingContent {
-
     }
 }

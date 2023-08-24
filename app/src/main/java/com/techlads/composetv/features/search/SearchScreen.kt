@@ -39,7 +39,7 @@ fun ContentGrid(modifier: Modifier = Modifier) {
     TvLazyVerticalGrid(
         modifier = modifier,
         columns = TvGridCells.Fixed(3),
-        contentPadding = PaddingValues(start = 12.dp, top = 24.dp, end = 12.dp, bottom = 48.dp)
+        contentPadding = PaddingValues(start = 12.dp, top = 24.dp, end = 12.dp, bottom = 48.dp),
     ) {
         item(span = {
             TvGridItemSpan(3)
@@ -57,7 +57,7 @@ fun GridHeader() {
     Text(
         text = "Search Results",
         style = MaterialTheme.typography.titleLarge,
-        modifier = Modifier.padding(bottom = 24.dp, start = 8.dp)
+        modifier = Modifier.padding(bottom = 24.dp, start = 8.dp),
     )
 }
 
@@ -67,7 +67,7 @@ fun SearchView() {
         Text(
             text = "Start typing to search",
             style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(all = 12.dp)
+            modifier = Modifier.padding(all = 12.dp),
         )
         Spacer(modifier = Modifier.height(1.dp).background(MaterialTheme.colorScheme.onSurface))
     }

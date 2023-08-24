@@ -79,13 +79,13 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
                                     videoPlayerState.showControls()
                                 }
                             }
-                        }
+                        },
                     )
                     .focusable(),
                 factory = {
                     player.getView()
-                }
-            )
+                },
+            ),
         ) {
             onDispose { player.release() }
         }
@@ -103,8 +103,8 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
             contentDurationInMillis = player.duration,
             state = videoPlayerState,
             onSeek = { seekProgress ->
-               player.seekTo(player.duration.times(seekProgress).toLong())
-            }
+                player.seekTo(player.duration.times(seekProgress).toLong())
+            },
         )
     }
 }
@@ -113,6 +113,5 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
 @Composable
 private fun PlayerScreenPreview() {
     PlayerScreen("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4") {
-
     }
 }

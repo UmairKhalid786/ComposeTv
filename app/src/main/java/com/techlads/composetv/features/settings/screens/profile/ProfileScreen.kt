@@ -4,7 +4,12 @@ package com.techlads.composetv.features.settings.screens.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,6 +35,7 @@ fun ProfileScreen() {
     }
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun ProfilesContent() {
     Column {
@@ -45,7 +51,7 @@ fun ProfilesContent() {
                 Text(
                     text = "Save",
                     modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
             }
             Spacer(modifier = Modifier.size(16.dp))
@@ -53,7 +59,7 @@ fun ProfilesContent() {
                 Text(
                     text = "Cancel",
                     modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
             }
         }
@@ -69,7 +75,7 @@ fun ProfilePicture() {
             .shadow(elevation = 12.dp, shape = CircleShape, clip = true)
             .border(2.dp, LocalContentColor.current, CircleShape),
         painter = painterResource(id = R.drawable.profile),
-        contentDescription = "User profile"
+        contentDescription = "User profile",
     )
 }
 
@@ -79,13 +85,14 @@ fun UserDetails() {
         Text(text = "Umair Khalid", style = MaterialTheme.typography.headlineSmall)
         Spacer(modifier = Modifier.size(8.dp))
         Text(
-            text = "Android Developer", style = MaterialTheme.typography.labelSmall,
-            color = LocalContentColor.current.copy(alpha = 0.4f)
+            text = "Android Developer",
+            style = MaterialTheme.typography.labelSmall,
+            color = LocalContentColor.current.copy(alpha = 0.4f),
         )
         Text(
             text = "Github: https://github.com/UmairKhalid786",
             style = MaterialTheme.typography.labelSmall,
-            color = LocalContentColor.current.copy(alpha = 0.4f)
+            color = LocalContentColor.current.copy(alpha = 0.4f),
         )
     }
 }

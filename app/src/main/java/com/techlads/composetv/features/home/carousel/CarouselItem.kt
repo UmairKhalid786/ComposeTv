@@ -19,7 +19,7 @@ fun CarouselItem(
     parent: Int,
     child: Int,
     onItemFocus: (parent: Int, child: Int) -> Unit,
-    onItemClick: (parent: Int, child: Int) -> Unit
+    onItemClick: (parent: Int, child: Int) -> Unit,
 ) {
     BorderedFocusableItem(
         onClick = { onItemClick(parent, child) },
@@ -30,13 +30,13 @@ fun CarouselItem(
                 if (it.isFocused) {
                     onItemFocus(parent, child)
                 }
-            }) {
+            },
+    ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
             Text(text = "Item $parent x $child", textAlign = TextAlign.Center)
         }
     }
 }
-
 
 @Composable
 fun VerticalCarouselItem(parent: Int, child: Int, onItemFocus: (parent: Int, child: Int) -> Unit) {
@@ -46,7 +46,7 @@ fun VerticalCarouselItem(parent: Int, child: Int, onItemFocus: (parent: Int, chi
         },
         modifier = Modifier
             .padding(8.dp)
-            .aspectRatio(0.6f)
+            .aspectRatio(0.6f),
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
             Text(text = "Item $parent x $child", textAlign = TextAlign.Center)
@@ -60,11 +60,9 @@ fun CarouselItemPrev() {
     CarouselItem(1, 1, onItemClick = { _, _ -> }, onItemFocus = { _, _ -> })
 }
 
-
 @Preview
 @Composable
 fun VerticalCarouselItemPrev() {
     VerticalCarouselItem(1, 1) { _, _ ->
-
     }
 }
