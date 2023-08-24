@@ -29,7 +29,7 @@ fun VideoPlayerControlsIcon(
     isPlaying: Boolean,
     @DrawableRes icon: Int,
     contentDescription: String? = null,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
@@ -45,10 +45,10 @@ fun VideoPlayerControlsIcon(
         onClick = onClick,
         shape = ClickableSurfaceDefaults.shape(shape = CircleShape),
         color = ClickableSurfaceDefaults.color(
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
         ),
         scale = ClickableSurfaceDefaults.scale(focusedScale = 1.05f),
-        interactionSource = interactionSource
+        interactionSource = interactionSource,
     ) {
         Icon(
             modifier = Modifier
@@ -56,7 +56,7 @@ fun VideoPlayerControlsIcon(
                 .padding(8.dp),
             painter = painterResource(id = icon),
             contentDescription = contentDescription,
-            tint = LocalContentColor.current
+            tint = LocalContentColor.current,
         )
     }
 }

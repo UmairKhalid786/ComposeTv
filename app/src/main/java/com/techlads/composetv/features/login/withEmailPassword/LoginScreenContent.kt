@@ -2,7 +2,13 @@
 
 package com.techlads.composetv.features.login.withEmailPassword
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,9 +28,10 @@ import androidx.tv.material3.Text
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.TvButton
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun LoginPage(
-    onLoginClick: (user: String, psw: String) -> Unit
+    onLoginClick: (user: String, psw: String) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -32,7 +39,6 @@ fun LoginPage(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         val username = remember { mutableStateOf("") }
         val password = remember { mutableStateOf("") }
 
@@ -46,18 +52,22 @@ fun LoginPage(
             value = password.value,
             label = "Password",
             visualTransformation = PasswordVisualTransformation(),
-            keyboardType = KeyboardType.Password
+            keyboardType = KeyboardType.Password,
         ) { password.value = it }
         Spacer(modifier = Modifier.height(40.dp))
 
-        TvButton(modifier = Modifier.padding(start = 20.dp, end = 20.dp), onClick = {onLoginClick(username.value, password.value)}) {
+        TvButton(
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp),
+            onClick = { onLoginClick(username.value, password.value) },
+        ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "LOGIN", style = TextStyle(
+                text = "LOGIN",
+                style = TextStyle(
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Light,
                     textAlign = TextAlign.Center,
-                )
+                ),
             )
         }
     }
@@ -68,7 +78,6 @@ fun LoginPage(
 fun LoginPagePrev() {
     ComposeTvTheme {
         LoginPage { u, p ->
-
         }
     }
 }

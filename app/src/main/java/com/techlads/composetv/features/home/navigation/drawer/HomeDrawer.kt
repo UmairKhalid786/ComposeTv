@@ -2,8 +2,6 @@
 
 package com.techlads.composetv.features.home.navigation.drawer
 
-import androidx.compose.runtime.Composable
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.keyframes
@@ -16,11 +14,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.DrawerValue
+import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.ModalNavigationDrawer
@@ -34,7 +34,7 @@ val navigationRow: @Composable (
     drawerValue: DrawerValue,
     menu: MenuItem,
     modifier: Modifier,
-    onMenuSelected: ((menuItem: MenuItem) -> Unit)?
+    onMenuSelected: ((menuItem: MenuItem) -> Unit)?,
 ) -> Unit =
     { drawerValue, menu, modifier, onMenuSelected ->
         val padding = animateDpAsState(
@@ -49,35 +49,34 @@ val navigationRow: @Composable (
             modifier =
             modifier
                 .padding(vertical = 4.dp)
-                .then(if (drawerValue == DrawerValue.Open) modifier.width(170.dp) else modifier)
+                .then(if (drawerValue == DrawerValue.Open) modifier.width(170.dp) else modifier),
         ) {
             Row(
                 Modifier
                     .padding(horizontal = 12.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 menu.icon?.let {
                     Icon(
                         imageVector = it,
                         contentDescription = menu.text,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(16.dp),
                     )
                     Spacer(modifier = Modifier.padding(horizontal = padding.value))
                 }
                 AnimatedVisibility(
                     visible = drawerValue == DrawerValue.Open,
-                    modifier = Modifier.height(20.dp)
+                    modifier = Modifier.height(20.dp),
                 ) {
                     Text(
                         text = menu.text,
                         maxLines = 1,
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.bodyMedium,
                     )
                 }
             }
         }
     }
-
 
 @Composable
 fun HomeDrawer(content: @Composable () -> Unit, onMenuSelected: ((menuItem: MenuItem) -> Unit)?) {
@@ -88,7 +87,7 @@ fun HomeDrawer(content: @Composable () -> Unit, onMenuSelected: ((menuItem: Menu
                     .background(MaterialTheme.colorScheme.surface)
                     .fillMaxHeight()
                     .padding(horizontal = 12.dp, vertical = 12.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
                 MenuHeader(expanded = drawer == DrawerValue.Open)
@@ -103,10 +102,10 @@ fun HomeDrawer(content: @Composable () -> Unit, onMenuSelected: ((menuItem: Menu
                     onMenuSelected?.invoke(it)
                 }
             }
-        }, content = content
+        },
+        content = content,
     )
 }
-
 
 @Preview
 @Composable
@@ -114,5 +113,4 @@ fun HomeDrawerPrev() {
     HomeDrawer(content = {
         Text(text = "Hello World")
     }, onMenuSelected = null)
-
 }

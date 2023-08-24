@@ -11,8 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
-    val menuItems : StateFlow<List<MenuItem>> = MutableStateFlow(emptyList())
-    val menuState : StateFlow<Boolean> = MutableStateFlow(false)
+    val menuItems: StateFlow<List<MenuItem>> = MutableStateFlow(emptyList())
+    val menuState: StateFlow<Boolean> = MutableStateFlow(false)
 
     init {
         menuItems.toMutable().value = MenuData.menuItems
@@ -21,6 +21,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     fun menuClosed() {
         menuState.toMutable().value = false
     }
+
     fun menuOpen() {
         menuState.toMutable().value = true
     }

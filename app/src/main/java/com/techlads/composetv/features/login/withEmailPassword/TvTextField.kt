@@ -1,13 +1,12 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class)
-
 package com.techlads.composetv.features.login.withEmailPassword
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
-import androidx.tv.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.input.KeyboardType
@@ -22,9 +21,8 @@ fun TvTextField(
     mutableInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardType: KeyboardType = KeyboardType.Text,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
 ) {
-
     OutlinedTextField(
         textStyle = MaterialTheme.typography.bodyLarge,
         colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -44,6 +42,5 @@ fun TvTextField(
 @Composable
 fun TvTextFieldPrev() {
     TvTextField("Test", "Enter Test") {
-
     }
 }

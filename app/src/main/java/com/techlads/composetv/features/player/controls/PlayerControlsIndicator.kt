@@ -2,22 +2,22 @@
 
 package com.techlads.composetv.features.player.controls
 
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.geometry.Offset
@@ -28,22 +28,25 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import com.techlads.composetv.utils.handleDPadKeyEvents
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalTvMaterial3Api::class)
 @Composable
 fun RowScope.VideoPlayerControllerIndicator(
     progress: Float,
     onSeek: (seekProgress: Float) -> Unit,
-    state: PlayerControlsState
+    state: PlayerControlsState,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     var isSelected by remember { mutableStateOf(false) }
     val isFocused by interactionSource.collectIsFocusedAsState()
     val color by rememberUpdatedState(
-        newValue = if (isSelected) MaterialTheme.colorScheme.primary
-        else MaterialTheme.colorScheme.onSurface
+        newValue = if (isSelected) {
+            MaterialTheme.colorScheme.primary
+        } else {
+            MaterialTheme.colorScheme.onSurface
+        },
     )
     val animatedIndicatorHeight by animateDpAsState(
-        targetValue = 4.dp.times((if (isFocused) 2.5f else 1f))
+        targetValue = 4.dp.times((if (isFocused) 2.5f else 1f)),
     )
     var seekProgress by remember { mutableStateOf(0f) }
     val focusManager = LocalFocusManager.current
@@ -84,7 +87,7 @@ fun RowScope.VideoPlayerControllerIndicator(
                     } else {
                         focusManager.moveFocus(FocusDirection.Right)
                     }
-                }
+                },
             )
             .focusable(interactionSource = interactionSource),
         onDraw = {
@@ -94,18 +97,18 @@ fun RowScope.VideoPlayerControllerIndicator(
                 start = Offset(x = 0f, y = yOffset),
                 end = Offset(x = size.width, y = yOffset),
                 strokeWidth = size.height,
-                cap = StrokeCap.Round
+                cap = StrokeCap.Round,
             )
             drawLine(
                 color = color,
                 start = Offset(x = 0f, y = yOffset),
                 end = Offset(
                     x = size.width.times(if (isSelected) seekProgress else progress),
-                    y = yOffset
+                    y = yOffset,
                 ),
                 strokeWidth = size.height,
-                cap = StrokeCap.Round
+                cap = StrokeCap.Round,
             )
-        }
+        },
     )
 }

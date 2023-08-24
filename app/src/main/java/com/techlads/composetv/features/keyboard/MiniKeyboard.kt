@@ -41,6 +41,7 @@ import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
 import com.techlads.composetv.theme.ComposeTvTheme
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun MiniKeyboard(modifier: Modifier) {
     var sizeInDp by remember { mutableStateOf(DpSize.Zero) }
@@ -53,17 +54,18 @@ fun MiniKeyboard(modifier: Modifier) {
     }
 
     Row(modifier = Modifier.padding(8.dp)) {
-        TvLazyVerticalGrid(modifier = modifier
-            .onSizeChanged {
-                sizeInDp = density.run {
-                    DpSize(
-                        it.width.toDp(),
-                        it.height.toDp()
-                    )
-                }
-            }, columns = TvGridCells.Fixed(7)
+        TvLazyVerticalGrid(
+            modifier = modifier
+                .onSizeChanged {
+                    sizeInDp = density.run {
+                        DpSize(
+                            it.width.toDp(),
+                            it.height.toDp(),
+                        )
+                    }
+                },
+            columns = TvGridCells.Fixed(7),
         ) {
-
             items(KeysGenerator.alphabet.value + KeysGenerator.specialCharV1.value) {
                 KeyItem(key = it)
             }
@@ -76,14 +78,15 @@ fun MiniKeyboard(modifier: Modifier) {
                 KeyItem(modifier = Modifier.aspectRatio(2f)) {
                     Icon(
                         imageVector = Icons.Default.KeyboardBackspace,
-                        contentDescription = "Backspace"
+                        contentDescription = "Backspace",
                     )
                 }
             }
             item(span = { TvGridItemSpan(2) }) {
                 KeyItem(modifier = Modifier.aspectRatio(2f)) {
                     Icon(
-                        imageVector = Icons.Default.Search, contentDescription = "Search"
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search",
                     )
                 }
             }
@@ -93,10 +96,11 @@ fun MiniKeyboard(modifier: Modifier) {
                 KeyItem(
                     modifier = Modifier
                         .width(extrasHeight * 1.5f)
-                        .height(extrasHeight)
+                        .height(extrasHeight),
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Cancel, contentDescription = "Search"
+                        imageVector = Icons.Default.Cancel,
+                        contentDescription = "Search",
                     )
                 }
             }
@@ -104,7 +108,7 @@ fun MiniKeyboard(modifier: Modifier) {
                 KeyItem(
                     modifier = Modifier
                         .width(extrasHeight * 1.5f)
-                        .height(extrasHeight)
+                        .height(extrasHeight),
                 ) {
                     Text(text = "&123")
                 }
@@ -120,21 +124,22 @@ fun KeyItem(key: Any, modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun KeyItem(
-    modifier: Modifier = Modifier, content: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
 ) {
     Surface(
         modifier = modifier.padding(3.dp),
         onClick = {},
-        shape = ClickableSurfaceDefaults.shape(shape = MaterialTheme.shapes.small)
+        shape = ClickableSurfaceDefaults.shape(shape = MaterialTheme.shapes.small),
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
             content()
         }
     }
 }
-
 
 @Preview
 @Composable

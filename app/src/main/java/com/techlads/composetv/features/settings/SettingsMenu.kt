@@ -28,6 +28,5 @@ fun SettingsMenu(modifier: Modifier = Modifier, onMenuSelected: (SettingsMenuMod
 @Composable
 fun SettingsMenuPrev() {
     SettingsMenu {
-
     }
 }

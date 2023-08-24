@@ -1,7 +1,14 @@
 package com.techlads.composetv.features.settings.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,18 +23,21 @@ import com.techlads.composetv.features.settings.data.SettingsMenuModel
 fun PreferencesContainer(
     modifier: Modifier = Modifier,
     preference: SettingsMenuModel,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Box(
         modifier
             .fillMaxSize()
             .padding(64.dp),
-        contentAlignment = Alignment.CenterStart
+        contentAlignment = Alignment.CenterStart,
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             ContentHeading(title = preference.text)
             Spacer(modifier = Modifier.padding(8.dp))
-            Spacer(modifier = Modifier.height(1.dp).fillMaxWidth().background(color = LocalContentColor.current.copy(alpha = 0.1f)))
+            Spacer(
+                modifier = Modifier.height(1.dp).fillMaxWidth()
+                    .background(color = LocalContentColor.current.copy(alpha = 0.1f)),
+            )
             Spacer(modifier = Modifier.padding(8.dp))
             content()
         }
@@ -40,7 +50,7 @@ fun ContentHeading(title: String) {
         text = title,
         style = MaterialTheme.typography.headlineLarge,
         modifier = Modifier
-            .wrapContentWidth()
+            .wrapContentWidth(),
     )
 }
 

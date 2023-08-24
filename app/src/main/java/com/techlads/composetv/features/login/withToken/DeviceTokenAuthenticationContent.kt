@@ -4,9 +4,17 @@ package com.techlads.composetv.features.login.withToken
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
-import androidx.tv.material3.*
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,18 +31,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
+import androidx.tv.material3.ExperimentalTvMaterial3Api
 import com.github.alexzhirkevich.customqrgenerator.QrData
 import com.github.alexzhirkevich.customqrgenerator.vector.QrCodeDrawable
 import com.github.alexzhirkevich.customqrgenerator.vector.QrVectorOptions
-import com.github.alexzhirkevich.customqrgenerator.vector.style.*
+import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColor
+import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColors
 import com.techlads.composetv.widgets.TvButton
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun DeviceTokenAuthenticationContent(
     token: String,
     url: String,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    onLoginClick: (token: String) -> Unit
+    onLoginClick: (token: String) -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -43,7 +54,6 @@ fun DeviceTokenAuthenticationContent(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         val globalText = "Login through web using $url and provide code or just Scan QR"
 
         val start = globalText.indexOf(url)
@@ -51,18 +61,19 @@ fun DeviceTokenAuthenticationContent(
             AnnotatedString.Range(
                 SpanStyle(
                     fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Normal
+                    fontWeight = FontWeight.Normal,
                 ),
                 start = start,
-                end = start + url.length
-            )
+                end = start + url.length,
+            ),
         )
         Text(
             text = AnnotatedString(text = globalText, spanStyles = spanStyles),
             style = TextStyle(
-                fontSize = 30.sp, fontFamily = FontFamily.SansSerif,
-                fontWeight = FontWeight.Thin
-            )
+                fontSize = 30.sp,
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.Thin,
+            ),
         )
 
         Spacer(modifier = Modifier.height(40.dp))
@@ -70,20 +81,21 @@ fun DeviceTokenAuthenticationContent(
         Row(
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             val white = QrVectorColor.Solid(
-                android.graphics.Color.LTGRAY
+                android.graphics.Color.LTGRAY,
             )
             val qrCodeView = QrCodeDrawable(
                 context,
-                QrData.Url(url), QrVectorOptions.Builder().setColors(
+                QrData.Url(url),
+                QrVectorOptions.Builder().setColors(
                     colors = QrVectorColors(
                         ball = white,
                         frame = white,
-                        dark = white
-                    )
-                ).build()
+                        dark = white,
+                    ),
+                ).build(),
             )
 
             Text(
@@ -91,8 +103,8 @@ fun DeviceTokenAuthenticationContent(
                 style = TextStyle(
                     fontSize = 100.sp,
                     fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Thin
-                )
+                    fontWeight = FontWeight.Thin,
+                ),
             )
 
             Spacer(modifier = Modifier.width(60.dp))
@@ -103,9 +115,8 @@ fun DeviceTokenAuthenticationContent(
                     color = color,
                     modifier = Modifier
                         .height(65.dp)
-                        .width(1.dp)
+                        .width(1.dp),
                 )
-
 
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
@@ -114,8 +125,8 @@ fun DeviceTokenAuthenticationContent(
                         fontSize = 35.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.ExtraLight,
-                        color = Color.LightGray
-                    )
+                        color = Color.LightGray,
+                    ),
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
@@ -124,7 +135,7 @@ fun DeviceTokenAuthenticationContent(
                     color = color,
                     modifier = Modifier
                         .height(65.dp)
-                        .width(1.dp)
+                        .width(1.dp),
                 )
             }
 
@@ -132,7 +143,7 @@ fun DeviceTokenAuthenticationContent(
 
             Image(
                 bitmap = qrCodeView.toBitmap(400, 400).asImageBitmap(),
-                contentDescription = "QR Code for URL $url"
+                contentDescription = "QR Code for URL $url",
             )
         }
 
@@ -141,19 +152,21 @@ fun DeviceTokenAuthenticationContent(
         Box(
             modifier = Modifier
                 .width(300.dp)
-                .padding(40.dp, 0.dp, 40.dp, 0.dp)
+                .padding(40.dp, 0.dp, 40.dp, 0.dp),
         ) {
             TvButton(
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp),
                 interactionSource = interactionSource,
-                onClick = { onLoginClick(token) }) {
+                onClick = { onLoginClick(token) },
+            ) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = "Login with Email", style = TextStyle(
+                    text = "Login with Email",
+                    style = TextStyle(
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Light,
                         textAlign = TextAlign.Center,
-                    )
+                    ),
                 )
             }
         }

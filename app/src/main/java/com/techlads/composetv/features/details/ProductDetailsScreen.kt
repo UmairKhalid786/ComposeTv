@@ -6,7 +6,17 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -29,8 +39,8 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
 import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.composetv.widgets.TvButton
 import com.techlads.composetv.widgets.ThumbnailImageCard
+import com.techlads.composetv.widgets.TvButton
 import kotlinx.coroutines.delay
 
 const val ANIMATION_DELAY = 600L
@@ -42,7 +52,6 @@ fun ProductDetailsScreen(onBackPressed: () -> Unit, onPlayClick: () -> Unit) {
 
 @Composable
 private fun ProductDetailsContent(onBackPressed: () -> Unit, onPlayClick: () -> Unit) {
-
     BackHandler(onBack = onBackPressed)
 
     val isLoaded = remember {
@@ -62,18 +71,18 @@ private fun ProductDetailsContent(onBackPressed: () -> Unit, onPlayClick: () -> 
                 .size(80.dp)
                 .align(Alignment.TopStart)
                 .padding(24.dp)
-                .zIndex(1f)
+                .zIndex(1f),
         )
 
         Column(
             Modifier
                 .align(Alignment.BottomCenter)
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
             BannerImage(
                 modifier = Modifier
                     .fillMaxSize()
-                    .weight(.4f)
+                    .weight(.4f),
             )
             Column(modifier = Modifier.weight(.6f)) {
                 ButtonSection(onPlayClick)
@@ -85,13 +94,12 @@ private fun ProductDetailsContent(onBackPressed: () -> Unit, onPlayClick: () -> 
             Modifier
                 .align(Alignment.CenterStart)
                 .padding(start = 30.dp)
-                .width(animatedPortraitSize.value)
+                .width(animatedPortraitSize.value),
         ) {
             Text(text = "1x1")
         }
     }
 }
-
 
 @Composable
 fun SearchIcon(modifier: Modifier) {
@@ -99,7 +107,7 @@ fun SearchIcon(modifier: Modifier) {
         modifier = modifier,
         painter = painterResource(id = R.drawable.ic_search),
         contentDescription = "search",
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Crop,
     )
 }
 
@@ -111,13 +119,13 @@ fun BannerImage(modifier: Modifier) {
             .height(200.dp),
         painter = painterResource(id = R.drawable.hero_item),
         contentDescription = "Hero item background",
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Crop,
     )
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun ButtonSection(onPlayClick: () -> Unit) {
-
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(key1 = Unit) {
@@ -131,14 +139,15 @@ fun ButtonSection(onPlayClick: () -> Unit) {
             .height(60.dp)
             .background(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start
+        horizontalArrangement = Arrangement.Start,
     ) {
         Spacer(modifier = Modifier.width(280.dp))
 
         TvButton(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 4.dp)
-                .focusRequester(focusRequester), onClick = onPlayClick
+                .focusRequester(focusRequester),
+            onClick = onPlayClick,
         ) {
             Text("Play")
         }
@@ -147,7 +156,7 @@ fun ButtonSection(onPlayClick: () -> Unit) {
             color = LocalContentColor.current,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
-            text = stringResource(R.string.watch_trailer)
+            text = stringResource(R.string.watch_trailer),
         )
     }
 }
@@ -158,15 +167,15 @@ fun DetailsSection() {
         modifier = Modifier
             .fillMaxSize(),
         verticalAlignment = Alignment.Top,
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
     ) {
         Spacer(modifier = Modifier.size(220.dp))
         Column(
             Modifier
                 .fillMaxWidth()
-                //.weight(.7f)
+                // .weight(.7f)
                 .padding(24.dp),
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
         ) {
             Spacer(modifier = Modifier.height(16.dp))
             Text(
@@ -174,7 +183,7 @@ fun DetailsSection() {
                 color = LocalContentColor.current,
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.headlineLarge,
-                text = stringResource(R.string.movie_name)
+                text = stringResource(R.string.movie_name),
             )
 
             Spacer(modifier = Modifier.size(10.dp))
@@ -187,7 +196,7 @@ fun DetailsSection() {
                 color = LocalContentColor.current,
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyLarge,
-                text = stringResource(R.string.movie_desciption)
+                text = stringResource(R.string.movie_desciption),
             )
         }
     }
@@ -197,14 +206,14 @@ fun DetailsSection() {
 fun MovieInfoSection() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
     ) {
         Text(
             modifier = Modifier,
             color = LocalContentColor.current,
             textAlign = TextAlign.Start,
             style = MaterialTheme.typography.bodyLarge,
-            text = stringResource(R.string.release_year)
+            text = stringResource(R.string.release_year),
         )
         Spacer(modifier = Modifier.size(12.dp))
         Text(
@@ -212,7 +221,7 @@ fun MovieInfoSection() {
             color = LocalContentColor.current,
             textAlign = TextAlign.Start,
             style = MaterialTheme.typography.bodyLarge,
-            text = stringResource(R.string.movie_duration_text)
+            text = stringResource(R.string.movie_duration_text),
         )
         Spacer(modifier = Modifier.size(12.dp))
         Rating(rating = "8.3")
@@ -223,7 +232,7 @@ fun MovieInfoSection() {
 fun Rating(rating: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
     ) {
         Image(
             modifier = Modifier.size(18.dp),
@@ -236,7 +245,7 @@ fun Rating(rating: String) {
             color = LocalContentColor.current,
             textAlign = TextAlign.Start,
             style = MaterialTheme.typography.bodyLarge,
-            text = rating
+            text = rating,
         )
     }
 }
