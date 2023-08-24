@@ -11,7 +11,11 @@ buildscript {
         classpath(libs.hilt.gradlePlugin)
     }
 }
- 
+
+plugins {
+    alias(libs.plugins.detekt) apply false
+}
+
 allprojects {
     repositories {
         google()

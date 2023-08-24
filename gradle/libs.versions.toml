@@ -66,6 +66,7 @@ compose_bom = "2023.04.00"
 # Media3
 media3 = "1.0.1"
 media3Ui = "1.0.2"
+detekt = "1.23.0"
 
 [libraries]
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
@@ -117,10 +118,10 @@ androidx-lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecyc
 
 # https://developer.android.com/jetpack/androidx/releases/navigation
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
-androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx" , version.ref = "androidx-navigation" }
+androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
 
-androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraintlayout"  }
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-constraintlayout" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-corektx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
@@ -184,3 +185,7 @@ media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3" }
 media3-session = { module = "androidx.media3:media3-session", version.ref = "media3" }
 media3-datasource-cronet = { module = "androidx.media3:media3-datasource-cronet", version.ref = "media3" }
 androidx-media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "media3Ui" }
+
+[plugins]
+#detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
