@@ -7,8 +7,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
-import androidx.tv.material3.lightColorScheme
 import androidx.tv.material3.darkColorScheme
+import androidx.tv.material3.lightColorScheme
 import md_theme_dark_background
 import md_theme_dark_error
 import md_theme_dark_errorContainer
@@ -94,7 +94,6 @@ private val LightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-
 private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
@@ -128,7 +127,7 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun ComposeTvTheme(
     useDarkTheme: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colors = if (useDarkTheme) {
         DarkColors
@@ -144,6 +143,6 @@ fun ComposeTvTheme(
             CompositionLocalProvider(LocalContentColor provides colors.onSurface) {
                 content()
             }
-        }
+        },
     )
 }
