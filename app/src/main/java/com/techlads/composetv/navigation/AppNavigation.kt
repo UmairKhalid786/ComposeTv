@@ -26,7 +26,8 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
         composable(
             Screens.Login.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() }) {
+            exitTransition = { tabExitTransition() },
+        ) {
             LoginScreen {
                 navController.navigateSingleTopTo(Screens.WhoIsWatching.title)
             }
@@ -35,7 +36,8 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
         composable(
             Screens.LoginToken.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() }) {
+            exitTransition = { tabExitTransition() },
+        ) {
             DeviceTokenAuthenticationScreen {
                 navController.navigateSingleTopTo(it.title)
             }
@@ -44,7 +46,8 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
         composable(
             Screens.WhoIsWatching.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() }) {
+            exitTransition = { tabExitTransition() },
+        ) {
             WhoIsWatchingScreen {
                 navController.navigateSingleTopTo(Screens.Home.title)
             }
@@ -53,7 +56,8 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
         composable(
             Screens.Home.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() }) {
+            exitTransition = { tabExitTransition() },
+        ) {
             HomeScreen(viewModel) { _, _ ->
                 navController.navigate(Screens.ProductDetail.title)
             }
@@ -62,42 +66,46 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
         composable(
             Screens.Player.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() }) {
+            exitTransition = { tabExitTransition() },
+        ) {
             PlayerScreen(
                 "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                 onBackPressed = {
                     navController.navigateUp()
-                })
+                },
+            )
         }
 
         composable(
             Screens.ProductDetail.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() }) {
+            exitTransition = { tabExitTransition() },
+        ) {
             ProductDetailsScreen(
                 onBackPressed = {
                     navController.navigateUp()
                 },
                 onPlayClick = {
                     navController.navigate(Screens.Player.title)
-                }
+                },
             )
         }
     }
 }
 
 fun tabExitTransition(
-    duration: Int = 500
+    duration: Int = 500,
 ) = fadeOut(tween(duration / 2, easing = LinearEasing))
 
 fun tabEnterTransition(
-    duration: Int = 500, delay: Int = duration - 350
+    duration: Int = 500,
+    delay: Int = duration - 350,
 ) = fadeIn(tween(duration, duration - delay))
 
 fun NavHostController.navigateSingleTopTo(route: String) =
     this.navigate(route) {
         popUpTo(
-            this@navigateSingleTopTo.graph.findStartDestination().id
+            this@navigateSingleTopTo.graph.findStartDestination().id,
         ) {
             saveState = true
             inclusive = true

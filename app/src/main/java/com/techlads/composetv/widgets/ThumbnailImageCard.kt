@@ -20,13 +20,16 @@ import com.techlads.composetv.theme.ComposeTvTheme
 @Composable
 fun ThumbnailImageCard(
     modifier: Modifier = Modifier,
-    content: @Composable (BoxScope.() -> Unit)
+    content: @Composable (BoxScope.() -> Unit),
 ) {
-    Box(modifier = modifier
-        .background(
-            color = MaterialTheme.colorScheme.surface,
-            shape = MaterialTheme.shapes.small
-        ).aspectRatio(0.6f), contentAlignment = Alignment.Center) {
+    Box(
+        modifier = modifier
+            .background(
+                color = MaterialTheme.colorScheme.surface,
+                shape = MaterialTheme.shapes.small,
+            ).aspectRatio(0.6f),
+        contentAlignment = Alignment.Center,
+    ) {
         content()
     }
 }
@@ -40,8 +43,8 @@ fun ThumbnailImageCardPreview() {
                 .width(150.dp)
                 .background(
                     color = MaterialTheme.colorScheme.onSurface,
-                    shape = MaterialTheme.shapes.small
-                )
+                    shape = MaterialTheme.shapes.small,
+                ),
         ) {
             Text(text = "1x1")
         }

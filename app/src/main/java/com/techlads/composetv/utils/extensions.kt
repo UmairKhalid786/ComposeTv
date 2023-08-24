@@ -22,13 +22,13 @@ private val DPadEventsKeyCodes = listOf(
     KEYCODE_SYSTEM_NAVIGATION_RIGHT,
     KEYCODE_DPAD_CENTER,
     KEYCODE_ENTER,
-    KEYCODE_NUMPAD_ENTER
+    KEYCODE_NUMPAD_ENTER,
 )
 
 fun Modifier.handleDPadKeyEvents(
     onLeft: (() -> Unit)? = null,
     onRight: (() -> Unit)? = null,
-    onEnter: (() -> Unit)? = null
+    onEnter: (() -> Unit)? = null,
 ) = onPreviewKeyEvent {
     fun onActionUp(block: () -> Unit) {
         if (it.nativeKeyEvent.action == KeyEvent.ACTION_UP) block()
@@ -37,10 +37,10 @@ fun Modifier.handleDPadKeyEvents(
     if (!DPadEventsKeyCodes.contains(it.nativeKeyEvent.keyCode)) return@onPreviewKeyEvent false
 
     when (it.nativeKeyEvent.keyCode) {
-
         KEYCODE_ENTER,
         KEYCODE_DPAD_CENTER,
-        KEYCODE_NUMPAD_ENTER, -> {
+        KEYCODE_NUMPAD_ENTER,
+        -> {
             onEnter?.apply {
                 onActionUp(::invoke)
                 return@onPreviewKeyEvent true
@@ -48,7 +48,8 @@ fun Modifier.handleDPadKeyEvents(
         }
 
         KEYCODE_DPAD_LEFT,
-        KEYCODE_SYSTEM_NAVIGATION_LEFT -> {
+        KEYCODE_SYSTEM_NAVIGATION_LEFT,
+        -> {
             onLeft?.apply {
                 onActionUp(::invoke)
                 return@onPreviewKeyEvent true
@@ -56,7 +57,8 @@ fun Modifier.handleDPadKeyEvents(
         }
 
         KEYCODE_DPAD_RIGHT,
-        KEYCODE_SYSTEM_NAVIGATION_RIGHT -> {
+        KEYCODE_SYSTEM_NAVIGATION_RIGHT,
+        -> {
             onRight?.apply {
                 onActionUp(::invoke)
                 return@onPreviewKeyEvent true

@@ -21,10 +21,10 @@
             android:name=".MainActivity"
             android:banner="@drawable/ic_app"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize"
             android:icon="@drawable/ic_app"
             android:logo="@drawable/ic_app"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
