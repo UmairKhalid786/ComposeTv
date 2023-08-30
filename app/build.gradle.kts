@@ -1,8 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -18,7 +19,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -31,7 +32,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.4"
+        kotlinCompilerExtensionVersion = libs.versions.androidComposeCompiler.get()
     }
 
     kapt {
@@ -44,46 +45,24 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.leanback)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.google.android.material)
-    implementation(libs.accompanist.navigation.animation)
-    implementation(libs.accompanist.placeholder)
-    implementation(libs.androidx.lifecycle.runtime)
-    implementation(libs.qrcode)
-    implementation(libs.line.awesome.icons)
-
-    // Player
     implementation(project(mapOf("path" to ":player")))
     implementation(project(mapOf("path" to ":exoplayer")))
 
-    /* Jetpack Compose */
-    /* Compose BOM */
-    val composeBom = platform(libs.androidx.compose.bom)
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.activity.compose)
 
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.materialWindow)
-    implementation(libs.androidx.compose.material.iconsExtended)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.androidx.compose.bom)
+    implementation(libs.bundles.compose.tv)
+    implementation(libs.bundles.compose.accompanist)
 
-    /* Debug */
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    /* End Compose BOM */
-
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.constraintlayout.compose)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewModelCompose)
-
-    // Specific APIs
-    implementation(libs.androidx.tv.material)
-    implementation(libs.androidx.tv.foundation)
-    // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-    // Hilt navigation
     implementation(libs.androidx.hilt.navigation.compose)
+
+    implementation(libs.androidx.lifecycle.viewModelCompose)
+    implementation(libs.qrcode)
+    implementation(libs.line.awesome.icons)
+
+    androidTestImplementation(platform(libs.compose.bom))
 }
