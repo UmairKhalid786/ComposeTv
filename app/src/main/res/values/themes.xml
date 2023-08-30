@@ -1,0 +1,6 @@
+<resources>
+
+    <style name="Theme.ComposeTV" parent="">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>
