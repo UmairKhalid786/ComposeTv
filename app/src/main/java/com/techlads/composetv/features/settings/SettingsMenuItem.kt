@@ -14,13 +14,10 @@ import com.techlads.composetv.widgets.FocusableItem
 
 @Composable
 fun SettingsMenuItem(item: SettingsMenuModel, onMenuSelected: (SettingsMenuModel) -> Unit) {
-    FocusableItem(
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-        onClick = { onMenuSelected(item) },
-    ) {
+    FocusableItem(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+        onClick = { onMenuSelected(item) }) {
         Text(
-            text = item.text,
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            text = item.text, modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
         )
     }
 }
@@ -28,6 +25,5 @@ fun SettingsMenuItem(item: SettingsMenuModel, onMenuSelected: (SettingsMenuModel
 @Preview
 @Composable
 fun SettingsMenuItemPrev() {
-    SettingsMenuItem(SettingsMenuModel("Menu", "")) {
-    }
+    SettingsMenuItem(SettingsMenuModel("Menu", "")) {}
 }
