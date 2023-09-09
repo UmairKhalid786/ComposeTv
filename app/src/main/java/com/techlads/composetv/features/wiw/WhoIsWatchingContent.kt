@@ -73,7 +73,6 @@ private val avatarList = listOf(
     ),
 )
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
     // initial height set at 0.dp
@@ -130,7 +129,6 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
                     val itemIndex = it
                     ScaleAbleAvatar(
                         avatarRes = item.image,
-                        avatarPos = itemIndex,
                         modifier = Modifier
                             .then(if (it == 1) Modifier.focusRequester(requester) else Modifier)
                             .onFocusChanged {
@@ -140,7 +138,9 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
                                 }
                                 selectedAvatar = item.title
                             },
-                        onProfileSelection = onProfileSelection,
+                        onProfileSelection = {
+                            onProfileSelection(item)
+                        }
                     )
                 }
             }
@@ -195,17 +195,15 @@ fun ProfileName(name: String, scaleUp: Boolean) {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun ScaleAbleAvatar(
     modifier: Modifier,
-    avatarPos: Int,
     avatarRes: Int,
-    onProfileSelection: (avatar: Avatar) -> Unit,
+    onProfileSelection: () -> Unit
 ) {
     Surface(
         onClick = {
-            onProfileSelection(avatarList[avatarPos])
+            onProfileSelection()
         },
         modifier = modifier.padding(horizontal = 32.dp),
         border = ClickableSurfaceDefaults.border(

@@ -12,15 +12,15 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.techlads.composetv.features.details.ProductDetailsScreen
 import com.techlads.composetv.features.home.HomeScreen
-import com.techlads.composetv.features.home.HomeViewModel
 import com.techlads.composetv.features.login.withEmailPassword.LoginScreen
 import com.techlads.composetv.features.login.withToken.DeviceTokenAuthenticationScreen
+import com.techlads.composetv.features.mp3.player.Mp3PlayerScreen
 import com.techlads.composetv.features.player.PlayerScreen
 import com.techlads.composetv.features.wiw.WhoIsWatchingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
+fun AppNavigation(navController: NavHostController) {
     AnimatedNavHost(navController = navController, startDestination = Screens.LoginToken.title) {
         // e.g will add auth routes here if when we will extend project
         composable(
@@ -52,6 +52,12 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
                 navController.navigateSingleTopTo(Screens.Home.title)
             }
         }
+        composable(
+            Screens.Mp3Player.title,
+            enterTransition = { tabEnterTransition() },
+            exitTransition = { tabExitTransition() }) {
+            Mp3PlayerScreen()
+        }
 
         composable(
             Screens.Home.title,
@@ -59,7 +65,11 @@ fun AppNavigation(navController: NavHostController, viewModel: HomeViewModel) {
             exitTransition = { tabExitTransition() },
         ) {
             HomeScreen(viewModel) { _, _ ->
+            exitTransition = { tabExitTransition() }) {
+            HomeScreen({ _, _ ->
                 navController.navigate(Screens.ProductDetail.title)
+            }) {
+                navController.navigate(Screens.Mp3Player.title)
             }
         }
 

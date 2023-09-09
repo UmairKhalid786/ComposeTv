@@ -19,54 +19,49 @@ import com.techlads.composetv.navigation.tabExitTransition
 fun NestedHomeScreenNavigation(
     navController: NavHostController,
     onItemClick: (parent: Int, child: Int) -> Unit,
+    onSongClick: () -> Unit
 ) {
     AnimatedNavHost(navController = navController, startDestination = NestedScreens.Home.title) {
         // e.g will add auth routes here if when we will extend project
         composable(
             NestedScreens.Home.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
-        ) {
+            exitTransition = { tabExitTransition() }) {
             HomeNestedScreen(onItemFocus = { _, _ -> }, onItemClick = onItemClick)
         }
 
         composable(
             NestedScreens.Search.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
-        ) {
+            exitTransition = { tabExitTransition() }) {
             SearchScreen()
         }
 
         composable(
             NestedScreens.Movies.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
-        ) {
+            exitTransition = { tabExitTransition() }) {
             MoviesScreen(onItemClick)
         }
 
         composable(
             NestedScreens.Songs.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
-        ) {
-            SongsScreen()
+            exitTransition = { tabExitTransition() }) {
+            SongsScreen(onSongClick)
         }
 
         composable(
             NestedScreens.Favorites.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
-        ) {
+            exitTransition = { tabExitTransition() }) {
             FavoritesScreen()
         }
 
         composable(
             NestedScreens.Settings.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
-        ) {
+            exitTransition = { tabExitTransition() }) {
             SettingsScreen()
         }
     }

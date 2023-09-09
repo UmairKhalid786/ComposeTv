@@ -31,6 +31,7 @@ import com.techlads.composetv.utils.handleDPadKeyEvents
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalTvMaterial3Api::class)
 @Composable
 fun RowScope.VideoPlayerControllerIndicator(
+    modifier: Modifier = Modifier,
     progress: Float,
     onSeek: (seekProgress: Float) -> Unit,
     state: PlayerControlsState,
@@ -60,7 +61,7 @@ fun RowScope.VideoPlayerControllerIndicator(
     }
 
     Canvas(
-        modifier = Modifier
+        modifier = modifier
             .weight(1f)
             .height(animatedIndicatorHeight)
             .padding(horizontal = 4.dp)

@@ -10,13 +10,14 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 fun NestedHomeNavigation(
     navController: NavHostController,
     onItemFocus: (parent: Int, child: Int) -> Unit,
+    onSongClick: () -> Unit
 ) {
-    NestedHomeScreenNavigation(navController, onItemFocus)
+    NestedHomeScreenNavigation(navController, onItemFocus, onSongClick)
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
-fun NestedHomeNavigationPrev() {
-    NestedHomeNavigation(rememberAnimatedNavController()) { _, _ -> }
+private fun NestedHomeNavigationPrev() {
+    NestedHomeNavigation(rememberAnimatedNavController(), { _, _ -> }) {}
 }
