@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.widgets
 
 import androidx.compose.foundation.layout.BoxScope
@@ -7,41 +9,49 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.ClickableSurfaceColor
 import androidx.tv.material3.ClickableSurfaceDefaults
+import androidx.tv.material3.ClickableSurfaceGlow
+import androidx.tv.material3.ClickableSurfaceScale
+import androidx.tv.material3.ClickableSurfaceShape
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Glow
 import androidx.tv.material3.ShapeDefaults
 import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun FocusableItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable (BoxScope.() -> Unit),
+    shape: ClickableSurfaceShape = ClickableSurfaceDefaults.shape(
+        shape = ShapeDefaults.Small,
+        focusedShape = ShapeDefaults.Small
+    ),
+    color: ClickableSurfaceColor = ClickableSurfaceDefaults.color(
+        color = colorScheme.onSurface,
+        focusedColor = colorScheme.surface
+    ),
+    contentColor: ClickableSurfaceColor = ClickableSurfaceDefaults.contentColor(
+        color = colorScheme.surface,
+        focusedColor = colorScheme.onSurface
+    ),
+    glow: ClickableSurfaceGlow = ClickableSurfaceDefaults.glow(
+        focusedGlow = Glow(
+            elevation = 5.dp,
+            elevationColor = colorScheme.surface.copy(alpha = 0.5f)
+        )
+    ),
+    scale: ClickableSurfaceScale = ClickableSurfaceDefaults.scale(focusedScale = 1.1f),
+    content: @Composable (BoxScope.() -> Unit)
 ) {
     Surface(
         onClick = { onClick() },
-        scale = ClickableSurfaceDefaults.scale(focusedScale = 1.1f),
-        color = ClickableSurfaceDefaults.color(
-            color = colorScheme.onSurface,
-            focusedColor = colorScheme.surface,
-        ),
-        contentColor = ClickableSurfaceDefaults.contentColor(
-            color = colorScheme.surface,
-            focusedColor = colorScheme.onSurface,
-        ),
-        glow = ClickableSurfaceDefaults.glow(
-            focusedGlow = Glow(
-                elevation = 5.dp,
-                elevationColor = colorScheme.surface.copy(alpha = 0.5f),
-            ),
-        ),
-        shape = ClickableSurfaceDefaults.shape(
-            shape = ShapeDefaults.Small,
-            focusedShape = ShapeDefaults.Small,
-        ),
+        scale = scale,
+        color = color,
+        contentColor = contentColor,
+        glow = glow,
+        shape = shape,
         modifier = modifier
             .fillMaxWidth(),
     ) {

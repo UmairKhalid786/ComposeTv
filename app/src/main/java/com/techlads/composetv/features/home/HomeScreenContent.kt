@@ -4,7 +4,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.features.home.navigation.NestedHomeNavigation
 import com.techlads.composetv.features.home.navigation.drawer.HomeDrawer
@@ -13,14 +12,14 @@ import com.techlads.composetv.theme.ComposeTvTheme
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreenContent(
-    viewModel: HomeViewModel,
     onItemFocus: (parent: Int, child: Int) -> Unit,
+    onSongClick: () -> Unit
 ) {
     val navController = rememberAnimatedNavController()
 
     Row {
         HomeDrawer(content = {
-            NestedHomeNavigation(navController, onItemFocus)
+            NestedHomeNavigation(navController, onItemFocus, onSongClick)
         }) {
             navController.navigate(it.id)
         }
@@ -31,6 +30,6 @@ fun HomeScreenContent(
 @Composable
 fun HomeScreenContentPrev() {
     ComposeTvTheme {
-        HomeScreenContent(hiltViewModel()) { _, _ -> }
+        HomeScreenContent({ _, _ -> }) {}
     }
 }
