@@ -26,8 +26,9 @@ fun TvTextField(
     OutlinedTextField(
         textStyle = MaterialTheme.typography.bodyLarge,
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = MaterialTheme.colorScheme.onSurface,
-            cursorColor = MaterialTheme.colorScheme.onSurface,
+            focusedBorderColor = MaterialTheme.colorScheme.surface,
+            cursorColor = MaterialTheme.colorScheme.surface,
+            focusedLabelColor = MaterialTheme.colorScheme.surface,
         ),
         interactionSource = mutableInteractionSource,
         label = { Text(text = label) },

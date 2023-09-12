@@ -28,7 +28,6 @@ import androidx.tv.material3.Text
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.TvButton
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun LoginPage(
     onLoginClick: (user: String, psw: String) -> Unit,
