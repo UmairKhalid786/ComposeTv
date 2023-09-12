@@ -62,9 +62,6 @@ fun AppNavigation(navController: NavHostController) {
         composable(
             Screens.Home.title,
             enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
-        ) {
-            HomeScreen(viewModel) { _, _ ->
             exitTransition = { tabExitTransition() }) {
             HomeScreen({ _, _ ->
                 navController.navigate(Screens.ProductDetail.title)
