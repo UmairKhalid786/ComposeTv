@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.DrawerValue
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
@@ -26,6 +27,7 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.ModalNavigationDrawer
 import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
+import androidx.tv.material3.rememberDrawerState
 import com.techlads.composetv.features.home.leftmenu.MenuHeader
 import com.techlads.composetv.features.home.leftmenu.data.MenuData
 import com.techlads.composetv.features.home.leftmenu.model.MenuItem
@@ -34,54 +36,62 @@ val navigationRow: @Composable (
     drawerValue: DrawerValue,
     menu: MenuItem,
     modifier: Modifier,
+    isSelected: Boolean,
     onMenuSelected: ((menuItem: MenuItem) -> Unit)?,
-) -> Unit =
-    { drawerValue, menu, modifier, onMenuSelected ->
+) -> Unit = { drawerValue, menu, modifier, isSelected, onMenuSelected ->
 
-        val padding = animateDpAsState(
-            animationSpec = keyframes {
-                this.delayMillis = 100
-            },
-            targetValue = if (drawerValue == DrawerValue.Open) 4.dp else 0.dp, label = "",
-        )
+    val padding = animateDpAsState(
+        animationSpec = keyframes {
+            this.delayMillis = 100
+        },
+        targetValue = if (drawerValue == DrawerValue.Open) 4.dp else 0.dp, label = "",
+    )
 
-        Surface(
-            onClick = { onMenuSelected?.invoke(menu) },
-            modifier =
-            modifier
-                .padding(vertical = 4.dp)
-                .then(if (drawerValue == DrawerValue.Open) modifier.width(170.dp) else modifier),
+    Surface(
+        onClick = { onMenuSelected?.invoke(menu) },
+        color = ClickableSurfaceDefaults.color(
+            color = if (isSelected) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f) else MaterialTheme.colorScheme.surface,
+        ),
+        modifier = modifier
+            .padding(vertical = 4.dp)
+            .then(if (drawerValue == DrawerValue.Open) modifier.width(170.dp) else modifier)
+    ) {
+        Row(
+            Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(
-                Modifier
-                    .padding(horizontal = 12.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
+            menu.icon?.let {
+                Icon(
+                    imageVector = it,
+                    contentDescription = menu.text,
+                    modifier = Modifier.size(20.dp),
+                )
+                Spacer(modifier = Modifier.padding(horizontal = padding.value))
+            }
+            AnimatedVisibility(
+                visible = drawerValue == DrawerValue.Open,
+                modifier = Modifier.height(20.dp),
             ) {
-                menu.icon?.let {
-                    Icon(
-                        imageVector = it,
-                        contentDescription = menu.text,
-                        modifier = Modifier.size(20.dp),
-                    )
-                    Spacer(modifier = Modifier.padding(horizontal = padding.value))
-                }
-                AnimatedVisibility(
-                    visible = drawerValue == DrawerValue.Open,
-                    modifier = Modifier.height(20.dp),
-                ) {
-                    Text(
-                        text = menu.text,
-                        maxLines = 1,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                }
+                Text(
+                    text = menu.text,
+                    maxLines = 1,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
             }
         }
     }
+}
 
 @Composable
-fun HomeDrawer(content: @Composable () -> Unit, onMenuSelected: ((menuItem: MenuItem) -> Unit)?) {
+fun HomeDrawer(
+    content: @Composable () -> Unit,
+    selectedId: String = MenuData.menuItems.first().id,
+    onMenuSelected: ((menuItem: MenuItem) -> Unit)?
+) {
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+
     ModalNavigationDrawer(
+        drawerState = drawerState,
         drawerContent = { drawer ->
             Column(
                 Modifier
@@ -93,14 +103,20 @@ fun HomeDrawer(content: @Composable () -> Unit, onMenuSelected: ((menuItem: Menu
                 Spacer(modifier = Modifier.height(8.dp))
                 MenuHeader(expanded = drawer == DrawerValue.Open)
                 Spacer(modifier = Modifier.height(16.dp))
+
                 MenuData.menuItems.forEach {
-                    navigationRow(drawer, it, Modifier) {
+                    navigationRow(drawer, it, Modifier, selectedId == it.id) {
                         onMenuSelected?.invoke(it)
+                        drawerState.setValue(DrawerValue.Closed)
                     }
                 }
+
                 Spacer(modifier = Modifier.weight(1f))
-                navigationRow(drawer, MenuData.settingsItem, Modifier) {
+                navigationRow(
+                    drawer, MenuData.settingsItem, Modifier, MenuData.settingsItem.id == selectedId
+                ) {
                     onMenuSelected?.invoke(it)
+                    drawerState.setValue(DrawerValue.Closed)
                 }
             }
         },
