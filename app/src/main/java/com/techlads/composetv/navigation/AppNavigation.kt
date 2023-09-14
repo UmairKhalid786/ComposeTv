@@ -14,7 +14,7 @@ import com.techlads.composetv.features.details.ProductDetailsScreen
 import com.techlads.composetv.features.home.HomeScreen
 import com.techlads.composetv.features.login.withEmailPassword.LoginScreen
 import com.techlads.composetv.features.login.withToken.DeviceTokenAuthenticationScreen
-import com.techlads.composetv.features.mp3.player.Mp3PlayerScreen
+import com.techlads.composetv.features.mp3.player.AudioPlayerScreen
 import com.techlads.composetv.features.player.PlayerScreen
 import com.techlads.composetv.features.wiw.WhoIsWatchingScreen
 
@@ -38,7 +38,9 @@ fun AppNavigation(navController: NavHostController) {
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() },
         ) {
-            DeviceTokenAuthenticationScreen {
+            DeviceTokenAuthenticationScreen(onSkip = {
+                navController.navigateSingleTopTo(Screens.Home.title)
+            }) {
                 navController.navigateSingleTopTo(it.title)
             }
         }
@@ -56,7 +58,9 @@ fun AppNavigation(navController: NavHostController) {
             Screens.Mp3Player.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            Mp3PlayerScreen()
+            AudioPlayerScreen {
+                navController.navigateUp()
+            }
         }
 
         composable(

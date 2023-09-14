@@ -3,9 +3,7 @@
 package com.techlads.composetv.features.login.withToken
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,16 +24,20 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
+import androidx.tv.material3.ButtonDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.github.alexzhirkevich.customqrgenerator.QrData
 import com.github.alexzhirkevich.customqrgenerator.vector.QrCodeDrawable
 import com.github.alexzhirkevich.customqrgenerator.vector.QrVectorOptions
 import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColor
 import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColors
+import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.TvButton
 
 @OptIn(ExperimentalTvMaterial3Api::class)
@@ -44,7 +45,7 @@ import com.techlads.composetv.widgets.TvButton
 fun DeviceTokenAuthenticationContent(
     token: String,
     url: String,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    skip: () -> Unit,
     onLoginClick: (token: String) -> Unit,
 ) {
     val context = LocalContext.current
@@ -149,14 +150,14 @@ fun DeviceTokenAuthenticationContent(
 
         Spacer(modifier = Modifier.height(50.dp))
 
-        Box(
+        Row(
             modifier = Modifier
-                .width(300.dp)
                 .padding(40.dp, 0.dp, 40.dp, 0.dp),
         ) {
             TvButton(
-                modifier = Modifier.padding(start = 20.dp, end = 20.dp),
-                interactionSource = interactionSource,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 20.dp, end = 20.dp),
                 onClick = { onLoginClick(token) },
             ) {
                 Text(
@@ -169,6 +170,36 @@ fun DeviceTokenAuthenticationContent(
                     ),
                 )
             }
+
+            TvButton(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 20.dp, end = 20.dp),
+                colors = ButtonDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.onSurface,
+                ),
+                onClick = { skip() },
+            ) {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Skip",
+                    style = TextStyle(
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Light,
+                        textAlign = TextAlign.Center,
+                    ),
+                )
+            }
         }
+    }
+}
+
+
+@Preview
+@Composable
+fun DeviceTokenAuthenticationContentPreview() {
+    ComposeTvTheme {
+        DeviceTokenAuthenticationContent(token = "OTF2", "www.google.com", skip = {}, onLoginClick = {})
     }
 }
