@@ -35,7 +35,7 @@ import com.techlads.composetv.features.player.controls.VideoPlayerControllerIndi
 import com.techlads.composetv.features.player.controls.rememberVideoPlayerState
 
 @Composable
-fun Mp3PlayerScreenContent(modifier: Modifier){
+fun AudioPlayerScreenContent(modifier: Modifier){
     Box(contentAlignment = Alignment.Center, modifier = modifier.fillMaxSize()) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Poster()
@@ -132,7 +132,6 @@ fun SongProgressBar(
 
 @Composable
 fun Details() {
-
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
         Text(text = "Chris Brown - Babie ft. Tyga", style = MaterialTheme.typography.titleLarge)
         Spacer(modifier = Modifier.size(2.dp))
