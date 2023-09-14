@@ -37,11 +37,12 @@ val navigationRow: @Composable (
     onMenuSelected: ((menuItem: MenuItem) -> Unit)?,
 ) -> Unit =
     { drawerValue, menu, modifier, onMenuSelected ->
+
         val padding = animateDpAsState(
             animationSpec = keyframes {
                 this.delayMillis = 100
             },
-            targetValue = if (drawerValue == DrawerValue.Open) 4.dp else 0.dp,
+            targetValue = if (drawerValue == DrawerValue.Open) 4.dp else 0.dp, label = "",
         )
 
         Surface(
@@ -60,7 +61,7 @@ val navigationRow: @Composable (
                     Icon(
                         imageVector = it,
                         contentDescription = menu.text,
-                        modifier = Modifier.size(16.dp),
+                        modifier = Modifier.size(20.dp),
                     )
                     Spacer(modifier = Modifier.padding(horizontal = padding.value))
                 }

@@ -24,10 +24,10 @@ import compose.icons.lineawesomeicons.TvSolid
 fun MenuHeader(expanded: Boolean = true) {
     val animatedAlpha = animateFloatAsState(
         animationSpec = keyframes {
-            this.delayMillis = 500
-            this.durationMillis = 500
+            this.delayMillis = 100
+            this.durationMillis = 100
         },
-        targetValue = if (expanded) 1f else 0f,
+        targetValue = if (expanded) 1f else 0f, label = "animatedAlpha",
     )
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
