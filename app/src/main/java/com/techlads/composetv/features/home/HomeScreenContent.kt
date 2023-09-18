@@ -1,7 +1,6 @@
 package com.techlads.composetv.features.home
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -31,12 +30,10 @@ fun HomeScreenContent(
         }
     }
 
-    Row {
-        HomeDrawer(content = {
-            NestedHomeNavigation(navController, onItemFocus, onSongClick)
-        }, selectedId = selectedId.value) {
-            navController.navigate(it.id)
-        }
+    HomeDrawer(content = {
+        NestedHomeNavigation(navController, onItemFocus, onSongClick)
+    }, selectedId = selectedId.value) {
+        navController.navigate(it.id)
     }
 }
 

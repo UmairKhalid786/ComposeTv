@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Border
 import androidx.tv.material3.ClickableSurfaceBorder
-import androidx.tv.material3.ClickableSurfaceColor
+import androidx.tv.material3.ClickableSurfaceColors
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ClickableSurfaceScale
 import androidx.tv.material3.ClickableSurfaceShape
@@ -28,9 +28,11 @@ fun BorderedFocusableItem(
     modifier: Modifier = Modifier,
     borderRadius: Dp = 12.dp,
     scale: ClickableSurfaceScale = ClickableSurfaceDefaults.scale(focusedScale = 1.1f),
-    color: ClickableSurfaceColor = ClickableSurfaceDefaults.color(
-        color = colorScheme.onSurface,
-        focusedColor = colorScheme.surface
+    color: ClickableSurfaceColors = ClickableSurfaceDefaults.colors(
+        containerColor = colorScheme.onSurface,
+        focusedContainerColor = colorScheme.surface,
+        contentColor = colorScheme.surface,
+        focusedContentColor = colorScheme.onSurface
     ),
     border: ClickableSurfaceBorder = ClickableSurfaceDefaults.border(
         focusedBorder = Border(
@@ -51,7 +53,7 @@ fun BorderedFocusableItem(
     Surface(
         onClick = { onClick() },
         scale = scale,
-        color = color,
+        colors = color,
         border = border,
         shape = shape,
         modifier = modifier

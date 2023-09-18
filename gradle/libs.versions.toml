@@ -1,21 +1,21 @@
 [versions]
 
 # Project Environment Versions
-compileSdk = "33"
-targetSdk = "33"
+compileSdk = "34"
+targetSdk = "34"
 minSdk = "23"
 minSdkTv = "21"
 
 # Plugin Versions
-kotlin = "1.8.10"
-androidComposeCompiler = "1.4.4"
+kotlin = "1.9.10"
+androidComposeCompiler = "1.5.3"
 androidLibrary = "7.4.1"
-androidGradlePlugin = "7.4.1"
+androidGradlePlugin = "8.1.1"
 detekt = "1.23.0"
 
 # Library Versions
 androidx-activity-compose = "1.7.0"
-androidx-corektx = "1.8.0"
+androidx-corektx = "1.12.0"
 accompanist = "0.31.0-alpha"
 androidx-lifecycle = "2.6.1"
 androidxHiltNavigationCompose = "1.1.0-alpha01"
@@ -23,24 +23,28 @@ qr_code = "1.5.3"
 timber = "5.0.1"
 hilt = "2.45"
 datastore-preferences = "1.0.0"
-tv-foundation = "1.0.0-alpha06"
+tv-compose = "1.0.0-alpha09"
 line_awesome = "1.0.0"
-compose_bom = "2023.04.00"
-media3 = "1.0.1"
-media3Ui = "1.0.2"
+compose_bom = "2023.09.00"
+media3 = "1.1.1"
+media3Ui = "1.1.1"
 
 # Test Library Versions
 junit = "4.13.2"
 androidx-test-espresso = "3.4.0"
 androidx-test-ext-junit = "1.1.3"
+uiautomator = "2.2.0"
+benchmark-macro-junit4 = "1.2.0-beta01"
+androidx-baselineprofile = "1.2.0-beta01"
+profileinstaller = "1.3.0"
 
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-corektx" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
 
-androidx-tv-foundation = { module = "androidx.tv:tv-foundation", version.ref = "tv-foundation" }
-androidx-tv-material = { module = "androidx.tv:tv-material", version.ref = "tv-foundation" }
+androidx-tv-foundation = { module = "androidx.tv:tv-foundation", version.ref = "tv-compose" }
+androidx-tv-material = { module = "androidx.tv:tv-material", version.ref = "tv-compose" }
 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose_bom" }
 compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended" }
@@ -67,6 +71,9 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 junit = { module = "junit:junit", version.ref = "junit" }
 androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-ext-junit" }
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
+uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
+benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmark-macro-junit4" }
+profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
 
 
 [bundles]
@@ -84,3 +91,5 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+androidTest = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-baselineprofile" }

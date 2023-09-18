@@ -19,6 +19,7 @@ import com.techlads.composetv.widgets.BorderedFocusableItem
 
 @Composable
 fun CarouselItem(
+    modifier: Modifier = Modifier,
     parent: Int,
     child: Int,
     onItemFocus: (parent: Int, child: Int) -> Unit,
@@ -27,7 +28,7 @@ fun CarouselItem(
     BorderedFocusableItem(
         onClick = { onItemClick(parent, child) },
         borderRadius = 12.dp,
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = 8.dp)
             .aspectRatio(1.8f)
             .onFocusChanged {
@@ -61,7 +62,7 @@ fun VerticalCarouselItem(parent: Int, child: Int, onItemFocus: (parent: Int, chi
 @Preview
 @Composable
 fun CarouselItemPrev() {
-    CarouselItem(1, 1, onItemClick = { _, _ -> }, onItemFocus = { _, _ -> })
+    CarouselItem(Modifier,1, 1, onItemClick = { _, _ -> }, onItemFocus = { _, _ -> })
 }
 
 @Preview

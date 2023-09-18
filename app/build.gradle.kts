@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 android {
@@ -25,6 +26,12 @@ android {
                 "proguard-rules.pro",
             )
         }
+        create("benchmark") {
+            initWith(buildTypes.getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
     }
 
     buildFeatures {
@@ -39,8 +46,13 @@ android {
         correctErrorTypes = true
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 
@@ -57,6 +69,8 @@ dependencies {
     implementation(libs.bundles.compose.accompanist)
 
     implementation(libs.hilt.android)
+    implementation(libs.profileinstaller)
+    "baselineProfile"(project(":baselineprofile"))
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 

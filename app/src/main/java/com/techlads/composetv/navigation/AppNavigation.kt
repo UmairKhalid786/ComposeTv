@@ -25,8 +25,6 @@ fun AppNavigation(navController: NavHostController) {
         // e.g will add auth routes here if when we will extend project
         composable(
             Screens.Login.title,
-            enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
         ) {
             LoginScreen {
                 navController.navigateSingleTopTo(Screens.WhoIsWatching.title)
@@ -35,8 +33,6 @@ fun AppNavigation(navController: NavHostController) {
 
         composable(
             Screens.LoginToken.title,
-            enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
         ) {
             DeviceTokenAuthenticationScreen(onSkip = {
                 navController.navigateSingleTopTo(Screens.Home.title)
@@ -47,26 +43,20 @@ fun AppNavigation(navController: NavHostController) {
 
         composable(
             Screens.WhoIsWatching.title,
-            enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
         ) {
             WhoIsWatchingScreen {
                 navController.navigateSingleTopTo(Screens.Home.title)
             }
         }
         composable(
-            Screens.Mp3Player.title,
-            enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() }) {
+            Screens.Mp3Player.title,) {
             AudioPlayerScreen {
                 navController.navigateUp()
             }
         }
 
         composable(
-            Screens.Home.title,
-            enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() }) {
+            Screens.Home.title,) {
             HomeScreen({ _, _ ->
                 navController.navigate(Screens.ProductDetail.title)
             }) {
@@ -76,8 +66,6 @@ fun AppNavigation(navController: NavHostController) {
 
         composable(
             Screens.Player.title,
-            enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
         ) {
             PlayerScreen(
                 "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
@@ -89,8 +77,6 @@ fun AppNavigation(navController: NavHostController) {
 
         composable(
             Screens.ProductDetail.title,
-            enterTransition = { tabEnterTransition() },
-            exitTransition = { tabExitTransition() },
         ) {
             ProductDetailsScreen(
                 onBackPressed = {
