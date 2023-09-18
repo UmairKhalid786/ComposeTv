@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.tv.material3.ClickableSurfaceColor
+import androidx.tv.material3.ClickableSurfaceColors
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ClickableSurfaceGlow
 import androidx.tv.material3.ClickableSurfaceScale
@@ -28,13 +28,11 @@ fun FocusableItem(
         shape = ShapeDefaults.Small,
         focusedShape = ShapeDefaults.Small
     ),
-    color: ClickableSurfaceColor = ClickableSurfaceDefaults.color(
-        color = colorScheme.onSurface,
-        focusedColor = colorScheme.surface
-    ),
-    contentColor: ClickableSurfaceColor = ClickableSurfaceDefaults.contentColor(
-        color = colorScheme.surface,
-        focusedColor = colorScheme.onSurface
+    color: ClickableSurfaceColors = ClickableSurfaceDefaults.colors(
+        containerColor = colorScheme.onSurface,
+        focusedContainerColor = colorScheme.surface,
+        contentColor = colorScheme.surface,
+        focusedContentColor = colorScheme.onSurface
     ),
     glow: ClickableSurfaceGlow = ClickableSurfaceDefaults.glow(
         focusedGlow = Glow(
@@ -48,8 +46,7 @@ fun FocusableItem(
     Surface(
         onClick = { onClick() },
         scale = scale,
-        color = color,
-        contentColor = contentColor,
+        colors = color,
         glow = glow,
         shape = shape,
         modifier = modifier

@@ -17,6 +17,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeTV">
+
+        <profileable android:shell="true"/>
+
         <activity
             android:name=".MainActivity"
             android:banner="@drawable/ic_app"

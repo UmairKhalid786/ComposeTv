@@ -1,5 +1,6 @@
 package com.techlads.composetv.features.home.carousel
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,5 +24,7 @@ fun HomeCarousel(
 @Preview
 @Composable
 fun HomeCarouselPrev() {
-    HomeCarousel(Modifier, onItemFocus = { _, _ -> }, onItemClick = { _, _ -> })
+    Column {
+        HomeCarousel(Modifier, onItemFocus = { _, _ -> }) { _, _ -> }
+    }
 }

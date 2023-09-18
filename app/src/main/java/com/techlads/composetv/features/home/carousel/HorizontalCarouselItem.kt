@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.home.carousel
 
 import androidx.compose.foundation.layout.Column
@@ -9,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.foundation.lazy.list.TvLazyRow
+import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 
 @Composable
@@ -29,6 +32,7 @@ fun HorizontalCarouselItem(
         ) {
             items(15) { child ->
                 CarouselItem(
+                    Modifier,
                     parent,
                     child,
                     onItemClick = onItemClick,

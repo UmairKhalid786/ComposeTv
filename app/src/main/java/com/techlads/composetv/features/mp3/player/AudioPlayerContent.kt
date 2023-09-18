@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.mp3.player
 
 import androidx.compose.foundation.Image
@@ -48,7 +50,6 @@ fun AudioPlayerScreenContent(modifier: Modifier){
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun Mp3Controls() {
     Row {

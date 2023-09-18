@@ -49,8 +49,8 @@ val navigationRow: @Composable (
 
     Surface(
         onClick = { onMenuSelected?.invoke(menu) },
-        color = ClickableSurfaceDefaults.color(
-            color = if (isSelected) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f) else MaterialTheme.colorScheme.surface,
+        colors = ClickableSurfaceDefaults.colors(
+            containerColor = if (isSelected) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f) else MaterialTheme.colorScheme.surface,
         ),
         modifier = modifier
             .padding(vertical = 4.dp)
