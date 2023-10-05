@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -41,6 +42,7 @@ import com.techlads.composetv.R
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.ThumbnailImageCard
 import com.techlads.composetv.widgets.TvButton
+import com.techlads.utils.testing.PRODUCT_DETAIL_BANNER_TAG
 import kotlinx.coroutines.delay
 
 const val ANIMATION_DELAY = 600L
@@ -115,6 +117,7 @@ fun SearchIcon(modifier: Modifier) {
 fun BannerImage(modifier: Modifier) {
     Image(
         modifier = modifier
+            .testTag(PRODUCT_DETAIL_BANNER_TAG)
             .fillMaxSize()
             .height(200.dp),
         painter = painterResource(id = R.drawable.hero_item),

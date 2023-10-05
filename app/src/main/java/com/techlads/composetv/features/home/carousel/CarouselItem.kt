@@ -10,12 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 import com.techlads.composetv.widgets.BorderedFocusableItem
+import com.techlads.utils.testing.tagForItem
 
 @Composable
 fun CarouselItem(
@@ -29,6 +31,7 @@ fun CarouselItem(
         onClick = { onItemClick(parent, child) },
         borderRadius = 12.dp,
         modifier = modifier
+            .testTag(tagForItem(parent, child))
             .padding(horizontal = 8.dp)
             .aspectRatio(1.8f)
             .onFocusChanged {

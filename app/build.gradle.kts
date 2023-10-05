@@ -57,6 +57,7 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":utils")))
     implementation(project(mapOf("path" to ":player")))
     implementation(project(mapOf("path" to ":exoplayer")))
 

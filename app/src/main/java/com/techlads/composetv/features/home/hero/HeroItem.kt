@@ -16,6 +16,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,11 +26,13 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
 import com.techlads.composetv.theme.ComposeTvTheme
+import com.techlads.utils.testing.HERO_ITEM_TAG
 
 @Composable
 fun HeroItem(modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
+            .testTag(HERO_ITEM_TAG)
             .padding(horizontal = 24.dp, vertical = 24.dp)
             .fillMaxWidth()
             .height(200.dp),
