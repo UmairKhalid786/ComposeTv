@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -39,6 +40,7 @@ import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColor
 import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColors
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.TvButton
+import com.techlads.utils.testing.SKIP_TAG
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
@@ -182,7 +184,7 @@ fun DeviceTokenAuthenticationContent(
                 onClick = { skip() },
             ) {
                 Text(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().testTag(SKIP_TAG),
                     text = "Skip",
                     style = TextStyle(
                         fontFamily = FontFamily.SansSerif,
