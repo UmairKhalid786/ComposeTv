@@ -24,7 +24,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+ 
     targetProjectPath = ":app"
 
 }
