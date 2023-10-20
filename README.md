@@ -1,5 +1,12 @@
 # ComposeTv
 
+## Special Guidlines for Hacktoberfest
+
+- Please choose a task, from the project or your own wish
+- Follow Hackfest [guidlines](https://hacktoberfest.com/participation/#pr-mr-details)
+- Follow Project [Readme](CONTRIBUTING.md) for contributions
+
+
 ## New features 
 ### Who is Watching
 ![Screenshot_20230819_235634](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/8006239f-d080-4610-bf73-22d026b81109)
