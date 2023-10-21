@@ -3,6 +3,7 @@
 package com.techlads.composetv.features.login.withToken
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -176,6 +177,7 @@ fun DeviceTokenAuthenticationContent(
             TvButton(
                 modifier = Modifier
                     .weight(1f)
+                    .testTag(SKIP_TAG)
                     .padding(start = 20.dp, end = 20.dp),
                 colors = ButtonDefaults.colors(
                     containerColor = MaterialTheme.colorScheme.surface,
@@ -184,8 +186,10 @@ fun DeviceTokenAuthenticationContent(
                 onClick = { skip() },
             ) {
                 Text(
-                    modifier = Modifier.fillMaxWidth().testTag(SKIP_TAG),
-                    text = "Skip",
+                    modifier = Modifier.fillMaxWidth().clickable {
+                        skip()
+                    },
+                    text = SKIP_TAG,
                     style = TextStyle(
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Light,

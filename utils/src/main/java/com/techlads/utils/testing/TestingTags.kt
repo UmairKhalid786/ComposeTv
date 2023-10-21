@@ -1,6 +1,6 @@
 package com.techlads.utils.testing
 
-const val SKIP_TAG = "skip"
+const val SKIP_TAG = "Skip"
 const val HERO_ITEM_TAG = "hero_item"
 const val SECTIONS_LIST_TAG = "sections_list"
 const val SECTION_ITEM_TAG = "section_item_{parent}_{child}"
