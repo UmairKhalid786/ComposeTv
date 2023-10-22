@@ -13,6 +13,7 @@ import compose.icons.lineawesomeicons.HeartSolid
 import compose.icons.lineawesomeicons.HomeSolid
 import compose.icons.lineawesomeicons.MusicSolid
 import compose.icons.lineawesomeicons.SearchSolid
+import compose.icons.lineawesomeicons.UserCircle
 import compose.icons.lineawesomeicons.VideoSolid
 
 object MenuData {
@@ -28,5 +29,11 @@ object MenuData {
         Settings.title,
         "Settings",
         LineAwesomeIcons.CogSolid,
+    )
+
+    val profile = MenuItem(
+        Home.title,
+        "My Profile",
+        LineAwesomeIcons.UserCircle,
     )
 }
