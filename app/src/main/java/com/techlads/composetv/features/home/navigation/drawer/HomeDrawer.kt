@@ -111,8 +111,7 @@ fun NavigationDrawerScope.NavigationRow(
         }, leadingContent = {
             Icon(
                 imageVector = item.icon ?: return@NavigationDrawerItem,
-                contentDescription = item.text,
-                modifier = Modifier.size(20.dp),
+                contentDescription = item.text
             )
         }) {
         Text(item.text)
