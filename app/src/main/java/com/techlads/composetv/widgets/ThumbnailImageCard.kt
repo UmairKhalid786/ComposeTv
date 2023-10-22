@@ -17,6 +17,7 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.theme.ComposeTvTheme
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun ThumbnailImageCard(
     modifier: Modifier = Modifier,
