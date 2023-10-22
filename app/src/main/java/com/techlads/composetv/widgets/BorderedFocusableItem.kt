@@ -22,7 +22,6 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun BorderedFocusableItem(
     modifier: Modifier = Modifier,

@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class, ExperimentalTvMaterial3Api::class)
+@file:OptIn(ExperimentalTvMaterial3Api::class)
 
 package com.techlads.composetv.features.favorites
 

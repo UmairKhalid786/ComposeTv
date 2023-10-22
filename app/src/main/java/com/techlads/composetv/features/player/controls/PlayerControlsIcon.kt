@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.player.controls
 
 import androidx.annotation.DrawableRes
@@ -21,7 +23,6 @@ import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun VideoPlayerControlsIcon(
     modifier: Modifier = Modifier,

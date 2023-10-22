@@ -36,15 +36,21 @@ fun HomeScreenContent(
         }
     }
 
-    usedTopBar.collectAsState().value.let {selectedTopBar ->
-        when(selectedTopBar) {
+    usedTopBar.collectAsState().value.let { selectedTopBar ->
+
+        when (selectedTopBar) {
             true -> HomeTopBar(content = {
-                NestedHomeNavigation(usedTopBar, toggleNavigationBar, navController, onItemFocus, onSongClick)
+                NestedHomeNavigation(
+                    usedTopBar, toggleNavigationBar, navController, onItemFocus, onSongClick
+                )
             }, selectedId = selectedId.value) {
                 navController.navigate(it.id)
             }
+
             false -> HomeDrawer(content = {
-                NestedHomeNavigation(usedTopBar, toggleNavigationBar, navController, onItemFocus, onSongClick)
+                NestedHomeNavigation(
+                    usedTopBar, toggleNavigationBar, navController, onItemFocus, onSongClick
+                )
             }, selectedId = selectedId.value) {
                 navController.navigate(it.id)
             }
@@ -56,8 +62,7 @@ fun HomeScreenContent(
 @Composable
 fun HomeScreenContentPrev() {
     ComposeTvTheme {
-        HomeScreenContent(
-            onItemFocus = { _, _ -> },
+        HomeScreenContent(onItemFocus = { _, _ -> },
             usedTopBar = MutableStateFlow(false),
             toggleNavigationBar = {}) {}
     }

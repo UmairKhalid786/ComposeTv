@@ -35,7 +35,7 @@ import com.techlads.composetv.features.home.leftmenu.model.MenuItem
 
 
 @Composable
-fun HomeDrawer(
+fun  HomeDrawer(
     content: @Composable () -> Unit,
     selectedId: String = MenuData.menuItems.first().id,
     onMenuSelected: ((menuItem: MenuItem) -> Unit)?

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalTvMaterial3Api::class)
+
 package com.techlads.composetv.features.settings
 
 import androidx.compose.foundation.layout.Arrangement
@@ -21,9 +23,13 @@ import com.techlads.composetv.widgets.FocusableItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun SettingsMenu(modifier: Modifier = Modifier, usedTopBar: StateFlow<Boolean>, toggleTopBar: () -> Unit, onMenuSelected: (SettingsMenuModel) -> Unit) {
+fun SettingsMenu(
+    modifier: Modifier = Modifier,
+    usedTopBar: StateFlow<Boolean>,
+    toggleTopBar: () -> Unit,
+    onMenuSelected: (SettingsMenuModel) -> Unit
+) {
     val settingsMenu = remember {
         SettingsMenuData.menu
     }
@@ -49,7 +55,8 @@ fun SettingsMenu(modifier: Modifier = Modifier, usedTopBar: StateFlow<Boolean>, 
                         text = "Top Bar",
                         modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
                     )
-                    Switch(checked = usedTopBar.collectAsState().value, onCheckedChange = { toggleTopBar() })
+                    Switch(checked = usedTopBar.collectAsState().value,
+                        onCheckedChange = { toggleTopBar() })
                 }
             }
         }
@@ -59,6 +66,5 @@ fun SettingsMenu(modifier: Modifier = Modifier, usedTopBar: StateFlow<Boolean>, 
 @Preview
 @Composable
 fun SettingsMenuPrev() {
-    SettingsMenu(usedTopBar = MutableStateFlow(false), toggleTopBar = {}) {
-    }
+    SettingsMenu(usedTopBar = MutableStateFlow(false), toggleTopBar = {}) {}
 }

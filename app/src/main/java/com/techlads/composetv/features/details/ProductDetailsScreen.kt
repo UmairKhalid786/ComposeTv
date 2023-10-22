@@ -126,7 +126,6 @@ fun BannerImage(modifier: Modifier) {
     )
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun ButtonSection(onPlayClick: () -> Unit) {
     val focusRequester = remember { FocusRequester() }
