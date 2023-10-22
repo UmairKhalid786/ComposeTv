@@ -10,6 +10,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.features.home.leftmenu.data.MenuData
 import com.techlads.composetv.features.home.navigation.NestedHomeNavigation
 import com.techlads.composetv.features.home.navigation.drawer.HomeDrawer
+import com.techlads.composetv.features.home.navigation.topbar.HomeTopBar
 import com.techlads.composetv.theme.ComposeTvTheme
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -30,7 +31,7 @@ fun HomeScreenContent(
         }
     }
 
-    HomeDrawer(content = {
+    HomeTopBar(content = {
         NestedHomeNavigation(navController, onItemFocus, onSongClick)
     }, selectedId = selectedId.value) {
         navController.navigate(it.id)

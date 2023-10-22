@@ -48,7 +48,7 @@ fun GridHeader() {
     )
 }
 
-@Preview
+@Preview(device = "id:tv_1080p")
 @Composable
 fun MoviesScreenPrev() {
     MoviesScreen { _, _ -> }
