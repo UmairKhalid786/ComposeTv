@@ -25,14 +25,6 @@ object MenuData {
         MenuItem(Favorites.title, "Favorites", LineAwesomeIcons.HeartSolid),
     )
 
-    val topBarMenuItems = listOf(
-        MenuItem(Home.title, "Home", LineAwesomeIcons.HomeSolid),
-        MenuItem(Movies.title, "Movies", LineAwesomeIcons.VideoSolid),
-        MenuItem(Songs.title, "Songs", LineAwesomeIcons.MusicSolid),
-        MenuItem(Favorites.title, "Favorites", LineAwesomeIcons.HeartSolid),
-        MenuItem(Search.title, "Search", LineAwesomeIcons.SearchSolid),
-    )
-
     val settingsItem = MenuItem(
         Settings.title,
         "Settings",
