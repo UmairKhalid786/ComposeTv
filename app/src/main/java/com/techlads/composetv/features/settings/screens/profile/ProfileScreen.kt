@@ -35,7 +35,6 @@ fun ProfileScreen() {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun ProfilesContent() {
     Column {

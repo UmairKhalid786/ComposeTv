@@ -178,7 +178,6 @@ fun PlayerControls(
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun VideoHeaders() {
     Column(Modifier.fillMaxWidth()) {

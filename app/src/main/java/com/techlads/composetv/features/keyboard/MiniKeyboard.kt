@@ -41,7 +41,6 @@ import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
 import com.techlads.composetv.theme.ComposeTvTheme
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun MiniKeyboard(modifier: Modifier) {
     var sizeInDp by remember { mutableStateOf(DpSize.Zero) }
@@ -124,7 +123,6 @@ fun KeyItem(key: Any, modifier: Modifier = Modifier) {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun KeyItem(
     modifier: Modifier = Modifier,

@@ -84,7 +84,6 @@ fun Mp3Controls() {
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun Control(
     modifier: Modifier = Modifier, content: @Composable () -> Unit

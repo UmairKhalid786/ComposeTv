@@ -43,7 +43,6 @@ import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.TvButton
 import com.techlads.utils.testing.SKIP_TAG
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun DeviceTokenAuthenticationContent(
     token: String,

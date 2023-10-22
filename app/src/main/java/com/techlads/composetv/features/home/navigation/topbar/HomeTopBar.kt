@@ -3,6 +3,8 @@
 package com.techlads.composetv.features.home.navigation.topbar
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,10 +38,10 @@ import androidx.tv.material3.Text
 import com.techlads.composetv.R
 import com.techlads.composetv.features.home.leftmenu.data.MenuData
 import com.techlads.composetv.features.home.leftmenu.model.MenuItem
+import com.techlads.composetv.features.home.leftmenu.model.isCircleIcon
 import com.techlads.composetv.features.home.navigation.NestedScreens
 import com.techlads.composetv.features.settings.screens.profile.ProfilePicture
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun HomeTopBar(
     content: @Composable () -> Unit,
@@ -57,24 +59,21 @@ fun HomeTopBar(
                 .fillMaxWidth()
                 .padding(24.dp)
         ) {
-            TabRow(selectedTabIndex = selectedTabIndex,
-                indicator = { _, _ ->
-                    Box(
-                        modifier = Modifier
-                            .clip(MaterialTheme.shapes.small)
-                            .background(Color.Transparent)
-                    )
-                }
-            ) {
+            TabRow(selectedTabIndex = selectedTabIndex, indicator = { _, _ ->
+                Box(
+                    modifier = Modifier
+                        .clip(MaterialTheme.shapes.small)
+                        .background(Color.Transparent)
+                )
+            }) {
                 NavigationTabItem(item = MenuData.settingsItem,
                     isSelected = selectedId == MenuData.settingsItem.id,
                     onMenuSelected = {
                         onMenuSelected?.invoke(MenuData.settingsItem)
                     })
                 MenuData.menuItems.forEachIndexed { index, menuItem ->
-                    if(menuItem.id != NestedScreens.Search.title){
-                        NavigationTabItem(
-                            item = menuItem,
+                    if (menuItem.id != NestedScreens.Search.title) {
+                        NavigationTabItem(item = menuItem,
                             isSelected = selectedId == menuItem.id,
                             onMenuSelected = {
                                 selectedTabIndex = index
@@ -82,7 +81,8 @@ fun HomeTopBar(
                             })
                     }
                 }
-                NavigationTabItem(item = searchItem,
+                NavigationTabItem(
+                    item = searchItem,
                     isSelected = selectedId == searchItem.id,
                     onMenuSelected = {
                         onMenuSelected?.invoke(searchItem)
@@ -94,15 +94,13 @@ fun HomeTopBar(
             )
         }
         Box(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
             content()
         }
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun TabRowScope.NavigationTabItem(
     item: MenuItem,
@@ -110,46 +108,59 @@ fun TabRowScope.NavigationTabItem(
     enabled: Boolean = true,
     onMenuSelected: ((menuItem: MenuItem) -> Unit)?
 ) {
+
+    val mutableInteractionSource = remember { MutableInteractionSource() }
+    val isFocused by mutableInteractionSource.collectIsFocusedAsState()
+
     Tab(
-        selected = isSelected, enabled = enabled,
-        onFocus = {
+        selected = isSelected,
+        enabled = enabled,
+        onClick = {
             onMenuSelected?.invoke(item)
         },
+        onFocus = {},
+        interactionSource = mutableInteractionSource,
         colors = TabDefaults.pillIndicatorTabColors(
-            selectedContentColor = MaterialTheme.colorScheme.onBackground,
-            focusedSelectedContentColor = if (item.id == NestedScreens.Settings.title)  MaterialTheme.colorScheme.inverseSurface else  MaterialTheme.colorScheme.onPrimary
+            selectedContentColor = MaterialTheme.colorScheme.onSurface,
+            focusedContentColor = MaterialTheme.colorScheme.surface,
         ),
         modifier = Modifier
-            .clip(if (item.id == NestedScreens.Settings.title) CircleShape else MaterialTheme.shapes.small)
+            .padding(horizontal = 8.dp)
             .background(
-                if (isSelected) MaterialTheme.colorScheme.onSurfaceVariant else Color.Transparent
+                when {
+                    isFocused -> MaterialTheme.colorScheme.inverseSurface
+                    isSelected -> MaterialTheme.colorScheme.surfaceVariant.copy(
+                        alpha = 0.5f
+                    )
+                    else -> Color.Transparent
+                }, if (item.isCircleIcon()) CircleShape else MaterialTheme.shapes.extraLarge
             )
     ) {
         when (item.id) {
-            NestedScreens.Search.title ->
-                Box(modifier = Modifier.size(36.dp), contentAlignment = Alignment.Center) {
-                    item.icon?.let {icon ->
-                        Icon(
-                            modifier = Modifier.size(24.dp),
-                            imageVector = icon,
-                            contentDescription = item.text,
-                        )
-                    }
+            NestedScreens.Search.title -> Box(
+                modifier = Modifier.size(36.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                item.icon?.let { icon ->
+                    Icon(
+                        modifier = Modifier.size(24.dp),
+                        imageVector = icon,
+                        contentDescription = item.text,
+                    )
                 }
+            }
 
             NestedScreens.Settings.title -> Box(modifier = Modifier.size(36.dp)) {
                 ProfilePicture()
             }
 
             else -> Text(
-                item.text,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                item.text, modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             )
         }
     }
 }
 
-@OptIn(ExperimentalTvMaterial3Api::class)
 @Preview
 @Composable
 fun HomeTopBarPrev() {
