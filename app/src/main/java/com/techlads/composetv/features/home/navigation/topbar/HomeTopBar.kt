@@ -47,6 +47,7 @@ fun HomeTopBar(
     onMenuSelected: ((menuItem: MenuItem) -> Unit)?
 ) {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
+    val searchItem = MenuData.menuItems[1]
 
     Column {
         Row(
@@ -68,18 +69,24 @@ fun HomeTopBar(
                 NavigationTabItem(item = MenuData.settingsItem,
                     isSelected = selectedId == MenuData.settingsItem.id,
                     onMenuSelected = {
-//                        selectedTabIndex = index
                         onMenuSelected?.invoke(MenuData.settingsItem)
                     })
-                MenuData.topBarMenuItems.forEachIndexed { index, menuItem ->
-                    NavigationTabItem(
-                        item = menuItem,
-                        isSelected = selectedId == menuItem.id,
-                        onMenuSelected = {
-                            selectedTabIndex = index
-                            onMenuSelected?.invoke(it)
-                        })
+                MenuData.menuItems.forEachIndexed { index, menuItem ->
+                    if(menuItem.id != NestedScreens.Search.title){
+                        NavigationTabItem(
+                            item = menuItem,
+                            isSelected = selectedId == menuItem.id,
+                            onMenuSelected = {
+                                selectedTabIndex = index
+                                onMenuSelected?.invoke(it)
+                            })
+                    }
                 }
+                NavigationTabItem(item = searchItem,
+                    isSelected = selectedId == searchItem.id,
+                    onMenuSelected = {
+                        onMenuSelected?.invoke(searchItem)
+                    })
             }
             Text(
                 text = stringResource(id = R.string.app_name),
@@ -109,25 +116,25 @@ fun TabRowScope.NavigationTabItem(
             onMenuSelected?.invoke(item)
         },
         colors = TabDefaults.pillIndicatorTabColors(
-            selectedContentColor = Color.Black,
-            focusedSelectedContentColor = if (item.id != NestedScreens.Settings.title) Color.Black else Color.White
+            selectedContentColor = MaterialTheme.colorScheme.onBackground,
+            focusedSelectedContentColor = if (item.id == NestedScreens.Settings.title)  MaterialTheme.colorScheme.inverseSurface else  MaterialTheme.colorScheme.onPrimary
         ),
         modifier = Modifier
             .clip(if (item.id == NestedScreens.Settings.title) CircleShape else MaterialTheme.shapes.small)
             .background(
-                if (isSelected) Color.White.copy(
-                    alpha = 0.7f
-                ) else Color.Transparent
+                if (isSelected) MaterialTheme.colorScheme.onSurfaceVariant else Color.Transparent
             )
     ) {
         when (item.id) {
             NestedScreens.Search.title ->
                 Box(modifier = Modifier.size(36.dp), contentAlignment = Alignment.Center) {
-                    Icon(
-                        modifier = Modifier.size(24.dp),
-                        imageVector = item.icon ?: return@Tab,
-                        contentDescription = item.text,
-                    )
+                    item.icon?.let {icon ->
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            imageVector = icon,
+                            contentDescription = item.text,
+                        )
+                    }
                 }
 
             NestedScreens.Settings.title -> Box(modifier = Modifier.size(36.dp)) {
