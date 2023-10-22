@@ -5,6 +5,7 @@ import android.view.View
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DefaultDataSource.Factory
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
@@ -12,7 +13,7 @@ import com.techlads.player.domain.TLPlayer
 import com.techlads.player.domain.state.PlayerStateListener
 import java.lang.ref.WeakReference
 
-internal class ExoPlayerImpl(
+@UnstableApi internal class ExoPlayerImpl(
     private val context: WeakReference<Context>,
     private val player: ExoPlayer,
     private val providePlayerView: () -> View

@@ -13,10 +13,13 @@ import com.techlads.composetv.features.settings.SettingsScreen
 import com.techlads.composetv.features.songs.SongsScreen
 import com.techlads.composetv.navigation.tabEnterTransition
 import com.techlads.composetv.navigation.tabExitTransition
+import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NestedHomeScreenNavigation(
+    usedTopBar: StateFlow<Boolean>,
+    toggleTopBar: () -> Unit,
     navController: NavHostController,
     onItemClick: (parent: Int, child: Int) -> Unit,
     onSongClick: () -> Unit
@@ -62,7 +65,7 @@ fun NestedHomeScreenNavigation(
             NestedScreens.Settings.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            SettingsScreen()
+            SettingsScreen(toggleTopBar = toggleTopBar, usedTopBar = usedTopBar)
         }
     }
 }
