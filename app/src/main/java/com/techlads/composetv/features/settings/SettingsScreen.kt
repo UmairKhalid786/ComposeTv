@@ -17,18 +17,23 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.features.settings.navigation.NestedSettingsScreenNavigation
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalTvMaterial3Api::class)
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(usedTopBar: StateFlow<Boolean>, toggleTopBar: () -> Unit) {
     val navController = rememberAnimatedNavController()
+//    val homeViewModel: HomeViewModel = remember { HomeViewModel() }
 
     Row(
         Modifier
             .fillMaxSize(),
     ) {
         SettingsMenu(
-            Modifier
+            usedTopBar = usedTopBar,
+            toggleTopBar = {toggleTopBar()},
+            modifier = Modifier
                 .fillMaxHeight()
                 .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.2f))
                 .padding(vertical = 32.dp, horizontal = 16.dp),
@@ -47,5 +52,5 @@ fun SettingsNavigation(navController: NavHostController) {
 @Preview
 @Composable
 fun SettingsScreenPrev() {
-    SettingsScreen()
+    SettingsScreen(MutableStateFlow(false)){}
 }

@@ -13,6 +13,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor() : ViewModel() {
     val menuItems: StateFlow<List<MenuItem>> = MutableStateFlow(emptyList())
     val menuState: StateFlow<Boolean> = MutableStateFlow(false)
+    private val _usedTopBar: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val usedTopBar: StateFlow<Boolean> = _usedTopBar
 
     init {
         menuItems.toMutable().value = MenuData.menuItems
@@ -24,5 +26,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
 
     fun menuOpen() {
         menuState.toMutable().value = true
+    }
+
+    fun toggleTopBar(){
+        _usedTopBar.value = !_usedTopBar.value
     }
 }

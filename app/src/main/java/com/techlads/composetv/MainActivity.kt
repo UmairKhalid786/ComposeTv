@@ -3,12 +3,14 @@ package com.techlads.composetv
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.techlads.composetv.features.home.HomeViewModel
 import com.techlads.composetv.navigation.AppNavigation
 import com.techlads.composetv.theme.ComposeTvTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,8 +25,8 @@ class MainActivity : ComponentActivity() {
             val displayDialog = remember {
                 mutableStateOf(false)
             }
-
-            App(navController = rememberAnimatedNavController())
+            val homeViewModel: HomeViewModel by viewModels()
+            App(navController = rememberAnimatedNavController(), homeViewModel = homeViewModel)
 
             registerOnBackPress {
                 displayDialog.value = true
@@ -39,9 +41,9 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun App(navController: NavHostController) {
+    fun App(navController: NavHostController, homeViewModel: HomeViewModel) {
         ComposeTvTheme {
-            AppNavigation(navController)
+            AppNavigation(navController, homeViewModel)
         }
     }
 }

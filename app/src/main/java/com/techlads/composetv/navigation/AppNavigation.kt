@@ -12,6 +12,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.techlads.composetv.features.details.ProductDetailsScreen
 import com.techlads.composetv.features.home.HomeScreen
+import com.techlads.composetv.features.home.HomeViewModel
 import com.techlads.composetv.features.login.withEmailPassword.LoginScreen
 import com.techlads.composetv.features.login.withToken.DeviceTokenAuthenticationScreen
 import com.techlads.composetv.features.mp3.player.AudioPlayerScreen
@@ -20,7 +21,7 @@ import com.techlads.composetv.features.wiw.WhoIsWatchingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AppNavigation(navController: NavHostController) {
+fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel) {
     AnimatedNavHost(navController = navController, startDestination = Screens.LoginToken.title) {
         // e.g will add auth routes here if when we will extend project
         composable(
@@ -57,7 +58,7 @@ fun AppNavigation(navController: NavHostController) {
 
         composable(
             Screens.Home.title,) {
-            HomeScreen({ _, _ ->
+            HomeScreen(homeViewModel, { _, _ ->
                 navController.navigate(Screens.ProductDetail.title)
             }) {
                 navController.navigate(Screens.Mp3Player.title)

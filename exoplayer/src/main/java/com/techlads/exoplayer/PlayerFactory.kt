@@ -3,13 +3,14 @@ package com.techlads.exoplayer
 import android.content.Context
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.techlads.player.domain.TLPlayer
 import java.lang.ref.WeakReference
 
-object PlayerFactory {
+@UnstableApi object PlayerFactory {
 
     fun create(
         context: Context
