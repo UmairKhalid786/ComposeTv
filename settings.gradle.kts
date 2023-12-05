@@ -15,7 +15,7 @@ dependencyResolutionManagement {
         maven { url = uri("https://jitpack.io") }
     }
 }
-
+ 
 rootProject.name = "Compose TV"
 include(":app", ":player", ":exoplayer")
 include(":benchmark")
