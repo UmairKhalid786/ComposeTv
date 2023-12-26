@@ -31,4 +31,3 @@
 - Follow Hackfest [guidlines](https://hacktoberfest.com/participation/#pr-mr-details)
 - Follow Project [Readme](CONTRIBUTING.md) for contributions
 - Or you can join our slack [channel](https://join.slack.com/t/composetv/shared_invite/zt-25jcxo9df-xpzHivjLGC~Gohsf4zFBxA) 
-
