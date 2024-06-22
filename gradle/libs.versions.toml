@@ -24,6 +24,7 @@ timber = "5.0.1"
 hilt = "2.45"
 datastore-preferences = "1.0.0"
 tv-compose = "1.0.0-alpha10"
+tv-compose-material = "1.0.0-beta01"
 line_awesome = "1.0.0"
 compose_bom = "2023.09.00"
 media3 = "1.1.1"
@@ -44,7 +45,7 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
 
 androidx-tv-foundation = { module = "androidx.tv:tv-foundation", version.ref = "tv-compose" }
-androidx-tv-material = { module = "androidx.tv:tv-material", version.ref = "tv-compose" }
+androidx-tv-material = { module = "androidx.tv:tv-material", version.ref = "tv-compose-material" }
 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose_bom" }
 compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended" }
