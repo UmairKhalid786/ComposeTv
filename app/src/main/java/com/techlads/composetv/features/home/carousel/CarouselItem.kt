@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
+import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.BorderedFocusableItem
 import com.techlads.utils.testing.tagForItem
 
@@ -65,12 +66,16 @@ fun VerticalCarouselItem(parent: Int, child: Int, onItemFocus: (parent: Int, chi
 @Preview
 @Composable
 fun CarouselItemPrev() {
-    CarouselItem(Modifier,1, 1, onItemClick = { _, _ -> }, onItemFocus = { _, _ -> })
+    ComposeTvTheme {
+        CarouselItem(Modifier, 1, 1, onItemClick = { _, _ -> }, onItemFocus = { _, _ -> })
+    }
 }
 
 @Preview
 @Composable
 fun VerticalCarouselItemPrev() {
-    VerticalCarouselItem(1, 1) { _, _ ->
+    ComposeTvTheme {
+        VerticalCarouselItem(1, 1) { _, _ ->
+        }
     }
 }

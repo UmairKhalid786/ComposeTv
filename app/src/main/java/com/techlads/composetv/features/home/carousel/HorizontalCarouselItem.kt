@@ -17,8 +17,8 @@ import androidx.tv.material3.Text
 @Composable
 fun HorizontalCarouselItem(
     parent: Int,
-    onItemFocus: (child: Int, parent: Int) -> Unit,
-    onItemClick: (child: Int, parent: Int) -> Unit,
+    onItemFocus: (parent: Int, child: Int) -> Unit,
+    onItemClick: (parent: Int, child: Int) -> Unit,
 ) {
     Column(Modifier.height(150.dp)) {
         Text(text = "Row $parent", modifier = Modifier.padding(horizontal = 24.dp))
