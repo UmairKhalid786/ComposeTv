@@ -40,11 +40,10 @@ fun BorderedFocusableItem(
     shape: ClickableSurfaceShape = CardItemDefaults.shape(borderRadius = borderRadius),
     color : Color = MaterialTheme.colorScheme.surface,
     onClick: () -> Unit,
-    interactionSource: MutableInteractionSource? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable (BoxScope.() -> Unit)
 ) {
-    val intSource = interactionSource ?: remember { MutableInteractionSource() }
-    val isFocused by intSource.collectIsFocusedAsState()
+    val isFocused by interactionSource.collectIsFocusedAsState()
 
     val animatedFloat = remember { Animatable(1f) }
     val scope = rememberCoroutineScope()
@@ -77,9 +76,8 @@ fun BorderedFocusableItem(
         border = border ?: CardItemDefaults.border(borderRadius, MaterialTheme.colorScheme.inverseSurface.copy(alpha = animatedFloat.value)),
         shape = shape,
         colors = ClickableSurfaceDefaults.colors(containerColor = color, focusedContainerColor = color),
-        modifier = modifier
-            .fillMaxWidth(),
-        interactionSource = intSource
+        modifier = modifier.fillMaxWidth(),
+        interactionSource = interactionSource
     ) {
         content()
     }
