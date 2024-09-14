@@ -10,6 +10,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.KeyboardBackspace
@@ -28,11 +33,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import androidx.tv.foundation.lazy.grid.TvGridCells
-import androidx.tv.foundation.lazy.grid.TvGridItemSpan
-import androidx.tv.foundation.lazy.grid.TvLazyVerticalGrid
-import androidx.tv.foundation.lazy.grid.items
-import androidx.tv.foundation.lazy.list.TvLazyColumn
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
@@ -53,7 +53,7 @@ fun MiniKeyboard(modifier: Modifier) {
     }
 
     Row(modifier = Modifier.padding(8.dp)) {
-        TvLazyVerticalGrid(
+        LazyVerticalGrid(
             modifier = modifier
                 .onSizeChanged {
                     sizeInDp = density.run {
@@ -63,17 +63,17 @@ fun MiniKeyboard(modifier: Modifier) {
                         )
                     }
                 },
-            columns = TvGridCells.Fixed(7),
+            columns = GridCells.Fixed(7),
         ) {
             items(KeysGenerator.alphabet.value + KeysGenerator.specialCharV1.value) {
                 KeyItem(key = it)
             }
-            item(span = { TvGridItemSpan(2) }) {
+            item(span = { GridItemSpan(2) }) {
                 KeyItem(modifier = Modifier.aspectRatio(2f)) {
                     Icon(imageVector = Icons.Default.SpaceBar, contentDescription = "Backspace")
                 }
             }
-            item(span = { TvGridItemSpan(2) }) {
+            item(span = { GridItemSpan(2) }) {
                 KeyItem(modifier = Modifier.aspectRatio(2f)) {
                     Icon(
                         imageVector = Icons.Default.KeyboardBackspace,
@@ -81,7 +81,7 @@ fun MiniKeyboard(modifier: Modifier) {
                     )
                 }
             }
-            item(span = { TvGridItemSpan(2) }) {
+            item(span = { GridItemSpan(2) }) {
                 KeyItem(modifier = Modifier.aspectRatio(2f)) {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -90,7 +90,7 @@ fun MiniKeyboard(modifier: Modifier) {
                 }
             }
         }
-        TvLazyColumn {
+        LazyColumn {
             item {
                 KeyItem(
                     modifier = Modifier

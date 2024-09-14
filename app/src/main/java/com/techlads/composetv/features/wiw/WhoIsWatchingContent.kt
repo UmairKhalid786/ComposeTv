@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,8 +45,6 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.tv.foundation.PivotOffsets
-import androidx.tv.foundation.lazy.list.TvLazyRow
 import androidx.tv.material3.Border
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
@@ -118,10 +117,9 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
 
             Spacer(modifier = Modifier.size(68.dp))
 
-            TvLazyRow(
-                contentPadding = PaddingValues(horizontal = containerWidth / 2),
+            LazyRow(
+                contentPadding = PaddingValues(vertical = 32.dp),
                 horizontalArrangement = Arrangement.Center,
-                pivotOffsets = PivotOffsets(0.5f, 0.5f),
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 items(avatarList.size) {

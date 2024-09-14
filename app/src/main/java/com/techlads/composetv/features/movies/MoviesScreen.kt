@@ -4,14 +4,14 @@ package com.techlads.composetv.features.movies
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.tv.foundation.lazy.grid.TvGridCells
-import androidx.tv.foundation.lazy.grid.TvGridItemSpan
-import androidx.tv.foundation.lazy.grid.TvLazyVerticalGrid
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 import com.techlads.composetv.features.home.carousel.VerticalCarouselItem
@@ -23,13 +23,13 @@ fun MoviesScreen(onItemFocus: (parent: Int, child: Int) -> Unit) {
 
 @Composable
 fun MoviesGrid(modifier: Modifier, onItemFocus: (parent: Int, child: Int) -> Unit) {
-    TvLazyVerticalGrid(
+    LazyVerticalGrid(
         modifier = modifier,
-        columns = TvGridCells.Fixed(5),
+        columns = GridCells.Fixed(5),
         contentPadding = PaddingValues(start = 24.dp, top = 24.dp, end = 24.dp, bottom = 48.dp),
     ) {
         item(span = {
-            TvGridItemSpan(5)
+            GridItemSpan(5)
         }) {
             GridHeader()
         }

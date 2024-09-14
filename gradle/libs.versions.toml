@@ -23,8 +23,7 @@ qr_code = "1.5.3"
 timber = "5.0.1"
 hilt = "2.45"
 datastore-preferences = "1.0.0"
-tv-compose = "1.0.0-alpha10"
-tv-compose-material = "1.0.0-beta01"
+tv-compose-material = "1.0.0"
 line_awesome = "1.0.0"
 compose_bom = "2023.09.00"
 media3 = "1.1.1"
@@ -44,7 +43,6 @@ profileinstaller = "1.3.0"
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-corektx" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
 
-androidx-tv-foundation = { module = "androidx.tv:tv-foundation", version.ref = "tv-compose" }
 androidx-tv-material = { module = "androidx.tv:tv-material", version.ref = "tv-compose-material" }
 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose_bom" }
@@ -78,7 +76,7 @@ profileinstaller = { group = "androidx.profileinstaller", name = "profileinstall
 
 
 [bundles]
-compose-tv = [ "androidx-tv-foundation", "androidx-tv-material" ]
+compose-tv = [ "androidx-tv-material" ]
 androidx-compose-bom = ["compose-material3", "compose-material-iconsExtended", "compose-ui-tooling-preview"]
 compose-accompanist = [ "accompanist-navigation-animation", "accompanist-placeholder" ]
 media3 = [ "media3-exoplayer", "media3-ui" ]

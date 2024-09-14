@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,9 +25,6 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.tv.foundation.lazy.grid.TvGridCells
-import androidx.tv.foundation.lazy.grid.TvLazyVerticalGrid
-import androidx.tv.foundation.lazy.list.TvLazyRow
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
@@ -47,7 +47,7 @@ fun RecentHistory(modifier: Modifier = Modifier, onSongClick: () -> Unit) {
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(horizontal = 32.dp),
         )
-        TvLazyRow(contentPadding = PaddingValues(horizontal = 32.dp, vertical = 8.dp)) {
+        LazyRow(contentPadding = PaddingValues(horizontal = 32.dp, vertical = 8.dp)) {
             items(12) {
                 BorderedFocusableItem(
                     onClick = onSongClick,
@@ -76,9 +76,9 @@ fun SongCategories(modifier: Modifier = Modifier) {
 
 @Composable
 fun TagsList(modifier: Modifier = Modifier) {
-    TvLazyVerticalGrid(
+    LazyVerticalGrid(
         contentPadding = PaddingValues(horizontal = 32.dp, vertical = 8.dp),
-        columns = TvGridCells.Fixed(3),
+        columns = GridCells.Fixed(3),
         modifier = modifier.fillMaxSize()
     ) {
         items(6) {
