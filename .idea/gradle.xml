@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/benchmark" />
             <option value="$PROJECT_DIR$/exoplayer" />
             <option value="$PROJECT_DIR$/player" />
-            <option value="$PROJECT_DIR$/utils" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

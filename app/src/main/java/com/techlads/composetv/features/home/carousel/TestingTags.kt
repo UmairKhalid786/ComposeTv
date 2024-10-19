@@ -1,4 +1,4 @@
-package com.techlads.utils.testing
+package com.techlads.composetv.features.home.carousel
 
 const val SKIP_TAG = "Skip"
 const val HERO_ITEM_TAG = "hero_item"

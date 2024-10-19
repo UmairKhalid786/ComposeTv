@@ -9,8 +9,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Direction
 import androidx.test.uiautomator.Until
-import com.techlads.utils.testing.SECTIONS_LIST_TAG
-import com.techlads.utils.testing.SKIP_TAG
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,8 +32,8 @@ class ComposeScrollPerformanceBenchmark {
             startActivityAndWait()
 
             device.waitForIdle(1000)
-            device.wait(Until.hasObject(By.res(SKIP_TAG)), 10_000)
-            device.findObject(By.res(SKIP_TAG)).click()
+            device.wait(Until.hasObject(By.res("Skip")), 10_000)
+            device.findObject(By.res("Skip")).click()
 
         }
     ) {
@@ -46,9 +44,9 @@ class ComposeScrollPerformanceBenchmark {
 
         device.waitForIdle(1000)
 
-        device.wait(Until.hasObject(By.res(SECTIONS_LIST_TAG)), 10_000)
+        device.wait(Until.hasObject(By.res("sections_list")), 10_000)
 
-        val recycler = device.findObject(By.res(SECTIONS_LIST_TAG))
+        val recycler = device.findObject(By.res("sections_list"))
         // Set gesture margin to avoid triggering gesture navigation
         // with input events from automation.
         recycler.setGestureMargin(device.displayWidth / 5)

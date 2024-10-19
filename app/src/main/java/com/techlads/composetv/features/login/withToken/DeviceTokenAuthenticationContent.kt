@@ -39,9 +39,9 @@ import com.github.alexzhirkevich.customqrgenerator.vector.QrCodeDrawable
 import com.github.alexzhirkevich.customqrgenerator.vector.QrVectorOptions
 import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColor
 import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColors
+import com.techlads.composetv.features.home.carousel.SKIP_TAG
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.TvButton
-import com.techlads.utils.testing.SKIP_TAG
 
 @Composable
 fun DeviceTokenAuthenticationContent(

@@ -7,7 +7,6 @@ import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
-import com.techlads.utils.testing.SKIP_TAG
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,7 +30,7 @@ class HomeLaunchBenchmark {
 }
 
 fun MacrobenchmarkScope.login() {
-    device.wait(Until.hasObject(By.res(SKIP_TAG)), 1000)
+    device.wait(Until.hasObject(By.res("Skip")), 1000)
 
-    assert(device.hasObject(By.res(SKIP_TAG)))
+    assert(device.hasObject(By.res("Skip")))
 }

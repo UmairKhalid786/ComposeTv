@@ -13,7 +13,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.techlads.composetv.utils.fadingEdge
-import com.techlads.utils.testing.SECTIONS_LIST_TAG
 
 @Composable
 fun HomeCarousel(
