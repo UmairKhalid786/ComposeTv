@@ -27,6 +27,21 @@ android {
  
     targetProjectPath = ":app"
 
+    testOptions {
+        managedDevices {
+            localDevices {
+                create("androidTVapi34") {
+                    // Use device profiles you typically see in Android Studio.
+                    device = "Android TV"
+                    // Use only API levels 27 and higher.
+                    apiLevel = 34
+                    // To include Google services, use "google".
+                    systemImageSource = "aosp-atd"
+                }
+            }
+        }
+    }
+
 }
 
 // This is the configuration block for the Baseline Profile plugin.
