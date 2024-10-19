@@ -25,8 +25,8 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
+import com.techlads.composetv.features.home.carousel.HERO_ITEM_TAG
 import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.utils.testing.HERO_ITEM_TAG
 
 @Composable
 fun HeroItem(modifier: Modifier = Modifier) {

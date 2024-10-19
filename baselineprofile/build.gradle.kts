@@ -10,12 +10,12 @@ android {
     compileSdk = 34
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     defaultConfig {
@@ -26,22 +26,6 @@ android {
     }
  
     targetProjectPath = ":app"
-
-    testOptions {
-        managedDevices {
-            localDevices {
-                create("androidTVapi34") {
-                    // Use device profiles you typically see in Android Studio.
-                    device = "Android TV"
-                    // Use only API levels 27 and higher.
-                    apiLevel = 34
-                    // To include Google services, use "google".
-                    systemImageSource = "aosp-atd"
-                }
-            }
-        }
-    }
-
 }
 
 // This is the configuration block for the Baseline Profile plugin.

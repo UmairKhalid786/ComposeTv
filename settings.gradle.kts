@@ -20,4 +20,3 @@ rootProject.name = "Compose TV"
 include(":app", ":player", ":exoplayer")
 include(":benchmark")
 include(":baselineprofile")
-include(":utils")

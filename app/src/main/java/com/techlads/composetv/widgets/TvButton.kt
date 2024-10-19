@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class)
-
 package com.techlads.composetv.widgets
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -17,7 +15,6 @@ import androidx.tv.material3.ButtonDefaults
 import androidx.tv.material3.ButtonGlow
 import androidx.tv.material3.ButtonScale
 import androidx.tv.material3.ButtonShape
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 
 @Composable
 fun TvButton(

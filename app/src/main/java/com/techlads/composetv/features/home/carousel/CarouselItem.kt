@@ -18,7 +18,6 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.BorderedFocusableItem
-import com.techlads.utils.testing.tagForItem
 
 @Composable
 fun CarouselItem(

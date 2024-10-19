@@ -40,7 +40,6 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":utils")))
     implementation(libs.androidx.test.ext.junit)
     implementation(libs.androidx.test.espresso.core)
     implementation(libs.uiautomator)

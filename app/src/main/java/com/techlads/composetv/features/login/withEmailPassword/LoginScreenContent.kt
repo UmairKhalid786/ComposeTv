@@ -43,13 +43,17 @@ fun LoginPage(
 
         ScreenHeading("LOGIN")
         Spacer(modifier = Modifier.height(20.dp))
-        TvTextField(value = username.value, label = "Username") {
+        TvTextField(
+            value = username.value, placeholder = "Username",
+            modifier = Modifier.fillMaxWidth(),
+        ) {
             username.value = it
         }
         Spacer(modifier = Modifier.height(20.dp))
         TvTextField(
+            modifier = Modifier.fillMaxWidth(),
             value = password.value,
-            label = "Password",
+            placeholder = "Password",
             visualTransformation = PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password,
         ) { password.value = it }

@@ -7,36 +7,36 @@ minSdk = "23"
 minSdkTv = "21"
 
 # Plugin Versions
-kotlin = "1.9.10"
+kotlin = "2.0.0"
 androidComposeCompiler = "1.5.3"
 androidLibrary = "7.4.1"
-androidGradlePlugin = "8.1.1"
+androidGradlePlugin = "8.7.0"
 detekt = "1.23.0"
 
 # Library Versions
-androidx-activity-compose = "1.7.0"
-androidx-corektx = "1.12.0"
+androidx-activity-compose = "1.9.3"
+androidx-corektx = "1.13.1"
 accompanist = "0.31.0-alpha"
-androidx-lifecycle = "2.6.1"
-androidxHiltNavigationCompose = "1.1.0-alpha01"
+androidx-lifecycle = "2.8.6"
+androidxHiltNavigationCompose = "1.2.0"
 qr_code = "1.5.3"
 timber = "5.0.1"
-hilt = "2.45"
-datastore-preferences = "1.0.0"
+hilt = "2.52"
+datastore-preferences = "1.1.1"
 tv-compose-material = "1.0.0"
 line_awesome = "1.0.0"
-compose_bom = "2023.09.00"
-media3 = "1.1.1"
-media3Ui = "1.1.1"
+compose_bom = "2024.10.00"
+media3 = "1.4.1"
+media3Ui = "1.4.1"
 
 # Test Library Versions
 junit = "4.13.2"
-androidx-test-espresso = "3.4.0"
-androidx-test-ext-junit = "1.1.3"
-uiautomator = "2.2.0"
-benchmark-macro-junit4 = "1.2.0-beta01"
-androidx-baselineprofile = "1.2.0-beta01"
-profileinstaller = "1.3.0"
+androidx-test-espresso = "3.6.1"
+androidx-test-ext-junit = "1.2.1"
+uiautomator = "2.3.0"
+benchmark-macro-junit4 = "1.3.3"
+androidx-baselineprofile = "1.3.3"
+profileinstaller = "1.4.1"
 
 
 [libraries]
@@ -88,6 +88,7 @@ android-library = { id = "com.android.library", version.ref = "androidLibrary" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 androidTest = { id = "com.android.test", version.ref = "androidGradlePlugin" }

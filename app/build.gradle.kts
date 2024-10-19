@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.androidx.baselineprofile)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -54,10 +55,24 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+//
+//    testOptions {
+//        managedDevices {
+//            localDevices {
+//                create("androidTVapi34") {
+//                    // Use device profiles you typically see in Android Studio.
+//                    device = "Android TV"
+//                    // Use only API levels 27 and higher.
+//                    apiLevel = 34
+//                    // To include Google services, use "google".
+//                    systemImageSource = "aosp-atd"
+//                }
+//            }
+//        }
+//    }
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":utils")))
     implementation(project(mapOf("path" to ":player")))
     implementation(project(mapOf("path" to ":exoplayer")))
 
