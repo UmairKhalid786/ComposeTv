@@ -55,21 +55,21 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-//
-//    testOptions {
-//        managedDevices {
-//            localDevices {
-//                create("androidTVapi34") {
-//                    // Use device profiles you typically see in Android Studio.
-//                    device = "Android TV"
-//                    // Use only API levels 27 and higher.
-//                    apiLevel = 34
-//                    // To include Google services, use "google".
-//                    systemImageSource = "aosp-atd"
-//                }
-//            }
-//        }
-//    }
+
+    testOptions {
+        managedDevices {
+            localDevices {
+                create("pixelTabletapi34") {
+                    // Use device profiles you typically see in Android Studio.
+                    device = "Pixel Tablet"
+                    // Use only API levels 27 and higher.
+                    apiLevel = 31
+                    // To include Google services, use "google".
+                    systemImageSource = "aosp-atd"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
