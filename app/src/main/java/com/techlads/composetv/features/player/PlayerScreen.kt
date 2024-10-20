@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -43,7 +43,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
     }
 
     val coroutineScope = rememberCoroutineScope()
-    var contentCurrentPosition: Long by remember { mutableStateOf(0L) }
+    var contentCurrentPosition: Long by remember { mutableLongStateOf(0L) }
     val videoPlayerState = rememberVideoPlayerState(hideSeconds = 4, coroutineScope)
 
     val stateListener = remember {
@@ -69,24 +69,23 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
     }
 
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        DisposableEffect(
-            AndroidView(
-                modifier = Modifier
-                    .handleDPadKeyEvents(
-                        onEnter = {
-                            if (!videoPlayerState.isDisplayed) {
-                                coroutineScope.launch {
-                                    videoPlayerState.showControls()
-                                }
+        AndroidView(
+            modifier = Modifier
+                .handleDPadKeyEvents(
+                    onEnter = {
+                        if (!videoPlayerState.isDisplayed) {
+                            coroutineScope.launch {
+                                videoPlayerState.showControls()
                             }
-                        },
-                    )
-                    .focusable(),
-                factory = {
-                    player.getView()
-                },
-            ),
-        ) {
+                        }
+                    },
+                )
+                .focusable(),
+            factory = {
+                player.getView()
+            },
+        )
+        DisposableEffect(Unit) {
             onDispose { player.release() }
         }
         PlayerControls(

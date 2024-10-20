@@ -10,7 +10,8 @@ import androidx.media3.ui.PlayerView
 import com.techlads.player.domain.TLPlayer
 import java.lang.ref.WeakReference
 
-@UnstableApi object PlayerFactory {
+@UnstableApi
+object PlayerFactory {
 
     fun create(
         context: Context
