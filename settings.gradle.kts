@@ -17,6 +17,8 @@ dependencyResolutionManagement {
 }
  
 rootProject.name = "Compose TV"
-include(":app", ":player", ":exoplayer")
+include(":app")
+include(":exoplayer")
+include(":player")
 include(":benchmark")
 include(":baselineprofile")

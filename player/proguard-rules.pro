@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# If there are specific methods or classes being referenced, add them similarly:
+-keep class com.techlads.player.domain.** { *; }

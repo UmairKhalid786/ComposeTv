@@ -20,8 +20,5 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-# Keep the PlayerFactory class and all its methods
--keep class com.techlads.exoplayer.PlayerFactory { *; }
-
-# If there are specific methods or classes being referenced, add them similarly:
 -keep class com.techlads.exoplayer.** { *; }
+-dontwarn java.lang.invoke.StringConcatFactory
