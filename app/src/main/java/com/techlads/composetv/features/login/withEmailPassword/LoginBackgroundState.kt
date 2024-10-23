@@ -1,12 +1,13 @@
 package com.techlads.composetv.features.login.withEmailPassword
 
-import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import coil.ImageLoader
 import coil.request.ImageRequest
@@ -19,24 +20,18 @@ class LoginBackgroundState(
     private val coilImageLoader: ImageLoader,
     private val coilBuilder: ImageRequest.Builder,
 ) {
-    val drawable by lazy { mutableStateOf<Bitmap?>(null) }
+    val drawable by lazy { mutableStateOf<ImageBitmap?>(null) }
     private var job: Deferred<ImageResult>? = null
 
-    fun load(url: String, onSuccess : () -> Unit, onError : () -> Unit) {
+    fun load(url: String, onSuccess: () -> Unit = {}, onError: () -> Unit = {}) {
         job?.cancel()
 
-        val request = coilBuilder
-            .data(url)
-            .target(
-                onSuccess = { result ->
-                    drawable.value = (result as? BitmapDrawable)?.bitmap
-                    onSuccess()
-                },
-                onError = {
-                    onError()
-                }
-            )
-            .build()
+        val request = coilBuilder.data(url).target(onSuccess = { result ->
+                drawable.value = (result as? BitmapDrawable)?.bitmap?.asImageBitmap()
+                onSuccess()
+            }, onError = {
+                onError()
+            }).build()
 
         job = coilImageLoader.enqueue(request).job
     }
@@ -45,7 +40,8 @@ class LoginBackgroundState(
 data class Movie(
     val title: String,
     val details: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val metadata: String
 )
 
 

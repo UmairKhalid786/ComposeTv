@@ -22,6 +22,7 @@ fun NestedHomeScreenNavigation(
     toggleTopBar: () -> Unit,
     navController: NavHostController,
     onItemClick: (parent: Int, child: Int) -> Unit,
+    onItemFocus: (parent: Int, child: Int) -> Unit,
     onSongClick: () -> Unit
 ) {
     AnimatedNavHost(navController = navController, startDestination = NestedScreens.Home.title) {
@@ -30,7 +31,7 @@ fun NestedHomeScreenNavigation(
             NestedScreens.Home.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            HomeNestedScreen(onItemFocus = { _, _ -> }, onItemClick = onItemClick)
+            HomeNestedScreen(onItemFocus = onItemFocus, onItemClick = onItemClick)
         }
 
         composable(
