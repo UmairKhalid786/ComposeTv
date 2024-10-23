@@ -4,6 +4,12 @@
 ### Who is Watching
 ![Screenshot_20230819_235634](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/8006239f-d080-4610-bf73-22d026b81109)
 
+### Login
+https://github.com/user-attachments/assets/b4633b2a-420e-480a-b209-ae3c39d52cf9
+
+### Home Carousel 
+https://github.com/user-attachments/assets/f18043eb-3e18-413b-906e-18d5b38ed9b5
+
 ### Search
 ![Screenshot_20230913_002726](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/50ea76e5-ae63-4769-b978-a2cf3882670b)
 
