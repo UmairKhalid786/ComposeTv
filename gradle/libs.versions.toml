@@ -28,6 +28,7 @@ line_awesome = "1.0.0"
 compose_bom = "2024.10.00"
 media3 = "1.4.1"
 media3Ui = "1.4.1"
+coil = "2.4.0"
 
 # Test Library Versions
 junit = "4.13.2"
@@ -74,6 +75,8 @@ uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", versi
 benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmark-macro-junit4" }
 profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
 
+coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
 [bundles]
 compose-tv = [ "androidx-tv-material" ]

@@ -1,19 +1,34 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class)
-
 package com.techlads.composetv.features.login.withEmailPassword
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -23,18 +38,79 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.TvButton
+import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.seconds
+
+val movies = listOf(
+    Movie(
+        title = "Movie 1",
+        details = "This is a sample movie description.",
+        imageUrl = "https://images.unsplash.com/photo-1729433321272-9243b22c5f6e"
+    ), Movie(
+        title = "Movie 2",
+        details = "Another sample movie description.",
+        imageUrl = "https://images.unsplash.com/photo-1719937206094-8de79c912f40"
+    ), Movie(
+        title = "Venom 3",
+        details = "Venom 3 movie description.",
+        imageUrl = "https://media.outnow.ch/Movies/Bilder/2024/Venom3/002.jpg"
+    ), Movie(
+        title = "Venom 3",
+        details = "Venom 3 movie description.",
+        imageUrl = "https://media.outnow.ch/Movies/Bilder/2024/Venom3/015.jpg"
+    ), Movie(
+        title = "Movie 5",
+        details = "This is a sample movie description.",
+        imageUrl = "https://64.media.tumblr.com/914bfbfdaeb0757c84c765d53bd747e6/tumblr_ms28wyKCs61qkd0zgo6_1280.png"
+    ), Movie(
+        title = "Movie 6",
+        details = "Another sample movie description.",
+        imageUrl = "https://film-grab.com/wp-content/uploads/2024/07/Diner-17.jpg"
+    ), Movie(
+        title = "Movie 7",
+        details = "This is a sample movie description.",
+        imageUrl = "https://film-grab.com/wp-content/uploads/2024/08/Lovers-Rock-17.jpg"
+    ), Movie(
+        title = "Movie 8",
+        details = "Another sample movie description.",
+        imageUrl = "https://film-grab.com/wp-content/uploads/2024/09/Cuckoo-30.jpg"
+    ), Movie(
+        title = "Movie 9",
+        details = "This is a sample movie description.",
+        imageUrl = "https://film-grab.com/wp-content/uploads/2024/08/The-Bloody-Judge-37.jpg"
+    )
+)
 
 @Composable
-fun LoginPage(
+fun BoxScope.LoginPageContent(
     onLoginClick: (user: String, psw: String) -> Unit,
 ) {
+    val background = MaterialTheme.colorScheme.surface
+
+    LoginBackground(modifier = Modifier
+        .fillMaxSize()
+        .drawWithContent {
+            drawContent()
+            drawRect(
+                Brush.radialGradient(
+                    listOf(
+                        background.copy(0.8f),
+                        background.copy(0.7f),
+                        background.copy(0.6f),
+                    )
+                ), size = size
+            )
+        })
+
     Column(
         modifier = Modifier
-            .width(320.dp),
+            .align(Alignment.Center)
+            .padding(horizontal = 60.dp)
+            .fillMaxWidth(0.4f),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -76,11 +152,57 @@ fun LoginPage(
     }
 }
 
+
+@Composable
+fun LoginBackground(modifier: Modifier = Modifier) {
+    var offsetX by remember { mutableFloatStateOf(0f) }
+    val animatedOffset by animateFloatAsState(
+        offsetX, label = "", animationSpec = tween(1000 * 20, easing = LinearEasing)
+    )
+
+    val backgroundState = backgroundImageState()
+    val targetBitmap by remember(backgroundState) { backgroundState.drawable }
+
+    var imageIndex = remember { 0 }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            imageIndex = (imageIndex + 1) % movies.size
+            backgroundState.load(movies[imageIndex].imageUrl, onError = {
+                offsetX = if (offsetX <= 0) 300f else -300f
+            }, onSuccess = {
+                offsetX = if (offsetX <= 0) 300f else -300f
+            })
+            delay(10.seconds)
+        }
+    }
+
+    Crossfade(
+        targetBitmap?.asImageBitmap(), modifier = modifier.fillMaxSize(), label = "",
+    ) { image ->
+        image?.let {
+            Image(
+                bitmap = it,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .graphicsLayer(
+                        translationX = animatedOffset, translationY = animatedOffset / 2
+                    )
+                    .fillMaxSize()
+                    .scale(1.5f)
+            )
+        }
+    }
+}
+
 @Preview(device = Devices.TV_1080p)
 @Composable
 fun LoginPagePrev() {
     ComposeTvTheme {
-        LoginPage { u, p ->
+        Box {
+            LoginPageContent { u, p ->
+            }
         }
     }
 }

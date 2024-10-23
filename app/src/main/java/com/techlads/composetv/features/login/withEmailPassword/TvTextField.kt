@@ -13,11 +13,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
 import androidx.tv.material3.SurfaceDefaults
@@ -36,12 +38,19 @@ fun TvTextField(
     val isFocused by mutableInteractionSource.collectIsFocusedAsState()
 
     val container by rememberUpdatedState(if (isFocused) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.surface)
+    val textColor by rememberUpdatedState(if (isFocused) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.onSurface)
 
-    BasicTextField(
-        modifier = modifier,
-        value = value,
-        decorationBox = {
-            Surface(colors = SurfaceDefaults.colors(containerColor = container), shape = MaterialTheme.shapes.medium) {
+    Surface(
+        modifier = modifier.shadow(2.dp, shape = MaterialTheme.shapes.medium),
+        colors = SurfaceDefaults.colors(
+            containerColor = container,
+            contentColor = textColor
+        ), shape = MaterialTheme.shapes.medium
+    ) {
+
+        BasicTextField(
+            value = value,
+            decorationBox = {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -49,17 +58,24 @@ fun TvTextField(
                     contentAlignment = Alignment.CenterStart
                 ) {
                     if (value.isEmpty()) {
-                        Text(text = placeholder, modifier.graphicsLayer { alpha = 0.6f }, style = MaterialTheme.typography.bodyMedium)
+                        Text(
+                            text = placeholder,
+                            modifier = modifier.graphicsLayer { alpha = 0.6f },
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     }
                     it() // This is where the actual BasicTextField will be placed
                 }
-            }
-        },
-        onValueChange = onValueChange,
-        interactionSource = mutableInteractionSource,
-        visualTransformation = visualTransformation,
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
-    )
+            },
+            onValueChange = onValueChange,
+            interactionSource = mutableInteractionSource,
+            visualTransformation = visualTransformation,
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+            textStyle = MaterialTheme.typography.bodyMedium.copy(
+                color = LocalContentColor.current
+            )
+        )
+    }
 }
 
 @Preview
