@@ -90,6 +90,9 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    implementation(libs.coil.core)
+    implementation(libs.coil.compose)
+
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.qrcode)
     implementation(libs.line.awesome.icons)
