@@ -13,15 +13,22 @@ fun NestedHomeNavigation(
     usedTopBar: StateFlow<Boolean>,
     toggleTopBar: () -> Unit,
     navController: NavHostController,
+    onItemClick: (parent: Int, child: Int) -> Unit,
     onItemFocus: (parent: Int, child: Int) -> Unit,
     onSongClick: () -> Unit
 ) {
-    NestedHomeScreenNavigation(usedTopBar, toggleTopBar, navController, onItemFocus, onSongClick)
+    NestedHomeScreenNavigation(
+        usedTopBar, toggleTopBar, navController, onItemClick, onItemFocus, onSongClick
+    )
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
 private fun NestedHomeNavigationPrev() {
-    NestedHomeNavigation(MutableStateFlow(false), {},  rememberAnimatedNavController(), { _, _ -> }) {}
+    NestedHomeNavigation(MutableStateFlow(false),
+        {},
+        rememberAnimatedNavController(),
+        { _, _ -> },
+        { _, _ -> }) {}
 }
