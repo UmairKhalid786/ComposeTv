@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/f18043eb-3e18-413b-906e-18d5b38ed9b5
 
 ## Special Guidlines for Hacktoberfest
 
-- Please choose a task, from the project or your own wish
+- Please choose a task, from the project or your wish
 - Follow Hackfest [guidlines](https://hacktoberfest.com/participation/#pr-mr-details)
 - Follow Project [Readme](CONTRIBUTING.md) for contributions
 - Or you can join our slack [channel](https://join.slack.com/t/composetv/shared_invite/zt-25jcxo9df-xpzHivjLGC~Gohsf4zFBxA) 
