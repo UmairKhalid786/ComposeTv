@@ -1,13 +1,13 @@
 [versions]
 
 # Project Environment Versions
-compileSdk = "34"
-targetSdk = "34"
+compileSdk = "35"
+targetSdk = "35"
 minSdk = "23"
 minSdkTv = "21"
 
 # Plugin Versions
-kotlin = "2.0.0"
+kotlin = "2.0.20"
 androidComposeCompiler = "1.5.3"
 androidLibrary = "7.4.2"
 androidGradlePlugin = "8.7.1"
@@ -15,9 +15,9 @@ detekt = "1.23.0"
 
 # Library Versions
 androidx-activity-compose = "1.9.3"
-androidx-corektx = "1.13.1"
+androidx-corektx = "1.15.0"
 accompanist = "0.31.0-alpha"
-androidx-lifecycle = "2.8.6"
+androidx-lifecycle = "2.8.7"
 androidxHiltNavigationCompose = "1.2.0"
 qr_code = "1.5.3"
 timber = "5.0.1"
@@ -25,10 +25,11 @@ hilt = "2.52"
 datastore-preferences = "1.1.1"
 tv-compose-material = "1.0.0"
 line_awesome = "1.0.0"
-compose_bom = "2024.10.00"
+compose_bom = "2024.10.01"
 media3 = "1.4.1"
 media3Ui = "1.4.1"
-coil = "2.4.0"
+coil = "2.7.0"
+kotlin-serialisation = "1.6.0"
 
 # Test Library Versions
 junit = "4.13.2"
@@ -38,6 +39,9 @@ uiautomator = "2.3.0"
 benchmark-macro-junit4 = "1.3.3"
 androidx-baselineprofile = "1.3.3"
 profileinstaller = "1.4.1"
+appcompat = "1.7.0"
+material = "1.12.0"
+ktor = "2.3.5"
 
 
 [libraries]
@@ -77,12 +81,23 @@ profileinstaller = { group = "androidx.profileinstaller", name = "profileinstall
 
 coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+ktor = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialisation" }
 
 [bundles]
-compose-tv = [ "androidx-tv-material" ]
+compose-tv = ["androidx-tv-material"]
 androidx-compose-bom = ["compose-material3", "compose-material-iconsExtended", "compose-ui-tooling-preview"]
-compose-accompanist = [ "accompanist-navigation-animation", "accompanist-placeholder" ]
-media3 = [ "media3-exoplayer", "media3-ui" ]
+compose-accompanist = ["accompanist-navigation-animation", "accompanist-placeholder"]
+media3 = ["media3-exoplayer", "media3-ui"]
+ktor = ["ktor", "ktor-okhttp", "ktor-serialization", "ktor-serialization-kotlinx-json", "ktor-client-content-negotiation"]
 
 
 [plugins]
@@ -96,3 +111,4 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 androidTest = { id = "com.android.test", version.ref = "androidGradlePlugin" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-baselineprofile" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

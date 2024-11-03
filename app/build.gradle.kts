@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.androidx.baselineprofile)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -76,6 +77,8 @@ dependencies {
     implementation(project(mapOf("path" to ":player")))
     implementation(project(mapOf("path" to ":exoplayer")))
 
+    implementation(project(":network"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
 
@@ -83,6 +86,8 @@ dependencies {
     implementation(libs.bundles.androidx.compose.bom)
     implementation(libs.bundles.compose.tv)
     implementation(libs.bundles.compose.accompanist)
+
+    implementation(libs.kotlin.serialization)
 
     implementation(libs.hilt.android)
     implementation(libs.profileinstaller)
