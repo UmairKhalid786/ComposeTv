@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.androidTest) apply false
     alias(libs.plugins.androidx.baselineprofile) apply false
     alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
 }
 
 tasks.register("clean", Delete::class) {
