@@ -2,12 +2,16 @@ package com.techlads.composetv.utils
 
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_DPAD_CENTER
+import android.view.KeyEvent.KEYCODE_DPAD_DOWN
 import android.view.KeyEvent.KEYCODE_DPAD_LEFT
 import android.view.KeyEvent.KEYCODE_DPAD_RIGHT
+import android.view.KeyEvent.KEYCODE_DPAD_UP
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.KeyEvent.KEYCODE_NUMPAD_ENTER
+import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_DOWN
 import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_LEFT
 import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_RIGHT
+import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_UP
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.BlendMode
@@ -28,9 +32,15 @@ private val DPadEventsKeyCodes = listOf(
     KEYCODE_DPAD_CENTER,
     KEYCODE_ENTER,
     KEYCODE_NUMPAD_ENTER,
+    KEYCODE_DPAD_UP,
+    KEYCODE_SYSTEM_NAVIGATION_UP,
+    KEYCODE_DPAD_DOWN,
+    KEYCODE_SYSTEM_NAVIGATION_DOWN
 )
 
 fun Modifier.handleDPadKeyEvents(
+    onUp: (() -> Unit)? = null,
+    onDown: (() -> Unit)? = null,
     onLeft: (() -> Unit)? = null,
     onRight: (() -> Unit)? = null,
     onEnter: (() -> Unit)? = null,
@@ -58,6 +68,24 @@ fun Modifier.handleDPadKeyEvents(
             onLeft?.apply {
                 onActionUp(::invoke)
                 return@onPreviewKeyEvent true
+            }
+        }
+
+        KEYCODE_DPAD_UP,
+        KEYCODE_SYSTEM_NAVIGATION_UP,
+        -> {
+            onUp?.apply {
+                onActionUp(::invoke)
+                return@onPreviewKeyEvent false
+            }
+        }
+
+        KEYCODE_DPAD_DOWN,
+        KEYCODE_SYSTEM_NAVIGATION_DOWN,
+        -> {
+            onDown?.apply {
+                onActionUp(::invoke)
+                return@onPreviewKeyEvent false
             }
         }
 
