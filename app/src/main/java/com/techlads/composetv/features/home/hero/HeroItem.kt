@@ -16,6 +16,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -57,6 +58,7 @@ import androidx.tv.material3.Surface
 import androidx.tv.material3.SurfaceDefaults
 import androidx.tv.material3.Text
 import androidx.tv.material3.rememberCarouselState
+import com.techlads.composetv.features.login.withEmailPassword.Movie
 import com.techlads.composetv.features.login.withEmailPassword.backgroundImageState
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.utils.Storage.movies
@@ -80,7 +82,8 @@ fun HeroItem(modifier: Modifier = Modifier) {
             )
             .onFocusChanged {
                 focused = it.isFocused
-            }.shadow(5.dp, shape = MaterialTheme.shapes.medium)
+            }
+            .shadow(5.dp, shape = MaterialTheme.shapes.medium)
             .clip(MaterialTheme.shapes.medium)
             .height(300.dp)
             .fillMaxWidth(),
@@ -144,50 +147,13 @@ fun HeroItem(modifier: Modifier = Modifier) {
                     )
                 }
             }
-            Column(
-                Modifier
+            ProductDetails(
+                movie = movies[it],
+                modifier = Modifier
                     .align(Alignment.BottomStart)
                     .fillMaxWidth(0.5f)
-                    .padding(32.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                    .padding(32.dp)
             ) {
-
-                AnimatedContent(movies[it].metadata) {
-                    Text(
-                        modifier = Modifier.graphicsLayer { alpha = 0.5f },
-                        text = it,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                }
-
-
-                AnimatedContent(movies[it].title) {
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            fontWeight = FontWeight.Black
-                        ),
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                }
-
-                Spacer(modifier = Modifier.size(2.dp))
-
-                AnimatedContent(movies[it].details) {
-                    Text(
-                        modifier = Modifier.graphicsLayer { alpha = 0.5f },
-                        text = it,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraLight),
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                }
-
-                Spacer(modifier = Modifier.size(16.dp))
                 var isFocused by remember { mutableStateOf(false) }
 
                 Button(onClick = {}, modifier = Modifier
@@ -214,6 +180,55 @@ fun HeroItem(modifier: Modifier = Modifier) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ProductDetails(
+    movie: Movie, modifier: Modifier = Modifier, navigation: @Composable ColumnScope.() -> Unit = {}
+) {
+    Column(
+        modifier = modifier, verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+
+        AnimatedContent(movie.metadata) {
+            Text(
+                modifier = Modifier.graphicsLayer { alpha = 0.5f },
+                text = it,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+        }
+
+
+        AnimatedContent(movie.title) {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Black
+                ),
+                minLines = 2,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+        }
+
+        Spacer(modifier = Modifier.size(2.dp))
+
+        AnimatedContent(movie.details) {
+            Text(
+                modifier = Modifier.graphicsLayer { alpha = 0.5f },
+                text = it,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraLight),
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+        }
+
+        Spacer(modifier = Modifier.size(16.dp))
+        navigation()
     }
 }
 

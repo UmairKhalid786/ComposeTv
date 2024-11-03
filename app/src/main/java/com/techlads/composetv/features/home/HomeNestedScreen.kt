@@ -21,10 +21,13 @@ fun HomeNestedScreen(
 
     Column(Modifier.fillMaxSize()) {
         HeroItem()
-        HomeCarousel(Modifier.weight(1f), onItemFocus = { parent, child ->
-            focusState.value = FocusPosition(parent, child)
-            onItemFocus(parent, child)
-        }, onItemClick = onItemClick)
+        HomeCarousel(
+            Modifier
+                .weight(1f), onItemFocus = { parent, child ->
+                focusState.value = FocusPosition(parent, child)
+                onItemFocus(parent, child)
+            }, onItemClick = onItemClick
+        )
     }
 }
 
