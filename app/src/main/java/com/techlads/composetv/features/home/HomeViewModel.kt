@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(
     private val _movies = MutableStateFlow<List<Movie>>(emptyList())
     val movies: StateFlow<List<Movie>> get() = _movies.asStateFlow()
 
-    fun fetchPopularMovies() {
+    private fun fetchPopularMovies() {
         viewModelScope.launch {
             try {
                 when (val response = api.getPopularMovies()) {
@@ -40,8 +40,8 @@ class HomeViewModel @Inject constructor(
 
     val menuItems: StateFlow<List<MenuItem>> = MutableStateFlow(emptyList())
     val menuState: StateFlow<Boolean> = MutableStateFlow(false)
-    private val _usedTopBar: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val usedTopBar: StateFlow<Boolean> = _usedTopBar
+    private val _usedTopBar: MutableStateFlow<NavigationEvent> = MutableStateFlow(NavigationEvent.TopBar)
+    val usedTopBar: StateFlow<NavigationEvent> = _usedTopBar
 
     init {
         menuItems.toMutable().value = MenuData.menuItems
@@ -56,7 +56,14 @@ class HomeViewModel @Inject constructor(
         menuState.toMutable().value = true
     }
 
-    fun toggleTopBar(){
-        _usedTopBar.value = !_usedTopBar.value
+    fun updateMenu(menu: NavigationEvent){
+        _usedTopBar.value = menu
     }
+}
+
+
+sealed class NavigationEvent {
+    data object None : NavigationEvent()
+    data object TopBar : NavigationEvent()
+    data object LeftMenu : NavigationEvent()
 }

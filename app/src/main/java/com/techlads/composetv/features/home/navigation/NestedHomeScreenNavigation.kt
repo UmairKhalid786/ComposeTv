@@ -7,6 +7,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.techlads.composetv.features.favorites.FavoritesScreen
 import com.techlads.composetv.features.home.HomeNestedScreen
+import com.techlads.composetv.features.home.NavigationEvent
 import com.techlads.composetv.features.movies.MoviesScreen
 import com.techlads.composetv.features.search.SearchScreen
 import com.techlads.composetv.features.settings.SettingsScreen
@@ -18,8 +19,8 @@ import kotlinx.coroutines.flow.StateFlow
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NestedHomeScreenNavigation(
-    usedTopBar: StateFlow<Boolean>,
-    toggleTopBar: () -> Unit,
+    usedTopBar: StateFlow<NavigationEvent>,
+    navigationBar: (NavigationEvent) -> Unit,
     navController: NavHostController,
     onItemClick: (parent: Int, child: Int) -> Unit,
     onItemFocus: (parent: Int, child: Int) -> Unit,
@@ -31,7 +32,7 @@ fun NestedHomeScreenNavigation(
             NestedScreens.Home.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            HomeNestedScreen(onItemFocus = onItemFocus, onItemClick = onItemClick)
+            HomeNestedScreen(onItemFocus = onItemFocus, onItemClick = onItemClick, navigationBar = navigationBar)
         }
 
         composable(
@@ -66,7 +67,7 @@ fun NestedHomeScreenNavigation(
             NestedScreens.Settings.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            SettingsScreen(toggleTopBar = toggleTopBar, usedTopBar = usedTopBar)
+            SettingsScreen(navigationBar = navigationBar, usedTopBar = usedTopBar)
         }
     }
 }

@@ -13,6 +13,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.tv.material3.MaterialTheme
@@ -31,8 +33,8 @@ import kotlinx.coroutines.flow.StateFlow
 @Composable
 fun HomeScreenContent(
     onItemFocus: (parent: Int, child: Int) -> Unit,
-    usedTopBar: StateFlow<Boolean>,
-    toggleNavigationBar: () -> Unit,
+    usedTopBar: StateFlow<NavigationEvent>,
+    navigationBar: (NavigationEvent) -> Unit,
     onSongClick: () -> Unit,
 ) {
     val navController = rememberAnimatedNavController()
@@ -61,7 +63,22 @@ fun HomeScreenContent(
                         .fillMaxSize()
                         .drawWithContent {
                             drawContent()
-                            drawRect(color = overlayColor)
+                            drawRect(
+                                Brush.horizontalGradient(
+                                    listOf(
+                                        overlayColor,
+                                        overlayColor.copy(alpha = 0.8f),
+                                        Color.Transparent
+                                    )
+                                )
+                            )
+                            drawRect(
+                                Brush.verticalGradient(
+                                    listOf(
+                                        Color.Transparent, overlayColor.copy(alpha = 0.5f)
+                                    )
+                                )
+                            )
                         },
                     bitmap = it,
                     contentDescription = "Hero item background",
@@ -71,40 +88,39 @@ fun HomeScreenContent(
         }
     }
 
-    usedTopBar.collectAsState().value.let { selectedTopBar ->
+    val menu by usedTopBar.collectAsState()
 
-        when (selectedTopBar) {
-            true -> HomeTopBar(content = {
-                NestedHomeNavigation(usedTopBar,
-                    toggleNavigationBar,
-                    navController,
-                    onItemClick = { parent, child ->
-                        onItemFocus(parent, child)
-                    },
-                    onItemFocus = { _, child ->
-                        backgroundState.load(Storage.movies[child % Storage.movies.size].imageUrl)
-                    },
-                    onSongClick
-                )
-            }, selectedId = selectedId.value) {
-                navController.navigate(it.id)
-            }
-
-            false -> HomeDrawer(content = {
-                NestedHomeNavigation(usedTopBar,
-                    toggleNavigationBar,
-                    navController,
-                    onItemClick = { parent, child ->
-                        onItemFocus(parent, child)
-                    },
-                    onItemFocus = { _, child ->
-                        backgroundState.load(Storage.movies[child % Storage.movies.size].imageUrl)
-                    },
-                    onSongClick
-                )
-            }, selectedId = selectedId.value) {
-                navController.navigate(it.id)
-            }
+    if (menu == NavigationEvent.LeftMenu) {
+        HomeDrawer(content = {
+            NestedHomeNavigation(usedTopBar,
+                navigationBar,
+                navController,
+                onItemClick = { parent, child ->
+                    onItemFocus(parent, child)
+                },
+                onItemFocus = { _, child ->
+                    backgroundState.load(Storage.movies[child % Storage.movies.size].imageUrl)
+                },
+                onSongClick
+            )
+        }, selectedId = selectedId.value) {
+            navController.navigate(it.id)
+        }
+    } else {
+        HomeTopBar(content = {
+            NestedHomeNavigation(usedTopBar,
+                navigationBar,
+                navController,
+                onItemClick = { parent, child ->
+                    onItemFocus(parent, child)
+                },
+                onItemFocus = { _, child ->
+                    backgroundState.load(Storage.movies[child % Storage.movies.size].imageUrl)
+                },
+                onSongClick
+            )
+        }, selectedId = selectedId.value, minimiseTopBar = menu == NavigationEvent.None) {
+            navController.navigate(it.id)
         }
     }
 }
@@ -114,7 +130,9 @@ fun HomeScreenContent(
 fun HomeScreenContentPrev() {
     ComposeTvTheme {
         HomeScreenContent(onItemFocus = { _, _ -> },
-            usedTopBar = MutableStateFlow(false),
-            toggleNavigationBar = {}) {}
+            usedTopBar = MutableStateFlow(NavigationEvent.TopBar),
+            navigationBar = {
+
+            }) {}
     }
 }

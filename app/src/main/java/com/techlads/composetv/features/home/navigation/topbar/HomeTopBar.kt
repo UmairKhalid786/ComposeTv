@@ -1,7 +1,6 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class)
-
 package com.techlads.composetv.features.home.navigation.topbar
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
@@ -27,7 +26,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Tab
@@ -45,6 +43,7 @@ import com.techlads.composetv.features.settings.screens.profile.ProfilePicture
 @Composable
 fun HomeTopBar(
     content: @Composable () -> Unit,
+    minimiseTopBar: Boolean = false,
     selectedId: String = MenuData.menuItems.first().id,
     onMenuSelected: ((menuItem: MenuItem) -> Unit)?
 ) {
@@ -52,46 +51,48 @@ fun HomeTopBar(
     val searchItem = MenuData.menuItems[1]
 
     Column {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp)
-        ) {
-            TabRow(selectedTabIndex = selectedTabIndex, indicator = { _, _ ->
-                Box(
-                    modifier = Modifier
-                        .clip(MaterialTheme.shapes.small)
-                        .background(Color.Transparent)
-                )
-            }) {
-                NavigationTabItem(item = MenuData.settingsItem,
-                    isSelected = selectedId == MenuData.settingsItem.id,
-                    onMenuSelected = {
-                        onMenuSelected?.invoke(MenuData.settingsItem)
-                    })
-                MenuData.menuItems.forEachIndexed { index, menuItem ->
-                    if (menuItem.id != NestedScreens.Search.title) {
-                        NavigationTabItem(item = menuItem,
-                            isSelected = selectedId == menuItem.id,
-                            onMenuSelected = {
-                                selectedTabIndex = index
-                                onMenuSelected?.invoke(it)
-                            })
+        AnimatedVisibility(minimiseTopBar.not()) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp)
+            ) {
+                TabRow(selectedTabIndex = selectedTabIndex, indicator = { _, _ ->
+                    Box(
+                        modifier = Modifier
+                            .clip(MaterialTheme.shapes.small)
+                            .background(Color.Transparent)
+                    )
+                }) {
+                    NavigationTabItem(item = MenuData.settingsItem,
+                        isSelected = selectedId == MenuData.settingsItem.id,
+                        onMenuSelected = {
+                            onMenuSelected?.invoke(MenuData.settingsItem)
+                        })
+                    MenuData.menuItems.forEachIndexed { index, menuItem ->
+                        if (menuItem.id != NestedScreens.Search.title) {
+                            NavigationTabItem(item = menuItem,
+                                isSelected = selectedId == menuItem.id,
+                                onMenuSelected = {
+                                    selectedTabIndex = index
+                                    onMenuSelected?.invoke(it)
+                                })
+                        }
                     }
+                    NavigationTabItem(
+                        item = searchItem,
+                        isSelected = selectedId == searchItem.id,
+                        onMenuSelected = {
+                            onMenuSelected?.invoke(searchItem)
+                        })
                 }
-                NavigationTabItem(
-                    item = searchItem,
-                    isSelected = selectedId == searchItem.id,
-                    onMenuSelected = {
-                        onMenuSelected?.invoke(searchItem)
-                    })
+                Text(
+                    text = stringResource(id = R.string.app_name),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight(700))
+                )
             }
-            Text(
-                text = stringResource(id = R.string.app_name),
-                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight(700))
-            )
         }
         Box(
             modifier = Modifier.fillMaxSize()
