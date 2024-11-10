@@ -1,7 +1,7 @@
 package com.techlads.composetv.features.home.network
 
 import com.techlads.composetv.features.home.network.data.MovieResponse
-import com.techlads.network.di.ApiResult
+import com.techlads.network.ApiResult
 import com.techlads.network.di.safeGet
 import io.ktor.client.HttpClient
 import io.ktor.client.request.header

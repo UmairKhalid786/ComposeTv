@@ -1,5 +1,6 @@
 package com.techlads.network.di
 
+import com.techlads.network.ApiResult
 import com.techlads.network.BuildConfig
 import dagger.Module
 import dagger.Provides

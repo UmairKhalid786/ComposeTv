@@ -74,14 +74,11 @@ fun HomeNestedScreen(
                                 delay(200)
                                 focusRequester.requestFocus()
                             }
-                        }~Z
+                        }
                     },
                 )
                 .onFocusChanged {
-                    if (it.hasFocus) {
-//                        showCarousel.value = true
-//                        showTopPickDetails.value = false
-                    } else {
+                    if (it.hasFocus.not()) {
                         showCarousel.value = true
                         showTopPickDetails.value = false
                     }
