@@ -7,7 +7,7 @@ import com.techlads.composetv.features.home.leftmenu.model.MenuItem
 import com.techlads.composetv.features.home.network.TmdbApiService
 import com.techlads.composetv.features.home.network.data.Movie
 import com.techlads.composetv.utils.toMutable
-import com.techlads.network.di.ApiResult
+import com.techlads.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
