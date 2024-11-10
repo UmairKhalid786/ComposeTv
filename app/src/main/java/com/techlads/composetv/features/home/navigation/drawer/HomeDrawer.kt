@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class)
-
 package com.techlads.composetv.features.home.navigation.drawer
 
 import androidx.compose.foundation.background
@@ -21,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.DrawerValue
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Icon
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.ModalNavigationDrawer
@@ -44,7 +41,7 @@ fun  HomeDrawer(
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
     ModalNavigationDrawer(
-        drawerState = drawerState, drawerContent = { drawer ->
+        drawerState = drawerState, drawerContent = { _ ->
             Column(
                 Modifier
                     .background(MaterialTheme.colorScheme.surface)

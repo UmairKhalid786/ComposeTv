@@ -18,14 +18,14 @@ fun HorizontalCarouselItem(
     onItemClick: (parent: Int, child: Int) -> Unit,
 ) {
     Column(Modifier.height(150.dp)) {
-        Text(text = "Row $parent", modifier = Modifier.padding(horizontal = 24.dp))
+        Text(text = "Row $parent", modifier = Modifier.padding(horizontal = 52.dp))
         PositionFocusedItemInLazyLayout(
             parentFraction = 0.1f,
             childFraction = 0.1f,
         ) {
             LazyRow(
                 contentPadding = PaddingValues(
-                    start = 16.dp,
+                    start = 42.dp,
                     top = 8.dp,
                     bottom = 8.dp,
                     end = 100.dp,

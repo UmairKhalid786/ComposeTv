@@ -3,20 +3,17 @@
 package com.techlads.composetv.features.home.hero
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.Crossfade
-import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,14 +33,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -62,6 +55,7 @@ import com.techlads.composetv.features.login.withEmailPassword.Movie
 import com.techlads.composetv.features.login.withEmailPassword.backgroundImageState
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.utils.Storage.movies
+import kotlinx.coroutines.delay
 
 @Composable
 fun HeroItem(modifier: Modifier = Modifier) {
@@ -69,23 +63,15 @@ fun HeroItem(modifier: Modifier = Modifier) {
     val carouselState = rememberCarouselState()
     val backgroundState = backgroundImageState()
     var focused by remember { mutableStateOf(false) }
-    val animatedAlpha by animateFloatAsState(if (focused) 1f else 0.3f, label = "")
-
+    val height by animateDpAsState(if (focused) 300.dp else 200.dp, label = "")
 
     Carousel(itemCount = movies.size,
         modifier = modifier
             .padding(horizontal = 24.dp, vertical = 24.dp)
-            .border(
-                2.dp,
-                MaterialTheme.colorScheme.onSurface.copy(alpha = animatedAlpha),
-                shape = MaterialTheme.shapes.medium
-            )
             .onFocusChanged {
-                focused = it.isFocused
+                focused = it.hasFocus
             }
-            .shadow(5.dp, shape = MaterialTheme.shapes.medium)
-            .clip(MaterialTheme.shapes.medium)
-            .height(300.dp)
+            .height(height)
             .fillMaxWidth(),
         carouselState = carouselState,
         carouselIndicator = {
@@ -114,79 +100,32 @@ fun HeroItem(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier.fillMaxSize(),
         ) {
-            val overlayColor = MaterialTheme.colorScheme.background
-            val targetBitmap by remember(backgroundState) { backgroundState.drawable }
-
-            Crossfade(targetState = targetBitmap) {
-                it?.let {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .drawWithContent {
-                                drawContent()
-                                drawRect(
-                                    Brush.horizontalGradient(
-                                        listOf(
-                                            overlayColor,
-                                            overlayColor.copy(alpha = 0.8f),
-                                            Color.Transparent
-                                        )
-                                    )
-                                )
-                                drawRect(
-                                    Brush.verticalGradient(
-                                        listOf(
-                                            Color.Transparent, overlayColor.copy(alpha = 0.5f)
-                                        )
-                                    )
-                                )
-                            },
-                        bitmap = it,
-                        contentDescription = "Hero item background",
-                        contentScale = ContentScale.Crop,
-                    )
-                }
-            }
             ProductDetails(
+                focused = focused,
                 movie = movies[it],
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .fillMaxWidth(0.5f)
                     .padding(32.dp)
-            ) {
-                var isFocused by remember { mutableStateOf(false) }
-
-                Button(onClick = {}, modifier = Modifier
-                    .onFocusChanged { isFocused = it.isFocused }
-                    // Duration of animation here should be less than or equal to carousel's
-                    // contentTransform duration to ensure the item below does not disappear
-                    // abruptly.
-                    .animateEnterExit(
-                        enter = slideInHorizontally(animationSpec = tween(1000)) { it / 2 },
-                        exit = slideOutHorizontally(animationSpec = tween(1000))
-                    ), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            contentDescription = null,
-                            imageVector = Icons.Default.PlayArrow,
-                            modifier = Modifier.size(24.dp)
-                        )
-                        Text(text = "Watch now")
-                    }
-                }
-            }
+            )
         }
     }
 }
 
 @Composable
 fun ProductDetails(
-    movie: Movie, modifier: Modifier = Modifier, navigation: @Composable ColumnScope.() -> Unit = {}
+    movie: Movie,
+    modifier: Modifier = Modifier,
+    focused: Boolean = false,
 ) {
+    val focusRequester = remember { FocusRequester() }
+    LaunchedEffect(focused) {
+        if (focused) {
+            delay(200)
+            focusRequester.requestFocus()
+        }
+    }
+
     Column(
         modifier = modifier, verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
@@ -228,7 +167,30 @@ fun ProductDetails(
         }
 
         Spacer(modifier = Modifier.size(16.dp))
-        navigation()
+        AnimatedVisibility(focused, enter = fadeIn(), exit = fadeOut()) {
+            Button(onClick = {}, modifier = Modifier
+                .focusRequester(focusRequester)
+                // Duration of animation here should be less than or equal to carousel's
+                // contentTransform duration to ensure the item below does not disappear
+                // abruptly.
+                .animateEnterExit(
+                    enter = slideInHorizontally(animationSpec = tween(1000)) { it / 2 },
+                    exit = slideOutHorizontally(animationSpec = tween(1000))
+                ), contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        contentDescription = null,
+                        imageVector = Icons.Default.PlayArrow,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Text(text = "Watch now")
+                }
+            }
+        }
     }
 }
 
