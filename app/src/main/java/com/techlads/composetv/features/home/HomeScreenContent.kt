@@ -32,7 +32,7 @@ import kotlinx.coroutines.flow.StateFlow
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreenContent(
-    onItemFocus: (parent: Int, child: Int) -> Unit,
+    onItemFocus: (parent: String, child: String) -> Unit,
     usedTopBar: StateFlow<NavigationEvent>,
     navigationBar: (NavigationEvent) -> Unit,
     onSongClick: () -> Unit,
@@ -99,7 +99,7 @@ fun HomeScreenContent(
                     onItemFocus(parent, child)
                 },
                 onItemFocus = { _, child ->
-                    backgroundState.load(Storage.movies[child % Storage.movies.size].imageUrl)
+                    backgroundState.load(Storage.movies.random().imageUrl)
                 },
                 onSongClick
             )
@@ -115,7 +115,7 @@ fun HomeScreenContent(
                     onItemFocus(parent, child)
                 },
                 onItemFocus = { _, child ->
-                    backgroundState.load(Storage.movies[child % Storage.movies.size].imageUrl)
+                    backgroundState.load(Storage.movies.random().imageUrl)
                 },
                 onSongClick
             )

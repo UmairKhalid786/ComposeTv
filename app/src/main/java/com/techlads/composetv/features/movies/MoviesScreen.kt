@@ -14,12 +14,12 @@ import androidx.tv.material3.Text
 import com.techlads.composetv.features.home.carousel.VerticalCarouselItem
 
 @Composable
-fun MoviesScreen(onItemFocus: (parent: Int, child: Int) -> Unit) {
+fun MoviesScreen(onItemFocus: (parent: String, child: String) -> Unit) {
     MoviesGrid(Modifier, onItemFocus)
 }
 
 @Composable
-fun MoviesGrid(modifier: Modifier, onItemFocus: (parent: Int, child: Int) -> Unit) {
+fun MoviesGrid(modifier: Modifier, onItemFocus: (parent: String, child: String) -> Unit) {
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(5),
@@ -31,7 +31,7 @@ fun MoviesGrid(modifier: Modifier, onItemFocus: (parent: Int, child: Int) -> Uni
             GridHeader()
         }
         items(30) {
-            VerticalCarouselItem(parent = 0, child = 0, onItemFocus)
+            VerticalCarouselItem(parent = "0", child = "0", onItemFocus)
         }
     }
 }

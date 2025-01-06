@@ -2,6 +2,7 @@ package com.techlads.composetv.features.home.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -22,8 +23,8 @@ fun NestedHomeScreenNavigation(
     usedTopBar: StateFlow<NavigationEvent>,
     navigationBar: (NavigationEvent) -> Unit,
     navController: NavHostController,
-    onItemClick: (parent: Int, child: Int) -> Unit,
-    onItemFocus: (parent: Int, child: Int) -> Unit,
+    onItemClick: (parent: String, child: String) -> Unit,
+    onItemFocus: (parent: String, child: String) -> Unit,
     onSongClick: () -> Unit
 ) {
     AnimatedNavHost(navController = navController, startDestination = NestedScreens.Home.title) {
@@ -32,7 +33,7 @@ fun NestedHomeScreenNavigation(
             NestedScreens.Home.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            HomeNestedScreen(onItemFocus = onItemFocus, onItemClick = onItemClick, navigationBar = navigationBar)
+            HomeNestedScreen(onItemFocus = onItemFocus, onItemClick = onItemClick, navigationBar = navigationBar, homeViewModel = hiltViewModel())
         }
 
         composable(

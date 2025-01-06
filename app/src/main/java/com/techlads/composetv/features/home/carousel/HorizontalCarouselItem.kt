@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -13,12 +14,12 @@ import androidx.tv.material3.Text
 
 @Composable
 fun HorizontalCarouselItem(
-    parent: Int,
-    onItemFocus: (parent: Int, child: Int) -> Unit,
-    onItemClick: (parent: Int, child: Int) -> Unit,
+    parent: CarouselItemPayload,
+    onItemFocus: (parentId: String, childId: String) -> Unit,
+    onItemClick: (parentId: String, childId: String) -> Unit,
 ) {
     Column(Modifier.height(150.dp)) {
-        Text(text = "Row $parent", modifier = Modifier.padding(horizontal = 52.dp))
+        Text(text = parent.title, modifier = Modifier.padding(horizontal = 52.dp))
         PositionFocusedItemInLazyLayout(
             parentFraction = 0.1f,
             childFraction = 0.1f,
@@ -31,13 +32,12 @@ fun HorizontalCarouselItem(
                     end = 100.dp,
                 ),
             ) {
-                items(15) { child ->
+                items(parent.items) { child ->
                     CarouselItem(
-                        Modifier,
-                        parent,
-                        child,
-                        onItemClick = onItemClick,
-                        onItemFocus = onItemFocus,
+                        cardPayload = child,
+                        modifier = Modifier,
+                        onItemClick = { onItemClick(parent.id, child.id) },
+                        onItemFocus = { onItemFocus(parent.id, child.id) },
                     )
                 }
             }
@@ -49,7 +49,12 @@ fun HorizontalCarouselItem(
 @Composable
 fun HorizontalCarouselItemPrev() {
     HorizontalCarouselItem(
-        1,
+        parent = CarouselItemPayload(
+            id = "1",
+            title = "Title",
+            type = "Type",
+            items = List(10) { CardPayload(id = "abc$it", title = "Card $it", image = "empty", promo = "") },
+        ),
         onItemFocus = { _, _ -> },
         onItemClick = { _, _ -> },
     )

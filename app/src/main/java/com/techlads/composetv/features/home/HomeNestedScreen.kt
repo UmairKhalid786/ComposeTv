@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -25,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.features.home.carousel.HomeCarousel
+import com.techlads.composetv.features.home.carousel.findIndexById
 import com.techlads.composetv.features.home.hero.HeroItem
 import com.techlads.composetv.utils.handleDPadKeyEvents
 import kotlinx.coroutines.delay
@@ -32,9 +35,10 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun HomeNestedScreen(
+    homeViewModel: HomeViewModel,
     navigationBar: (NavigationEvent) -> Unit,
-    onItemFocus: (parent: Int, child: Int) -> Unit,
-    onItemClick: (parent: Int, child: Int) -> Unit,
+    onItemFocus: (parent: String, child: String) -> Unit,
+    onItemClick: (parent: String, child: String) -> Unit,
 ) {
 
     val focusState = remember {
@@ -52,6 +56,7 @@ fun HomeNestedScreen(
     val focusRequester = remember { FocusRequester() }
 
     val coroutineScope = rememberCoroutineScope()
+    val homeState by homeViewModel.homeState.collectAsState()
 
     Column(Modifier.fillMaxSize()) {
         AnimatedVisibility(showCarousel.value) {
@@ -63,7 +68,8 @@ fun HomeNestedScreen(
                 .height(200.dp), title = "Top Picks", metadata = "SVT Play  •  2021  •  1h 30m")
         }
         HomeCarousel(
-            Modifier
+            homeState = homeState,
+            modifier = Modifier
                 .handleDPadKeyEvents(
                     onUp = {
                         coroutineScope.launch {
@@ -85,10 +91,12 @@ fun HomeNestedScreen(
                 }
                 .weight(1f), onItemFocus = { parent, child ->
 
-                focusState.value = FocusPosition(parent, child)
+                val parentIndex = homeState.findIndexById(parentId = parent, childId = child)
+
+                focusState.value = FocusPosition(parentIndex.first, parentIndex.second)
                 onItemFocus(parent, child)
 
-                if (parent == 0) {
+                if (parentIndex.first == 0) {
                     showCarousel.value = false
                     showTopPickDetails.value = true
                 } else {
@@ -96,9 +104,10 @@ fun HomeNestedScreen(
                     showTopPickDetails.value = false
                 }
 
-                navigationBar(if (parent >= 0) NavigationEvent.None else NavigationEvent.TopBar)
+                navigationBar(if (parentIndex.first >= 0) NavigationEvent.None else NavigationEvent.TopBar)
 
-            }, onItemClick = onItemClick
+            },
+            onItemClick = onItemClick,
         )
     }
 }

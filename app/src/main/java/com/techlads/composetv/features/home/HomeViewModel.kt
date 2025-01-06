@@ -2,6 +2,8 @@ package com.techlads.composetv.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.techlads.composetv.features.home.carousel.HomeCarouselState
+import com.techlads.composetv.features.home.carousel.HomeCarouselState
 import com.techlads.composetv.features.home.leftmenu.data.MenuData
 import com.techlads.composetv.features.home.leftmenu.model.MenuItem
 import com.techlads.composetv.features.home.network.TmdbApiService
@@ -30,6 +32,9 @@ class HomeViewModel @Inject constructor(
 
     private val _movies = MutableStateFlow<List<Movie>>(emptyList())
     val movies: StateFlow<List<Movie>> get() = _movies.asStateFlow()
+
+    private val _homeState = MutableStateFlow<HomeCarouselState>(HomeCarouselState(emptyList()))
+    val homeState: StateFlow<HomeCarouselState> get() = _homeState.asStateFlow()
 
     init {
         _menuItems.value = MenuData.menuItems
