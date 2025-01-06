@@ -50,7 +50,7 @@ fun ContentGrid(modifier: Modifier = Modifier) {
             GridHeader()
         }
         items(30) {
-            VerticalCarouselItem(parent = 0, child = 0) { a, b -> }
+            VerticalCarouselItem(parent = "0", child = "0") { a, b -> }
         }
     }
 }

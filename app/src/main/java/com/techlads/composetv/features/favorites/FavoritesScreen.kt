@@ -34,7 +34,7 @@ fun FavoritesGrid(modifier: Modifier) {
             GridHeader()
         }
         items(30) {
-            VerticalCarouselItem(parent = 0, child = 0) { _, _ ->
+            VerticalCarouselItem(parent = "0", child = "0") { _, _ ->
             }
         }
     }
