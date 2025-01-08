@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class)
-
 package com.techlads.composetv.features.settings.screens.profile
 
 import androidx.compose.foundation.Image
@@ -19,7 +17,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text

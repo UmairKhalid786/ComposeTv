@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class)
-
 package com.techlads.composetv.widgets
 
 import androidx.compose.foundation.layout.BoxScope
@@ -14,7 +12,6 @@ import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ClickableSurfaceGlow
 import androidx.tv.material3.ClickableSurfaceScale
 import androidx.tv.material3.ClickableSurfaceShape
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Glow
 import androidx.tv.material3.ShapeDefaults
 import androidx.tv.material3.Surface
