@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalTvMaterial3Api::class)
-
 package com.techlads.composetv.features.player.controls
 
 import androidx.compose.animation.core.animateDpAsState
