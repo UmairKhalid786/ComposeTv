@@ -30,10 +30,3 @@ https://github.com/user-attachments/assets/f18043eb-3e18-413b-906e-18d5b38ed9b5
 
 ### Screenshots
 ![ns](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/7f2d9334-e1f8-475f-a955-91c60d6f8a7a)
-
-## Special Guidlines for Hacktoberfest
-
-- Please choose a task, from the project or your wish
-- Follow Hackfest [guidlines](https://hacktoberfest.com/participation/#pr-mr-details)
-- Follow Project [Readme](CONTRIBUTING.md) for contributions
-- Or you can join our slack [channel](https://join.slack.com/t/composetv/shared_invite/zt-25jcxo9df-xpzHivjLGC~Gohsf4zFBxA) 
