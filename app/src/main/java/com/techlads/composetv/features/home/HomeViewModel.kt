@@ -3,7 +3,6 @@ package com.techlads.composetv.features.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.techlads.composetv.features.home.carousel.HomeCarouselState
-import com.techlads.composetv.features.home.carousel.HomeCarouselState
 import com.techlads.composetv.features.home.leftmenu.data.MenuData
 import com.techlads.composetv.features.home.leftmenu.model.MenuItem
 import com.techlads.composetv.features.home.network.TmdbApiService
