@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package com.techlads.composetv.features.songs
 
 import androidx.compose.foundation.Image
@@ -17,9 +19,11 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.focus.focusRestorer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,7 +48,10 @@ fun RecentHistory(modifier: Modifier = Modifier, onSongClick: () -> Unit) {
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(horizontal = 32.dp),
         )
-        LazyRow(contentPadding = PaddingValues(horizontal = 32.dp, vertical = 8.dp)) {
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 8.dp),
+            modifier = Modifier.focusRestorer()
+        ) {
             items(12) {
                 BorderedFocusableItem(
                     onClick = onSongClick,
@@ -76,12 +83,16 @@ fun TagsList(modifier: Modifier = Modifier) {
     LazyVerticalGrid(
         contentPadding = PaddingValues(horizontal = 32.dp, vertical = 8.dp),
         columns = GridCells.Fixed(3),
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .focusRestorer()
     ) {
         items(6) {
-            BorderedFocusableItem(onClick = {},
+            BorderedFocusableItem(
+                onClick = {},
                 borderRadius = 12.dp,
-                modifier = Modifier.padding(4.dp)) {
+                modifier = Modifier.padding(4.dp)
+            ) {
                 TagItem(it)
             }
         }

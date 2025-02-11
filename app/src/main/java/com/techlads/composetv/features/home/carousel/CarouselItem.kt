@@ -8,11 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Text
+import coil.compose.AsyncImage
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.BorderedFocusableItem
 
@@ -37,13 +39,22 @@ fun CarouselItem(
             },
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-            Text(text = "Item ${cardPayload.title}", textAlign = TextAlign.Center)
+            AsyncImage(
+                model = cardPayload.image,
+                modifier = Modifier.fillMaxSize(),
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
         }
     }
 }
 
 @Composable
-fun VerticalCarouselItem(parent: String, child: String, onItemFocus: (parent: String, child: String) -> Unit) {
+fun VerticalCarouselItem(
+    parent: String,
+    child: String,
+    onItemFocus: (parent: String, child: String) -> Unit
+) {
     BorderedFocusableItem(
         onClick = {
             onItemFocus(parent, child)

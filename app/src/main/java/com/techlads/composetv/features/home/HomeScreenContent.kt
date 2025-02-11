@@ -53,9 +53,7 @@ fun HomeScreenContent(
 
     Box(modifier = Modifier.fillMaxSize()) {
         val targetBitmap by remember(backgroundState) { backgroundState.drawable }
-
         val overlayColor = MaterialTheme.colorScheme.background.copy(alpha = 0.9f)
-
         Crossfade(targetState = targetBitmap) {
             it?.let {
                 Image(

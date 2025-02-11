@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package com.techlads.composetv.features.home.carousel
 
 import androidx.compose.foundation.layout.Column
@@ -7,7 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusRestorer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Text
@@ -25,6 +29,7 @@ fun HorizontalCarouselItem(
             childFraction = 0.1f,
         ) {
             LazyRow(
+                modifier = Modifier.focusRestorer(),
                 contentPadding = PaddingValues(
                     start = 42.dp,
                     top = 8.dp,
@@ -34,8 +39,8 @@ fun HorizontalCarouselItem(
             ) {
                 items(parent.items) { child ->
                     CarouselItem(
-                        cardPayload = child,
                         modifier = Modifier,
+                        cardPayload = child,
                         onItemClick = { onItemClick(parent.id, child.id) },
                         onItemFocus = { onItemFocus(parent.id, child.id) },
                     )
