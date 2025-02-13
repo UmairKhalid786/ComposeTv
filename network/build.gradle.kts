@@ -20,7 +20,7 @@ android {
         consumerProguardFiles("consumer-rules.pro")
 
         buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3\"")
-        buildConfigField("String", "TMDB_API_KEY", "\"9f0fc0d5b4ddb923a3b006aa11a4e8ac\"")
+        buildConfigField("String", "TMDB_API_KEY", "\"\"")
     }
 
     buildTypes {

@@ -22,8 +22,12 @@ fun HorizontalCarouselItem(
     onItemFocus: (parentId: String, childId: String) -> Unit,
     onItemClick: (parentId: String, childId: String) -> Unit,
 ) {
-    Column(Modifier.height(150.dp)) {
-        Text(text = parent.title, modifier = Modifier.padding(horizontal = 52.dp))
+    Column(
+        Modifier
+            .height(150.dp)
+            .padding(top = 16.dp)
+    ) {
+        Text(text = parent.title, modifier = Modifier.padding(horizontal = 52.dp, vertical = 4.dp))
         PositionFocusedItemInLazyLayout(
             parentFraction = 0.1f,
             childFraction = 0.1f,
@@ -58,7 +62,11 @@ fun HorizontalCarouselItemPrev() {
             id = "1",
             title = "Title",
             type = "Type",
-            items = List(10) { CardPayload(id = "abc$it", title = "Card $it", image = "empty", promo = "") },
+            items = List(10) {
+                CardPayload(
+                    id = "abc$it", title = "Card $it", image = "empty", promo = ""
+                )
+            },
         ),
         onItemFocus = { _, _ -> },
         onItemClick = { _, _ -> },
