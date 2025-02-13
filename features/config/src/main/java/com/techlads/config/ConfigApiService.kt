@@ -1,6 +1,6 @@
-package com.techlads.composetv.features.home.network
+package com.techlads.config
 
-import com.techlads.composetv.features.home.network.data.MovieResponse
+import com.techlads.config.data.ConfigResponse
 import com.techlads.network.ApiResult
 import com.techlads.network.di.safeGet
 import io.ktor.client.HttpClient
@@ -10,21 +10,20 @@ import io.ktor.client.request.url
 import javax.inject.Inject
 import javax.inject.Named
 
-interface TmdbApiService {
-    suspend fun getPopularMovies(): ApiResult<MovieResponse>
+interface ConfigApiService {
+    suspend fun getConfig(): ApiResult<ConfigResponse>
 }
 
-class TmdbApiServiceImpl @Inject constructor(
+class ConfigApiServiceImpl @Inject constructor(
     private val client: HttpClient,
     @Named("TMDBBaseUrl") private val baseUrl: String,
     @Named("TMDBApiKey") private val apiKey: String
-) : TmdbApiService {
+) : ConfigApiService {
 
-    override suspend fun getPopularMovies(): ApiResult<MovieResponse> = client.safeGet {
-        url("$baseUrl/movie/popular")
+    override suspend fun getConfig(): ApiResult<ConfigResponse> = client.safeGet {
+        url("$baseUrl/configuration")
         header("Content-Type", "application/json")
         parameter("api_key", apiKey)
-        parameter("page", 1)
         parameter("language", "en")
     }
 }

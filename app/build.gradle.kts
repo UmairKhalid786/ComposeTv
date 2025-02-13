@@ -78,6 +78,8 @@ dependencies {
     implementation(project(mapOf("path" to ":exoplayer")))
 
     implementation(project(":network"))
+    implementation(project(":features:config"))
+    implementation(project(":features:content"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
@@ -90,10 +92,11 @@ dependencies {
     implementation(libs.kotlin.serialization)
 
     implementation(libs.hilt.android)
-    implementation(libs.profileinstaller)
-    "baselineProfile"(project(":baselineprofile"))
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    implementation(libs.profileinstaller)
+    "baselineProfile"(project(":baselineprofile"))
 
     implementation(libs.coil.core)
     implementation(libs.coil.compose)

@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,10 +33,13 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.tv.material3.LocalContentColor
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
+import coil.compose.AsyncImage
 import com.techlads.composetv.R
+import com.techlads.composetv.features.details.ProductDetailsState.Success
 import com.techlads.composetv.features.home.carousel.PRODUCT_DETAIL_BANNER_TAG
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.composetv.widgets.ThumbnailImageCard
@@ -45,57 +49,28 @@ import kotlinx.coroutines.delay
 const val ANIMATION_DELAY = 600L
 
 @Composable
-fun ProductDetailsScreen(onBackPressed: () -> Unit, onPlayClick: () -> Unit) {
-    ProductDetailsContent(onBackPressed, onPlayClick = onPlayClick)
+fun ProductDetailsScreen(
+    viewModel: ProductViewModel, onBackPressed: () -> Unit, onPlayClick: () -> Unit
+) {
+    val uiDetails = viewModel.details.collectAsStateWithLifecycle()
+    uiDetails.value?.let {
+        ProductDetailsContent(
+            state = it, onBackPressed = onBackPressed, onPlayClick = onPlayClick
+        )
+    }
 }
 
 @Composable
-private fun ProductDetailsContent(onBackPressed: () -> Unit, onPlayClick: () -> Unit) {
+private fun ProductDetailsContent(
+    state: ProductDetailsState, onBackPressed: () -> Unit, onPlayClick: () -> Unit
+) {
     BackHandler(onBack = onBackPressed)
 
-    val isLoaded = remember {
-        mutableStateOf(false)
-    }
-
-    val animatedPortraitSize = animateDpAsState(targetValue = if (isLoaded.value) 150.dp else 1.dp)
-
-    LaunchedEffect(key1 = Unit) {
-        delay(ANIMATION_DELAY)
-        isLoaded.value = true
-    }
-
     Box {
-        SearchIcon(
-            modifier = Modifier
-                .size(80.dp)
-                .align(Alignment.TopStart)
-                .padding(24.dp)
-                .zIndex(1f),
-        )
-
-        Column(
-            Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxSize(),
-        ) {
-            BannerImage(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(.4f),
-            )
-            Column(modifier = Modifier.weight(.6f)) {
-                ButtonSection(onPlayClick)
-                DetailsSection()
+        when {
+            state is Success -> {
+                ProductDetailsSuccess(state.details, onPlayClick)
             }
-        }
-
-        ThumbnailImageCard(
-            Modifier
-                .align(Alignment.CenterStart)
-                .padding(start = 30.dp)
-                .width(animatedPortraitSize.value),
-        ) {
-            Text(text = "1x1")
         }
     }
 }
@@ -111,13 +86,15 @@ fun SearchIcon(modifier: Modifier) {
 }
 
 @Composable
-fun BannerImage(modifier: Modifier) {
-    Image(
+fun BannerImage(
+    url: String, modifier: Modifier
+) {
+    AsyncImage(
+        model = url,
         modifier = modifier
             .testTag(PRODUCT_DETAIL_BANNER_TAG)
             .fillMaxSize()
             .height(200.dp),
-        painter = painterResource(id = R.drawable.hero_item),
         contentDescription = "Hero item background",
         contentScale = ContentScale.Crop,
     )
@@ -161,10 +138,9 @@ fun ButtonSection(onPlayClick: () -> Unit) {
 }
 
 @Composable
-fun DetailsSection() {
+fun DetailsSection(state: Details) {
     Row(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalAlignment = Alignment.Top,
         horizontalArrangement = Arrangement.Center,
     ) {
@@ -182,7 +158,7 @@ fun DetailsSection() {
                 color = LocalContentColor.current,
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.headlineLarge,
-                text = stringResource(R.string.movie_name),
+                text = state.title,
             )
 
             Spacer(modifier = Modifier.size(10.dp))
@@ -198,6 +174,55 @@ fun DetailsSection() {
                 text = stringResource(R.string.movie_desciption),
             )
         }
+    }
+}
+
+@Composable
+fun BoxScope.ProductDetailsSuccess(state: Details, onPlayClick: () -> Unit) {
+
+    val isLoaded = remember {
+        mutableStateOf(false)
+    }
+
+    val animatedPortraitSize = animateDpAsState(targetValue = if (isLoaded.value) 150.dp else 1.dp)
+
+    LaunchedEffect(key1 = Unit) {
+        delay(ANIMATION_DELAY)
+        isLoaded.value = true
+    }
+
+    SearchIcon(
+        modifier = Modifier
+            .size(80.dp)
+            .align(Alignment.TopStart)
+            .padding(24.dp)
+            .zIndex(1f),
+    )
+
+    Column(
+        Modifier
+            .align(Alignment.BottomCenter)
+            .fillMaxSize(),
+    ) {
+        BannerImage(
+            url = state.background,
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(.4f),
+        )
+        Column(modifier = Modifier.weight(.6f)) {
+            ButtonSection(onPlayClick)
+            DetailsSection(state)
+        }
+    }
+
+    ThumbnailImageCard(
+        Modifier
+            .align(Alignment.CenterStart)
+            .padding(start = 30.dp)
+            .width(animatedPortraitSize.value),
+    ) {
+        Text(text = "1x1")
     }
 }
 
@@ -253,6 +278,14 @@ fun Rating(rating: String) {
 @Composable
 fun DetailsScreenPrev() {
     ComposeTvTheme {
-        ProductDetailsScreen(onPlayClick = {}, onBackPressed = {})
+        ProductDetailsContent(
+            state = Success(
+                details = Details(
+                    title = "Hello world",
+                    background = "www.test.image.jpg",
+                    description = "This is a dummy movie",
+                    releaseDate = "14 august 1994",
+                    genres = List(5) { "Genre $it" })
+            ), onBackPressed = {}) {}
     }
 }

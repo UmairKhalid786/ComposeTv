@@ -6,10 +6,11 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import com.techlads.composetv.features.details.ProductDetailsScreen
 import com.techlads.composetv.features.home.HomeScreen
 import com.techlads.composetv.features.home.HomeViewModel
@@ -22,54 +23,57 @@ import com.techlads.composetv.features.wiw.WhoIsWatchingScreen
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel) {
-    AnimatedNavHost(navController = navController, startDestination = Screens.Login.title) {
+    NavHost(navController = navController, startDestination = Screens.Login.route) {
         // e.g will add auth routes here if when we will extend project
         composable(
-            Screens.Login.title,
+            Screens.Login.route,
         ) {
             LoginScreen {
-                navController.navigateSingleTopTo(Screens.WhoIsWatching.title)
+                navController.navigateSingleTopTo(Screens.WhoIsWatching.route)
             }
         }
 
         composable(
-            Screens.LoginToken.title,
+            Screens.LoginToken.route,
         ) {
             DeviceTokenAuthenticationScreen(onSkip = {
-                navController.navigateSingleTopTo(Screens.Home.title)
+                navController.navigateSingleTopTo(Screens.Home.route)
             }) {
-                navController.navigateSingleTopTo(it.title)
+                navController.navigateSingleTopTo(it.route)
             }
         }
 
         composable(
-            Screens.WhoIsWatching.title,
+            Screens.WhoIsWatching.route,
         ) {
             WhoIsWatchingScreen {
-                navController.navigateSingleTopTo(Screens.Home.title)
+                navController.navigateSingleTopTo(Screens.Home.route)
             }
         }
         composable(
-            Screens.Mp3Player.title,) {
+            Screens.Mp3Player.route,
+        ) {
             AudioPlayerScreen {
                 navController.navigateUp()
             }
         }
 
         composable(
-            Screens.Home.title,) {
-            HomeScreen(homeViewModel, { _, _ ->
-                navController.navigate(Screens.ProductDetail.title)
+            Screens.Home.route,
+        ) {
+            HomeScreen(homeViewModel, { _, child ->
+                navController.navigate(Screens.ProductDetail.createRoute(child.toInt()))
             }) {
-                navController.navigate(Screens.Mp3Player.title)
+                navController.navigate(Screens.Mp3Player.route)
             }
         }
 
         composable(
-            Screens.Player.title,
+            Screens.Player.route,
         ) {
             PlayerScreen(
-                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+//                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                "https://www.youtube.com/watch?v=kI7RdKPpPFc",
                 onBackPressed = {
                     navController.navigateUp()
                 },
@@ -77,15 +81,14 @@ fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel
         }
 
         composable(
-            Screens.ProductDetail.title,
-        ) {
+            Screens.ProductDetail.route,
+        ) { backStackEntry ->
             ProductDetailsScreen(
                 onBackPressed = {
-                    navController.navigateUp()
-                },
-                onPlayClick = {
-                    navController.navigate(Screens.Player.title)
-                },
+                navController.navigateUp()
+            }, onPlayClick = {
+                navController.navigate(Screens.Player.route)
+            }, viewModel = hiltViewModel()
             )
         }
     }
@@ -100,14 +103,13 @@ fun tabEnterTransition(
     delay: Int = duration - 350,
 ) = fadeIn(tween(duration, duration - delay))
 
-fun NavHostController.navigateSingleTopTo(route: String) =
-    this.navigate(route) {
-        popUpTo(
-            this@navigateSingleTopTo.graph.findStartDestination().id,
-        ) {
-            saveState = true
-            inclusive = true
-        }
-        launchSingleTop = true
-        restoreState = true
+fun NavHostController.navigateSingleTopTo(route: String) = this.navigate(route) {
+    popUpTo(
+        this@navigateSingleTopTo.graph.findStartDestination().id,
+    ) {
+        saveState = true
+        inclusive = true
     }
+    launchSingleTop = true
+    restoreState = true
+}

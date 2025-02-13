@@ -110,8 +110,8 @@ fun TabRowScope.NavigationTabItem(
     onMenuSelected: ((menuItem: MenuItem) -> Unit)?
 ) {
 
-    val mutableInteractionSource = remember { MutableInteractionSource() }
-    val isFocused by mutableInteractionSource.collectIsFocusedAsState()
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused by interactionSource.collectIsFocusedAsState()
 
     Tab(
         selected = isSelected,
@@ -120,7 +120,7 @@ fun TabRowScope.NavigationTabItem(
             onMenuSelected?.invoke(item)
         },
         onFocus = {},
-        interactionSource = mutableInteractionSource,
+        interactionSource = interactionSource,
         colors = TabDefaults.pillIndicatorTabColors(
             selectedContentColor = MaterialTheme.colorScheme.onSurface,
             focusedContentColor = MaterialTheme.colorScheme.surface,

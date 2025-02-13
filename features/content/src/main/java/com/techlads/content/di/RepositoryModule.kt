@@ -1,7 +1,7 @@
-package com.techlads.composetv.features.home.network.di
+package com.techlads.content.di
 
-import com.techlads.composetv.features.home.network.TmdbApiService
-import com.techlads.composetv.features.home.network.TmdbApiServiceImpl
+import com.techlads.content.TmdbApiService
+import com.techlads.content.TmdbApiServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

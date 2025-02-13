@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalFoundationApi::class)
 
 package com.techlads.composetv.features.home.carousel
 
@@ -8,6 +8,7 @@ import androidx.compose.foundation.gestures.LocalBringIntoViewSpec
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -24,9 +25,10 @@ import com.techlads.composetv.utils.fadingEdge
 
 @Composable
 fun HomeCarousel(
+    homeState: HomeCarouselState,
     modifier: Modifier,
-    onItemFocus: (parent: Int, child: Int) -> Unit,
-    onItemClick: (child: Int, parent: Int) -> Unit,
+    onItemFocus: (parentId: String, childId: String) -> Unit,
+    onItemClick: (parentId: String, childId: String) -> Unit,
 ) {
     val topFade by rememberUpdatedState(
         Brush.verticalGradient(
@@ -52,10 +54,10 @@ fun HomeCarousel(
                 ),
             contentPadding = PaddingValues(bottom = 100.dp)
         ) {
-            items(15) {
+            items(homeState.items) {
                 HorizontalCarouselItem(it, onItemFocus = { p, c ->
                     onItemFocus(p, c)
-                    enableFadeEdge.value = p > 0
+                    enableFadeEdge.value = it.items.firstOrNull { it.id == p } != null
                 }, onItemClick = onItemClick)
             }
         }
@@ -66,7 +68,11 @@ fun HomeCarousel(
 @Composable
 fun HomeCarouselPrev() {
     Column {
-        HomeCarousel(Modifier, onItemFocus = { _, _ -> }) { _, _ -> }
+        HomeCarousel(homeState = HomeCarouselState(items = (1..20).map { it ->
+            CarouselItemPayload(id = it.toString(), title = "Item $it", type = "empty", items = (1..10).map {
+                CardPayload(id = it.toString(), title = "Card $it", image = "empty", promo = "")
+            })
+        }), modifier = Modifier, onItemFocus = { _, _ -> }) { _, _ -> }
     }
 }
 
