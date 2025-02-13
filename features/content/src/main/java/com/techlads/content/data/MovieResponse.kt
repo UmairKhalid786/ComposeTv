@@ -5,16 +5,28 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MovieResponse(
-    val results: List<Movie>
+    val id: Int,
+    val title: String,
+    val adult: Boolean,
+    val budget: Int,
+    val overview: String,
+    val genres: List<Genre>,
+    @SerialName("poster_path") val posterPath: String,
+    @SerialName("release_date") val releaseDate: String,
+    @SerialName("backdrop_path") val backdropPath: String,
+    @SerialName("original_title") val originalTitle: String,
+    @SerialName("spoken_languages") val spokenLanguages: List<Language>,
 )
 
 @Serializable
-data class Movie(
+data class Genre(
     val id: Int,
-    val title: String,
-    val overview: String,
-    @SerialName("poster_path")
-    val posterPath: String,
-    @SerialName("backdrop_path")
-    val backdropPath: String
+    val name: String,
+)
+
+@Serializable
+data class Language(
+    @SerialName("english_name") val englishName: String,
+    @SerialName("iso_639_1") val iso: String,
+    val name: String,
 )

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel,
-    onItemFocus: (parent: String, child: String) -> Unit,
+    onItemFocus: (parent: String, id: String) -> Unit,
     onSongClick: () -> Unit,
 ) {
     HomeScreenContent(onItemFocus, homeViewModel.usedTopBar,

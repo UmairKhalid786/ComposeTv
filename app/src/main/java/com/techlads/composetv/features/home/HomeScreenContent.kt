@@ -32,7 +32,7 @@ import kotlinx.coroutines.flow.StateFlow
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreenContent(
-    onItemFocus: (parent: String, child: String) -> Unit,
+    onItemFocus: (parent: String, id: String) -> Unit,
     usedTopBar: StateFlow<NavigationEvent>,
     navigationBar: (NavigationEvent) -> Unit,
     onSongClick: () -> Unit,

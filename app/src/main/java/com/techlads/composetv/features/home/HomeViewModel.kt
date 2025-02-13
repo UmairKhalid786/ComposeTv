@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.techlads.composetv.features.home.carousel.CardPayload
 import com.techlads.composetv.features.home.carousel.CarouselItemPayload
 import com.techlads.composetv.features.home.carousel.HomeCarouselState
-import com.techlads.content.data.MovieResponse
 import com.techlads.content.data.MoviesRepository
+import com.techlads.content.data.MoviesResponse
 import com.techlads.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -50,7 +50,7 @@ class HomeViewModel @Inject constructor(
 
     private fun CoroutineScope.handleMoviesResponse(
         title: String,
-        result: ApiResult<MovieResponse>) {
+        result: ApiResult<MoviesResponse>) {
         when (result) {
             is ApiResult.Success -> _homeState.update {
                 it.copy(

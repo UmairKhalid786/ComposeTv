@@ -1,6 +1,8 @@
 package com.techlads.content
 
 import com.techlads.content.data.MovieResponse
+import com.techlads.content.data.MovieVideosResponse
+import com.techlads.content.data.MoviesResponse
 import com.techlads.network.ApiResult
 import com.techlads.network.di.safeGet
 import io.ktor.client.HttpClient
@@ -11,10 +13,10 @@ import javax.inject.Inject
 import javax.inject.Named
 
 interface TmdbApiService {
-    suspend fun getPopularMovies(): ApiResult<MovieResponse>
-    suspend fun getTopRatedMovies(): ApiResult<MovieResponse>
-    suspend fun getNowPlaying(): ApiResult<MovieResponse>
-    suspend fun getUpcoming(): ApiResult<MovieResponse>
+    suspend fun getMovies(category: String): ApiResult<MoviesResponse>
+    suspend fun getMovieDetail(movieId: Int): ApiResult<MovieResponse>
+    suspend fun getMovieVideos(movieId: Int): ApiResult<MovieVideosResponse>
+    suspend fun getTrending(category: String): ApiResult<MoviesResponse>
 }
 
 class TmdbApiServiceImpl @Inject constructor(
@@ -23,32 +25,28 @@ class TmdbApiServiceImpl @Inject constructor(
     @Named("TMDBApiKey") private val apiKey: String
 ) : TmdbApiService {
 
-    override suspend fun getPopularMovies(): ApiResult<MovieResponse> = client.safeGet {
-        url("$baseUrl/movie/popular")
+    override suspend fun getMovies(category: String): ApiResult<MoviesResponse> = client.safeGet {
+        url("$baseUrl/movie/$category")
         header("Content-Type", "application/json")
         parameter("api_key", apiKey)
         parameter("page", 1)
         parameter("language", "en")
     }
 
-    override suspend fun getTopRatedMovies(): ApiResult<MovieResponse> = client.safeGet {
-        url("$baseUrl/movie/top_rated")
+    override suspend fun getMovieDetail(movieId: Int): ApiResult<MovieResponse> = client.safeGet {
+        url("$baseUrl/movie/$movieId")
         header("Content-Type", "application/json")
         parameter("api_key", apiKey)
-        parameter("page", 1)
-        parameter("language", "en")
     }
 
-    override suspend fun getNowPlaying(): ApiResult<MovieResponse> = client.safeGet {
-        url("$baseUrl/movie/now_playing")
+    override suspend fun getMovieVideos(movieId: Int): ApiResult<MovieVideosResponse> = client.safeGet {
+        url("$baseUrl/movie/${movieId}/videos")
         header("Content-Type", "application/json")
         parameter("api_key", apiKey)
-        parameter("page", 1)
-        parameter("language", "en")
     }
 
-    override suspend fun getUpcoming(): ApiResult<MovieResponse> = client.safeGet {
-        url("$baseUrl/movie/upcoming")
+    override suspend fun getTrending(category: String): ApiResult<MoviesResponse> = client.safeGet {
+        url("$baseUrl/trending/$category/day")
         header("Content-Type", "application/json")
         parameter("api_key", apiKey)
         parameter("page", 1)
