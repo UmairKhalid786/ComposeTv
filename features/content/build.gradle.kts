@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":network"))
+    implementation(project(":libs:network"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

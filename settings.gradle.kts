@@ -1,4 +1,5 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     repositories {
         google()
@@ -16,15 +17,21 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Compose TV"
+rootProject.name = "ComposeTV"
 
 include(
+    // Apps
     ":app",
-    ":exoplayer",
-    ":player",
-    ":benchmark",
-    ":baselineprofile",
-    ":network",
+
+    // Libs
+    ":libs:exoplayer",
+    ":libs:player",
+    ":libs:benchmark",
+    ":libs:baselineprofile",
+    ":libs:network",
+
+    // Features
     ":features:config",
     ":features:content",
+    ":features:login",
 )

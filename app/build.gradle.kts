@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -23,10 +22,6 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
         }
         create("benchmark") {
             initWith(buildTypes.getByName("release"))
@@ -74,12 +69,11 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":player")))
-    implementation(project(mapOf("path" to ":exoplayer")))
-
-    implementation(project(":network"))
-    implementation(project(":features:config"))
-    implementation(project(":features:content"))
+    implementation(projects.libs.player)
+    implementation(projects.libs.network)
+    implementation(projects.libs.exoplayer)
+    implementation(projects.features.config)
+    implementation(projects.features.content)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
@@ -96,7 +90,7 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.profileinstaller)
-    "baselineProfile"(project(":baselineprofile"))
+    "baselineProfile"(projects.libs.baselineprofile)
 
     implementation(libs.coil.core)
     implementation(libs.coil.compose)
