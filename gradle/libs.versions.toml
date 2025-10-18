@@ -4,7 +4,7 @@
 compileSdk = "35"
 targetSdk = "35"
 minSdk = "23"
-minSdkTv = "21"
+minSdkTv = "24"
 
 # Plugin Versions
 kotlin = "2.0.20"

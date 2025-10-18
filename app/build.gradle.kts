@@ -43,15 +43,6 @@ android {
         correctErrorTypes = true
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
-
     testOptions {
         managedDevices {
             localDevices {
@@ -96,7 +87,6 @@ dependencies {
     implementation(libs.coil.compose)
 
     implementation(libs.androidx.lifecycle.viewModelCompose)
-    implementation(libs.qrcode)
     implementation(libs.line.awesome.icons)
 
     androidTestImplementation(platform(libs.compose.bom))

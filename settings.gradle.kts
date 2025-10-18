@@ -29,6 +29,7 @@ include(
     ":libs:benchmark",
     ":libs:baselineprofile",
     ":libs:network",
+    ":libs:ui-components",
 
     // Features
     ":features:config",

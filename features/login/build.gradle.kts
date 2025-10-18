@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -19,22 +20,25 @@ android {
             isMinifyEnabled = false
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+    buildFeatures {
+        compose = true
     }
 }
 
 dependencies {
-    implementation(project(":libs:network"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    implementation(libs.qrcode)
+
+    implementation(libs.coil.core)
+    implementation(libs.coil.compose)
+
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.androidx.compose.bom)
+    implementation(libs.bundles.compose.tv)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
