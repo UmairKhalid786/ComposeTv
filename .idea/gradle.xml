@@ -14,11 +14,13 @@
             <option value="$PROJECT_DIR$/baselineprofile" />
             <option value="$PROJECT_DIR$/benchmark" />
             <option value="$PROJECT_DIR$/exoplayer" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/config" />
+            <option value="$PROJECT_DIR$/features/content" />
             <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/player" />
           </set>
         </option>
-        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

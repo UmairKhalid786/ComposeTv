@@ -2,64 +2,81 @@ package com.techlads.composetv.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.techlads.composetv.features.home.leftmenu.data.MenuData
-import com.techlads.composetv.features.home.leftmenu.model.MenuItem
-import com.techlads.composetv.features.home.network.TmdbApiService
-import com.techlads.composetv.features.home.network.data.Movie
-import com.techlads.composetv.utils.toMutable
+import com.techlads.composetv.features.home.carousel.CardPayload
+import com.techlads.composetv.features.home.carousel.CarouselItemPayload
+import com.techlads.composetv.features.home.carousel.HomeCarouselState
+import com.techlads.content.data.MoviesRepository
+import com.techlads.content.data.MoviesResponse
 import com.techlads.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val api: TmdbApiService
+    private val repo: MoviesRepository
 ) : ViewModel() {
-
-    val menuState: StateFlow<Boolean> = MutableStateFlow(false)
-
-    private val _menuItems = MutableStateFlow<List<MenuItem>>(emptyList())
-    val menuItems: StateFlow<List<MenuItem>> = _menuItems.asStateFlow()
 
     private val _usedTopBar = MutableStateFlow<NavigationEvent>(NavigationEvent.TopBar)
     val usedTopBar: StateFlow<NavigationEvent> = _usedTopBar.asStateFlow()
 
-    private val _movies = MutableStateFlow<List<Movie>>(emptyList())
-    val movies: StateFlow<List<Movie>> get() = _movies.asStateFlow()
+    private val _homeState = MutableStateFlow<HomeCarouselState>(HomeCarouselState(emptyList()))
+    val homeState: StateFlow<HomeCarouselState> get() = _homeState.asStateFlow()
 
     init {
-        _menuItems.value = MenuData.menuItems
         fetchPopularMovies()
     }
 
     private fun fetchPopularMovies() {
         viewModelScope.launch {
             try {
-                when (val response = api.getPopularMovies()) {
-                    is ApiResult.Success -> _movies.value = response.data.results
-                    is ApiResult.Error -> {
-                        // Handle error
-                    }
-                }
+                handleMoviesResponse(title = "now playing", result = async { repo.getNowPlaying() }.await())
+                handleMoviesResponse(title = "popular", result = async { repo.getPopularMovies() }.await())
+                handleMoviesResponse(title = "top rated", result = async { repo.getTopRatedMovies() }.await())
+                handleMoviesResponse(title = "upcoming", result = async { repo.getUpcoming() }.await())
             } catch (e: Exception) {
+                // Handle error
+                throw e
+            }
+        }
+    }
+
+    private fun CoroutineScope.handleMoviesResponse(
+        title: String,
+        result: ApiResult<MoviesResponse>) {
+        when (result) {
+            is ApiResult.Success -> _homeState.update {
+                it.copy(
+                    it.items + CarouselItemPayload(
+                        id = title,
+                        title = "${title.capitalize(Locale.ROOT)} Videos",
+                        type = title,
+                        items = result.data.results.map {
+                            CardPayload(
+                                id = it.id.toString(),
+                                title = it.title,
+                                image ="https://image.tmdb.org/t/p/w500" + it.backdropPath,
+                                promo = null
+                            )
+                        }
+                    )
+                )
+            }
+
+            is ApiResult.Error -> {
                 // Handle error
             }
         }
     }
 
-    fun menuClosed() {
-        menuState.toMutable().value = false
-    }
-
-    fun menuOpen() {
-        menuState.toMutable().value = true
-    }
-
-    fun updateMenu(menu: NavigationEvent){
+    fun updateMenu(menu: NavigationEvent) {
         _usedTopBar.value = menu
     }
 }

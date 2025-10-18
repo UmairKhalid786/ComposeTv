@@ -32,7 +32,7 @@ import kotlinx.coroutines.flow.StateFlow
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreenContent(
-    onItemFocus: (parent: Int, child: Int) -> Unit,
+    onItemFocus: (parent: String, id: String) -> Unit,
     usedTopBar: StateFlow<NavigationEvent>,
     navigationBar: (NavigationEvent) -> Unit,
     onSongClick: () -> Unit,
@@ -53,9 +53,7 @@ fun HomeScreenContent(
 
     Box(modifier = Modifier.fillMaxSize()) {
         val targetBitmap by remember(backgroundState) { backgroundState.drawable }
-
         val overlayColor = MaterialTheme.colorScheme.background.copy(alpha = 0.9f)
-
         Crossfade(targetState = targetBitmap) {
             it?.let {
                 Image(
@@ -99,7 +97,7 @@ fun HomeScreenContent(
                     onItemFocus(parent, child)
                 },
                 onItemFocus = { _, child ->
-                    backgroundState.load(Storage.movies[child % Storage.movies.size].imageUrl)
+                    backgroundState.load(Storage.movies.random().imageUrl)
                 },
                 onSongClick
             )
@@ -115,7 +113,7 @@ fun HomeScreenContent(
                     onItemFocus(parent, child)
                 },
                 onItemFocus = { _, child ->
-                    backgroundState.load(Storage.movies[child % Storage.movies.size].imageUrl)
+                    backgroundState.load(Storage.movies.random().imageUrl)
                 },
                 onSongClick
             )

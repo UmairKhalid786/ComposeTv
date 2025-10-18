@@ -14,8 +14,8 @@ fun NestedHomeNavigation(
     usedTopBar: StateFlow<NavigationEvent>,
     navigationBar: (NavigationEvent) -> Unit,
     navController: NavHostController,
-    onItemClick: (parent: Int, child: Int) -> Unit,
-    onItemFocus: (parent: Int, child: Int) -> Unit,
+    onItemClick: (parent: String, child: String) -> Unit,
+    onItemFocus: (parent: String, child: String) -> Unit,
     onSongClick: () -> Unit
 ) {
     NestedHomeScreenNavigation(
