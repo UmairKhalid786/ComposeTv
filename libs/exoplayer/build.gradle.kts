@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":player")))
+    implementation(project(mapOf("path" to ":libs:player")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.media3)

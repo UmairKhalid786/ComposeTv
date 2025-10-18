@@ -12,17 +12,11 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdkTv.get().toInt()
-
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
     }
     compileOptions {
@@ -36,7 +30,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":network"))
+    implementation(project(":libs:network"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

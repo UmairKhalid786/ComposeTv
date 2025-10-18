@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.techlads.content"
+    namespace = "com.techlads.login"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
