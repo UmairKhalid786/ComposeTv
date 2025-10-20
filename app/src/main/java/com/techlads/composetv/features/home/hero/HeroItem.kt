@@ -51,21 +51,22 @@ import androidx.tv.material3.Surface
 import androidx.tv.material3.SurfaceDefaults
 import androidx.tv.material3.Text
 import androidx.tv.material3.rememberCarouselState
-import com.techlads.composetv.features.login.withEmailPassword.Movie
-import com.techlads.composetv.features.login.withEmailPassword.backgroundImageState
+import com.techlads.composetv.features.Movie
 import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.composetv.utils.Storage.movies
+import com.techlads.login.withEmailPassword.backgroundImageState
 import kotlinx.coroutines.delay
 
 @Composable
-fun HeroItem(modifier: Modifier = Modifier) {
+fun HeroItem(
+    state: HeroItemState,
+    modifier: Modifier = Modifier) {
 
     val carouselState = rememberCarouselState()
     val backgroundState = backgroundImageState()
     var focused by remember { mutableStateOf(false) }
     val height by animateDpAsState(if (focused) 300.dp else 200.dp, label = "")
 
-    Carousel(itemCount = movies.size,
+    Carousel(itemCount = state.list.size,
         modifier = modifier
             .padding(horizontal = 24.dp, vertical = 24.dp)
             .onFocusChanged {
@@ -75,7 +76,7 @@ fun HeroItem(modifier: Modifier = Modifier) {
             .fillMaxWidth(),
         carouselState = carouselState,
         carouselIndicator = {
-            CarouselDefaults.IndicatorRow(itemCount = movies.size,
+            CarouselDefaults.IndicatorRow(itemCount = state.list.size,
                 activeItemIndex = carouselState.activeItemIndex,
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
@@ -94,7 +95,7 @@ fun HeroItem(modifier: Modifier = Modifier) {
         contentTransformStartToEnd = fadeIn(tween(1000)).togetherWith(fadeOut(tween(1000)))
     ) {
         LaunchedEffect(it) {
-            backgroundState.load(movies[it].imageUrl, onSuccess = {}, onError = {})
+            backgroundState.load(state.list[it].imageUrl, onSuccess = {}, onError = {})
         }
 
         Box(
@@ -102,7 +103,7 @@ fun HeroItem(modifier: Modifier = Modifier) {
         ) {
             ProductDetails(
                 focused = focused,
-                movie = movies[it],
+                movie = state.list[it],
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .fillMaxWidth(0.5f)
@@ -198,6 +199,6 @@ fun ProductDetails(
 @Composable
 fun HeroItemPrev() {
     ComposeTvTheme {
-        HeroItem()
+        HeroItem(state = HeroItemState())
     }
 }

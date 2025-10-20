@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Text
 import com.techlads.composetv.features.settings.data.SettingsMenuModel
-import com.techlads.composetv.widgets.FocusableItem
+import com.techlads.uicomponents.widgets.FocusableItem
 
 @Composable
 fun SettingsMenuItem(item: SettingsMenuModel, onMenuSelected: (SettingsMenuModel) -> Unit) {

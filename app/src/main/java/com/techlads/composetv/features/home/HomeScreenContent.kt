@@ -23,9 +23,8 @@ import com.techlads.composetv.features.home.leftmenu.data.MenuData
 import com.techlads.composetv.features.home.navigation.NestedHomeNavigation
 import com.techlads.composetv.features.home.navigation.drawer.HomeDrawer
 import com.techlads.composetv.features.home.navigation.topbar.HomeTopBar
-import com.techlads.composetv.features.login.withEmailPassword.backgroundImageState
 import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.composetv.utils.Storage
+import com.techlads.login.withEmailPassword.backgroundImageState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -97,7 +96,7 @@ fun HomeScreenContent(
                     onItemFocus(parent, child)
                 },
                 onItemFocus = { _, child ->
-                    backgroundState.load(Storage.movies.random().imageUrl)
+                    backgroundState.load("")
                 },
                 onSongClick
             )
@@ -113,7 +112,7 @@ fun HomeScreenContent(
                     onItemFocus(parent, child)
                 },
                 onItemFocus = { _, child ->
-                    backgroundState.load(Storage.movies.random().imageUrl)
+                    backgroundState.load("")
                 },
                 onSongClick
             )

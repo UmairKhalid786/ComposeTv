@@ -39,32 +39,32 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
-import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.composetv.utils.Storage.movies
-import com.techlads.composetv.widgets.TvButton
+import com.techlads.uicomponents.widgets.TvButton
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun BoxScope.LoginPageContent(
+    state: CrossFadeState,
     onLoginClick: (user: String, psw: String) -> Unit,
 ) {
     val background = MaterialTheme.colorScheme.surface
 
-    LoginBackground(modifier = Modifier
-        .fillMaxSize()
-        .drawWithContent {
-            drawContent()
-            drawRect(
-                Brush.radialGradient(
-                    listOf(
-                        background.copy(0.8f),
-                        background.copy(0.7f),
-                        background.copy(0.6f),
-                    )
-                ), size = size
-            )
-        })
+    CrossFadeBackground(
+        state = state, modifier = Modifier
+            .fillMaxSize()
+            .drawWithContent {
+                drawContent()
+                drawRect(
+                    Brush.radialGradient(
+                        listOf(
+                            background.copy(0.8f),
+                            background.copy(0.7f),
+                            background.copy(0.6f),
+                        )
+                    ), size = size
+                )
+            })
 
     Column(
         modifier = Modifier
@@ -114,10 +114,14 @@ fun BoxScope.LoginPageContent(
 
 
 @Composable
-fun LoginBackground(modifier: Modifier = Modifier) {
+fun CrossFadeBackground(
+    state: CrossFadeState, modifier: Modifier = Modifier
+) {
     var offsetX by remember { mutableFloatStateOf(0f) }
     val animatedOffset by animateFloatAsState(
-        offsetX, label = "", animationSpec = tween(1000 * 20, easing = LinearEasing)
+        targetValue = offsetX,
+        label = "",
+        animationSpec = tween(durationMillis = 1000 * 20, easing = LinearEasing)
     )
 
     val backgroundState = backgroundImageState()
@@ -127,13 +131,13 @@ fun LoginBackground(modifier: Modifier = Modifier) {
 
     LaunchedEffect(Unit) {
         while (true) {
-            imageIndex = (imageIndex + 1) % movies.size
-            backgroundState.load(movies[imageIndex].imageUrl, onError = {
-                offsetX = if (offsetX <= 0) 300f else -300f
+            imageIndex = (imageIndex + 1) % state.images.size
+            backgroundState.load(state.images[imageIndex], onError = {
+                offsetX = if (offsetX <= 0) state.durationMs else state.durationMs * -1
             }, onSuccess = {
-                offsetX = if (offsetX <= 0) 300f else -300f
+                offsetX = if (offsetX <= 0) state.durationMs else state.durationMs * -1
             })
-            delay(10.seconds)
+            delay(state.delaySec.seconds)
         }
     }
 
@@ -159,10 +163,18 @@ fun LoginBackground(modifier: Modifier = Modifier) {
 @Preview(device = Devices.TV_1080p)
 @Composable
 fun LoginPagePrev() {
-    ComposeTvTheme {
+    MaterialTheme {
         Box {
-            LoginPageContent { u, p ->
-            }
+            LoginPageContent(
+                state = CrossFadeState(
+                    images = listOf(
+                        "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+                        "https://images.unsplash.com/photo-1494526585095-c41746248156",
+                        "https://images.unsplash.com/photo-1500534623283-312aade485b7",
+                    ),
+                    delaySec = 10,
+                    durationMs = 300f,
+                ), onLoginClick = { _, _ -> })
         }
     }
 }

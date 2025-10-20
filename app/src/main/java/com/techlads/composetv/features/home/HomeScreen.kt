@@ -9,6 +9,6 @@ fun HomeScreen(
     onSongClick: () -> Unit,
 ) {
     HomeScreenContent(onItemFocus, homeViewModel.usedTopBar,
-        { homeViewModel.updateMenu(it) }, onSongClick
+        navigationBar = { homeViewModel.updateMenu(it) }, onSongClick
     )
 }

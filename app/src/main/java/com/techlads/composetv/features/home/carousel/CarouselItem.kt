@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Text
 import coil.compose.AsyncImage
 import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.composetv.widgets.BorderedFocusableItem
+import com.techlads.uicomponents.widgets.BorderedFocusableItem
 
 @Composable
 fun CarouselItem(

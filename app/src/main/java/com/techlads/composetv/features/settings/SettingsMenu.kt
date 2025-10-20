@@ -18,7 +18,7 @@ import androidx.tv.material3.Switch
 import androidx.tv.material3.Text
 import com.techlads.composetv.features.home.NavigationEvent
 import com.techlads.composetv.features.settings.data.SettingsMenuModel
-import com.techlads.composetv.widgets.FocusableItem
+import com.techlads.uicomponents.widgets.FocusableItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

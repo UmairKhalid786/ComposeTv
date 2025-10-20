@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -36,9 +35,7 @@ import com.github.alexzhirkevich.customqrgenerator.vector.QrCodeDrawable
 import com.github.alexzhirkevich.customqrgenerator.vector.QrVectorOptions
 import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColor
 import com.github.alexzhirkevich.customqrgenerator.vector.style.QrVectorColors
-import com.techlads.composetv.features.home.carousel.SKIP_TAG
-import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.composetv.widgets.TvButton
+import com.techlads.uicomponents.widgets.TvButton
 
 @Composable
 fun DeviceTokenAuthenticationContent(
@@ -173,7 +170,7 @@ fun DeviceTokenAuthenticationContent(
             TvButton(
                 modifier = Modifier
                     .weight(1f)
-                    .testTag(SKIP_TAG)
+//                    .testTag(SKIP_TAG)
                     .padding(start = 20.dp, end = 20.dp),
                 colors = ButtonDefaults.colors(
                     containerColor = MaterialTheme.colorScheme.surface,
@@ -185,7 +182,7 @@ fun DeviceTokenAuthenticationContent(
                     modifier = Modifier.fillMaxWidth().clickable {
                         skip()
                     },
-                    text = SKIP_TAG,
+                    text = "Skip",
                     style = TextStyle(
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Light,
@@ -201,7 +198,7 @@ fun DeviceTokenAuthenticationContent(
 @Preview
 @Composable
 fun DeviceTokenAuthenticationContentPreview() {
-    ComposeTvTheme {
+    MaterialTheme {
         DeviceTokenAuthenticationContent(token = "OTF2", "www.google.com", skip = {}, onLoginClick = {})
     }
 }

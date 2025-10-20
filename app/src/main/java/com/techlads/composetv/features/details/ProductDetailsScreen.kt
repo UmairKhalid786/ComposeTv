@@ -42,8 +42,8 @@ import com.techlads.composetv.R
 import com.techlads.composetv.features.details.ProductDetailsState.Success
 import com.techlads.composetv.features.home.carousel.PRODUCT_DETAIL_BANNER_TAG
 import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.composetv.widgets.ThumbnailImageCard
-import com.techlads.composetv.widgets.TvButton
+import com.techlads.uicomponents.widgets.ThumbnailImageCard
+import com.techlads.uicomponents.widgets.TvButton
 import kotlinx.coroutines.delay
 
 const val ANIMATION_DELAY = 600L

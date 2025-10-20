@@ -6,23 +6,40 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.techlads.auth.AuthState
 import com.techlads.composetv.features.details.ProductDetailsScreen
 import com.techlads.composetv.features.home.HomeScreen
 import com.techlads.composetv.features.home.HomeViewModel
-import com.techlads.composetv.features.login.withEmailPassword.LoginScreen
-import com.techlads.composetv.features.login.withToken.DeviceTokenAuthenticationScreen
 import com.techlads.composetv.features.mp3.player.AudioPlayerScreen
 import com.techlads.composetv.features.player.PlayerScreen
 import com.techlads.composetv.features.wiw.WhoIsWatchingScreen
+import com.techlads.login.withEmailPassword.LoginScreen
+import com.techlads.login.withToken.DeviceTokenAuthenticationScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel) {
+
+    val state by homeViewModel.userState.collectAsStateWithLifecycle()
+    LaunchedEffect(state) {
+        when (state) {
+            is AuthState.LoggedIn -> navController.navigate(Screens.Home.route) {
+                popUpTo(Screens.Login.route) { inclusive = true }
+            }
+            AuthState.LoggedOut -> navController.navigate(Screens.Login.route) {
+                popUpTo(0)
+            }
+        }
+    }
+
     NavHost(navController = navController, startDestination = Screens.Login.route) {
         // e.g will add auth routes here if when we will extend project
         composable(
@@ -38,9 +55,9 @@ fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel
         ) {
             DeviceTokenAuthenticationScreen(onSkip = {
                 navController.navigateSingleTopTo(Screens.Home.route)
-            }) {
-                navController.navigateSingleTopTo(it.route)
-            }
+            }, onLogin = {
+                navController.navigateSingleTopTo(Screens.Login.route)
+            })
         }
 
         composable(

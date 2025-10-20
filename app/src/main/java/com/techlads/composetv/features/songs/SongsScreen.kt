@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
-import com.techlads.composetv.widgets.BorderedFocusableItem
+import com.techlads.uicomponents.widgets.BorderedFocusableItem
 
 @Composable
 fun SongsScreen(onSongClick: () -> Unit) {

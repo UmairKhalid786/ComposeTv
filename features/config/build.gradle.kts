@@ -1,34 +1,19 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.hilt)
+    id("com.techlads.android.feature")
+    id("com.techlads.android.hilt")
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "com.techlads.config"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = libs.versions.minSdkTv.get().toInt()
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-        }
-    }
 }
 
 dependencies {
-    implementation(project(":libs:network"))
+    implementation(projects.libs.network)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 }

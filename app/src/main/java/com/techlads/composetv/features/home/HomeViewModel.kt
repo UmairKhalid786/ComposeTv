@@ -2,9 +2,11 @@ package com.techlads.composetv.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.techlads.auth.UserSession
 import com.techlads.composetv.features.home.carousel.CardPayload
 import com.techlads.composetv.features.home.carousel.CarouselItemPayload
 import com.techlads.composetv.features.home.carousel.HomeCarouselState
+import com.techlads.composetv.features.home.hero.HeroItemState
 import com.techlads.content.data.MoviesRepository
 import com.techlads.content.data.MoviesResponse
 import com.techlads.network.ApiResult
@@ -21,8 +23,22 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repo: MoviesRepository
+    private val repo: MoviesRepository,
+    private val userSession: UserSession
 ) : ViewModel() {
+
+    val userState = userSession.authState
+
+    fun logout() = viewModelScope.launch {
+        userSession.logout()
+    }
+
+    private val _homeItems: MutableStateFlow<HeroItemState> = MutableStateFlow(
+        HeroItemState(
+            list = listOf()
+        )
+    )
+    val heroItemState: StateFlow<HeroItemState> = _homeItems.asStateFlow()
 
     private val _usedTopBar = MutableStateFlow<NavigationEvent>(NavigationEvent.TopBar)
     val usedTopBar: StateFlow<NavigationEvent> = _usedTopBar.asStateFlow()
@@ -37,10 +53,22 @@ class HomeViewModel @Inject constructor(
     private fun fetchPopularMovies() {
         viewModelScope.launch {
             try {
-                handleMoviesResponse(title = "now playing", result = async { repo.getNowPlaying() }.await())
-                handleMoviesResponse(title = "popular", result = async { repo.getPopularMovies() }.await())
-                handleMoviesResponse(title = "top rated", result = async { repo.getTopRatedMovies() }.await())
-                handleMoviesResponse(title = "upcoming", result = async { repo.getUpcoming() }.await())
+                handleMoviesResponse(
+                    title = "now playing",
+                    result = async { repo.getNowPlaying() }.await()
+                )
+                handleMoviesResponse(
+                    title = "popular",
+                    result = async { repo.getPopularMovies() }.await()
+                )
+                handleMoviesResponse(
+                    title = "top rated",
+                    result = async { repo.getTopRatedMovies() }.await()
+                )
+                handleMoviesResponse(
+                    title = "upcoming",
+                    result = async { repo.getUpcoming() }.await()
+                )
             } catch (e: Exception) {
                 // Handle error
                 throw e
@@ -50,7 +78,8 @@ class HomeViewModel @Inject constructor(
 
     private fun CoroutineScope.handleMoviesResponse(
         title: String,
-        result: ApiResult<MoviesResponse>) {
+        result: ApiResult<MoviesResponse>
+    ) {
         when (result) {
             is ApiResult.Success -> _homeState.update {
                 it.copy(
@@ -62,7 +91,7 @@ class HomeViewModel @Inject constructor(
                             CardPayload(
                                 id = it.id.toString(),
                                 title = it.title,
-                                image ="https://image.tmdb.org/t/p/w500" + it.backdropPath,
+                                image = "https://image.tmdb.org/t/p/w500" + it.backdropPath,
                                 promo = null
                             )
                         }

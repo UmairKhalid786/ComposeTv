@@ -1,0 +1,20 @@
+package com.techlads.content.data
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class MoviesResponse(
+    val results: List<MovieDto>
+)
+
+@Serializable
+data class MovieDto(
+    val id: Int,
+    val title: String,
+    val overview: String,
+    @SerialName("poster_path")
+    val posterPath: String,
+    @SerialName("backdrop_path")
+    val backdropPath: String
+)

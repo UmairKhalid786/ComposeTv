@@ -104,7 +104,7 @@ fun MovieResponse.toUIDetails() = Details(
     background = backdropPath,
     description = overview,
     releaseDate = releaseDate,
-    genres = genres.map { it.name })
+    genres = genre.map { it.name })
 
 fun MovieVideosResponse.toUiVideos() = Videos(
     videos = results.map {
