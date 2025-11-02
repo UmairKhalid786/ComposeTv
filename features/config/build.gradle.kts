@@ -10,10 +10,4 @@ android {
 
 dependencies {
     implementation(projects.libs.network)
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-
-    implementation(libs.androidx.hilt.navigation.compose)
 }

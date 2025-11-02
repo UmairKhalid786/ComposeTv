@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeNestedScreen(
     homeViewModel: HomeViewModel,
-    navigationBar: (NavigationEvent) -> Unit,
+//    navigationBar: (NavigationEvent) -> Unit,
     onItemFocus: (parent: String, child: String) -> Unit,
     onItemClick: (parent: String, child: String) -> Unit,
 ) {
@@ -78,7 +78,6 @@ fun HomeNestedScreen(
                             if (focusState.value.first == 0) {
                                 showCarousel.value = true
                                 showTopPickDetails.value = false
-                                navigationBar(NavigationEvent.TopBar)
                                 delay(200)
                                 focusRequester.requestFocus()
                             }
@@ -106,8 +105,7 @@ fun HomeNestedScreen(
                     showTopPickDetails.value = false
                 }
 
-                navigationBar(if (parentIndex.first >= 0) NavigationEvent.None else NavigationEvent.TopBar)
-
+//                navigationBar(NavigationEvent.TopBar)
             },
             onItemClick = onItemClick,
         )

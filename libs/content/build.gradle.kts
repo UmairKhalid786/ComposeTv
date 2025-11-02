@@ -9,7 +9,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.libs.network)
+    api(projects.libs.network)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

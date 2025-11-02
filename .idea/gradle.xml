@@ -29,6 +29,8 @@
             <option value="$PROJECT_DIR$/gradle/build-logic" />
             <option value="$PROJECT_DIR$/gradle/build-logic/convention" />
             <option value="$PROJECT_DIR$/libs" />
+            <option value="$PROJECT_DIR$/libs/auth" />
+            <option value="$PROJECT_DIR$/libs/auth-imp" />
             <option value="$PROJECT_DIR$/libs/baselineprofile" />
             <option value="$PROJECT_DIR$/libs/benchmark" />
             <option value="$PROJECT_DIR$/libs/content" />

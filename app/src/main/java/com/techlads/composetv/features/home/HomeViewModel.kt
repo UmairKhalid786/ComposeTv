@@ -24,14 +24,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repo: MoviesRepository,
-    private val userSession: UserSession
+    userSession: UserSession
 ) : ViewModel() {
-
     val userState = userSession.authState
-
-    fun logout() = viewModelScope.launch {
-        userSession.logout()
-    }
 
     private val _homeItems: MutableStateFlow<HeroItemState> = MutableStateFlow(
         HeroItemState(
@@ -40,10 +35,7 @@ class HomeViewModel @Inject constructor(
     )
     val heroItemState: StateFlow<HeroItemState> = _homeItems.asStateFlow()
 
-    private val _usedTopBar = MutableStateFlow<NavigationEvent>(NavigationEvent.TopBar)
-    val usedTopBar: StateFlow<NavigationEvent> = _usedTopBar.asStateFlow()
-
-    private val _homeState = MutableStateFlow<HomeCarouselState>(HomeCarouselState(emptyList()))
+    private val _homeState = MutableStateFlow(HomeCarouselState(emptyList()))
     val homeState: StateFlow<HomeCarouselState> get() = _homeState.asStateFlow()
 
     init {
@@ -91,7 +83,7 @@ class HomeViewModel @Inject constructor(
                             CardPayload(
                                 id = it.id.toString(),
                                 title = it.title,
-                                image = "https://image.tmdb.org/t/p/w500" + it.backdropPath,
+                                image = if (it.backdropPath.startsWith("https")) it.backdropPath else "https://image.tmdb.org/t/p/w500" + it.backdropPath,
                                 promo = null
                             )
                         }
@@ -103,10 +95,6 @@ class HomeViewModel @Inject constructor(
                 // Handle error
             }
         }
-    }
-
-    fun updateMenu(menu: NavigationEvent) {
-        _usedTopBar.value = menu
     }
 }
 

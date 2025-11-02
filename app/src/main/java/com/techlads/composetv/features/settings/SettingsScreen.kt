@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun SettingsScreen(usedTopBar: StateFlow<NavigationEvent>, navigationBar: (NavigationEvent) -> Unit,) {
+fun SettingsScreen() {
     val navController = rememberAnimatedNavController()
 
     Row(
@@ -28,8 +28,6 @@ fun SettingsScreen(usedTopBar: StateFlow<NavigationEvent>, navigationBar: (Navig
             .fillMaxSize(),
     ) {
         SettingsMenu(
-            usedTopBar = usedTopBar,
-            navigationBar = { navigationBar(it) },
             modifier = Modifier
                 .fillMaxHeight()
                 .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.2f))
@@ -49,5 +47,5 @@ fun SettingsNavigation(navController: NavHostController) {
 @Preview
 @Composable
 fun SettingsScreenPrev() {
-    SettingsScreen(MutableStateFlow(NavigationEvent.TopBar)){}
+    SettingsScreen()
 }

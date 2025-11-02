@@ -1,97 +1,98 @@
 package com.techlads.content.data
 
 object FakeMoviesDataProvider {
+
     val movies = listOf(
         MovieDto(
             id = 0,
             title = "Dune: Part Two",
             overview = "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
-            posterPath = "https://images.unsplash.com/photo-1729433321272-9243b22c5f6e",
-            backdropPath = "https://images.unsplash.com/photo-1718191983833-9f07f72dba26"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/001.jpg"
         ), MovieDto(
             id = 1,
             title = "Killers of the Flower Moon",
             overview = "Members of the Osage tribe are murdered under mysterious circumstances in the 1920s, prompting a major F.B.I. investigation.",
-            posterPath = "https://images.unsplash.com/photo-1719937206094-8de79c912f40",
-            backdropPath = "https://images.unsplash.com/photo-1696073869327-f5b41b4f8121"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/KillersOfTheFlowerMoon/007.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/KillersOfTheFlowerMoon/006.jpg"
         ), MovieDto(
             id = 2,
             title = "Venom 3: Let There Be Carnage",
             overview = "Eddie Brock and Venom face a new threat in the form of Cletus Kasady, a serial killer who becomes the host of the symbiote Carnage.",
-            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Venom3/002.jpg",
-            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Venom3/001.jpg"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Venom3/005.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Venom3/015.jpg"
         ), MovieDto(
             id = 3,
             title = "Napoleon",
             overview = "An epic historical drama charting the rise and fall of French Emperor Napoleon Bonaparte, starring Joaquin Phoenix.",
-            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Napoleon/005.jpg",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Napoleon/007.jpg",
             backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/Napoleon/001.jpg"
         ), MovieDto(
             id = 4,
             title = "Spider-Man: Across the Spider-Verse",
             overview = "Miles Morales reunites with Gwen Stacy and encounters a team of Spider-People to face a new threat across the multiverse.",
-            posterPath = "https://64.media.tumblr.com/914bfbfdaeb0757c84c765d53bd747e6/tumblr_ms28wyKCs61qkd0zgo6_1280.png",
-            backdropPath = "https://images.unsplash.com/photo-1683053145862-090e207614d9"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Spider-Man-AcrossTheSpider-Verse/043.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/Spider-Man-AcrossTheSpider-Verse/001.jpg"
         ), MovieDto(
             id = 5,
             title = "The Menu",
             overview = "A young couple travels to a remote island to eat at an exclusive restaurant where the chef has prepared a lavish menu with shocking surprises.",
-            posterPath = "https://film-grab.com/wp-content/uploads/2024/07/Diner-17.jpg",
-            backdropPath = "https://film-grab.com/wp-content/uploads/2024/07/Diner-10.jpg"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2022/Menu/002.png",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2022/Menu/017.jpg"
         ), MovieDto(
             id = 6,
             title = "Lovers Rock",
             overview = "A romantic and immersive story set at a blues party in 1980s London.",
-            posterPath = "https://film-grab.com/wp-content/uploads/2024/08/Lovers-Rock-17.jpg",
-            backdropPath = "https://film-grab.com/wp-content/uploads/2024/08/Lovers-Rock-23.jpg"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2008/Elegy/posters.p/03.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2008/Elegy/movie.ws/01.jpg"
         ), MovieDto(
             id = 7,
             title = "Cuckoo",
             overview = "A young woman's idyllic summer takes a dark turn when she suspects she's being stalked by a sinister presence.",
-            posterPath = "https://film-grab.com/wp-content/uploads/2024/09/Cuckoo-30.jpg",
-            backdropPath = "https://film-grab.com/wp-content/uploads/2024/09/Cuckoo-06.jpg"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Cuckoo/001.png",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Cuckoo/008.jpg"
         ), MovieDto(
             id = 8,
             title = "The Bloody Judge",
             overview = "A corrupt and sadistic judge terrorizes 17th-century England with his brutal methods.",
-            posterPath = "https://film-grab.com/wp-content/uploads/2024/08/The-Bloody-Judge-37.jpg",
-            backdropPath = "https://film-grab.com/wp-content/uploads/2024/08/The-Bloody-Judge-15.jpg"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/001.jpg"
         ), MovieDto(
             id = 9,
             title = "Oppenheimer",
             overview = "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb during World War II.",
-            posterPath = "https://images.unsplash.com/photo-1698235389013-507bcb014c81",
-            backdropPath = "https://images.unsplash.com/photo-1698235388791-04f8371dff4c"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/001.jpg"
         ), MovieDto(
             id = 10,
             title = "Barbie",
             overview = "Barbie and Ken leave the perfect world of Barbie Land to discover the joys and challenges of the real world.",
-            posterPath = "https://images.unsplash.com/photo-1692466020868-70f2abbd7b41",
-            backdropPath = "https://images.unsplash.com/photo-1692466030561-c03b2ff7b8ef"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/001.jpg"
         ), MovieDto(
             id = 11,
             title = "Poor Things",
             overview = "A young woman, brought back to life by an unorthodox scientist, embarks on a journey of self-discovery and liberation.",
-            posterPath = "https://images.unsplash.com/photo-1699648628910-01fd6035f28a",
-            backdropPath = "https://images.unsplash.com/photo-1699648629061-0d98b4e2a7af"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/001.jpg"
         ), MovieDto(
             id = 12,
             title = "Everything Everywhere All at Once",
             overview = "A Chinese immigrant woman is swept up in an insane multiverse adventure, exploring alternate realities and her own regrets.",
-            posterPath = "https://images.unsplash.com/photo-1680364358650-41726ddf88e3",
-            backdropPath = "https://images.unsplash.com/photo-1680364360209-f1a2c85ff913"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/001.jpg"
         ), MovieDto(
             id = 13,
             title = "The Batman",
             overview = "Batman uncovers corruption in Gotham City that connects to his own family while facing the Riddler, a serial killer targeting the city's elite.",
-            posterPath = "https://images.unsplash.com/photo-1647849476694-870c6d19f9f9",
-            backdropPath = "https://images.unsplash.com/photo-1647849469012-88f07abf3fc4"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/001.jpg"
         ), MovieDto(
             id = 14,
             title = "Tenet",
             overview = "Armed with only one word — Tenet — and fighting for the survival of the world, a protagonist journeys through a twilight world of international espionage.",
-            posterPath = "https://images.unsplash.com/photo-1619108432491-18d2a8fa7c54",
-            backdropPath = "https://images.unsplash.com/photo-1619108444025-6e1f7329b7d7"
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/001.jpg"
         )
     )
     val movieDetails = listOf(
@@ -104,9 +105,9 @@ object FakeMoviesDataProvider {
             genre = listOf(
                 GenreDto(1, "Science Fiction"), GenreDto(2, "Adventure"), GenreDto(3, "Drama")
             ),
-            posterPath = "https://images.unsplash.com/photo-1729433321272-9243b22c5f6e",
             releaseDate = "2024-03-01",
-            backdropPath = "https://images.unsplash.com/photo-1718191983833-9f07f72dba26",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/042.jpg",
             originalTitle = "Dune: Part Two",
             spokenLanguages = listOf(
                 LanguageDto("en", "English", "English"), LanguageDto("fr", "French", "Français")
@@ -120,9 +121,9 @@ object FakeMoviesDataProvider {
             genre = listOf(
                 GenreDto(1, "Crime"), GenreDto(2, "Western"), GenreDto(3, "Drama")
             ),
-            posterPath = "https://images.unsplash.com/photo-1719937206094-8de79c912f40",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/KillersOfTheFlowerMoon/007.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/KillersOfTheFlowerMoon/014.jpg",
             releaseDate = "2023-10-20",
-            backdropPath = "https://images.unsplash.com/photo-1696073869327-f5b41b4f8121",
             originalTitle = "Killers of the Flower Moon",
             spokenLanguages = listOf(LanguageDto("en", "English", "English"))
         ), MovieResponse(
@@ -135,8 +136,8 @@ object FakeMoviesDataProvider {
                 GenreDto(1, "Action"), GenreDto(2, "Science Fiction")
             ),
             posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Venom3/002.jpg",
-            releaseDate = "2024-11-08",
             backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Venom3/001.jpg",
+            releaseDate = "2024-11-08",
             originalTitle = "Venom 3: Let There Be Carnage",
             spokenLanguages = listOf(LanguageDto("en", "English", "English"))
         ), MovieResponse(
@@ -148,8 +149,8 @@ object FakeMoviesDataProvider {
             genre = listOf(
                 GenreDto(1, "History"), GenreDto(2, "Biography"), GenreDto(3, "War")
             ),
-            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Napoleon/005.jpg",
             releaseDate = "2023-11-22",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Napoleon/007.jpg",
             backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/Napoleon/001.jpg",
             originalTitle = "Napoleon",
             spokenLanguages = listOf(
@@ -178,12 +179,13 @@ object FakeMoviesDataProvider {
             genre = listOf(
                 GenreDto(1, "Horror"), GenreDto(2, "Thriller")
             ),
-            posterPath = "https://film-grab.com/wp-content/uploads/2024/07/Diner-17.jpg",
             releaseDate = "2022-11-18",
-            backdropPath = "https://film-grab.com/wp-content/uploads/2024/07/Diner-10.jpg",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2022/Menu/002.png",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2022/Menu/017.jpg",
             originalTitle = "The Menu",
             spokenLanguages = listOf(LanguageDto("en", "English", "English"))
-        ), MovieResponse(
+        ),
+        MovieResponse(
             id = 6,
             title = "Lovers Rock",
             adult = false,
@@ -192,12 +194,13 @@ object FakeMoviesDataProvider {
             genre = listOf(
                 GenreDto(1, "Romance"), GenreDto(2, "Drama"), GenreDto(3, "Music")
             ),
-            posterPath = "https://film-grab.com/wp-content/uploads/2024/08/Lovers-Rock-17.jpg",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2008/Elegy/posters.p/03.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2008/Elegy/movie.ws/01.jpg",
             releaseDate = "2020-11-27",
-            backdropPath = "https://film-grab.com/wp-content/uploads/2024/08/Lovers-Rock-23.jpg",
             originalTitle = "Lovers Rock",
             spokenLanguages = listOf(LanguageDto("en", "English", "English"))
-        ), MovieResponse(
+        ),
+        MovieResponse(
             id = 7,
             title = "Cuckoo",
             adult = false,
@@ -206,12 +209,13 @@ object FakeMoviesDataProvider {
             genre = listOf(
                 GenreDto(1, "Horror"), GenreDto(2, "Thriller"), GenreDto(3, "Mystery")
             ),
-            posterPath = "https://film-grab.com/wp-content/uploads/2024/09/Cuckoo-30.jpg",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Cuckoo/001.png",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Cuckoo/009.jpg",
             releaseDate = "2023-10-05",
-            backdropPath = "https://film-grab.com/wp-content/uploads/2024/09/Cuckoo-06.jpg",
             originalTitle = "Cuckoo",
             spokenLanguages = listOf(LanguageDto("en", "English", "English"))
-        ), MovieResponse(
+        ),
+        MovieResponse(
             id = 8,
             title = "The Bloody Judge",
             adult = true,
@@ -220,31 +224,169 @@ object FakeMoviesDataProvider {
             genre = listOf(
                 GenreDto(1, "Horror"), GenreDto(2, "History")
             ),
-            posterPath = "https://film-grab.com/wp-content/uploads/2024/08/The-Bloody-Judge-37.jpg",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Napoleon/005.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/Napoleon/001.jpg",
             releaseDate = "1972-02-25",
-            backdropPath = "https://film-grab.com/wp-content/uploads/2024/08/The-Bloody-Judge-15.jpg",
             originalTitle = "The Bloody Judge",
             spokenLanguages = listOf(LanguageDto("en", "English", "English"))
-        ), MovieResponse(
+        ),
+        MovieResponse(
             id = 9,
             title = "Oppenheimer",
             adult = false,
             budget = 100_000_000,
-            overview = "The story of J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+            overview = "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb during World War II.",
             genre = listOf(
                 GenreDto(1, "Biography"), GenreDto(2, "Drama"), GenreDto(3, "History")
             ),
-            posterPath = "https://images.unsplash.com/photo-1698235389013-507bcb014c81",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Oppenheimer/012.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/Oppenheimer/054.jpg",
             releaseDate = "2023-07-21",
-            backdropPath = "https://images.unsplash.com/photo-1698235388791-04f8371dff4c",
             originalTitle = "Oppenheimer",
+            spokenLanguages = listOf(LanguageDto("en", "English", "English"))
+        ),
+        MovieResponse(
+            id = 10,
+            title = "Barbie",
+            adult = false,
+            budget = 145_000_000,
+            overview = "Barbie and Ken leave the perfect world of Barbie Land to discover the joys and challenges of the real world.",
+            genre = listOf(
+                GenreDto(1, "Comedy"), GenreDto(2, "Fantasy"), GenreDto(3, "Adventure")
+            ),
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Barbie/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/Barbie/048.jpg",
+            releaseDate = "2023-07-21",
+            originalTitle = "Barbie",
+            spokenLanguages = listOf(LanguageDto("en", "English", "English"))
+        ),
+        MovieResponse(
+            id = 11,
+            title = "Poor Things",
+            adult = false,
+            budget = 35_000_000,
+            overview = "A young woman, brought back to life by an unorthodox scientist, embarks on a journey of self-discovery and liberation.",
+            genre = listOf(
+                GenreDto(1, "Drama"), GenreDto(2, "Romance"), GenreDto(3, "Fantasy")
+            ),
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/PoorThings/029.png",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/PoorThings/028.jpg",
+            releaseDate = "2023-12-08",
+            originalTitle = "Poor Things",
+            spokenLanguages = listOf(LanguageDto("en", "English", "English"))
+        ),
+        MovieResponse(
+            id = 12,
+            title = "Everything Everywhere All at Once",
+            adult = false,
+            budget = 25_000_000,
+            overview = "A Chinese immigrant woman is swept up in an insane multiverse adventure, exploring alternate realities and her own regrets.",
+            genre = listOf(
+                GenreDto(1, "Action"), GenreDto(2, "Adventure"), GenreDto(3, "Comedy")
+            ),
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2022/EverythingEverywhereAllAtOnce/001.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2022/EverythingEverywhereAllAtOnce/016.jpg",
+            releaseDate = "2022-03-25",
+            originalTitle = "Everything Everywhere All at Once",
+            spokenLanguages = listOf(
+                LanguageDto("en", "English", "English"),
+                LanguageDto("zh", "Chinese", "中文")
+            )
+        ),
+        MovieResponse(
+            id = 13,
+            title = "The Batman",
+            adult = false,
+            budget = 200_000_000,
+            overview = "Batman uncovers corruption in Gotham City that connects to his own family while facing the Riddler, a serial killer targeting the city's elite.",
+            genre = listOf(
+                GenreDto(1, "Action"), GenreDto(2, "Crime"), GenreDto(3, "Drama")
+            ),
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2022/Batman/021.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2022/Batman/043.jpg",
+            releaseDate = "2022-03-04",
+            originalTitle = "The Batman",
+            spokenLanguages = listOf(LanguageDto("en", "English", "English"))
+        ),
+        MovieResponse(
+            id = 14,
+            title = "Tenet",
+            adult = false,
+            budget = 205_000_000,
+            overview = "Armed with only one word — Tenet — and fighting for the survival of the world, a protagonist journeys through a twilight world of international espionage.",
+            genre = listOf(
+                GenreDto(1, "Action"), GenreDto(2, "Science Fiction"), GenreDto(3, "Thriller")
+            ),
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2020/Tenet/037.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2020/Tenet/010.jpg",
+            releaseDate = "2020-08-26",
+            originalTitle = "Tenet",
+            spokenLanguages = listOf(LanguageDto("en", "English", "English"))
+        ),
+        MovieResponse(
+            id = 15,
+            title = "Dune: Part Two",
+            adult = false,
+            budget = 165_000_000,
+            overview = "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+            genre = listOf(
+                GenreDto(1, "Science Fiction"), GenreDto(2, "Adventure"), GenreDto(3, "Drama")
+            ),
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/042.jpg",
+            releaseDate = "2024-03-01",
+            originalTitle = "Dune: Part Two",
+            spokenLanguages = listOf(LanguageDto("en", "English", "English"))
+        ),
+        MovieResponse(
+            id = 16,
+            title = "John Wick: Chapter 4",
+            adult = false,
+            budget = 100_000_000,
+            overview = "John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face a new enemy.",
+            genre = listOf(
+                GenreDto(1, "Action"), GenreDto(2, "Crime"), GenreDto(3, "Thriller")
+            ),
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/JohnWick-Chapter4/021.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/JohnWick-Chapter4/020.jpg",
+            releaseDate = "2023-03-24",
+            originalTitle = "John Wick: Chapter 4",
+            spokenLanguages = listOf(LanguageDto("en", "English", "English"))
+        ),
+        MovieResponse(
+            id = 17,
+            title = "Killers of the Flower Moon",
+            adult = false,
+            budget = 200_000_000,
+            overview = "Members of the Osage Nation are murdered under mysterious circumstances in the 1920s, prompting a major FBI investigation.",
+            genre = listOf(
+                GenreDto(1, "Crime"), GenreDto(2, "Drama"), GenreDto(3, "History")
+            ),
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/KillersOfTheFlowerMoon/007.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/KillersOfTheFlowerMoon/014.jpg",
+            releaseDate = "2023-10-20",
+            originalTitle = "Killers of the Flower Moon",
+            spokenLanguages = listOf(LanguageDto("en", "English", "English"))
+        ),
+        MovieResponse(
+            id = 18,
+            title = "Guardians of the Galaxy Vol. 3",
+            adult = false,
+            budget = 250_000_000,
+            overview = "The Guardians embark on one final mission to protect one of their own and the galaxy along the way.",
+            genre = listOf(
+                GenreDto(1, "Action"), GenreDto(2, "Comedy"), GenreDto(3, "Science Fiction")
+            ),
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/GuardiansOfTheGalaxyVol.3/021.png",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/GuardiansOfTheGalaxyVol.3/006.jpg",
+            releaseDate = "2023-05-05",
+            originalTitle = "Guardians of the Galaxy Vol. 3",
             spokenLanguages = listOf(LanguageDto("en", "English", "English"))
         )
     )
     val movieVideos = listOf(
         MovieVideosResponse(
-            id = 0,
-            results = listOf(
+            id = 0, results = listOf(
                 VideoDto(
                     name = "Dune: Part Two | Official Trailer",
                     size = 1080,
@@ -255,8 +397,7 @@ object FakeMoviesDataProvider {
                     publishedAt = "2024-02-15T10:00:00Z",
                     iso639 = "en",
                     iso3166 = "US"
-                ),
-                VideoDto(
+                ), VideoDto(
                     name = "Behind the Scenes: Creating Arrakis",
                     size = 720,
                     site = "YouTube",
@@ -268,10 +409,8 @@ object FakeMoviesDataProvider {
                     iso3166 = "US"
                 )
             )
-        ),
-        MovieVideosResponse(
-            id = 1,
-            results = listOf(
+        ), MovieVideosResponse(
+            id = 1, results = listOf(
                 VideoDto(
                     name = "Killers of the Flower Moon | Official Trailer",
                     size = 1080,
@@ -284,10 +423,8 @@ object FakeMoviesDataProvider {
                     iso3166 = "US"
                 )
             )
-        ),
-        MovieVideosResponse(
-            id = 2,
-            results = listOf(
+        ), MovieVideosResponse(
+            id = 2, results = listOf(
                 VideoDto(
                     name = "Venom 3 | Official Trailer",
                     size = 1080,
@@ -300,10 +437,8 @@ object FakeMoviesDataProvider {
                     iso3166 = "US"
                 )
             )
-        ),
-        MovieVideosResponse(
-            id = 3,
-            results = listOf(
+        ), MovieVideosResponse(
+            id = 3, results = listOf(
                 VideoDto(
                     name = "Napoleon | Official Trailer",
                     size = 1080,
@@ -316,10 +451,8 @@ object FakeMoviesDataProvider {
                     iso3166 = "US"
                 )
             )
-        ),
-        MovieVideosResponse(
-            id = 4,
-            results = listOf(
+        ), MovieVideosResponse(
+            id = 4, results = listOf(
                 VideoDto(
                     name = "Spider-Man: Across the Spider-Verse | Official Trailer",
                     size = 1080,
@@ -330,8 +463,7 @@ object FakeMoviesDataProvider {
                     publishedAt = "2023-04-04T10:00:00Z",
                     iso639 = "en",
                     iso3166 = "US"
-                ),
-                VideoDto(
+                ), VideoDto(
                     name = "Meet the Spider-Team",
                     size = 720,
                     site = "YouTube",
@@ -343,10 +475,8 @@ object FakeMoviesDataProvider {
                     iso3166 = "US"
                 )
             )
-        ),
-        MovieVideosResponse(
-            id = 5,
-            results = listOf(
+        ), MovieVideosResponse(
+            id = 5, results = listOf(
                 VideoDto(
                     name = "The Menu | Official Trailer",
                     size = 1080,
@@ -359,10 +489,8 @@ object FakeMoviesDataProvider {
                     iso3166 = "US"
                 )
             )
-        ),
-        MovieVideosResponse(
-            id = 6,
-            results = listOf(
+        ), MovieVideosResponse(
+            id = 6, results = listOf(
                 VideoDto(
                     name = "Lovers Rock | Trailer",
                     size = 720,
@@ -375,10 +503,8 @@ object FakeMoviesDataProvider {
                     iso3166 = "GB"
                 )
             )
-        ),
-        MovieVideosResponse(
-            id = 7,
-            results = listOf(
+        ), MovieVideosResponse(
+            id = 7, results = listOf(
                 VideoDto(
                     name = "Cuckoo | Official Trailer",
                     size = 1080,
@@ -391,10 +517,8 @@ object FakeMoviesDataProvider {
                     iso3166 = "US"
                 )
             )
-        ),
-        MovieVideosResponse(
-            id = 8,
-            results = listOf(
+        ), MovieVideosResponse(
+            id = 8, results = listOf(
                 VideoDto(
                     name = "The Bloody Judge | 4K Restoration Trailer",
                     size = 1080,
@@ -407,10 +531,8 @@ object FakeMoviesDataProvider {
                     iso3166 = "US"
                 )
             )
-        ),
-        MovieVideosResponse(
-            id = 9,
-            results = listOf(
+        ), MovieVideosResponse(
+            id = 9, results = listOf(
                 VideoDto(
                     name = "Oppenheimer | Official Trailer",
                     size = 1080,
@@ -421,8 +543,7 @@ object FakeMoviesDataProvider {
                     publishedAt = "2023-05-08T12:00:00Z",
                     iso639 = "en",
                     iso3166 = "US"
-                ),
-                VideoDto(
+                ), VideoDto(
                     name = "Inside Oppenheimer | Behind the Scenes",
                     size = 720,
                     site = "YouTube",

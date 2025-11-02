@@ -5,21 +5,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.techlads.composetv.features.home.NavigationEvent
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun NestedHomeNavigation(
-    usedTopBar: StateFlow<NavigationEvent>,
-    navigationBar: (NavigationEvent) -> Unit,
     navController: NavHostController,
     onItemClick: (parent: String, child: String) -> Unit,
     onItemFocus: (parent: String, child: String) -> Unit,
     onSongClick: () -> Unit
 ) {
     NestedHomeScreenNavigation(
-        usedTopBar, navigationBar, navController, onItemClick, onItemFocus, onSongClick
+        navController, onItemClick, onItemFocus, onSongClick
     )
 }
 
@@ -27,8 +22,7 @@ fun NestedHomeNavigation(
 @Preview
 @Composable
 private fun NestedHomeNavigationPrev() {
-    NestedHomeNavigation(MutableStateFlow(NavigationEvent.TopBar),
-        {},
+    NestedHomeNavigation(
         rememberAnimatedNavController(),
         { _, _ -> },
         { _, _ -> }) {}

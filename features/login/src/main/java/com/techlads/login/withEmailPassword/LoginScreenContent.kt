@@ -5,15 +5,25 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -23,7 +33,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
@@ -45,47 +54,39 @@ import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun BoxScope.LoginPageContent(
-    state: CrossFadeState,
     onLoginClick: (user: String, psw: String) -> Unit,
 ) {
-    val background = MaterialTheme.colorScheme.surface
-
-    CrossFadeBackground(
-        state = state, modifier = Modifier
-            .fillMaxSize()
-            .drawWithContent {
-                drawContent()
-                drawRect(
-                    Brush.radialGradient(
-                        listOf(
-                            background.copy(0.8f),
-                            background.copy(0.7f),
-                            background.copy(0.6f),
-                        )
-                    ), size = size
-                )
-            })
+    val insets = WindowInsets.ime.union(WindowInsets.systemBars)
+    val brush = Brush.radialGradient(
+        listOf(
+            MaterialTheme.colorScheme.background.copy(alpha = 0.5f),
+            MaterialTheme.colorScheme.background.copy(0.1f)
+        )
+    )
 
     Column(
         modifier = Modifier
+            .windowInsetsPadding(insets)
+            .verticalScroll(rememberScrollState())
+            .imePadding()
+            .background(brush)
             .align(Alignment.Center)
             .padding(horizontal = 60.dp)
+            .fillMaxHeight()
             .fillMaxWidth(0.4f),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val username = remember { mutableStateOf("") }
         val password = remember { mutableStateOf("") }
 
         ScreenHeading("LOGIN")
-        Spacer(modifier = Modifier.height(20.dp))
         TvTextField(
             value = username.value, placeholder = "Username",
             modifier = Modifier.fillMaxWidth(),
         ) {
             username.value = it
         }
-        Spacer(modifier = Modifier.height(20.dp))
         TvTextField(
             modifier = Modifier.fillMaxWidth(),
             value = password.value,
@@ -93,7 +94,8 @@ fun BoxScope.LoginPageContent(
             visualTransformation = PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password,
         ) { password.value = it }
-        Spacer(modifier = Modifier.height(40.dp))
+
+        Spacer(modifier = Modifier.height(20.dp))
 
         TvButton(
             modifier = Modifier.padding(start = 20.dp, end = 20.dp),
@@ -101,7 +103,7 @@ fun BoxScope.LoginPageContent(
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "LOGIN",
+                text = "Login",
                 style = TextStyle(
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Light,
@@ -165,16 +167,7 @@ fun CrossFadeBackground(
 fun LoginPagePrev() {
     MaterialTheme {
         Box {
-            LoginPageContent(
-                state = CrossFadeState(
-                    images = listOf(
-                        "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-                        "https://images.unsplash.com/photo-1494526585095-c41746248156",
-                        "https://images.unsplash.com/photo-1500534623283-312aade485b7",
-                    ),
-                    delaySec = 10,
-                    durationMs = 300f,
-                ), onLoginClick = { _, _ -> })
+            LoginPageContent(onLoginClick = { _, _ -> })
         }
     }
 }

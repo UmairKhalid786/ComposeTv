@@ -29,7 +29,6 @@
             android:exported="true"
             android:icon="@drawable/ic_app"
             android:logo="@drawable/ic_app"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

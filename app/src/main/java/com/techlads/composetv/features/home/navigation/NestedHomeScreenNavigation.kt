@@ -20,8 +20,6 @@ import kotlinx.coroutines.flow.StateFlow
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NestedHomeScreenNavigation(
-    usedTopBar: StateFlow<NavigationEvent>,
-    navigationBar: (NavigationEvent) -> Unit,
     navController: NavHostController,
     onItemClick: (parent: String, child: String) -> Unit,
     onItemFocus: (parent: String, child: String) -> Unit,
@@ -33,7 +31,7 @@ fun NestedHomeScreenNavigation(
             NestedScreens.Home.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            HomeNestedScreen(onItemFocus = onItemFocus, onItemClick = onItemClick, navigationBar = navigationBar, homeViewModel = hiltViewModel())
+            HomeNestedScreen(onItemFocus = onItemFocus, onItemClick = onItemClick, homeViewModel = hiltViewModel())
         }
 
         composable(
@@ -68,7 +66,7 @@ fun NestedHomeScreenNavigation(
             NestedScreens.Settings.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            SettingsScreen(navigationBar = navigationBar, usedTopBar = usedTopBar)
+            SettingsScreen()
         }
     }
 }

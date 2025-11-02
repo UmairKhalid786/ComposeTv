@@ -21,12 +21,17 @@ import com.techlads.composetv.features.home.HomeViewModel
 import com.techlads.composetv.features.mp3.player.AudioPlayerScreen
 import com.techlads.composetv.features.player.PlayerScreen
 import com.techlads.composetv.features.wiw.WhoIsWatchingScreen
+import com.techlads.login.withEmailPassword.BackgroundViewModel
 import com.techlads.login.withEmailPassword.LoginScreen
 import com.techlads.login.withToken.DeviceTokenAuthenticationScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel) {
+fun AppNavigation(
+    navController: NavHostController,
+    backgroundViewModel: BackgroundViewModel,
+    homeViewModel: HomeViewModel
+) {
 
     val state by homeViewModel.userState.collectAsStateWithLifecycle()
     LaunchedEffect(state) {
@@ -34,6 +39,7 @@ fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel
             is AuthState.LoggedIn -> navController.navigate(Screens.Home.route) {
                 popUpTo(Screens.Login.route) { inclusive = true }
             }
+
             AuthState.LoggedOut -> navController.navigate(Screens.Login.route) {
                 popUpTo(0)
             }
@@ -78,8 +84,10 @@ fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel
         composable(
             Screens.Home.route,
         ) {
-            HomeScreen(homeViewModel, { _, child ->
+            HomeScreen(onItemClick = { _, child ->
                 navController.navigate(Screens.ProductDetail.createRoute(child.toInt()))
+            }, onItemFocus = { parent, child ->
+                backgroundViewModel.changeBackground(parent, child)
             }) {
                 navController.navigate(Screens.Mp3Player.route)
             }
