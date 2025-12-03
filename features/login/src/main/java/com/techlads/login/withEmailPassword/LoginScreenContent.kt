@@ -34,6 +34,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
@@ -96,9 +98,17 @@ fun BoxScope.LoginPageContent(
         ) { password.value = it }
 
         Spacer(modifier = Modifier.height(20.dp))
+        // Play Button
+        val focusRequester = remember { FocusRequester() }
+        LaunchedEffect(Unit) {
+            delay(400)
+            focusRequester.requestFocus()
+        }
 
         TvButton(
-            modifier = Modifier.padding(start = 20.dp, end = 20.dp),
+            modifier = Modifier
+                .focusRequester(focusRequester)
+                .padding(start = 20.dp, end = 20.dp),
             onClick = { onLoginClick(username.value, password.value) },
         ) {
             Text(
