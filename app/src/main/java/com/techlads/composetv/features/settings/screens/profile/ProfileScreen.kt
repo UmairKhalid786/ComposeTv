@@ -23,7 +23,7 @@ import androidx.tv.material3.Text
 import com.techlads.composetv.R
 import com.techlads.composetv.features.settings.data.SettingsMenuModel
 import com.techlads.composetv.features.settings.screens.PreferencesContainer
-import com.techlads.composetv.widgets.TvButton
+import com.techlads.uicomponents.widgets.TvButton
 
 @Composable
 fun ProfileScreen() {

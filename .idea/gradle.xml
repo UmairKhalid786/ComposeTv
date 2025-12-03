@@ -4,21 +4,40 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/gradle/build-logic" name="build-logic">
+                <projects>
+                  <project path="$PROJECT_DIR$/gradle/build-logic" />
+                  <project path="$PROJECT_DIR$/gradle/build-logic/convention" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="jbr-21" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/baselineprofile" />
-            <option value="$PROJECT_DIR$/benchmark" />
-            <option value="$PROJECT_DIR$/exoplayer" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/config" />
-            <option value="$PROJECT_DIR$/features/content" />
-            <option value="$PROJECT_DIR$/network" />
-            <option value="$PROJECT_DIR$/player" />
+            <option value="$PROJECT_DIR$/features/login" />
+            <option value="$PROJECT_DIR$/gradle/build-logic" />
+            <option value="$PROJECT_DIR$/gradle/build-logic/convention" />
+            <option value="$PROJECT_DIR$/libs" />
+            <option value="$PROJECT_DIR$/libs/auth" />
+            <option value="$PROJECT_DIR$/libs/auth-imp" />
+            <option value="$PROJECT_DIR$/libs/baselineprofile" />
+            <option value="$PROJECT_DIR$/libs/benchmark" />
+            <option value="$PROJECT_DIR$/libs/content" />
+            <option value="$PROJECT_DIR$/libs/exoplayer" />
+            <option value="$PROJECT_DIR$/libs/network" />
+            <option value="$PROJECT_DIR$/libs/player" />
+            <option value="$PROJECT_DIR$/libs/ui-components" />
           </set>
         </option>
       </GradleProjectSettings>

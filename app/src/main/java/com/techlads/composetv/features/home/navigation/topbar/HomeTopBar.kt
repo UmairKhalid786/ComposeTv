@@ -21,6 +21,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -49,8 +51,34 @@ fun HomeTopBar(
 ) {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
     val searchItem = MenuData.menuItems[1]
+    val background = MaterialTheme.colorScheme.surface
 
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .drawBehind {
+                drawRect(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            background,
+                            background.copy(alpha = 0.0f)
+                        ),
+                        startY = 0.0f,
+                        endY = size.height / 3
+                    )
+                )
+
+                drawRect(brush = Brush.horizontalGradient(
+                    colors = listOf(
+                        background,
+                        background.copy(alpha = 0.7f),
+                        background.copy(alpha = 0.0f)
+                    ),
+                    startX = 0.0f,
+                    endX = size.height
+                ))
+            }
+    ) {
         AnimatedVisibility(minimiseTopBar.not()) {
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -95,7 +123,8 @@ fun HomeTopBar(
             }
         }
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
         ) {
             content()
         }

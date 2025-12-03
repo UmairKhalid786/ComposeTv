@@ -13,14 +13,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.tv.material3.MaterialTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.techlads.composetv.features.home.NavigationEvent
 import com.techlads.composetv.features.settings.navigation.NestedSettingsScreenNavigation
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun SettingsScreen(usedTopBar: StateFlow<NavigationEvent>, navigationBar: (NavigationEvent) -> Unit,) {
+fun SettingsScreen() {
     val navController = rememberAnimatedNavController()
 
     Row(
@@ -28,8 +25,6 @@ fun SettingsScreen(usedTopBar: StateFlow<NavigationEvent>, navigationBar: (Navig
             .fillMaxSize(),
     ) {
         SettingsMenu(
-            usedTopBar = usedTopBar,
-            navigationBar = { navigationBar(it) },
             modifier = Modifier
                 .fillMaxHeight()
                 .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.2f))
@@ -49,5 +44,5 @@ fun SettingsNavigation(navController: NavHostController) {
 @Preview
 @Composable
 fun SettingsScreenPrev() {
-    SettingsScreen(MutableStateFlow(NavigationEvent.TopBar)){}
+    SettingsScreen()
 }

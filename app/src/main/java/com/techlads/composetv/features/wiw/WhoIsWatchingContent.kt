@@ -11,6 +11,7 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.with
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,9 +32,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -52,6 +55,7 @@ import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
 import com.techlads.composetv.R
 import com.techlads.composetv.features.wiw.data.Avatar
+import com.techlads.composetv.theme.ComposeTvTheme
 import kotlinx.coroutines.delay
 
 private val avatarList = listOf(
@@ -75,10 +79,20 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
     var containerWidth by remember { mutableStateOf(0.dp) }
     // get local density from composable
     val density = LocalDensity.current
+    val brush = Brush.radialGradient(
+        listOf(
+            MaterialTheme.colorScheme.background.copy(alpha = 0.5f),
+            MaterialTheme.colorScheme.background.copy(0.1f)
+        )
+    )
 
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .drawWithContent {
+                drawCircle(brush, radius = size.maxDimension)
+                drawContent()
+            }
             .onGloballyPositioned {
                 containerWidth = with(density) {
                     it.size.width.toDp()
@@ -135,8 +149,7 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
                             },
                         onProfileSelection = {
                             onProfileSelection(item)
-                        }
-                    )
+                        })
                 }
             }
 
@@ -167,13 +180,11 @@ fun ProfileName(name: String, scaleUp: Boolean) {
             if (scaleUp) {
                 // If the target number is larger, it slides up and fades in
                 // while the initial (smaller) number slides up and fades out.
-                slideInVertically { height -> height } + fadeIn() with
-                    slideOutVertically { height -> -height } + fadeOut()
+                slideInVertically { height -> height } + fadeIn() with slideOutVertically { height -> -height } + fadeOut()
             } else {
                 // If the target number is smaller, it slides down and fades in
                 // while the initial number slides down and fades out.
-                slideInVertically { height -> -height } + fadeIn() with
-                    slideOutVertically { height -> height } + fadeOut()
+                slideInVertically { height -> -height } + fadeIn() with slideOutVertically { height -> height } + fadeOut()
             }.using(
                 // Disable clipping since the faded slide-in/out should
                 // be displayed out of bounds.
@@ -192,9 +203,7 @@ fun ProfileName(name: String, scaleUp: Boolean) {
 
 @Composable
 fun ScaleAbleAvatar(
-    modifier: Modifier,
-    avatarRes: Int,
-    onProfileSelection: () -> Unit
+    modifier: Modifier, avatarRes: Int, onProfileSelection: () -> Unit
 ) {
     Surface(
         onClick = {
@@ -234,9 +243,18 @@ fun AvatarIcon(modifier: Modifier, @DrawableRes avatarRes: Int, description: Str
     )
 }
 
-@Preview(device = Devices.TV_1080p, showBackground = true)
+@Preview(
+    device = Devices.TV_1080p,
+)
 @Composable
 private fun WhoIsWatchingPreview() {
-    WhoIsWatchingContent {
+    ComposeTvTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color.Red)
+        ) {
+            WhoIsWatchingContent {}
+        }
     }
 }

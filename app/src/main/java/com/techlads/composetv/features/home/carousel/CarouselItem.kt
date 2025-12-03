@@ -1,5 +1,6 @@
 package com.techlads.composetv.features.home.carousel
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Text
 import coil.compose.AsyncImage
 import com.techlads.composetv.theme.ComposeTvTheme
-import com.techlads.composetv.widgets.BorderedFocusableItem
+import com.techlads.uicomponents.widgets.BorderedFocusableItem
 
 @Composable
 fun CarouselItem(
@@ -44,7 +45,9 @@ fun CarouselItem(
                 modifier = Modifier.fillMaxSize(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
-            )
+            ).apply {
+                Log.e("CarouselItem", "CarouselItem: Loading Image ${cardPayload.image}" )
+            }
         }
     }
 }

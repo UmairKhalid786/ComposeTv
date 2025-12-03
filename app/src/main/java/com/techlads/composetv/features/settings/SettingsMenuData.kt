@@ -8,6 +8,7 @@ object SettingsMenuData {
         listOf(
             SettingsMenuModel("Profile", SettingsScreens.Profile.title),
             SettingsMenuModel("About Me", SettingsScreens.AboutMe.title),
+            SettingsMenuModel("Logout", SettingsScreens.Logout.title),
         )
     }
 }

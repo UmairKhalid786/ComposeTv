@@ -1,6 +1,6 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
+    includeBuild("gradle/build-logic")
     repositories {
         google()
         mavenCentral()
@@ -9,7 +9,6 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
@@ -17,21 +16,24 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ComposeTV"
-
 include(
     // Apps
     ":app",
 
     // Libs
-    ":libs:exoplayer",
-    ":libs:player",
+    ":libs:auth",
     ":libs:benchmark",
     ":libs:baselineprofile",
+    ":libs:content",
+    ":libs:exoplayer",
     ":libs:network",
+    ":libs:player",
+    ":libs:ui-components",
 
     // Features
     ":features:config",
-    ":features:content",
     ":features:login",
 )
+
+rootProject.name = "ComposeTV"
+include(":libs:auth-imp")

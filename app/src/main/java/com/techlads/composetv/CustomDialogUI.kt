@@ -8,13 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +22,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.tv.material3.Card
+import androidx.tv.material3.CardDefaults
+import androidx.tv.material3.MaterialTheme
+import androidx.tv.material3.OutlinedButton
+import androidx.tv.material3.OutlinedButtonDefaults
+import androidx.tv.material3.Text
 
 @Composable
 fun CustomDialog(openDialogCustom: MutableState<Boolean>, onExitClick: () -> Unit) {
@@ -46,8 +46,9 @@ fun CustomDialogUI(
     onExitClick: () -> Unit,
 ) {
     Card(
-        shape = RoundedCornerShape(10.dp),
+        shape = CardDefaults.shape(RoundedCornerShape(10.dp)),
         modifier = Modifier.padding(10.dp, 5.dp, 10.dp, 10.dp),
+        onClick = {}
     ) {
         Column(modifier.background(MaterialTheme.colorScheme.surface)) {
             // .......................................................................
@@ -92,9 +93,9 @@ fun CustomDialogUI(
                     .padding(top = 10.dp)
                     .background(MaterialTheme.colorScheme.background.copy(0.2F)),
             ) {
-                TextButton(onClick = {
+                OutlinedButton (onClick = {
                     openDialogCustom.value = false
-                }, modifier = Modifier.weight(1F), shape = RoundedCornerShape(0.dp)) {
+                }, modifier = Modifier.weight(1F), shape = OutlinedButtonDefaults.shape(RoundedCornerShape(0.dp))) {
                     Text(
                         "No",
                         fontWeight = FontWeight.Bold,
@@ -102,16 +103,16 @@ fun CustomDialogUI(
                     )
                 }
 
-                Divider(
-                    Modifier
-                        .height(50.dp)
-                        .width(1.dp),
-                )
+//                Divider(
+//                    Modifier
+//                        .height(50.dp)
+//                        .width(1.dp),
+//                )
 
-                TextButton(onClick = {
+                OutlinedButton(onClick = {
                     openDialogCustom.value = false
                     onExitClick()
-                }, modifier = Modifier.weight(1F), shape = RoundedCornerShape(0.dp)) {
+                }, modifier = Modifier.weight(1F), shape =  OutlinedButtonDefaults.shape(RoundedCornerShape(0.dp))) {
                     Text(
                         "Yes",
                         fontWeight = FontWeight.ExtraBold,

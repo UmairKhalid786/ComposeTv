@@ -1,42 +1,29 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.serialization)
+    id("com.techlads.android.feature")
+    id("com.techlads.android.compose")
+    id("com.techlads.android.hilt")
 }
 
 android {
     namespace = "com.techlads.login"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = libs.versions.minSdkTv.get().toInt()
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
 }
 
 dependencies {
-    implementation(project(":libs:network"))
+    implementation(projects.libs.content)
+    implementation(projects.libs.uiComponents)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    implementation(libs.qrcode)
+
+    implementation(libs.coil.core)
+    implementation(libs.coil.compose)
+
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.androidx.compose.bom)
+    implementation(libs.bundles.compose.tv)
+
     implementation(libs.androidx.hilt.navigation.compose)
 }
