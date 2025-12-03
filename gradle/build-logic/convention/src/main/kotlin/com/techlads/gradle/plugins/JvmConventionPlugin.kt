@@ -19,8 +19,8 @@ class JvmConventionPlugin : Plugin<Project> {
         // ---- resolve JVM version lazily & safely
         val jvmVersionProvider = providers.gradleProperty("jvm.version")
             .map { it.toInt() }
-            .map { it.takeIf { it in setOf(8, 11, 17, 21) } ?: 21 }
-            .orElse(21)
+            .map { it.takeIf { it in setOf(8, 11, 17, 21) } ?: 17 }
+            .orElse(17)
 
         val javaVersionProvider = jvmVersionProvider.map(JavaVersion::toVersion)
         val jvmTargetProvider = jvmVersionProvider.map { it.toJvmTarget() }
@@ -72,5 +72,5 @@ private fun Int.toJvmTarget(): JvmTarget = when (this) {
     11 -> JvmTarget.JVM_11
     17 -> JvmTarget.JVM_17
     21 -> JvmTarget.JVM_21
-    else -> JvmTarget.JVM_21
+    else -> JvmTarget.JVM_17
 }
