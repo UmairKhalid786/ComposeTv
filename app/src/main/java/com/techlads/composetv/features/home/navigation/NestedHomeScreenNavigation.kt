@@ -8,14 +8,12 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.techlads.composetv.features.favorites.FavoritesScreen
 import com.techlads.composetv.features.home.HomeNestedScreen
-import com.techlads.composetv.features.home.NavigationEvent
 import com.techlads.composetv.features.movies.MoviesScreen
 import com.techlads.composetv.features.search.SearchScreen
 import com.techlads.composetv.features.settings.SettingsScreen
 import com.techlads.composetv.features.songs.SongsScreen
 import com.techlads.composetv.navigation.tabEnterTransition
 import com.techlads.composetv.navigation.tabExitTransition
-import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable

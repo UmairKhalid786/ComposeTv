@@ -3,6 +3,7 @@ package com.techlads.composetv.features.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.techlads.auth.UserSession
+import com.techlads.composetv.features.Movie
 import com.techlads.composetv.features.home.carousel.CardPayload
 import com.techlads.composetv.features.home.carousel.CarouselItemPayload
 import com.techlads.composetv.features.home.carousel.HomeCarouselState
@@ -40,6 +41,33 @@ class HomeViewModel @Inject constructor(
 
     init {
         fetchPopularMovies()
+        fetchHeroItems()
+    }
+
+    private fun fetchHeroItems() {
+        viewModelScope.launch {
+            when (val result = repo.getPopularMovies()) {
+                is ApiResult.Success -> {
+                    val heroItems = result.data.results.take(5).map {
+                        Movie(
+                            title = it.title,
+                            imageUrl = if (it.backdropPath.startsWith("https")) it.backdropPath else "https://image.tmdb.org/t/p/w500" + it.backdropPath,
+                            metadata = "2023  •  1h 45m  •  Action, Adventure",
+                            details = it.overview
+                        )
+                    }
+                    _homeItems.update {
+                        it.copy(
+                            list = heroItems
+                        )
+                    }
+                }
+
+                is ApiResult.Error -> {
+                    // Handle error
+                }
+            }
+        }
     }
 
     private fun fetchPopularMovies() {
@@ -96,11 +124,4 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-}
-
-
-sealed class NavigationEvent {
-    data object None : NavigationEvent()
-    data object TopBar : NavigationEvent()
-    data object LeftMenu : NavigationEvent()
 }

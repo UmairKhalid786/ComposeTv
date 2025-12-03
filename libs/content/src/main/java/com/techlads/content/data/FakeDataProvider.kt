@@ -93,6 +93,111 @@ object FakeMoviesDataProvider {
             overview = "Armed with only one word — Tenet — and fighting for the survival of the world, a protagonist journeys through a twilight world of international espionage.",
             posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
             backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/001.jpg"
+        ),
+        MovieDto(
+            id = 0,
+            title = "Dune: Part Two",
+            overview = "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2024/Dune-PartTwo/042.jpg"
+        ),
+        MovieDto(
+            id = 1,
+            title = "Oppenheimer",
+            overview = "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Oppenheimer/012.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/Oppenheimer/054.jpg"
+        ),
+        MovieDto(
+            id = 2,
+            title = "Poor Things",
+            overview = "A young woman, brought back to life by an unorthodox scientist, embarks on a journey of self-discovery and liberation.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/PoorThings/029.png",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/PoorThings/028.jpg"
+        ),
+        MovieDto(
+            id = 3,
+            title = "Barbie",
+            overview = "Barbie and Ken leave the perfect world of Barbie Land to discover the joys and challenges of the real world.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/Barbie/030.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/Barbie/048.jpg"
+        ),
+        MovieDto(
+            id = 4,
+            title = "Killers of the Flower Moon",
+            overview = "Members of the Osage Nation are murdered under mysterious circumstances in the 1920s, prompting a major FBI investigation.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/KillersOfTheFlowerMoon/007.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/KillersOfTheFlowerMoon/014.jpg"
+        ),
+        MovieDto(
+            id = 5,
+            title = "John Wick: Chapter 4",
+            overview = "John Wick uncovers a path to defeating The High Table, but faces a new enemy with powerful alliances across the globe.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/JohnWick-Chapter4/021.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/JohnWick-Chapter4/020.jpg"
+        ),
+        MovieDto(
+            id = 6,
+            title = "The Batman",
+            overview = "Batman uncovers corruption in Gotham City that connects to his own family while facing the Riddler, a serial killer targeting the city's elite.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2022/Batman/021.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2022/Batman/043.jpg"
+        ),
+        MovieDto(
+            id = 7,
+            title = "Everything Everywhere All at Once",
+            overview = "A Chinese immigrant woman is swept up in an insane multiverse adventure, exploring alternate realities and her own regrets.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2022/EverythingEverywhereAllAtOnce/001.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2022/EverythingEverywhereAllAtOnce/016.jpg"
+        ),
+        MovieDto(
+            id = 8,
+            title = "Top Gun: Maverick",
+            overview = "After more than 30 years of service, Maverick faces his past while training a new generation of fighter pilots.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2022/TopGun-Maverick/001.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2022/TopGun-Maverick/016.jpg"
+        ),
+        MovieDto(
+            id = 9,
+            title = "Tenet",
+            overview = "Armed with only one word — Tenet — and fighting for the survival of the world, a protagonist journeys through a twilight world of espionage.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2020/Tenet/037.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2020/Tenet/010.jpg"
+        ),
+        MovieDto(
+            id = 10,
+            title = "Spider-Man: Across the Spider-Verse",
+            overview = "Miles Morales reunites with Gwen Stacy and a team of Spider-People to face a new threat across the multiverse.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/SpiderMan-AcrossTheSpiderVerse/002.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/SpiderMan-AcrossTheSpiderVerse/015.jpg"
+        ),
+        MovieDto(
+            id = 11,
+            title = "Guardians of the Galaxy Vol. 3",
+            overview = "The Guardians embark on one final mission to protect one of their own — and the galaxy along the way.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/GuardiansOfTheGalaxyVol.3/021.png",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/GuardiansOfTheGalaxyVol.3/006.jpg"
+        ),
+        MovieDto(
+            id = 12,
+            title = "Avatar: The Way of Water",
+            overview = "Jake Sully and Neytiri protect their family and join with the Metkayina clan when a familiar threat returns to Pandora.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2022/Avatar-TheWayOfWater/010.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2022/Avatar-TheWayOfWater/005.jpg"
+        ),
+        MovieDto(
+            id = 13,
+            title = "Past Lives",
+            overview = "Childhood friends reunite after years apart, exploring love, destiny, and the choices that define a lifetime.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/PastLives/009.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/PastLives/010.jpg"
+        ),
+        MovieDto(
+            id = 14,
+            title = "Anatomy of a Fall",
+            overview = "A woman is put on trial after her husband’s mysterious death, unraveling the truth of their complicated marriage.",
+            posterPath = "https://media.outnow.ch/Movies/Bilder/2023/AnatomieEinesFalls/004.jpg",
+            backdropPath = "https://media.outnow.ch/Movies/Bilder/2023/AnatomieEinesFalls/002.jpg"
         )
     )
     val movieDetails = listOf(

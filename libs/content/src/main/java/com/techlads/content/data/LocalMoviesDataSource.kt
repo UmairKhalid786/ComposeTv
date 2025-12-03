@@ -14,4 +14,3 @@ data class LocalMoviesDataSource @Inject constructor(
     suspend fun fetchMovieDetail(movieId: Int) = apiService.getMovieDetail(movieId)
     suspend fun fetchMovieVideos(movieId: Int) = apiService.getMovieVideos(movieId)
 }
-
