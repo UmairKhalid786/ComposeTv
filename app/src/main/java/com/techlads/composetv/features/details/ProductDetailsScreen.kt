@@ -91,12 +91,11 @@ private fun TVProductDetails(details: Details, onPlayClick: () -> Unit) {
                     drawContent()
                     drawRect(brush = Brush.horizontalGradient(
                         colors = listOf(
-                            background,
-                            background,
-                            background.copy(alpha = 0.0f)
+                            background.copy(alpha = 0.8f),
+                            background.copy(alpha = 0.1f)
                         ),
                         startX = 0.0f,
-                        endX = size.height
+                        endX = size.width
                     ))
                 }
                 .align(Alignment.TopCenter),
