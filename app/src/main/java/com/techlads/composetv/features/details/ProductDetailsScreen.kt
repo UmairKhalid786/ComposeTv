@@ -146,6 +146,7 @@ private fun TVProductDetails(details: Details, onPlayClick: () -> Unit) {
                 delay(400)
                 focusRequester.requestFocus()
             }
+
             TvButton(
                 modifier = Modifier
                     .focusRequester(focusRequester),
@@ -154,7 +155,6 @@ private fun TVProductDetails(details: Details, onPlayClick: () -> Unit) {
                 Text(
                     modifier = Modifier.padding(horizontal = 24.dp),
                     text = stringResource(R.string.play),
-                    style = MaterialTheme.typography.titleLarge,
                     textAlign = TextAlign.Center
                 )
             }
