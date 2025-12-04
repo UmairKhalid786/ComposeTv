@@ -39,8 +39,6 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.tv.material3.Border
 import androidx.tv.material3.ClickableSurfaceDefaults
+import androidx.tv.material3.Glow
 import androidx.tv.material3.Icon
 import androidx.tv.material3.IconButton
 import androidx.tv.material3.MaterialTheme
@@ -75,14 +74,10 @@ private val avatarList = listOf(
 
 @Composable
 fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
-    // initial height set at 0.dp
-    var containerWidth by remember { mutableStateOf(0.dp) }
-    // get local density from composable
-    val density = LocalDensity.current
     val brush = Brush.radialGradient(
         listOf(
-            MaterialTheme.colorScheme.background.copy(alpha = 0.5f),
-            MaterialTheme.colorScheme.background.copy(0.1f)
+            MaterialTheme.colorScheme.surface.copy(alpha = 0.3f),
+            MaterialTheme.colorScheme.surface.copy(alpha = 0.1f)
         )
     )
 
@@ -90,13 +85,8 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .drawWithContent {
-                drawCircle(brush, radius = size.maxDimension)
+                drawRect(brush, size = size)
                 drawContent()
-            }
-            .onGloballyPositioned {
-                containerWidth = with(density) {
-                    it.size.width.toDp()
-                }
             },
         contentAlignment = Alignment.Center,
     ) {
@@ -123,13 +113,13 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
             Text(
                 text = "Who's Watching?",
                 style = MaterialTheme.typography.titleLarge.copy(fontSize = 38.sp),
-                modifier = Modifier.padding(top = 32.dp),
+                modifier = Modifier.padding(top = 42.dp),
             )
 
-            Spacer(modifier = Modifier.size(68.dp))
+            Spacer(modifier = Modifier.size(64.dp))
 
             LazyRow(
-                contentPadding = PaddingValues(vertical = 32.dp),
+                contentPadding = PaddingValues(vertical = 24.dp),
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth(),
             ) {
@@ -158,7 +148,7 @@ fun WhoIsWatchingContent(onProfileSelection: (avatar: Avatar) -> Unit) {
                 ProfileName(name = selectedAvatar, isLeft)
             }
 
-            Spacer(modifier = Modifier.size(38.dp))
+            Spacer(modifier = Modifier.size(32.dp))
 
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(
@@ -225,6 +215,14 @@ fun ScaleAbleAvatar(
                 ),
                 shape = CircleShape,
             ),
+        ),
+        glow = ClickableSurfaceDefaults.glow(
+            glow = Glow(elevationColor = MaterialTheme.colorScheme.inverseSurface.copy(
+                alpha = 0.8f
+            ), elevation = 4.dp),
+        ),
+        colors = ClickableSurfaceDefaults.colors(
+            focusedContainerColor = MaterialTheme.colorScheme.surface,
         ),
         shape = ClickableSurfaceDefaults.shape(shape = CircleShape),
         scale = ClickableSurfaceDefaults.scale(focusedScale = 1.5f),
