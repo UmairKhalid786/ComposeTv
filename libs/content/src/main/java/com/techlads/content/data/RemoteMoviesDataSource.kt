@@ -12,6 +12,7 @@ data class RemoteMoviesDataSource @Inject constructor(
     suspend fun fetchNowPlayingMovies() = apiService.getMovies("now_playing")
     suspend fun fetchUpcomingMovies() = apiService.getMovies("upcoming")
     suspend fun fetchMovieDetail(movieId: Int) = apiService.getMovieDetail(movieId)
+    suspend fun fetchMovieCredits(movieId: Int) = apiService.getMovieCredits(movieId)
     suspend fun fetchMovieVideos(movieId: Int) = apiService.getMovieVideos(movieId)
 }
 
