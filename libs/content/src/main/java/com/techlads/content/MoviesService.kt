@@ -1,5 +1,7 @@
 package com.techlads.content
 
+import com.techlads.content.data.CreditsResponse
+import com.techlads.content.data.FakeCastProvider
 import com.techlads.content.data.FakeMoviesDataProvider
 import com.techlads.content.data.MovieResponse
 import com.techlads.content.data.MovieVideosResponse
@@ -16,6 +18,7 @@ import javax.inject.Named
 interface MoviesService {
     suspend fun getMovies(category: String): ApiResult<MoviesResponse>
     suspend fun getMovieDetail(movieId: Int): ApiResult<MovieResponse>
+    suspend fun getMovieCredits(movieId: Int): ApiResult<CreditsResponse>
     suspend fun getMovieVideos(movieId: Int): ApiResult<MovieVideosResponse>
     suspend fun getTrending(category: String): ApiResult<MoviesResponse>
 }
@@ -40,11 +43,19 @@ class TmdbApiServiceImpl @Inject constructor(
         parameter("api_key", apiKey)
     }
 
-    override suspend fun getMovieVideos(movieId: Int): ApiResult<MovieVideosResponse> = client.safeGet {
-        url("$baseUrl/movie/${movieId}/videos")
-        header("Content-Type", "application/json")
-        parameter("api_key", apiKey)
-    }
+    override suspend fun getMovieCredits(movieId: Int): ApiResult<CreditsResponse> =
+        client.safeGet {
+            url("$baseUrl/movie/$movieId/credits")
+            header("Content-Type", "application/json")
+            parameter("api_key", apiKey)
+        }
+
+    override suspend fun getMovieVideos(movieId: Int): ApiResult<MovieVideosResponse> =
+        client.safeGet {
+            url("$baseUrl/movie/${movieId}/videos")
+            header("Content-Type", "application/json")
+            parameter("api_key", apiKey)
+        }
 
     override suspend fun getTrending(category: String): ApiResult<MoviesResponse> = client.safeGet {
         url("$baseUrl/trending/$category/day")
@@ -61,9 +72,16 @@ class FakeMoviesService @Inject constructor() : MoviesService {
     }
 
     override suspend fun getMovieDetail(movieId: Int): ApiResult<MovieResponse> {
-        val movie = FakeMoviesDataProvider.movieDetails.find { it.id == movieId }
-            ?: return ApiResult.Error("Movie not found")
+        val movie =
+            FakeMoviesDataProvider.movieDetails.find { it.id == movieId } ?: return ApiResult.Error(
+                "Movie not found"
+            )
         return ApiResult.Success(movie)
+    }
+
+    override suspend fun getMovieCredits(movieId: Int): ApiResult<CreditsResponse> {
+        val credits = FakeCastProvider.cast
+        return ApiResult.Success(CreditsResponse(id = movieId, cast = credits))
     }
 
     override suspend fun getMovieVideos(movieId: Int): ApiResult<MovieVideosResponse> {

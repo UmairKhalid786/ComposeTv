@@ -49,6 +49,16 @@ class ProductViewModel @Inject constructor(
 
             is ApiResult.Error -> ProductDetailsState.Error("Something went wrong !!")
         }
+
+        val creditResponse = repo.getMovieCredit(id)
+        if (creditResponse is ApiResult.Success) {
+            val currentDetails = (_details.value as? ProductDetailsState.Success)?.details
+            currentDetails?.let {
+                val castList = creditResponse.data.cast.map { it.profilePath }.take(5)
+                val updatedDetails = it.copy(cast = castList)
+                _details.value = ProductDetailsState.Success(updatedDetails)
+            }
+        }
     }
 
     private suspend fun getMovieVideos(id: Int) {
@@ -82,7 +92,8 @@ data class Details(
     val background: String,
     val description: String,
     val releaseDate: String,
-    val genres: List<String>
+    val genres: List<String>,
+    val cast: List<String>
 )
 
 data class Videos(val videos: List<Video>) {
@@ -104,7 +115,10 @@ fun MovieResponse.toUIDetails() = Details(
     background = backdropPath,
     description = overview,
     releaseDate = releaseDate,
-    genres = genre.map { it.name })
+    genres = genre.map { it.name },
+    cast = emptyList()
+)
+
 
 fun MovieVideosResponse.toUiVideos() = Videos(
     videos = results.map {

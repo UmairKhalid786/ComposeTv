@@ -43,6 +43,14 @@ class MoviesRepository @Inject constructor(
             }
         }
 
+    suspend fun getMovieCredit(movieId: Int) =
+        remoteMoviesDataSource.fetchMovieCredits(movieId).apply {
+            // Simulate caching to local data source
+            if (this is ApiResult.Error) {
+                localMoviesDataSource.fetchMovieCredit(movieId)
+            }
+        }
+
     suspend fun getMovieVideos(movieId: Int) =
         remoteMoviesDataSource.fetchMovieVideos(movieId).apply {
             // Simulate caching to local data source
