@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -134,7 +135,7 @@ private fun TVProductDetails(details: Details, onPlayClick: () -> Unit) {
                 TVRatingChip(rating = "8.3")
             }
 
-            Spacer(Modifier.size(24.dp))
+            Spacer(Modifier.height(24.dp))
 
             // Description
             Text(
@@ -144,7 +145,7 @@ private fun TVProductDetails(details: Details, onPlayClick: () -> Unit) {
                 color = MaterialTheme.colorScheme.onBackground,
             )
 
-            Spacer(Modifier.size(32.dp))
+            Spacer(Modifier.height(32.dp))
 
             // Play Button
             val focusRequester = remember { FocusRequester() }
@@ -165,17 +166,23 @@ private fun TVProductDetails(details: Details, onPlayClick: () -> Unit) {
                 )
             }
 
-            Spacer(Modifier.size(32.dp))
+            Spacer(Modifier.height(24.dp))
+
+            Text(
+                modifier = Modifier.padding(bottom = 16.dp, start = 4.dp),
+                text = stringResource(R.string.cast),
+                textAlign = TextAlign.Center
+            )
 
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                contentPadding = PaddingValues(vertical = 4.dp, horizontal = 4.dp)
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                contentPadding = PaddingValues(vertical = 0.dp, horizontal = 4.dp)
             ) {
                 items(details.cast) {
                     PersonCard(
                         person = it,
-                        modifier = Modifier.width(80.dp)
+                        modifier = Modifier.width(64.dp)
                     )
                 }
             }
