@@ -36,9 +36,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -98,16 +103,10 @@ fun BoxScope.LoginPageContent(
         ) { password.value = it }
 
         Spacer(modifier = Modifier.height(20.dp))
-        // Play Button
-        val focusRequester = remember { FocusRequester() }
-        LaunchedEffect(Unit) {
-            delay(400)
-            focusRequester.requestFocus()
-        }
 
         TvButton(
             modifier = Modifier
-                .focusRequester(focusRequester)
+                .requestFocusWhenVisibleInWindow()
                 .padding(start = 20.dp, end = 20.dp),
             onClick = { onLoginClick(username.value, password.value) },
         ) {
@@ -180,4 +179,40 @@ fun LoginPagePrev() {
             LoginPageContent(onLoginClick = { _, _ -> })
         }
     }
+}
+
+@Composable
+fun Modifier.requestFocusWhenVisibleInWindow(): Modifier {
+    val focusRequester = remember { FocusRequester() }
+    var isVisible by remember { mutableStateOf(false) }
+
+    // You can simplify this part depending on your needs.
+    val config = LocalConfiguration.current
+    val density = LocalDensity.current
+
+    val windowBounds = remember(config) {
+        with(density) {
+            Rect(
+                0f,
+                0f,
+                config.screenWidthDp.dp.toPx(),
+                config.screenHeightDp.dp.toPx()
+            )
+        }
+    }
+
+    LaunchedEffect(isVisible) {
+        if (isVisible) {
+            focusRequester.requestFocus()
+        }
+    }
+
+    return this
+        .focusRequester(focusRequester)
+        .onGloballyPositioned { coords ->
+            if (coords.isAttached) {
+                val itemBounds = coords.boundsInWindow()
+                isVisible = itemBounds.overlaps(windowBounds)
+            }
+        }
 }
