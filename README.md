@@ -22,4 +22,5 @@
 <img width="1920" height="1080" alt="Screenshot_20251209_234011" src="https://github.com/user-attachments/assets/1050e033-3f0b-40c9-8511-8b2592c5fec1" />
 
 ### Movie detail  
-<img width="1920" height="1080" alt="Screenshot_20251209_234003" src="https://github.com/user-attachments/assets/50c9c27d-d8d5-4cc2-9489-b5f01002b941" />
+<img width="1280" height="720" alt="Screenshot_20251211_154352" src="https://github.com/user-attachments/assets/7b3b8d55-6495-488f-af95-70799358cfe4" />
+<img width="1280" height="720" alt="Screenshot_20251211_154409" src="https://github.com/user-attachments/assets/814d46c7-7496-4eba-8854-9f6230b24ae7" />
