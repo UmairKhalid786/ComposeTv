@@ -34,7 +34,6 @@ fun PersonCard(
         ),
         shape = CardDefaults.shape(CircleShape),
         onClick = { /* No-op */ },
-        scale = CardDefaults.scale(1f, focusedScale = 1.01f)
     ) {
         AsyncImage(
             model = person,
