@@ -7,5 +7,6 @@
     <string name="release_year">2022</string>
     <string name="movie_duration_text">2h 56mm</string>
     <string name="play">Play</string>
-    <string name="cast">Cast</string>
+    <string name="cast_and_crew">Cast and Crew</string>
+    <string name="user_ratings">User Ratings</string>
 </resources>
