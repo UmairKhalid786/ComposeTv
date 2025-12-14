@@ -22,11 +22,8 @@ import com.techlads.composetv.features.player.controls.PlayerControls
 import com.techlads.composetv.features.player.controls.rememberVideoPlayerState
 import com.techlads.composetv.utils.handleDPadKeyEvents
 import com.techlads.exoplayer.PlayerFactory
-import com.techlads.player.domain.state.PlayerState
-import com.techlads.player.domain.state.PlayerStateListener
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @Composable
 fun PlayerScreen(mediaUrl: String, onBackPressed: () -> Unit) {
@@ -46,19 +43,10 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
     var contentCurrentPosition: Long by remember { mutableLongStateOf(0L) }
     val videoPlayerState = rememberVideoPlayerState(hideSeconds = 4, coroutineScope)
 
-    val stateListener = remember {
-        object : PlayerStateListener {
-            override fun on(state: PlayerState) {
-                Timber.d("State $state")
-            }
-        }
-    }
-
     BackHandler(onBack = onBackPressed)
 
     LaunchedEffect(Unit) {
-        player.prepare(mediaUrl, false)
-        player.setPlaybackEvent(callback = stateListener)
+        player.prepare(mediaUrl, true)
     }
 
     LaunchedEffect(Unit) {
