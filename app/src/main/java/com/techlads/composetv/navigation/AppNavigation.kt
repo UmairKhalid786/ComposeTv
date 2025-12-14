@@ -97,8 +97,7 @@ fun AppNavigation(
             Screens.Player.route,
         ) {
             PlayerScreen(
-//                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                "https://www.youtube.com/watch?v=kI7RdKPpPFc",
+                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                 onBackPressed = {
                     navController.navigateUp()
                 },

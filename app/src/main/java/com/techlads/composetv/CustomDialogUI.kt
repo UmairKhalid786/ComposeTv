@@ -51,7 +51,6 @@ fun CustomDialogUI(
         onClick = {}
     ) {
         Column(modifier.background(MaterialTheme.colorScheme.surface)) {
-            // .......................................................................
             Image(
                 painter = painterResource(id = R.drawable.ic_info),
                 contentDescription = null, // decorative
