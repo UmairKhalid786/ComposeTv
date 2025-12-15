@@ -3,7 +3,7 @@
 ### Login
 <img width="1920" height="1080" alt="Screenshot_20251209_233857" src="https://github.com/user-attachments/assets/0f07b107-e16e-47c7-a96c-77f014b4e6d1" />
 
-### WHo is watching
+### Who is watching
 <img width="1920" height="1080" alt="Screenshot_20251209_233910" src="https://github.com/user-attachments/assets/58edc4de-ae60-46db-bcb4-113d362f2c57" />
 
 ### Home hero item
@@ -23,4 +23,6 @@
 
 ### Movie detail  
 <img width="1280" height="720" alt="Screenshot_20251211_154352" src="https://github.com/user-attachments/assets/7b3b8d55-6495-488f-af95-70799358cfe4" />
+
+### Movie detail view more  
 <img width="1280" height="720" alt="Screenshot_20251211_154409" src="https://github.com/user-attachments/assets/814d46c7-7496-4eba-8854-9f6230b24ae7" />
