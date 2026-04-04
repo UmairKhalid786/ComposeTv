@@ -61,6 +61,9 @@ import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun BoxScope.LoginPageContent(
+    isLoading: Boolean = false,
+    errorMessage: String? = null,
+    onInputChanged: () -> Unit = {},
     onLoginClick: (user: String, psw: String) -> Unit,
 ) {
     val insets = WindowInsets.ime.union(WindowInsets.systemBars)
@@ -86,13 +89,20 @@ fun BoxScope.LoginPageContent(
     ) {
         val username = remember { mutableStateOf("") }
         val password = remember { mutableStateOf("") }
+        val canLogin = username.value.isNotBlank() && password.value.isNotBlank() && !isLoading
 
         ScreenHeading("LOGIN")
+        Text(
+            text = "Use your TMDB username and password.",
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
+        )
         TvTextField(
             value = username.value, placeholder = "Username",
             modifier = Modifier.fillMaxWidth(),
         ) {
             username.value = it
+            onInputChanged()
         }
         TvTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -100,7 +110,19 @@ fun BoxScope.LoginPageContent(
             placeholder = "Password",
             visualTransformation = PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password,
-        ) { password.value = it }
+        ) {
+            password.value = it
+            onInputChanged()
+        }
+
+        errorMessage?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.Center,
+            )
+        }
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -108,11 +130,12 @@ fun BoxScope.LoginPageContent(
             modifier = Modifier
                 .requestFocusWhenVisibleInWindow()
                 .padding(start = 20.dp, end = 20.dp),
+            enabled = canLogin,
             onClick = { onLoginClick(username.value, password.value) },
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Login",
+                text = if (isLoading) "Signing In..." else "Login",
                 style = TextStyle(
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Light,

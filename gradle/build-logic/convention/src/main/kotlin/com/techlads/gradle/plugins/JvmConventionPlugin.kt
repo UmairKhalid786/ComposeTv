@@ -49,7 +49,7 @@ class JvmConventionPlugin : Plugin<Project> {
 
         tasks.withType<KotlinCompilationTask<KotlinJvmCompilerOptions>>().configureEach {
             compilerOptions {
-                jvmTarget.set(jvmTargetProvider.map { it.ordinal.toJvmTarget() })
+                jvmTarget.set(jvmTargetProvider)
             }
         }
 

@@ -18,17 +18,19 @@ interface UserSession {
 
     suspend fun setLoggedIn(
         user: User,
-        accessToken: String,
+        accessToken: String? = null,
         refreshToken: String? = null,
-        expiresAt: Instant? = null
+        expiresAt: Instant? = null,
+        sessionId: String? = null,
     )
 
     suspend fun logout()
 
-    /** Replace token after refresh without touching user. */
+    /** Replace auth credentials without touching user details. */
     suspend fun updateTokens(
-        accessToken: String,
+        accessToken: String? = null,
         refreshToken: String? = null,
-        expiresAt: Instant? = null
+        expiresAt: Instant? = null,
+        sessionId: String? = null,
     )
 }
