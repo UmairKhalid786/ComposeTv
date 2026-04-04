@@ -2,6 +2,7 @@ plugins {
     id("com.techlads.android.feature")
     id("com.techlads.android.compose")
     id("com.techlads.android.hilt")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -9,7 +10,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.libs.auth)
     implementation(projects.libs.content)
+    implementation(projects.libs.network)
     implementation(projects.libs.uiComponents)
 
     implementation(libs.androidx.core.ktx)

@@ -34,6 +34,7 @@ private object Keys {
     val USER_NAME = stringPreferencesKey("user_name")
     val USER_EMAIL = stringPreferencesKey("user_email")
     val ACCESS = stringPreferencesKey("access_token")
+    val SESSION_ID = stringPreferencesKey("session_id")
     val REFRESH = stringPreferencesKey("refresh_token")
     val EXPIRES_AT = longPreferencesKey("expires_at_epoch_ms") // -1 if unknown
 }
@@ -61,9 +62,10 @@ class DefaultUserSession @Inject constructor(
 
     override suspend fun setLoggedIn(
         user: User,
-        accessToken: String,
+        accessToken: String?,
         refreshToken: String?,
-        expiresAt: Instant?
+        expiresAt: Instant?,
+        sessionId: String?
     ) {
         persist(
             id = user.id,
@@ -71,19 +73,22 @@ class DefaultUserSession @Inject constructor(
             email = user.email,
             access = accessToken,
             refresh = refreshToken,
-            expiresAt = expiresAt?.toEpochMilliseconds()
+            expiresAt = expiresAt?.toEpochMilliseconds(),
+            sessionId = sessionId
         )
     }
 
     override suspend fun updateTokens(
-        accessToken: String,
+        accessToken: String?,
         refreshToken: String?,
-        expiresAt: Instant?
+        expiresAt: Instant?,
+        sessionId: String?
     ) {
         appContext.sessionDataStore.edit { p ->
-            p[Keys.ACCESS] = accessToken
+            accessToken?.let { p[Keys.ACCESS] = it }
             refreshToken?.let { p[Keys.REFRESH] = it }
             expiresAt?.let { p[Keys.EXPIRES_AT] = it.toEpochMilliseconds() }
+            sessionId?.let { p[Keys.SESSION_ID] = it }
         }
     }
 
@@ -102,24 +107,29 @@ class DefaultUserSession @Inject constructor(
         id: String,
         name: String?,
         email: String?,
-        access: String,
+        access: String?,
         refresh: String?,
-        expiresAt: Long?
+        expiresAt: Long?,
+        sessionId: String?
     ) {
         appContext.sessionDataStore.edit { p ->
             p[Keys.USER_ID] = id
-            name?.let { p[Keys.USER_NAME] = it }
-            email?.let { p[Keys.USER_EMAIL] = it }
-            p[Keys.ACCESS] = access
-            refresh?.let { p[Keys.REFRESH] = it }
-            if (expiresAt != null) p[Keys.EXPIRES_AT] = expiresAt
+            if (name != null) p[Keys.USER_NAME] = name else p.remove(Keys.USER_NAME)
+            if (email != null) p[Keys.USER_EMAIL] = email else p.remove(Keys.USER_EMAIL)
+            if (access != null) p[Keys.ACCESS] = access else p.remove(Keys.ACCESS)
+            if (sessionId != null) p[Keys.SESSION_ID] = sessionId else p.remove(Keys.SESSION_ID)
+            if (refresh != null) p[Keys.REFRESH] = refresh else p.remove(Keys.REFRESH)
+            if (expiresAt != null) p[Keys.EXPIRES_AT] = expiresAt else p.remove(Keys.EXPIRES_AT)
         }
     }
 
     private fun Preferences.toAuthState(): AuthState {
-        val access = this[Keys.ACCESS] ?: return AuthState.LoggedOut
+        val access = this[Keys.ACCESS]
+        val sessionId = this[Keys.SESSION_ID]
+        if (access == null && sessionId == null) return AuthState.LoggedOut
         val userId = this[Keys.USER_ID] ?: return AuthState.LoggedOut
         val expiresMs = this[Keys.EXPIRES_AT]
+        val expiresAt = expiresMs?.let { Instant.fromEpochMilliseconds(it) }
         val state = AuthState.LoggedIn(
             user = User(
                 id = userId,
@@ -128,15 +138,18 @@ class DefaultUserSession @Inject constructor(
             ),
             accessToken = access,
             refreshToken = this[Keys.REFRESH],
-            expiresAt = expiresMs?.let { Instant.fromEpochMilliseconds(it) }
+            expiresAt = expiresAt,
+            sessionId = sessionId
         )
-        return if (state.expiresAt?.let { it < Instant.fromEpochMilliseconds(System.currentTimeMillis()) } == true)
-            AuthState.LoggedOut else state
+        val hasExpiredAccessToken = access != null &&
+            expiresAt?.let { it < Instant.fromEpochMilliseconds(System.currentTimeMillis()) } == true
+        return if (hasExpiredAccessToken) AuthState.LoggedOut else state
     }
 
     private fun isExpiredNow(): Boolean {
         val s = _authState.value
         return s is AuthState.LoggedIn &&
+                s.accessToken != null &&
                 s.expiresAt?.toEpochMilliseconds()?.let { it <= System.currentTimeMillis() } == true
     }
 }

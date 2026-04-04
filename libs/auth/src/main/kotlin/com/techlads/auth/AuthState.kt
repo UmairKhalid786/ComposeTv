@@ -10,8 +10,9 @@ sealed interface AuthState {
     data object LoggedOut : AuthState
     data class LoggedIn(
         val user: User,
-        val accessToken: String,
-        val refreshToken: String?,
-        val expiresAt: Instant? // optional
+        val accessToken: String? = null,
+        val refreshToken: String? = null,
+        val expiresAt: Instant? = null,
+        val sessionId: String? = null,
     ) : AuthState
 }

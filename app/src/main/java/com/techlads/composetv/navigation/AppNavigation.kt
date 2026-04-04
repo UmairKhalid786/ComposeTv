@@ -36,7 +36,7 @@ fun AppNavigation(
     val state by homeViewModel.userState.collectAsStateWithLifecycle()
     LaunchedEffect(state) {
         when (state) {
-            is AuthState.LoggedIn -> navController.navigate(Screens.Home.route) {
+            is AuthState.LoggedIn -> navController.navigate(Screens.WhoIsWatching.route) {
                 popUpTo(Screens.Login.route) { inclusive = true }
             }
 
@@ -51,9 +51,7 @@ fun AppNavigation(
         composable(
             Screens.Login.route,
         ) {
-            LoginScreen {
-                navController.navigateSingleTopTo(Screens.WhoIsWatching.route)
-            }
+            LoginScreen()
         }
 
         composable(

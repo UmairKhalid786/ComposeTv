@@ -2,21 +2,29 @@ package com.techlads.login.withEmailPassword
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.tv.material3.MaterialTheme
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    goToHomeScreen: () -> Unit,
+    viewModel: LoginViewModel = hiltViewModel(),
 ) {
+    val uiState by viewModel.uiState.collectAsState()
+
     Box(modifier = modifier.fillMaxSize()) {
-        LoginPageContent { _, _ ->
-            goToHomeScreen()
-        }
+        LoginPageContent(
+            isLoading = uiState.isLoading,
+            errorMessage = uiState.errorMessage,
+            onInputChanged = viewModel::clearError,
+            onLoginClick = viewModel::login,
+        )
     }
 }
 
@@ -24,7 +32,8 @@ fun LoginScreen(
 @Composable
 fun LoginScreenPrev() {
     MaterialTheme {
-        LoginScreen(Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            LoginPageContent(onLoginClick = { _, _ -> })
         }
     }
 }
