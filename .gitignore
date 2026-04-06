@@ -8,6 +8,9 @@
 # Android local config
 local.properties
 captures/
+app/src/debug/AndroidManifest.xml
+app/src/debug/res/xml/network_security_config.xml
+app/src/debug/res/raw/zscaler_root_ca.cer
 
 # Native build outputs
 .externalNativeBuild/
