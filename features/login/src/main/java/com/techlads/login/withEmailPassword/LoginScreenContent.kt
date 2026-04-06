@@ -97,13 +97,19 @@ fun BoxScope.LoginPageContent(
 
         ScreenHeading("LOGIN")
         Text(
-            text = "Use your TMDB username and password.",
+            text = "Sign in with your TMDB account.",
             style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
+        )
+        Text(
+            text = "Use your TMDB username, not your email address. We exchange your credentials for a TMDB session on this device.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
             textAlign = TextAlign.Center,
         )
         TvTextField(
             value = username.value,
-            placeholder = "Username",
+            placeholder = "TMDB Username",
             modifier = Modifier
                 .fillMaxWidth()
                 .requestFocusWhenVisibleInWindow(mutableInteractionSource),
@@ -290,4 +296,3 @@ fun Modifier.visibilityAware(
             }
         }
 }
-
