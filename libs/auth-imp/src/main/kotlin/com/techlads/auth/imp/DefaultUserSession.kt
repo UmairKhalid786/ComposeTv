@@ -45,7 +45,7 @@ class DefaultUserSession @Inject constructor(
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    private val _authState = MutableStateFlow<AuthState>(AuthState.LoggedOut)
+    private val _authState = MutableStateFlow<AuthState>(AuthState.Loading)
     override val authState: StateFlow<AuthState> = _authState.asStateFlow()
 
     override val isLoggedIn: Flow<Boolean> =

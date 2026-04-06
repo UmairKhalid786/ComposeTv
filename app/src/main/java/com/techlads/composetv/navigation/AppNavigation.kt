@@ -5,19 +5,29 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.tv.material3.MaterialTheme
+import androidx.tv.material3.Text
 import com.techlads.auth.AuthState
 import com.techlads.composetv.features.details.ProductDetailsScreen
 import com.techlads.composetv.features.home.HomeScreen
-import com.techlads.composetv.features.home.HomeViewModel
 import com.techlads.composetv.features.mp3.player.AudioPlayerScreen
 import com.techlads.composetv.features.player.PlayerScreen
 import com.techlads.composetv.features.wiw.WhoIsWatchingScreen
@@ -30,24 +40,33 @@ import com.techlads.login.withToken.DeviceTokenAuthenticationScreen
 fun AppNavigation(
     navController: NavHostController,
     backgroundViewModel: BackgroundViewModel,
-    homeViewModel: HomeViewModel
+    viewModel: AppNavigationViewModel = hiltViewModel(),
 ) {
 
-    val state by homeViewModel.userState.collectAsStateWithLifecycle()
+    val state by viewModel.authState.collectAsStateWithLifecycle()
     LaunchedEffect(state) {
         when (state) {
+            AuthState.Loading -> Unit
             is AuthState.LoggedIn -> navController.navigate(Screens.WhoIsWatching.route) {
-                popUpTo(Screens.Login.route) { inclusive = true }
+                popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
+                launchSingleTop = true
             }
 
             AuthState.LoggedOut -> navController.navigate(Screens.Login.route) {
-                popUpTo(0)
+                popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
+                launchSingleTop = true
             }
         }
     }
 
-    NavHost(navController = navController, startDestination = Screens.Login.route) {
+    NavHost(navController = navController, startDestination = Screens.AuthLoading.route) {
         // e.g will add auth routes here if when we will extend project
+        composable(
+            Screens.AuthLoading.route,
+        ) {
+            AuthStateScreen()
+        }
+
         composable(
             Screens.Login.route,
         ) {
@@ -111,6 +130,32 @@ fun AppNavigation(
             }, onPlayClick = {
                 navController.navigate(Screens.Player.route)
             }, viewModel = hiltViewModel()
+            )
+        }
+    }
+}
+
+@Composable
+private fun AuthStateScreen() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = "Checking session",
+                style = MaterialTheme.typography.headlineSmall,
+                textAlign = TextAlign.Center,
+            )
+            Text(
+                text = "Restoring your TMDB login state.",
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
             )
         }
     }

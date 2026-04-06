@@ -2,7 +2,6 @@ package com.techlads.composetv.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.techlads.auth.UserSession
 import com.techlads.composetv.features.Movie
 import com.techlads.composetv.features.home.carousel.CardPayload
 import com.techlads.composetv.features.home.carousel.CarouselItemPayload
@@ -27,10 +26,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repo: MoviesRepository,
-    userSession: UserSession
 ) : ViewModel() {
-    val userState = userSession.authState
-
     private val _homeItems: MutableStateFlow<HeroItemState> = MutableStateFlow(
         HeroItemState(
             list = listOf()

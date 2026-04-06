@@ -7,6 +7,7 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
 sealed interface AuthState {
+    data object Loading : AuthState
     data object LoggedOut : AuthState
     data class LoggedIn(
         val user: User,
