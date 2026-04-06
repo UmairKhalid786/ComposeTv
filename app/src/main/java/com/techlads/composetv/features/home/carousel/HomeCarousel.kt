@@ -7,6 +7,7 @@ import androidx.compose.foundation.gestures.BringIntoViewSpec
 import androidx.compose.foundation.gestures.LocalBringIntoViewSpec
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -26,6 +27,11 @@ import com.techlads.composetv.utils.fadingEdge
 @Composable
 fun HomeCarousel(
     homeState: HomeCarouselState,
+    focusedParentId: String,
+    focusedChildId: String,
+    focusedParentIndex: Int,
+    focusedChildIndex: Int,
+    restoreFocusVersion: Int,
     modifier: Modifier,
     onItemFocus: (parentId: String, childId: String) -> Unit,
     onItemClick: (parentId: String, childId: String) -> Unit,
@@ -37,13 +43,15 @@ fun HomeCarousel(
         )
     )
     val enableFadeEdge = remember { mutableStateOf(false) }
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = focusedParentIndex)
 
     PositionFocusedItemInLazyLayout(
         parentFraction = 0.25f,
         childFraction = 0.1f,
     ) {
         LazyColumn(
-            modifier
+            state = listState,
+            modifier = modifier
                 .testTag(SECTIONS_LIST_TAG)
                 .then(
                     if (enableFadeEdge.value) {
@@ -55,10 +63,18 @@ fun HomeCarousel(
             contentPadding = PaddingValues(bottom = 100.dp)
         ) {
             items(homeState.items) {
-                HorizontalCarouselItem(it, onItemFocus = { p, c ->
-                    onItemFocus(p, c)
-                    enableFadeEdge.value = it.items.firstOrNull { it.id == p } != null
-                }, onItemClick = onItemClick)
+                HorizontalCarouselItem(
+                    parent = it,
+                    focusedParentId = focusedParentId,
+                    focusedChildId = focusedChildId,
+                    focusedChildIndex = focusedChildIndex,
+                    restoreFocusVersion = restoreFocusVersion,
+                    onItemFocus = { p, c ->
+                        onItemFocus(p, c)
+                        enableFadeEdge.value = it.items.firstOrNull { child -> child.id == c } != null
+                    },
+                    onItemClick = onItemClick,
+                )
             }
         }
     }
@@ -72,7 +88,14 @@ fun HomeCarouselPrev() {
             CarouselItemPayload(id = it.toString(), title = "Item $it", type = "empty", items = (1..10).map {
                 CardPayload(id = it.toString(), title = "Card $it", image = "empty", promo = "")
             })
-        }), modifier = Modifier, onItemFocus = { _, _ -> }) { _, _ -> }
+        }),
+            focusedParentId = "",
+            focusedChildId = "",
+            focusedParentIndex = 0,
+            focusedChildIndex = 0,
+            restoreFocusVersion = 0,
+            modifier = Modifier,
+            onItemFocus = { _, _ -> }) { _, _ -> }
     }
 }
 

@@ -5,7 +5,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 data class RemoteMoviesDataSource @Inject constructor(
-    @Named("FakeMoviesService")
+    @Named("TmdbApiService")
     private val apiService: MoviesService) {
     suspend fun fetchPopularMovies() = apiService.getMovies("popular")
     suspend fun fetchTopRatedMovies() = apiService.getMovies("top_rated")
@@ -15,4 +15,3 @@ data class RemoteMoviesDataSource @Inject constructor(
     suspend fun fetchMovieCredits(movieId: Int) = apiService.getMovieCredits(movieId)
     suspend fun fetchMovieVideos(movieId: Int) = apiService.getMovieVideos(movieId)
 }
-

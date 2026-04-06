@@ -1,7 +1,7 @@
 package com.techlads.content.data
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import javax.inject.Named
 
 @Serializable
 data class CreditsResponse(
@@ -13,6 +13,6 @@ data class CreditsResponse(
 data class Cast(
     val id: Int,
     val name: String,
-    @Named("profile_path")
-    val profilePath: String
+    @SerialName("profile_path")
+    val profilePath: String? = null,
 )

@@ -10,11 +10,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -24,6 +26,9 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import com.techlads.composetv.features.home.carousel.HomeCarousel
@@ -42,23 +47,54 @@ fun HomeNestedScreen(
 ) {
 
     val heroItemState by homeViewModel.heroItemState.collectAsState()
+    val lifecycleOwner = LocalLifecycleOwner.current
 
-    val focusState = remember {
+    val focusState = rememberSaveable {
         mutableStateOf(FocusPosition(0, 0))
     }
 
-    val showCarousel = remember {
+    val showCarousel = rememberSaveable {
         mutableStateOf(true)
     }
 
-    val showTopPickDetails = remember {
+    val showTopPickDetails = rememberSaveable {
         mutableStateOf(false)
+    }
+
+    val focusedParentId = rememberSaveable {
+        mutableStateOf("")
+    }
+
+    val focusedChildId = rememberSaveable {
+        mutableStateOf("")
+    }
+
+    val restoreFocusVersion = rememberSaveable {
+        mutableStateOf(0)
     }
 
     val focusRequester = remember { FocusRequester() }
 
     val coroutineScope = rememberCoroutineScope()
     val homeState by homeViewModel.homeState.collectAsState()
+
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (
+                event == Lifecycle.Event.ON_RESUME &&
+                focusedParentId.value.isNotBlank() &&
+                focusedChildId.value.isNotBlank()
+            ) {
+                restoreFocusVersion.value += 1
+            }
+        }
+
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
 
     Column(Modifier.fillMaxSize()) {
         AnimatedVisibility(showCarousel.value) {
@@ -71,6 +107,11 @@ fun HomeNestedScreen(
         }
         HomeCarousel(
             homeState = homeState,
+            focusedParentId = focusedParentId.value,
+            focusedChildId = focusedChildId.value,
+            focusedParentIndex = focusState.value.first,
+            focusedChildIndex = focusState.value.second,
+            restoreFocusVersion = restoreFocusVersion.value,
             modifier = Modifier
                 .handleDPadKeyEvents(
                     onUp = {
@@ -95,6 +136,8 @@ fun HomeNestedScreen(
                 val parentIndex = homeState.findIndexById(parentId = parent, childId = child)
 
                 focusState.value = FocusPosition(parentIndex.first, parentIndex.second)
+                focusedParentId.value = parent
+                focusedChildId.value = child
                 onItemFocus(parent, child)
 
                 if (parentIndex.first == 0) {

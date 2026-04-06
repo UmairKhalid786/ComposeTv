@@ -3,6 +3,7 @@ package com.techlads.composetv.features.details
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.techlads.content.toTmdbImageUrl
 import com.techlads.content.data.MovieResponse
 import com.techlads.content.data.MovieVideosResponse
 import com.techlads.content.data.MoviesRepository
@@ -47,14 +48,16 @@ class ProductViewModel @Inject constructor(
                 ProductDetailsState.Success(response.data.toUIDetails())
             }
 
-            is ApiResult.Error -> ProductDetailsState.Error("Something went wrong !!")
+            is ApiResult.Error -> ProductDetailsState.Error(response.message)
         }
 
         val creditResponse = repo.getMovieCredit(id)
         if (creditResponse is ApiResult.Success) {
             val currentDetails = (_details.value as? ProductDetailsState.Success)?.details
             currentDetails?.let {
-                val castList = creditResponse.data.cast.map { it.profilePath }.take(5)
+                val castList = creditResponse.data.cast.mapNotNull { cast ->
+                    cast.profilePath.toTmdbImageUrl()
+                }.take(5)
                 val updatedDetails = it.copy(cast = castList)
                 _details.value = ProductDetailsState.Success(updatedDetails)
             }
@@ -70,7 +73,7 @@ class ProductViewModel @Inject constructor(
                 } })
             }
 
-            is ApiResult.Error -> ProductVideosState.Error("Something went wrong !!")
+            is ApiResult.Error -> ProductVideosState.Error(response.message)
         }
     }
 }
@@ -112,7 +115,7 @@ data class Videos(val videos: List<Video>) {
 
 fun MovieResponse.toUIDetails() = Details(
     title = title,
-    background = backdropPath,
+    background = backdropPath.toTmdbImageUrl() ?: posterPath.toTmdbImageUrl().orEmpty(),
     description = overview,
     releaseDate = releaseDate,
     genres = genre.map { it.name },
@@ -131,6 +134,6 @@ fun MovieVideosResponse.toUiVideos() = Videos(
             official = it.official,
             publishedAt = it.publishedAt,
             iso639 = it.iso639,
-            iso3166 = it.iso639,
+            iso3166 = it.iso3166,
         )
     })

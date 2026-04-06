@@ -14,8 +14,10 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.security.cert.CertPathValidatorException
 import javax.inject.Inject
 import javax.inject.Named
+import javax.net.ssl.SSLHandshakeException
 
 class TmdbLoginService @Inject constructor(
     private val client: HttpClient,
@@ -59,7 +61,7 @@ class TmdbLoginService @Inject constructor(
         } catch (exception: ResponseException) {
             ApiResult.Error(exception.toTmdbErrorMessage())
         } catch (exception: Exception) {
-            ApiResult.Error(exception.message ?: "TMDB login failed.")
+            ApiResult.Error(exception.toTmdbConnectionError())
         }
     }
 
@@ -85,13 +87,31 @@ class TmdbLoginService @Inject constructor(
         } catch (exception: ResponseException) {
             ApiResult.Error(exception.toTmdbErrorMessage())
         } catch (exception: Exception) {
-            ApiResult.Error(exception.message ?: "TMDB login failed.")
+            ApiResult.Error(exception.toTmdbConnectionError())
         }
     }
 
     private suspend fun ResponseException.toTmdbErrorMessage(): String {
         val error = runCatching { response.body<TmdbErrorResponse>() }.getOrNull()
         return error?.statusMessage ?: (message ?: "TMDB login failed.")
+    }
+
+    private fun Exception.toTmdbConnectionError(): String {
+        return when {
+            hasCause<SSLHandshakeException>() || hasCause<CertPathValidatorException>() ->
+                "Secure connection to TMDB failed. Check the device date/time and any proxy, VPN, or custom certificate setup."
+
+            else -> message ?: "TMDB login failed."
+        }
+    }
+
+    private inline fun <reified T : Throwable> Throwable.hasCause(): Boolean {
+        var current: Throwable? = this
+        while (current != null) {
+            if (current is T) return true
+            current = current.cause
+        }
+        return false
     }
 }
 
