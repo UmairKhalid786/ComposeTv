@@ -6,6 +6,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.FocusInteraction
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -61,6 +63,9 @@ import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun BoxScope.LoginPageContent(
+    isLoading: Boolean = false,
+    errorMessage: String? = null,
+    onInputChanged: () -> Unit = {},
     onLoginClick: (user: String, psw: String) -> Unit,
 ) {
     val insets = WindowInsets.ime.union(WindowInsets.systemBars)
@@ -86,13 +91,32 @@ fun BoxScope.LoginPageContent(
     ) {
         val username = remember { mutableStateOf("") }
         val password = remember { mutableStateOf("") }
+        val canLogin = username.value.isNotBlank() && password.value.isNotBlank() && !isLoading
+        val mutableInteractionSource: MutableInteractionSource =
+            remember { MutableInteractionSource() }
 
         ScreenHeading("LOGIN")
+        Text(
+            text = "Sign in with your TMDB account.",
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
+        )
+        Text(
+            text = "Use your TMDB username, not your email address. We exchange your credentials for a TMDB session on this device.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+            textAlign = TextAlign.Center,
+        )
         TvTextField(
-            value = username.value, placeholder = "Username",
-            modifier = Modifier.fillMaxWidth(),
+            value = username.value,
+            placeholder = "TMDB Username",
+            modifier = Modifier
+                .fillMaxWidth()
+                .requestFocusWhenVisibleInWindow(mutableInteractionSource),
+            mutableInteractionSource = mutableInteractionSource
         ) {
             username.value = it
+            onInputChanged()
         }
         TvTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -100,19 +124,30 @@ fun BoxScope.LoginPageContent(
             placeholder = "Password",
             visualTransformation = PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password,
-        ) { password.value = it }
+        ) {
+            password.value = it
+            onInputChanged()
+        }
+
+        errorMessage?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.Center,
+            )
+        }
 
         Spacer(modifier = Modifier.height(20.dp))
 
         TvButton(
-            modifier = Modifier
-                .requestFocusWhenVisibleInWindow()
-                .padding(start = 20.dp, end = 20.dp),
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp),
+            enabled = canLogin,
             onClick = { onLoginClick(username.value, password.value) },
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Login",
+                text = if (isLoading) "Signing In..." else "Login",
                 style = TextStyle(
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Light,
@@ -141,7 +176,7 @@ fun CrossFadeBackground(
     var imageIndex = remember { 0 }
 
     LaunchedEffect(Unit) {
-        while (true) {
+        while (state.images.isNotEmpty()) {
             imageIndex = (imageIndex + 1) % state.images.size
             backgroundState.load(state.images[imageIndex], onError = {
                 offsetX = if (offsetX <= 0) state.durationMs else state.durationMs * -1
@@ -181,36 +216,81 @@ fun LoginPagePrev() {
     }
 }
 
+/**
+ * Requests focus on this composable as soon as it becomes visible within the window bounds.
+ */
 @Composable
 fun Modifier.requestFocusWhenVisibleInWindow(): Modifier {
     val focusRequester = remember { FocusRequester() }
+    return this
+        .focusRequester(focusRequester)
+        .visibilityAware(onVisible = {
+            focusRequester.requestFocus()
+        })
+}
+
+/**
+ * Requests focus on this composable as soon as it becomes visible within the window bounds.
+ */
+@Composable
+fun Modifier.requestFocusWhenVisibleInWindow(
+    mutableInteractionSource: MutableInteractionSource
+): Modifier {
+    return visibilityAware(onVisible = {
+        mutableInteractionSource.tryEmit(FocusInteraction.Focus())
+    })
+}
+
+/**
+ * Variant that accepts an explicit [FocusRequester], useful when the caller already
+ * holds a reference to it (e.g. for programmatic focus management elsewhere).
+ */
+@Composable
+fun Modifier.requestFocusWhenVisibleInWindow(focusRequester: FocusRequester): Modifier {
+    return this
+        .focusRequester(focusRequester)
+        .visibilityAware(onVisible = {
+            focusRequester.requestFocus()
+        })
+}
+
+/**
+ * Calls [onVisible] the first time (and every time) this composable enters the window bounds,
+ * and [onHidden] whenever it leaves. The initial [false] state does **not** trigger [onHidden].
+ *
+ * @param onVisible called when the composable overlaps the window bounds
+ * @param onHidden  called when the composable is no longer visible in the window
+ */
+@Composable
+fun Modifier.visibilityAware(
+    onVisible: () -> Unit = {}, onHidden: () -> Unit = {}
+): Modifier {
+    // Track whether we have ever had a real value so we skip the initial false.
+    var initialized by remember { mutableStateOf(false) }
     var isVisible by remember { mutableStateOf(false) }
 
-    // You can simplify this part depending on your needs.
     val config = LocalConfiguration.current
     val density = LocalDensity.current
 
-    val windowBounds = remember(config) {
+    // Re-compute window bounds if config OR density changes.
+    val windowBounds = remember(config, density) {
         with(density) {
             Rect(
-                0f,
-                0f,
-                config.screenWidthDp.dp.toPx(),
-                config.screenHeightDp.dp.toPx()
+                0f, 0f, config.screenWidthDp.dp.toPx(), config.screenHeightDp.dp.toPx()
             )
         }
     }
 
     LaunchedEffect(isVisible) {
-        if (isVisible) {
-            focusRequester.requestFocus()
+        when {
+            isVisible -> onVisible()
+            initialized -> onHidden()   // only fire onHidden after the first real layout
         }
     }
 
-    return this
-        .focusRequester(focusRequester)
-        .onGloballyPositioned { coords ->
+    return this.onGloballyPositioned { coords ->
             if (coords.isAttached) {
+                initialized = true
                 val itemBounds = coords.boundsInWindow()
                 isVisible = itemBounds.overlaps(windowBounds)
             }

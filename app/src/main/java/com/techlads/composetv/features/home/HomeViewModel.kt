@@ -8,8 +8,10 @@ import com.techlads.composetv.features.home.carousel.CardPayload
 import com.techlads.composetv.features.home.carousel.CarouselItemPayload
 import com.techlads.composetv.features.home.carousel.HomeCarouselState
 import com.techlads.composetv.features.home.hero.HeroItemState
+import com.techlads.content.data.MovieDto
 import com.techlads.content.data.MoviesRepository
 import com.techlads.content.data.MoviesResponse
+import com.techlads.content.toTmdbImageUrl
 import com.techlads.network.ApiResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -51,7 +53,7 @@ class HomeViewModel @Inject constructor(
                     val heroItems = result.data.results.take(5).map {
                         Movie(
                             title = it.title,
-                            imageUrl = if (it.backdropPath.startsWith("https")) it.backdropPath else "https://image.tmdb.org/t/p/w500" + it.backdropPath,
+                            imageUrl = it.displayImageUrl(),
                             metadata = "2023  •  1h 45m  •  Action, Adventure",
                             details = it.overview
                         )
@@ -111,7 +113,7 @@ class HomeViewModel @Inject constructor(
                             CardPayload(
                                 id = it.id.toString(),
                                 title = it.title,
-                                image = if (it.backdropPath.startsWith("https")) it.backdropPath else "https://image.tmdb.org/t/p/w500" + it.backdropPath,
+                                image = it.displayImageUrl(),
                                 promo = null
                             )
                         }
@@ -125,3 +127,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 }
+
+private fun MovieDto.displayImageUrl(): String =
+    backdropPath.toTmdbImageUrl() ?: posterPath.toTmdbImageUrl().orEmpty()

@@ -10,10 +10,11 @@ data class MovieResponse(
     val adult: Boolean,
     val budget: Int,
     val overview: String,
+    @SerialName("genres")
     val genre: List<GenreDto>,
-    @SerialName("poster_path") val posterPath: String,
+    @SerialName("poster_path") val posterPath: String? = null,
     @SerialName("release_date") val releaseDate: String,
-    @SerialName("backdrop_path") val backdropPath: String,
+    @SerialName("backdrop_path") val backdropPath: String? = null,
     @SerialName("original_title") val originalTitle: String,
     @SerialName("spoken_languages") val spokenLanguages: List<LanguageDto>,
 )

@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRestorer
@@ -19,9 +21,19 @@ import androidx.tv.material3.Text
 @Composable
 fun HorizontalCarouselItem(
     parent: CarouselItemPayload,
+    focusedParentId: String,
+    focusedChildId: String,
+    focusedChildIndex: Int,
+    restoreFocusVersion: Int,
     onItemFocus: (parentId: String, childId: String) -> Unit,
     onItemClick: (parentId: String, childId: String) -> Unit,
 ) {
+    val rowState = rememberSaveable(parent.id, saver = LazyListState.Saver) {
+        LazyListState(
+            firstVisibleItemIndex = if (parent.id == focusedParentId) focusedChildIndex else 0
+        )
+    }
+
     Column(
         Modifier
             .height(150.dp)
@@ -33,6 +45,7 @@ fun HorizontalCarouselItem(
             childFraction = 0.1f,
         ) {
             LazyRow(
+                state = rowState,
                 modifier = Modifier.focusRestorer(),
                 contentPadding = PaddingValues(
                     start = 42.dp,
@@ -41,10 +54,12 @@ fun HorizontalCarouselItem(
                     end = 100.dp,
                 ),
             ) {
-                items(parent.items) { child ->
+                itemsIndexed(parent.items, key = { _, child -> child.id }) { _, child ->
                     CarouselItem(
                         modifier = Modifier,
                         cardPayload = child,
+                        shouldRestoreFocus = parent.id == focusedParentId && child.id == focusedChildId,
+                        restoreFocusVersion = restoreFocusVersion,
                         onItemClick = { onItemClick(parent.id, child.id) },
                         onItemFocus = { onItemFocus(parent.id, child.id) },
                     )
@@ -68,6 +83,10 @@ fun HorizontalCarouselItemPrev() {
                 )
             },
         ),
+        focusedParentId = "",
+        focusedChildId = "",
+        focusedChildIndex = 0,
+        restoreFocusVersion = 0,
         onItemFocus = { _, _ -> },
         onItemClick = { _, _ -> },
     )

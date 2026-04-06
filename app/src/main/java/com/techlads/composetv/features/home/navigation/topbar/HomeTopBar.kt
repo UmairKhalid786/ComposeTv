@@ -1,6 +1,7 @@
 package com.techlads.composetv.features.home.navigation.topbar
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +54,14 @@ fun HomeTopBar(
     var selectedTabIndex by remember { mutableIntStateOf(0) }
     val searchItem = MenuData.menuItems[1]
     val background = MaterialTheme.colorScheme.surface
+    val isTopBarVisible = minimiseTopBar.not()
+    val topBarVisibilityState = remember {
+        MutableTransitionState(isTopBarVisible)
+    }
+
+    LaunchedEffect(isTopBarVisible) {
+        topBarVisibilityState.targetState = isTopBarVisible
+    }
 
     Column(
         modifier = Modifier
@@ -79,7 +89,7 @@ fun HomeTopBar(
                 ))
             }
     ) {
-        AnimatedVisibility(minimiseTopBar.not()) {
+        AnimatedVisibility(visibleState = topBarVisibilityState) {
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,

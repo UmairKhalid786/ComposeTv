@@ -2,10 +2,13 @@ package com.techlads.composetv.features.home
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.techlads.composetv.features.home.leftmenu.data.MenuData
 import com.techlads.composetv.features.home.navigation.NestedHomeNavigation
@@ -21,13 +24,18 @@ fun HomeScreenContent(
 ) {
     val navController = rememberAnimatedNavController()
 
-    val selectedId = remember {
+    var selectedId by rememberSaveable {
         mutableStateOf(MenuData.menuItems.first().id)
     }
 
-    LaunchedEffect(key1 = Unit) {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            selectedId.value = destination.route ?: return@addOnDestinationChangedListener
+    DisposableEffect(navController) {
+        val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
+            selectedId = destination.route ?: return@OnDestinationChangedListener
+        }
+        navController.addOnDestinationChangedListener(listener)
+
+        onDispose {
+            navController.removeOnDestinationChangedListener(listener)
         }
     }
 
@@ -39,7 +47,7 @@ fun HomeScreenContent(
             onItemFocus(parent, child)
         }, onSongClick
         )
-    }, selectedId = selectedId.value) {
+    }, selectedId = selectedId) {
         navController.navigate(it.id)
     }
 }

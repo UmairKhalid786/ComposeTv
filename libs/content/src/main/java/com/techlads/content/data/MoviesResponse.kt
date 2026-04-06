@@ -14,7 +14,7 @@ data class MovieDto(
     val title: String,
     val overview: String,
     @SerialName("poster_path")
-    val posterPath: String,
+    val posterPath: String? = null,
     @SerialName("backdrop_path")
-    val backdropPath: String
+    val backdropPath: String? = null,
 )

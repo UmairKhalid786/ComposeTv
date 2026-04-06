@@ -6,8 +6,12 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
@@ -18,14 +22,25 @@ import androidx.tv.material3.Text
 import coil.compose.AsyncImage
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.uicomponents.widgets.BorderedFocusableItem
+import timber.log.Timber
 
 @Composable
 fun CarouselItem(
     cardPayload: CardPayload,
     modifier: Modifier = Modifier,
+    shouldRestoreFocus: Boolean = false,
+    restoreFocusVersion: Int = 0,
     onItemFocus: () -> Unit,
     onItemClick: () -> Unit,
 ) {
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(shouldRestoreFocus, restoreFocusVersion) {
+        if (shouldRestoreFocus && restoreFocusVersion > 0) {
+            focusRequester.requestFocus()
+        }
+    }
+
     BorderedFocusableItem(
         onClick = { onItemClick() },
         borderRadius = 12.dp,
@@ -33,6 +48,7 @@ fun CarouselItem(
             .testTag(cardPayload.id)
             .padding(horizontal = 8.dp)
             .aspectRatio(1.8f)
+            .focusRequester(focusRequester)
             .onFocusChanged {
                 if (it.isFocused) {
                     onItemFocus()
@@ -46,7 +62,7 @@ fun CarouselItem(
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             ).apply {
-                Log.e("CarouselItem", "CarouselItem: Loading Image ${cardPayload.image}" )
+                Timber.tag("CarouselItem").e("CarouselItem: Loading Image ${cardPayload.image}")
             }
         }
     }

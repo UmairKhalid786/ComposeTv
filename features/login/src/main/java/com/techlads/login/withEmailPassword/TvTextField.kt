@@ -29,10 +29,10 @@ import androidx.tv.material3.Text
 fun TvTextField(
     value: String,
     placeholder: String,
+    modifier: Modifier = Modifier,
     mutableInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardType: KeyboardType = KeyboardType.Text,
-    modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit,
 ) {
     val isFocused by mutableInteractionSource.collectIsFocusedAsState()

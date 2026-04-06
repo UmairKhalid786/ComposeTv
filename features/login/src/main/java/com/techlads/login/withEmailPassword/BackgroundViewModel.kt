@@ -2,6 +2,7 @@ package com.techlads.login.withEmailPassword
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.techlads.content.toTmdbImageUrl
 import com.techlads.content.data.MoviesRepository
 import com.techlads.network.getOrElse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -51,7 +52,13 @@ class BackgroundViewModel @Inject constructor(
 
     fun playDefault() {
         viewModelScope.launch {
-            val popularMovies = movies.getPopularMovies().getOrElse()?.results?.map { it.backdropPath } ?: emptyList()
+            val popularMovies = movies.getPopularMovies()
+                .getOrElse()
+                ?.results
+                ?.mapNotNull { movie ->
+                    movie.backdropPath.toTmdbImageUrl() ?: movie.posterPath.toTmdbImageUrl()
+                }
+                ?: emptyList()
             play(popularMovies)
         }
     }
