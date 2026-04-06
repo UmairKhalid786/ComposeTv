@@ -18,7 +18,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.tv.material3.MaterialTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.techlads.composetv.features.home.HomeViewModel
 import com.techlads.composetv.navigation.AppNavigation
 import com.techlads.composetv.theme.ComposeTvTheme
 import com.techlads.login.withEmailPassword.BackgroundViewModel
@@ -62,10 +61,8 @@ class MainActivity : ComponentActivity() {
                 val displayDialog = remember {
                     mutableStateOf(false)
                 }
-                val homeViewModel: HomeViewModel by viewModels()
                 App(
                     navController = rememberAnimatedNavController(),
-                    homeViewModel = homeViewModel,
                     backgroundViewModel = backgroundViewModel
                 )
 
@@ -85,11 +82,11 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun App(
         navController: NavHostController,
-        homeViewModel: HomeViewModel,
         backgroundViewModel: BackgroundViewModel
     ) {
         AppNavigation(
-            navController, homeViewModel = homeViewModel, backgroundViewModel = backgroundViewModel
+            navController,
+            backgroundViewModel = backgroundViewModel
         )
     }
 }

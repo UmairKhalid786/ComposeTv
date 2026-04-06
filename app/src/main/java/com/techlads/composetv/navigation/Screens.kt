@@ -3,6 +3,7 @@ package com.techlads.composetv.navigation
 import com.techlads.composetv.navigation.Screens.ProductDetail.Args.ID
 
 sealed class Screens(val route: String) {
+    object AuthLoading : Screens("auth_loading")
     object Login : Screens("login")
     object LoginToken : Screens("login_token")
     object Home : Screens("home_screen")
